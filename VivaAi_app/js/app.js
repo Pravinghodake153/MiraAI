@@ -7392,6 +7392,8 @@ const App = {
   // ==========================================================================
   selectedNewFlowIcon: 'codeSimple',
 
+  renderAdminAddFlowContent() {
+    const stages = this.getCurrentFlowStages();
     let latestEndSec = 0;
     stages.forEach(s => {
       const m = (s.timing || '').match(/(\d+):(\d+)\s*[–\-—]\s*(\d+):(\d+)/);

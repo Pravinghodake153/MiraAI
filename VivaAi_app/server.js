@@ -379,6 +379,7 @@ async function generateMiraQuestion(payload) {
 
   // Check if OpenRouter key is present
   if (process.env.OPENROUTER_API_KEY && process.env.OPENROUTER_API_KEY.trim().length > 10) {
+    try {
       // Calculate total examination duration dynamically from flow stages
       let totalFlowSecs = 0;
       const stagesForClock = (Array.isArray(allStages) && allStages.length > 0) ? allStages : (readDb('flows.json') || []);
