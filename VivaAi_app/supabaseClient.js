@@ -7,10 +7,13 @@
 const https = require('https');
 const url = require('url');
 
-// Default Supabase project configuration
-const SUPABASE_PROJECT_REF = process.env.SUPABASE_PROJECT_REF || 'vveubzrxvlklepzthuvq';
-const SUPABASE_URL = (process.env.SUPABASE_URL || `https://${SUPABASE_PROJECT_REF}.supabase.co`).replace(/\/$/, '');
-const SUPABASE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY || process.env.SUPABASE_ANON_KEY || '';
+function getSupabaseUrl() {
+  return (process.env.SUPABASE_URL || `https://${process.env.SUPABASE_PROJECT_REF || 'vveubzrxvlklepzthuvq'}.supabase.co`).replace(/\/$/, '');
+}
+
+function getSupabaseKey() {
+  return process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_KEY || process.env.SUPABASE_ANON_KEY || '';
+}
 
 // Free tier storage buffer threshold: 900 MB limit (Supabase free tier provides 1GB)
 // When total bucket usage exceeds MAX_STORAGE_BYTES, oldest recordings are automatically deleted
@@ -19,7 +22,7 @@ const RECORDINGS_BUCKET = process.env.SUPABASE_RECORDINGS_BUCKET || 'recordings'
 
 // Check if credentials are configured
 function isConfigured() {
-  return Boolean(SUPABASE_URL && SUPABASE_KEY);
+  return Boolean(getSupabaseUrl() && getSupabaseKey());
 }
 
 // ----------------------------------------------------------------------------
@@ -31,12 +34,14 @@ function supabaseRequest(endpoint, options = {}) {
       return reject(new Error('Supabase credentials (SUPABASE_KEY) not configured'));
     }
 
-    const fullUrl = `${SUPABASE_URL}${endpoint}`;
-    const parsed = url.parse(fullUrl);
+    const baseUrl = getSupabaseUrl();
+    const key = getSupabaseKey();
+    const fullUrl = `${baseUrl}${endpoint}`;
+    const parsed = new URL(fullUrl);
 
     const headers = {
-      'apikey': SUPABASE_KEY,
-      'Authorization': `Bearer ${SUPABASE_KEY}`,
+      'apikey': key,
+      'Authorization': `Bearer ${key}`,
       ...(options.headers || {})
     };
 
@@ -231,7 +236,7 @@ async function uploadRecording(filename, buffer, contentType = 'video/webm') {
       body: buffer
     });
 
-    const publicUrl = `${SUPABASE_URL}/storage/v1/object/public/${RECORDINGS_BUCKET}/${encodeURIComponent(filename)}`;
+    const publicUrl = `${getSupabaseUrl()}/storage/v1/object/public/${RECORDINGS_BUCKET}/${encodeURIComponent(filename)}`;
     console.log(`[Supabase Storage Uploaded] ${filename} (${buffer.length} bytes) -> ${publicUrl}`);
 
     return {
@@ -280,8 +285,8 @@ async function dbUpsert(table, data, onConflict = 'id') {
 
 module.exports = {
   isConfigured,
-  SUPABASE_URL,
-  SUPABASE_PROJECT_REF,
+  getSupabaseUrl,
+  getSupabaseKey,
   RECORDINGS_BUCKET,
   MAX_STORAGE_BYTES,
   ensureRecordingsBucket,
