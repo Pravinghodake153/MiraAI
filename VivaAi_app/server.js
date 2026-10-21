@@ -1577,31 +1577,39 @@ const server = http.createServer(async (req, res) => {
     try {
       const filename = `${interviewId}-${type}.webm`;
       const filePath = path.join(RECORDINGS_DIR, filename);
-      fs.writeFileSync(filePath, buffer);
-
-      // Keep both naming conventions (-camera.webm and -cam.webm) in sync
-      if (type === 'camera') {
-        const altFilename1 = `${interviewId}-cam.webm`;
-        const altFilename2 = `${interviewId}-camera.webm`;
-        fs.writeFileSync(path.join(RECORDINGS_DIR, altFilename1), buffer);
-        fs.writeFileSync(path.join(RECORDINGS_DIR, altFilename2), buffer);
-      }
-
-      console.log(`[Storage] Saved ${type} recording for ${interviewId} (${buffer.length} bytes, file: ${filename})`);
-
       let recordingUrl = `/recordings/${filename}`;
+      let uploadedToCloud = false;
 
-      // Upload to Supabase Storage & Trigger Auto-FIFO Pruning if approaching limit
+      // 1. Upload to Supabase Storage & Trigger Auto-FIFO Pruning if approaching limit
       if (Supabase.isConfigured()) {
         try {
           const cloudRes = await Supabase.uploadRecording(filename, buffer, 'video/webm');
           if (cloudRes && cloudRes.success && cloudRes.publicUrl) {
             recordingUrl = cloudRes.publicUrl;
-            console.log(`[Supabase Storage] Successfully synced ${filename} to Supabase bucket -> ${recordingUrl}`);
+            uploadedToCloud = true;
+            console.log(`[Supabase Storage] Successfully uploaded ${filename} (${buffer.length} bytes) -> ${recordingUrl}`);
           }
         } catch (cloudErr) {
-          console.warn(`[Supabase Storage Warning] Could not sync to cloud, using local storage: ${cloudErr.message}`);
+          console.warn(`[Supabase Storage Warning] Cloud upload failed: ${cloudErr.message}`);
         }
+      }
+
+      // 2. If cloud upload succeeded, we DO NOT keep giant video blobs on Render disk to save memory
+      // Only keep on disk if Supabase is not configured or temporarily offline
+      if (!uploadedToCloud) {
+        fs.writeFileSync(filePath, buffer);
+        console.log(`[Storage] Saved ${type} recording to disk for ${interviewId} (${buffer.length} bytes)`);
+      } else {
+        // If file already exists on disk from earlier retry, remove it to reclaim Render RAM/disk
+        if (fs.existsSync(filePath)) {
+          try { fs.unlinkSync(filePath); } catch (_) {}
+        }
+      }
+
+      // 3. Clear buffer reference immediately to allow V8 engine to free RAM
+      buffer = null;
+      if (global.gc) {
+        try { global.gc(); } catch (_) {}
       }
 
       const existingIv = DB.getInterviewById(interviewId);
@@ -1621,12 +1629,11 @@ const server = http.createServer(async (req, res) => {
         interviewId: interviewId,
         url: recordingUrl,
         type: type,
-        sizeBytes: buffer.length,
-        cloudStorage: Supabase.isConfigured() ? 'supabase' : 'local'
+        cloudStorage: uploadedToCloud ? 'supabase' : 'local'
       });
     } catch (err) {
-      console.error('[Storage Error] Failed to save recording:', err);
-      return sendJson(res, 500, { error: 'Failed to write recording to disk' });
+      console.error('[Storage Error] Failed to process recording:', err);
+      return sendJson(res, 500, { error: 'Failed to process recording upload' });
     }
   }
 
@@ -2359,6 +2366,11 @@ const server = http.createServer(async (req, res) => {
         return fs.createReadStream(recordingPath).pipe(res);
       }
     } else {
+      if (Supabase.isConfigured()) {
+        const cloudUrl = `${Supabase.getSupabaseUrl()}/storage/v1/object/public/${Supabase.RECORDINGS_BUCKET}/${encodeURIComponent(filename)}`;
+        res.writeHead(302, { 'Location': cloudUrl });
+        return res.end();
+      }
       res.writeHead(404, { 'Content-Type': 'application/json' });
       return res.end(JSON.stringify({ error: 'Recording not found on disk', filename }));
     }
@@ -2459,5 +2471,18 @@ function startServer(portToTry) {
     }
   });
 }
+
+// Periodic Memory Guard: Cleans unused memory references every 2 minutes
+setInterval(() => {
+  const mem = process.memoryUsage();
+  const rssMb = (mem.rss / (1024 * 1024)).toFixed(1);
+  const heapUsedMb = (mem.heapUsed / (1024 * 1024)).toFixed(1);
+  if (global.gc) {
+    try { global.gc(); } catch (_) {}
+  }
+  if (mem.rss > 350 * 1024 * 1024) {
+    console.warn(`[Memory Guard Warning] Memory usage high: RSS ${rssMb}MB / Heap ${heapUsedMb}MB - Garbage collector invoked.`);
+  }
+}, 120000);
 
 startServer(PORT);

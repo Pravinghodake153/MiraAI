@@ -4,10 +4,10 @@
   "description": "VivaAI - Technical Viva & Placement Evaluation Platform",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js",
+    "start": "node --max-old-space-size=384 --expose-gc server.js",
+    "dev": "node --max-old-space-size=384 --expose-gc server.js",
     "bun": "bun server.js",
-    "node": "node server.js"
+    "node": "node --max-old-space-size=384 --expose-gc server.js"
   },
   "keywords": ["viva", "ai", "interview", "evaluation"],
   "author": "MSOT Team",
