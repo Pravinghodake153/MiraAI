@@ -61,6 +61,7 @@ const MIME_TYPES = {
 };
 
 const DB = require('./db.js');
+const Supabase = require('./supabaseClient.js');
 
 // --------------------------------------------------------------------------
 // 3. DATABASE HELPERS (Bun Native SQLite + JSON Backup Sync)
@@ -1588,7 +1589,21 @@ const server = http.createServer(async (req, res) => {
 
       console.log(`[Storage] Saved ${type} recording for ${interviewId} (${buffer.length} bytes, file: ${filename})`);
 
-      const recordingUrl = `/recordings/${filename}`;
+      let recordingUrl = `/recordings/${filename}`;
+
+      // Upload to Supabase Storage & Trigger Auto-FIFO Pruning if approaching limit
+      if (Supabase.isConfigured()) {
+        try {
+          const cloudRes = await Supabase.uploadRecording(filename, buffer, 'video/webm');
+          if (cloudRes && cloudRes.success && cloudRes.publicUrl) {
+            recordingUrl = cloudRes.publicUrl;
+            console.log(`[Supabase Storage] Successfully synced ${filename} to Supabase bucket -> ${recordingUrl}`);
+          }
+        } catch (cloudErr) {
+          console.warn(`[Supabase Storage Warning] Could not sync to cloud, using local storage: ${cloudErr.message}`);
+        }
+      }
+
       const existingIv = DB.getInterviewById(interviewId);
       if (existingIv) {
         if (type === 'camera') {
@@ -1606,7 +1621,8 @@ const server = http.createServer(async (req, res) => {
         interviewId: interviewId,
         url: recordingUrl,
         type: type,
-        sizeBytes: buffer.length
+        sizeBytes: buffer.length,
+        cloudStorage: Supabase.isConfigured() ? 'supabase' : 'local'
       });
     } catch (err) {
       console.error('[Storage Error] Failed to save recording:', err);

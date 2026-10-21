@@ -9,6 +9,11 @@ const path = require('path');
 const DATA_DIR = path.join(__dirname, 'data');
 if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
 
+let Supabase = null;
+try {
+  Supabase = require('./supabaseClient.js');
+} catch (_) {}
+
 const SQLITE_FILE = path.join(DATA_DIR, 'viva.sqlite');
 
 let sqliteDb = null;
@@ -564,7 +569,33 @@ const DB = {
         writeJson('interviews.json', all);
       } catch (e) {}
 
-      return this.getInterviewById(id);
+      const savedInterview = this.getInterviewById(id);
+
+      // Async sync to Supabase Database if active
+      if (Supabase && Supabase.isConfigured()) {
+        Supabase.dbUpsert('interviews', {
+          id: id,
+          student_name: savedInterview.studentName,
+          student_email: savedInterview.studentEmail,
+          topic: savedInterview.topic,
+          score: savedInterview.score,
+          integrity_score: savedInterview.integrityScore,
+          duration: savedInterview.duration,
+          date: savedInterview.date,
+          status: savedInterview.status,
+          recording_url: savedInterview.recordingUrl,
+          camera_recording_url: savedInterview.cameraRecordingUrl,
+          screen_recording_url: savedInterview.screenRecordingUrl,
+          technology: savedInterview.technology,
+          difficulty: savedInterview.difficulty,
+          transcripts: savedInterview.transcripts,
+          scorecard: savedInterview.scorecard,
+          feedback: savedInterview.feedback,
+          created_at: savedInterview.createdAt
+        }).catch(err => console.warn('[Supabase Sync Warning] Failed to sync interview to cloud DB:', err.message));
+      }
+
+      return savedInterview;
     }
 
     // JSON fallback
@@ -586,6 +617,30 @@ const DB = {
       list.unshift(record);
     }
     writeJson('interviews.json', list);
+
+    if (Supabase && Supabase.isConfigured()) {
+      Supabase.dbUpsert('interviews', {
+        id: id,
+        student_name: record.studentName || record.candidateName,
+        student_email: record.studentEmail || record.candidateEmail,
+        topic: record.topic,
+        score: record.score,
+        integrity_score: record.integrityScore,
+        duration: record.duration,
+        date: record.date,
+        status: record.status,
+        recording_url: record.recordingUrl,
+        camera_recording_url: record.cameraRecordingUrl,
+        screen_recording_url: record.screenRecordingUrl,
+        technology: record.technology,
+        difficulty: record.difficulty,
+        transcripts: record.transcripts,
+        scorecard: record.scorecard,
+        feedback: record.feedback,
+        created_at: record.createdAt
+      }).catch(err => console.warn('[Supabase Sync Warning] Failed to sync interview to cloud DB:', err.message));
+    }
+
     return record;
   },
 
