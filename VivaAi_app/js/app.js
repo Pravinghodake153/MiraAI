@@ -8399,20 +8399,49 @@ const App = {
               </div>
 
               <!-- Fetched Problem Preview Card -->
-              <div id="leetcode-preview-card" style="display:${codingProblemObj ? 'block' : 'none'}; background:#FFF; border:1px solid #E2E8F0; border-radius:10px; padding:14px 16px; margin-bottom:14px;">
+              <div id="leetcode-preview-card" style="display:${codingProblemObj ? 'block' : 'none'}; background:#FFF; border:1px solid #CBD5E1; border-radius:12px; padding:16px; margin-bottom:16px;">
                 <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px;">
-                  <div style="font-size:14px; font-weight:800; color:#0F172A;" id="preview-problem-title">
+                  <div style="font-size:15px; font-weight:800; color:#0F172A;" id="preview-problem-title">
                     ${codingProblemObj?.title || 'Problem Title'}
                   </div>
                   <span id="preview-problem-difficulty" class="badge" style="font-size:11px; font-weight:700; background:#FEF3C7; color:#B45309;">
                     ${codingProblemObj?.difficulty || 'Medium'}
                   </span>
                 </div>
-                <div style="font-size:12px; color:#64748B; max-height:80px; overflow-y:auto; line-height:1.5;" id="preview-problem-desc">
-                  ${codingProblemObj?.description ? codingProblemObj.description.slice(0, 240) + '...' : 'Problem description will preview here.'}
+                <div style="font-size:12px; color:#475569; max-height:80px; overflow-y:auto; line-height:1.5; margin-bottom:10px;" id="preview-problem-desc">
+                  ${codingProblemObj?.description ? codingProblemObj.description.slice(0, 300) + '...' : 'Problem description will preview here.'}
                 </div>
-                <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;" id="preview-problem-tags">
+                <div style="margin-bottom:12px; display:flex; gap:6px; flex-wrap:wrap;" id="preview-problem-tags">
                   ${(codingProblemObj?.tags || ['Algorithms']).map(t => `<span class="badge" style="font-size:10px; background:#F1F5F9; color:#475569;">${t}</span>`).join('')}
+                </div>
+
+                <!-- Examples Preview -->
+                <div id="preview-examples-section" style="margin-bottom:12px; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:10px 12px;">
+                  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
+                    <span style="font-size:11px; font-weight:800; color:#334155; text-transform:uppercase; letter-spacing:0.5px;">Examples & Test Cases</span>
+                    <span id="preview-examples-count" class="badge" style="font-size:10px; background:#EFF6FF; color:#1D4ED8; font-weight:700;">${codingProblemObj?.examples ? codingProblemObj.examples.length + ' Examples' : '0 Examples'}</span>
+                  </div>
+                  <div id="preview-problem-examples" style="display:flex; flex-direction:column; gap:6px;">
+                    ${codingProblemObj?.examples ? codingProblemObj.examples.map(ex => `
+                      <div style="background:#FFF; border:1px solid #E2E8F0; border-radius:6px; padding:6px 10px; font-size:11px;">
+                        <span style="font-weight:700; color:#0F172A;">Example ${ex.id}:</span>
+                        <div style="color:#0369A1; margin-top:2px; font-family:monospace;">Input: ${ex.input}</div>
+                        <div style="color:#15803D; margin-top:2px; font-family:monospace;">Output: ${ex.output}</div>
+                        ${ex.explanation ? `<div style="color:#64748B; margin-top:2px;">Explanation: ${ex.explanation}</div>` : ''}
+                      </div>
+                    `).join('') : '<div style="font-size:11px; color:#94A3B8;">Examples will appear here upon fetch.</div>'}
+                  </div>
+                </div>
+
+                <!-- Constraints Preview -->
+                <div id="preview-constraints-section" style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:8px; padding:10px 12px;">
+                  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
+                    <span style="font-size:11px; font-weight:800; color:#334155; text-transform:uppercase; letter-spacing:0.5px;">Constraints</span>
+                    <span id="preview-constraints-count" class="badge" style="font-size:10px; background:#F1F5F9; color:#475569; font-weight:700;">${codingProblemObj?.constraints ? codingProblemObj.constraints.length + ' Constraints' : '0 Constraints'}</span>
+                  </div>
+                  <ul id="preview-problem-constraints" style="margin:0; padding-left:18px; font-size:11px; color:#475569; line-height:1.6;">
+                    ${codingProblemObj?.constraints ? codingProblemObj.constraints.map(c => `<li>${c}</li>`).join('') : '<li style="color:#94A3B8;">Constraints will appear here upon fetch.</li>'}
+                  </ul>
                 </div>
               </div>
 
@@ -8758,8 +8787,8 @@ const App = {
 
     try {
       const res = await window.API.fetchLeetCodeProblem(query);
-      if (res && res.success && res.problem) {
-        const prob = res.problem;
+      const prob = (res && res.problem) ? res.problem : (res && res.title ? res : null);
+      if (prob && prob.title) {
         this.currentFetchedProblem = prob;
 
         if (previewCard) {
@@ -8769,29 +8798,66 @@ const App = {
           const descEl = document.getElementById('preview-problem-desc');
           const tagsEl = document.getElementById('preview-problem-tags');
 
-          if (titleEl) titleEl.textContent = `${prob.questionFrontendId ? prob.questionFrontendId + '. ' : ''}${prob.title}`;
+          const examplesEl = document.getElementById('preview-problem-examples');
+          const examplesCountEl = document.getElementById('preview-examples-count');
+          const constraintsEl = document.getElementById('preview-problem-constraints');
+          const constraintsCountEl = document.getElementById('preview-constraints-count');
+
+          if (titleEl) titleEl.textContent = `${prob.questionFrontendId || prob.questionId ? (prob.questionFrontendId || prob.questionId) + '. ' : ''}${prob.title}`;
           if (diffEl) {
             diffEl.textContent = prob.difficulty || 'Medium';
             diffEl.style.background = prob.difficulty === 'Easy' ? '#DCFCE7' : (prob.difficulty === 'Hard' ? '#FEE2E2' : '#FEF3C7');
             diffEl.style.color = prob.difficulty === 'Easy' ? '#15803D' : (prob.difficulty === 'Hard' ? '#B91C1C' : '#B45309');
           }
-          if (descEl) descEl.textContent = prob.description ? prob.description.slice(0, 240) + '...' : '';
+          if (descEl) descEl.textContent = prob.description ? (prob.description.slice(0, 320) + (prob.description.length > 320 ? '...' : '')) : '';
           if (tagsEl) {
             tagsEl.innerHTML = (prob.tags || ['Algorithms']).map(t => `<span class="badge" style="font-size:10px; background:#F1F5F9; color:#475569;">${t}</span>`).join('');
+          }
+
+          if (examplesCountEl) {
+            examplesCountEl.textContent = `${(prob.examples || []).length} Examples & Test Cases`;
+          }
+          if (examplesEl && prob.examples && prob.examples.length > 0) {
+            examplesEl.innerHTML = prob.examples.map(ex => `
+              <div style="background:#FFF; border:1px solid #E2E8F0; border-radius:6px; padding:6px 10px; font-size:11px;">
+                <span style="font-weight:700; color:#0F172A;">Example ${ex.id}:</span>
+                <div style="color:#0369A1; margin-top:2px; font-family:monospace;">Input: ${ex.input || ''}</div>
+                <div style="color:#15803D; margin-top:2px; font-family:monospace;">Output: ${ex.output || ''}</div>
+                ${ex.explanation ? `<div style="color:#64748B; margin-top:2px;">Explanation: ${ex.explanation}</div>` : ''}
+              </div>
+            `).join('');
+          }
+
+          if (constraintsCountEl) {
+            constraintsCountEl.textContent = `${(prob.constraints || []).length} Constraints`;
+          }
+          if (constraintsEl && prob.constraints && prob.constraints.length > 0) {
+            constraintsEl.innerHTML = prob.constraints.map(c => `<li>${c}</li>`).join('');
           }
         }
 
         if (nameInput) {
           nameInput.value = prob.title || 'Applied Problem — Coding Round';
         }
-        if (descInput && (!descInput.value || descInput.value.includes('Solve the problem'))) {
-          descInput.value = prob.description ? prob.description.slice(0, 200) + '...' : `Solve ${prob.title} and explain your approach to Mira.`;
+
+        // Build comprehensive description containing problem text, examples, and constraints
+        let fullDescFormatted = prob.description || '';
+        if (prob.examples && prob.examples.length > 0) {
+          fullDescFormatted += '\n\nExamples:\n' + prob.examples.map(ex => `Example ${ex.id}:\nInput: ${ex.input}\nOutput: ${ex.output}${ex.explanation ? `\nExplanation: ${ex.explanation}` : ''}`).join('\n\n');
         }
-        if (guidanceInput && (!guidanceInput.value || guidanceInput.value.includes('Please solve the problem'))) {
+        if (prob.constraints && prob.constraints.length > 0) {
+          fullDescFormatted += '\n\nConstraints:\n' + prob.constraints.map(c => `• ${c}`).join('\n');
+        }
+
+        if (descInput) {
+          descInput.value = fullDescFormatted;
+        }
+        if (guidanceInput) {
           guidanceInput.value = `Ask the candidate to solve ${prob.title}. Inquire about their algorithmic intuition, edge case handling, and Big-O runtime complexity.`;
         }
         if (customAiInput && !customAiInput.value) {
-          customAiInput.value = `Probe how the candidate approaches ${prob.title} (${prob.difficulty || 'Medium'}). What data structures do they pick? Ask what happens on empty or single-element inputs.`;
+          const firstConstraint = prob.constraints && prob.constraints[0] ? ` (${prob.constraints[0]})` : '';
+          customAiInput.value = `Probe how the candidate approaches ${prob.title} (${prob.difficulty || 'Medium'}). Guide them towards optimal time/space complexity. Inquire about edge cases and constraints${firstConstraint}.`;
         }
 
         this.showToast(`Successfully fetched "${prob.title}" from LeetCode!`, 'success');

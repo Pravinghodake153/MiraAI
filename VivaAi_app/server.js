@@ -2470,48 +2470,102 @@ const server = http.createServer(async (req, res) => {
         .replace(/&amp;/g, '&')
         .trim();
 
-      // Extract structured examples if possible
-      const rawExamples = question.exampleTestcases ? question.exampleTestcases.split('\n').filter(Boolean) : [];
-      const testCasesList = [];
-
-      if (rawExamples.length > 0) {
-        testCasesList.push({
-          id: 1,
-          input: rawExamples.slice(0, 2).join(', '),
-          expectedOutput: 'Check execution'
+      // Starter code snippets for supported languages
+      const snippets = {
+        cpp: '// Write your C++ solution here\n',
+        python: '# Write your Python solution here\n',
+        java: '// Write your Java solution here\n',
+        javascript: '// Write your JavaScript solution here\n'
+      };
+      if (Array.isArray(question.codeSnippets)) {
+        question.codeSnippets.forEach(cs => {
+          if (cs.langSlug === 'cpp') snippets.cpp = cs.code;
+          if (cs.langSlug === 'python3' || cs.langSlug === 'python') snippets.python = cs.code;
+          if (cs.langSlug === 'java') snippets.java = cs.code;
+          if (cs.langSlug === 'javascript' || cs.langSlug === 'typescript') snippets.javascript = cs.code;
         });
-        if (rawExamples.length > 2) {
-          testCasesList.push({
-            id: 2,
-            input: rawExamples.slice(2, 4).join(', '),
-            expectedOutput: 'Check execution'
-          });
-        }
       }
 
-      // Map starter code snippets
-      const snippets = {};
-      (question.codeSnippets || []).forEach(s => {
-        if (s.langSlug === 'cpp' || s.langSlug === 'c++') snippets['cpp'] = s.code;
-        if (s.langSlug === 'python3' || s.langSlug === 'python') snippets['python'] = s.code;
-        if (s.langSlug === 'java') snippets['java'] = s.code;
-        if (s.langSlug === 'javascript') snippets['javascript'] = s.code;
-      });
+      // Parse separated main description, examples, and constraints
+      let mainDesc = textClean;
+      let constraintsList = [];
+      let parsedExamples = [];
 
-      // Default fallback starter codes if snippet missing
-      if (!snippets['python']) snippets['python'] = `# ${question.title}\nclass Solution:\n    def solve(self):\n        pass\n`;
-      if (!snippets['cpp']) snippets['cpp'] = `// ${question.title}\n#include <iostream>\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Your code here\n    }\n};\n`;
-      if (!snippets['javascript']) snippets['javascript'] = `// ${question.title}\nfunction solve() {\n    // Your code here\n}\n`;
-      if (!snippets['java']) snippets['java'] = `// ${question.title}\nclass Solution {\n    public void solve() {\n        // Your code here\n    }\n}\n`;
+      // Extract constraints
+      const constraintsIdx = textClean.toLowerCase().indexOf('constraints:');
+      if (constraintsIdx !== -1) {
+        const constraintsPart = textClean.slice(constraintsIdx + 12).trim();
+        constraintsList = constraintsPart
+          .split('\n')
+          .map(c => c.replace(/^[-*•\t\s]+/, '').trim())
+          .filter(c => c.length > 2);
+      }
+
+      // Extract main description before Example 1
+      const firstExampleIdx = textClean.search(/Example\s*1/i);
+      if (firstExampleIdx !== -1) {
+        mainDesc = textClean.slice(0, firstExampleIdx).trim();
+      } else if (constraintsIdx !== -1) {
+        mainDesc = textClean.slice(0, constraintsIdx).trim();
+      }
+
+      // Extract examples from content
+      const exampleMatches = [...textClean.matchAll(/Example\s*(\d+)[\s:]*([\s\S]*?)(?=Example\s*\d+|Constraints:|$)/gi)];
+      if (exampleMatches.length > 0) {
+        parsedExamples = exampleMatches.map((m, idx) => {
+          const body = (m[2] || '').replace(/```/g, '').trim();
+          let inMatch = body.match(/Input:\s*([^\n]+)/i);
+          let outMatch = body.match(/Output:\s*([^\n]+)/i);
+          let expMatch = body.match(/Explanation:\s*([\s\S]+?)(?=\n[A-Z]|$)/i);
+          return {
+            id: idx + 1,
+            input: inMatch ? inMatch[1].trim() : `Test Case ${idx + 1}`,
+            output: outMatch ? outMatch[1].trim() : 'Output',
+            explanation: expMatch ? expMatch[1].trim() : ''
+          };
+        });
+      }
+
+      // Generate test cases from parsed examples or raw exampleTestcases
+      let testCasesList = [];
+      if (parsedExamples.length > 0) {
+        testCasesList = parsedExamples.map((ex, idx) => ({
+          id: idx + 1,
+          input: ex.input,
+          expectedOutput: ex.output
+        }));
+      } else if (question.exampleTestcases) {
+        testCasesList = question.exampleTestcases
+          .split('\n')
+          .filter(t => t.trim())
+          .map((tc, idx) => ({
+            id: idx + 1,
+            input: tc.trim(),
+            expectedOutput: 'Matches example'
+          }));
+      }
 
       const problemData = {
         questionId: question.questionId,
+        questionFrontendId: question.questionId,
         title: question.title,
         slug: question.titleSlug,
         difficulty: question.difficulty || 'Medium',
         tags: (question.topicTags || []).map(t => t.name),
-        description: textClean,
+        description: mainDesc,
+        fullDescription: textClean,
+        examples: parsedExamples.length > 0 ? parsedExamples : [
+          { id: 1, input: 'l1 = [2,4,3], l2 = [5,6,4]', output: '[7,0,8]', explanation: '342 + 465 = 807.' },
+          { id: 2, input: 'l1 = [0], l2 = [0]', output: '[0]' },
+          { id: 3, input: 'l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]', output: '[8,9,9,9,0,0,0,1]' }
+        ],
+        constraints: constraintsList.length > 0 ? constraintsList : [
+          'The number of nodes in each linked list is in the range [1, 100].',
+          '0 <= Node.val <= 9',
+          'It is guaranteed that the list represents a number that does not have leading zeros.'
+        ],
         snippets: snippets,
+        codeSnippets: snippets,
         testCases: testCasesList.length > 0 ? testCasesList : [
           { id: 1, input: 'l1 = [2,4,3], l2 = [5,6,4]', expectedOutput: '[7,0,8]' },
           { id: 2, input: 'l1 = [0], l2 = [0]', expectedOutput: '[0]' },
@@ -2519,11 +2573,15 @@ const server = http.createServer(async (req, res) => {
         ]
       };
 
-      console.log(`[LeetCode Fetch] Successfully parsed: "${problemData.title}" (${problemData.difficulty})`);
-      return sendJson(res, 200, problemData);
+      console.log(`[LeetCode Fetch] Successfully parsed: "${problemData.title}" (${problemData.difficulty}), ${problemData.examples.length} examples, ${problemData.constraints.length} constraints`);
+      return sendJson(res, 200, {
+        success: true,
+        problem: problemData,
+        ...problemData
+      });
     } catch (err) {
       console.error('[LeetCode Fetch Error]', err.message);
-      return sendJson(res, 500, { error: 'Failed to fetch LeetCode problem: ' + err.message });
+      return sendJson(res, 500, { success: false, error: 'Failed to fetch LeetCode problem: ' + err.message });
     }
   }
 
