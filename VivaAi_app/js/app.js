@@ -5998,13 +5998,16 @@ const App = {
   },
 
   renderScorecardCodeSection(iv) {
+    const sc = (iv && iv.scorecard) ? (typeof iv.scorecard === 'string' ? JSON.parse(iv.scorecard) : iv.scorecard) : {};
     const submissions = (iv && Array.isArray(iv.candidateCodeSubmissions) && iv.candidateCodeSubmissions.length > 0)
       ? iv.candidateCodeSubmissions
-      : (Array.isArray(this.candidateCodeSubmissions) && this.candidateCodeSubmissions.length > 0
-          ? this.candidateCodeSubmissions
-          : (iv?.submittedCode || this.latestSubmittedCode
-              ? [{ version: 1, code: iv?.submittedCode || this.latestSubmittedCode, language: iv?.technology || 'cpp', submittedAt: 'Final' }]
-              : []));
+      : (Array.isArray(sc.candidateCodeSubmissions) && sc.candidateCodeSubmissions.length > 0
+          ? sc.candidateCodeSubmissions
+          : (Array.isArray(this.candidateCodeSubmissions) && this.candidateCodeSubmissions.length > 0
+              ? this.candidateCodeSubmissions
+              : (iv?.submittedCode || sc.submittedCode || this.latestSubmittedCode
+                  ? [{ version: 1, code: iv?.submittedCode || sc.submittedCode || this.latestSubmittedCode, language: iv?.technology || 'cpp', submittedAt: 'Final' }]
+                  : [])));
 
     // If user quit before coding stage or never submitted any code, DO NOT show section
     if (!submissions || submissions.length === 0) {

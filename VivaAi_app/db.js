@@ -470,32 +470,45 @@ const DB = {
   getInterviews() {
     if (sqliteDb) {
       const rows = sqliteDb.query('SELECT * FROM interviews ORDER BY created_at DESC;').all();
-      return rows.map(r => ({
-        id: r.id,
-        sessionNumber: r.id,
-        studentName: r.student_name,
-        studentEmail: r.student_email,
-        candidateName: r.student_name,
-        candidateEmail: r.student_email,
-        topic: r.topic,
-        score: r.score,
-        integrityScore: r.integrity_score,
-        duration: r.duration,
-        date: r.date,
-        status: r.status,
-        recordingUrl: r.recording_url,
-        cameraRecordingUrl: r.camera_recording_url || null,
-        screenRecordingUrl: r.screen_recording_url || null,
-        technology: r.technology || 'Python',
-        difficulty: r.difficulty || 'Medium',
-        audioPath: r.audio_path,
-        transcripts: r.transcripts ? (typeof r.transcripts === 'string' ? JSON.parse(r.transcripts) : r.transcripts) : [],
-        scorecard: r.scorecard ? (typeof r.scorecard === 'string' ? JSON.parse(r.scorecard) : r.scorecard) : {},
-        feedback: r.feedback ? (typeof r.feedback === 'string' ? JSON.parse(r.feedback) : r.feedback) : {},
-        createdAt: r.created_at
-      }));
+      return rows.map(r => {
+        const sc = r.scorecard ? (typeof r.scorecard === 'string' ? JSON.parse(r.scorecard) : r.scorecard) : {};
+        return {
+          id: r.id,
+          sessionNumber: r.id,
+          studentName: r.student_name,
+          studentEmail: r.student_email,
+          candidateName: r.student_name,
+          candidateEmail: r.student_email,
+          topic: r.topic,
+          score: r.score,
+          integrityScore: r.integrity_score,
+          duration: r.duration,
+          date: r.date,
+          status: r.status,
+          recordingUrl: r.recording_url,
+          cameraRecordingUrl: r.camera_recording_url || null,
+          screenRecordingUrl: r.screen_recording_url || null,
+          technology: r.technology || 'Python',
+          difficulty: r.difficulty || 'Medium',
+          audioPath: r.audio_path,
+          transcripts: r.transcripts ? (typeof r.transcripts === 'string' ? JSON.parse(r.transcripts) : r.transcripts) : [],
+          scorecard: sc,
+          feedback: r.feedback ? (typeof r.feedback === 'string' ? JSON.parse(r.feedback) : r.feedback) : {},
+          submittedCode: sc.submittedCode || '',
+          candidateCodeSubmissions: sc.candidateCodeSubmissions || [],
+          codingProblem: sc.codingProblem || null,
+          createdAt: r.created_at
+        };
+      });
     }
-    return readJson('interviews.json', []);
+    const list = readJson('interviews.json', []);
+    return list.map(item => {
+      const sc = item.scorecard || {};
+      if (!item.submittedCode && sc.submittedCode) item.submittedCode = sc.submittedCode;
+      if (!item.candidateCodeSubmissions && sc.candidateCodeSubmissions) item.candidateCodeSubmissions = sc.candidateCodeSubmissions;
+      if (!item.codingProblem && sc.codingProblem) item.codingProblem = sc.codingProblem;
+      return item;
+    });
   },
 
   getInterviewById(id) {
@@ -503,6 +516,7 @@ const DB = {
     if (sqliteDb) {
       const r = sqliteDb.query('SELECT * FROM interviews WHERE id = ? LIMIT 1;').get(id);
       if (!r) return null;
+      const sc = r.scorecard ? (typeof r.scorecard === 'string' ? JSON.parse(r.scorecard) : r.scorecard) : {};
       return {
         id: r.id,
         sessionNumber: r.id,
@@ -523,13 +537,24 @@ const DB = {
         difficulty: r.difficulty || 'Medium',
         audioPath: r.audio_path,
         transcripts: r.transcripts ? (typeof r.transcripts === 'string' ? JSON.parse(r.transcripts) : r.transcripts) : [],
-        scorecard: r.scorecard ? (typeof r.scorecard === 'string' ? JSON.parse(r.scorecard) : r.scorecard) : {},
+        scorecard: sc,
         feedback: r.feedback ? (typeof r.feedback === 'string' ? JSON.parse(r.feedback) : r.feedback) : {},
+        submittedCode: sc.submittedCode || '',
+        candidateCodeSubmissions: sc.candidateCodeSubmissions || [],
+        codingProblem: sc.codingProblem || null,
         createdAt: r.created_at
       };
     }
     const list = readJson('interviews.json', []);
-    return list.find(iv => iv.id === id || iv.sessionNumber === id) || null;
+    const found = list.find(iv => iv.id === id || iv.sessionNumber === id);
+    if (found) {
+      const sc = found.scorecard || {};
+      if (!found.submittedCode && sc.submittedCode) found.submittedCode = sc.submittedCode;
+      if (!found.candidateCodeSubmissions && sc.candidateCodeSubmissions) found.candidateCodeSubmissions = sc.candidateCodeSubmissions;
+      if (!found.codingProblem && sc.codingProblem) found.codingProblem = sc.codingProblem;
+      return found;
+    }
+    return null;
   },
 
   saveInterview(data) {
@@ -544,6 +569,9 @@ const DB = {
     if (data.annotatedTranscript && !scorecardObj.annotatedTranscript) scorecardObj.annotatedTranscript = data.annotatedTranscript;
     if (data.summary && !scorecardObj.summary) scorecardObj.summary = data.summary;
     if (data.readinessTier && !scorecardObj.readinessTier) scorecardObj.readinessTier = data.readinessTier;
+    if (data.submittedCode && !scorecardObj.submittedCode) scorecardObj.submittedCode = data.submittedCode;
+    if (data.candidateCodeSubmissions && !scorecardObj.candidateCodeSubmissions) scorecardObj.candidateCodeSubmissions = data.candidateCodeSubmissions;
+    if (data.codingProblem && !scorecardObj.codingProblem) scorecardObj.codingProblem = data.codingProblem;
     const scorecardStr = JSON.stringify(scorecardObj);
     const feedbackStr = typeof data.feedback === 'string' ? data.feedback : JSON.stringify(data.feedback || {});
 

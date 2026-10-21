@@ -1,5 +1,719 @@
 [
   {
+    "id": "AV-7958",
+    "candidateName": "pravin",
+    "candidateEmail": "ghodakepravin154@gmail.com",
+    "studentName": "pravin",
+    "studentEmail": "ghodakepravin154@gmail.com",
+    "topic": "Data Structures",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "duration": "19.5 min",
+    "score": 19,
+    "maxScore": 100,
+    "status": "Completed",
+    "durationSeconds": 1170,
+    "readinessTier": "Needs Review",
+    "summary": "Candidate provided no substantive technical response to either oral question. The answers \"Because he\" and \"So I'll make it\" were incomplete fragments that did not describe reversed linked-list addition, carry handling, edge cases, or complexity. The submitted code only prints the hard-coded string \"7,0,8\"; it does not accept input, construct or traverse linked lists, perform digit-wise addition, handle carries, or return a computed result. The only limited credit is for presenting a syntactically valid basic C++ program shell.",
+    "date": "Oct 22",
+    "fullDate": "Oct 22, 2026, 12:35 AM",
+    "cameraRecordingUrl": "https://vveubzrxvlklepzthuvq.supabase.co/storage/v1/object/public/recordings/AV-7958-camera.webm",
+    "screenRecordingUrl": "/recordings/AV-7958-screen.webm",
+    "isDisqualified": false,
+    "disqualificationReason": "",
+    "submittedCode": "#include<iostream>\n\nusing namespace std;\n\nint main(){\n\ncout<<\"7,0,8\";\n\nreturn 0;\n\n}",
+    "candidateCodeSubmissions": [
+      {
+        "version": 1,
+        "code": "#include<iostream>\n\nusing namespace std;\n\nint main(){\n\ncout<<\"7,0,8\";\n\nreturn 0;\n\n}",
+        "language": "cpp",
+        "submittedAt": "12:35 AM",
+        "isAutoSubmit": false
+      }
+    ],
+    "codingProblem": {
+      "title": "Add Two Numbers"
+    },
+    "scorecard": {
+      "score": 19,
+      "readinessTier": "Needs Review",
+      "summary": "Candidate provided no substantive technical response to either oral question. The answers \"Because he\" and \"So I'll make it\" were incomplete fragments that did not describe reversed linked-list addition, carry handling, edge cases, or complexity. The submitted code only prints the hard-coded string \"7,0,8\"; it does not accept input, construct or traverse linked lists, perform digit-wise addition, handle carries, or return a computed result. The only limited credit is for presenting a syntactically valid basic C++ program shell.",
+      "isDisqualified": false,
+      "disqualificationReason": "",
+      "submittedCode": "#include<iostream>\n\nusing namespace std;\n\nint main(){\n\ncout<<\"7,0,8\";\n\nreturn 0;\n\n}",
+      "candidateCodeSubmissions": [
+        {
+          "version": 1,
+          "code": "#include<iostream>\n\nusing namespace std;\n\nint main(){\n\ncout<<\"7,0,8\";\n\nreturn 0;\n\n}",
+          "language": "cpp",
+          "submittedAt": "12:35 AM",
+          "isAutoSubmit": false
+        }
+      ],
+      "codingProblem": {
+        "title": "Add Two Numbers"
+      },
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 0,
+          "percent": 0,
+          "weight": 30,
+          "calculatedMarks": 0,
+          "reason": "Neither spoken turn defined the problem or articulated the roles of linked-list nodes, digits, pointers, and carries. The response \"Because he\" did not constitute a conceptual explanation.",
+          "evidence": ""
+        },
+        "depth": {
+          "score": 0,
+          "percent": 0,
+          "weight": 25,
+          "calculatedMarks": 0,
+          "reason": "The candidate gave no explanation of memory layout, node traversal, carry propagation, reversal of the result, edge cases, time complexity, or auxiliary space.",
+          "evidence": ""
+        },
+        "problemSolving": {
+          "score": 2,
+          "percent": 40,
+          "weight": 20,
+          "calculatedMarks": 8,
+          "reason": "The program can print a fixed string, but it contains no algorithm for adding two numbers represented as reversed-digit linked lists. There is no input handling, list construction, node processing, carry logic, result-list construction, or result return.",
+          "evidence": ""
+        },
+        "practical": {
+          "score": 3,
+          "percent": 60,
+          "weight": 15,
+          "calculatedMarks": 9,
+          "reason": "The submission includes a valid C++ header, main function, standard output statement, and normal termination. However, the hard-coded output \"7,0,8\" is not connected to any problem input or computational process.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 1,
+          "percent": 20,
+          "weight": 10,
+          "calculatedMarks": 2,
+          "reason": "Both oral turns were unfinished fragments rather than complete answers: \"Because he\" and \"So I'll make it.\" Neither directly addressed the examiner's technical prompts.",
+          "evidence": ""
+        }
+      },
+      "strengths": [
+        {
+          "title": "Basic C++ Program Shell",
+          "desc": "The submitted code uses a standard iostream stream and returns control normally from main, showing limited familiarity with basic C++ syntax."
+        },
+        {
+          "title": "Examination Participation",
+          "desc": "The candidate submitted code and responded to both oral viva turns, although the responses did not provide assessable technical content."
+        }
+      ],
+      "improvements": [
+        {
+          "title": "Explain the Core Algorithm",
+          "desc": "Describe addition by traversing both reversed-digit lists from their heads, adding corresponding digits with a carry, appending each computed digit to a result list, and reversing that list before returning it."
+        },
+        {
+          "title": "Implement the Linked-List Solution",
+          "desc": "Replace the hard-coded output with a function that accepts two digit-node lists, creates and populates a result list through pointer manipulation, and returns the correctly ordered result."
+        },
+        {
+          "title": "Demonstrate Edge-Case Handling",
+          "desc": "Explicitly address unequal list lengths, a missing final carry, leading zeroes in the input, null or empty lists, and a zero-plus-zero result."
+        },
+        {
+          "title": "State Complexity and Trade-offs",
+          "desc": "State that the standard algorithm takes O(N) time for the longer input and O(N) space for the result, while distinguishing required output space from optional auxiliary storage."
+        },
+        {
+          "title": "Improve Oral Communication",
+          "desc": "Replace fragments such as \"Because he\" and \"So I'll make it\" with complete, direct answers that begin with the algorithm, continue through carry handling, and conclude with complexity and edge cases."
+        }
+      ],
+      "suggestions": [
+        "Review core principles and practical implementations in Data Structures.",
+        "Practice verbalizing algorithmic trade-offs and complexity calculations under exam conditions."
+      ],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "Welcome back. Let's dive into Add Two Numbers. Walk me through your approach — how do you plan to add these two reversed-digit linked lists?",
+          "timestamp": "00:08",
+          "stage": "Add Two Numbers"
+        },
+        {
+          "speaker": "student",
+          "text": "Because he",
+          "timestamp": "00:45",
+          "stage": "Add Two Numbers",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete answer",
+            "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+            "dimension": "Communication",
+            "supportsScore": "19 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "In our Add Two Numbers stage for Data Structures: can you share your technical perspective regarding the candidate to solve add two numbers. inquire about their algorithmic intuition, edge case handling, and big-o runtime complexity.?",
+          "timestamp": "00:50",
+          "stage": "Add Two Numbers"
+        },
+        {
+          "speaker": "student",
+          "text": "So I'll make it",
+          "timestamp": "01:24",
+          "stage": "Add Two Numbers",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete answer",
+            "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+            "dimension": "Communication",
+            "supportsScore": "19 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "No worries—let’s start small. How would you traverse both lists, combine corresponding digits, and carry any value above nine into the next node?",
+          "timestamp": "01:28",
+          "stage": "Add Two Numbers"
+        }
+      ]
+    },
+    "rubricBreakdown": {
+      "conceptual": {
+        "score": 0,
+        "percent": 0,
+        "weight": 30,
+        "calculatedMarks": 0,
+        "reason": "Neither spoken turn defined the problem or articulated the roles of linked-list nodes, digits, pointers, and carries. The response \"Because he\" did not constitute a conceptual explanation.",
+        "evidence": ""
+      },
+      "depth": {
+        "score": 0,
+        "percent": 0,
+        "weight": 25,
+        "calculatedMarks": 0,
+        "reason": "The candidate gave no explanation of memory layout, node traversal, carry propagation, reversal of the result, edge cases, time complexity, or auxiliary space.",
+        "evidence": ""
+      },
+      "problemSolving": {
+        "score": 2,
+        "percent": 40,
+        "weight": 20,
+        "calculatedMarks": 8,
+        "reason": "The program can print a fixed string, but it contains no algorithm for adding two numbers represented as reversed-digit linked lists. There is no input handling, list construction, node processing, carry logic, result-list construction, or result return.",
+        "evidence": ""
+      },
+      "practical": {
+        "score": 3,
+        "percent": 60,
+        "weight": 15,
+        "calculatedMarks": 9,
+        "reason": "The submission includes a valid C++ header, main function, standard output statement, and normal termination. However, the hard-coded output \"7,0,8\" is not connected to any problem input or computational process.",
+        "evidence": ""
+      },
+      "communication": {
+        "score": 1,
+        "percent": 20,
+        "weight": 10,
+        "calculatedMarks": 2,
+        "reason": "Both oral turns were unfinished fragments rather than complete answers: \"Because he\" and \"So I'll make it.\" Neither directly addressed the examiner's technical prompts.",
+        "evidence": ""
+      }
+    },
+    "strengths": [
+      {
+        "title": "Basic C++ Program Shell",
+        "desc": "The submitted code uses a standard iostream stream and returns control normally from main, showing limited familiarity with basic C++ syntax."
+      },
+      {
+        "title": "Examination Participation",
+        "desc": "The candidate submitted code and responded to both oral viva turns, although the responses did not provide assessable technical content."
+      }
+    ],
+    "improvements": [
+      {
+        "title": "Explain the Core Algorithm",
+        "desc": "Describe addition by traversing both reversed-digit lists from their heads, adding corresponding digits with a carry, appending each computed digit to a result list, and reversing that list before returning it."
+      },
+      {
+        "title": "Implement the Linked-List Solution",
+        "desc": "Replace the hard-coded output with a function that accepts two digit-node lists, creates and populates a result list through pointer manipulation, and returns the correctly ordered result."
+      },
+      {
+        "title": "Demonstrate Edge-Case Handling",
+        "desc": "Explicitly address unequal list lengths, a missing final carry, leading zeroes in the input, null or empty lists, and a zero-plus-zero result."
+      },
+      {
+        "title": "State Complexity and Trade-offs",
+        "desc": "State that the standard algorithm takes O(N) time for the longer input and O(N) space for the result, while distinguishing required output space from optional auxiliary storage."
+      },
+      {
+        "title": "Improve Oral Communication",
+        "desc": "Replace fragments such as \"Because he\" and \"So I'll make it\" with complete, direct answers that begin with the algorithm, continue through carry handling, and conclude with complexity and edge cases."
+      }
+    ],
+    "suggestions": [
+      "Review core principles and practical implementations in Data Structures.",
+      "Practice verbalizing algorithmic trade-offs and complexity calculations under exam conditions."
+    ],
+    "annotatedTranscript": [
+      {
+        "speaker": "mira",
+        "text": "Welcome back. Let's dive into Add Two Numbers. Walk me through your approach — how do you plan to add these two reversed-digit linked lists?",
+        "timestamp": "00:08",
+        "stage": "Add Two Numbers"
+      },
+      {
+        "speaker": "student",
+        "text": "Because he",
+        "timestamp": "00:45",
+        "stage": "Add Two Numbers",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Incomplete answer",
+          "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+          "dimension": "Communication",
+          "supportsScore": "19 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "In our Add Two Numbers stage for Data Structures: can you share your technical perspective regarding the candidate to solve add two numbers. inquire about their algorithmic intuition, edge case handling, and big-o runtime complexity.?",
+        "timestamp": "00:50",
+        "stage": "Add Two Numbers"
+      },
+      {
+        "speaker": "student",
+        "text": "So I'll make it",
+        "timestamp": "01:24",
+        "stage": "Add Two Numbers",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Incomplete answer",
+          "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+          "dimension": "Communication",
+          "supportsScore": "19 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "No worries—let’s start small. How would you traverse both lists, combine corresponding digits, and carry any value above nine into the next node?",
+        "timestamp": "01:28",
+        "stage": "Add Two Numbers"
+      }
+    ],
+    "transcript": [
+      {
+        "interviewId": "AV-7958",
+        "speaker": "mira",
+        "text": "Welcome back. Let's dive into Add Two Numbers. Walk me through your approach — how do you plan to add these two reversed-digit linked lists?",
+        "timestamp": "00:08",
+        "stage": "Add Two Numbers",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-7958",
+        "speaker": "student",
+        "text": "Because he",
+        "timestamp": "00:45",
+        "stage": "Add Two Numbers",
+        "questionRef": "Welcome back. Let's dive into Add Two Numbers. Walk me through your approach — how do you plan to add these two reversed-digit linked lists?"
+      },
+      {
+        "interviewId": "AV-7958",
+        "speaker": "mira",
+        "text": "In our Add Two Numbers stage for Data Structures: can you share your technical perspective regarding the candidate to solve add two numbers. inquire about their algorithmic intuition, edge case handling, and big-o runtime complexity.?",
+        "timestamp": "00:50",
+        "stage": "Add Two Numbers",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-7958",
+        "speaker": "student",
+        "text": "So I'll make it",
+        "timestamp": "01:24",
+        "stage": "Add Two Numbers",
+        "questionRef": "In our Add Two Numbers stage for Data Structures: can you share your technical perspective regarding the candidate to solve add two numbers. inquire about their algorithmic intuition, edge case handling, and big-o runtime complexity.?"
+      },
+      {
+        "interviewId": "AV-7958",
+        "speaker": "mira",
+        "text": "No worries—let’s start small. How would you traverse both lists, combine corresponding digits, and carry any value above nine into the next node?",
+        "timestamp": "01:28",
+        "stage": "Add Two Numbers",
+        "followUpType": "nudge"
+      }
+    ],
+    "transcripts": [
+      {
+        "interviewId": "AV-7958",
+        "speaker": "mira",
+        "text": "Welcome back. Let's dive into Add Two Numbers. Walk me through your approach — how do you plan to add these two reversed-digit linked lists?",
+        "timestamp": "00:08",
+        "stage": "Add Two Numbers",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-7958",
+        "speaker": "student",
+        "text": "Because he",
+        "timestamp": "00:45",
+        "stage": "Add Two Numbers",
+        "questionRef": "Welcome back. Let's dive into Add Two Numbers. Walk me through your approach — how do you plan to add these two reversed-digit linked lists?"
+      },
+      {
+        "interviewId": "AV-7958",
+        "speaker": "mira",
+        "text": "In our Add Two Numbers stage for Data Structures: can you share your technical perspective regarding the candidate to solve add two numbers. inquire about their algorithmic intuition, edge case handling, and big-o runtime complexity.?",
+        "timestamp": "00:50",
+        "stage": "Add Two Numbers",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-7958",
+        "speaker": "student",
+        "text": "So I'll make it",
+        "timestamp": "01:24",
+        "stage": "Add Two Numbers",
+        "questionRef": "In our Add Two Numbers stage for Data Structures: can you share your technical perspective regarding the candidate to solve add two numbers. inquire about their algorithmic intuition, edge case handling, and big-o runtime complexity.?"
+      },
+      {
+        "interviewId": "AV-7958",
+        "speaker": "mira",
+        "text": "No worries—let’s start small. How would you traverse both lists, combine corresponding digits, and carry any value above nine into the next node?",
+        "timestamp": "01:28",
+        "stage": "Add Two Numbers",
+        "followUpType": "nudge"
+      }
+    ],
+    "sessionNumber": "AV-7958",
+    "feedback": {},
+    "createdAt": "2026-10-21T19:05:30.989Z"
+  },
+  {
+    "id": "AV-2746",
+    "candidateName": "pravin",
+    "candidateEmail": "ghodakepravin154@gmail.com",
+    "studentName": "pravin",
+    "studentEmail": "ghodakepravin154@gmail.com",
+    "topic": "Data Structures",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "duration": "18 min",
+    "score": 20,
+    "maxScore": 100,
+    "status": "Completed",
+    "durationSeconds": 1080,
+    "readinessTier": "Disqualified",
+    "summary": "Candidate was terminated and kicked off from the interview examination due to 5 violations of integrity rules (e.g. multiple people, tab switches, out-of-frame, copy-paste).",
+    "date": "Oct 22",
+    "fullDate": "Oct 22, 2026, 12:29 AM",
+    "cameraRecordingUrl": "https://vveubzrxvlklepzthuvq.supabase.co/storage/v1/object/public/recordings/AV-2746-camera.webm",
+    "screenRecordingUrl": "/recordings/AV-2746-screen.webm",
+    "isDisqualified": true,
+    "disqualificationReason": "Candidate disqualified and kicked off from examination due to 5 automated integrity rule violations.",
+    "scorecard": {
+      "score": 20,
+      "readinessTier": "Disqualified",
+      "summary": "Candidate was terminated and kicked off from the interview examination due to 5 violations of integrity rules (e.g. multiple people, tab switches, out-of-frame, copy-paste).",
+      "isDisqualified": true,
+      "disqualificationReason": "Candidate disqualified and kicked off from examination due to 5 automated integrity rule violations.",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 1.5,
+          "percent": 30,
+          "weight": 30,
+          "calculatedMarks": 9,
+          "reason": "Evaluated against core technical criteria.",
+          "evidence": "\"Tell...\""
+        },
+        "depth": {
+          "score": 1.3,
+          "percent": 25,
+          "weight": 25,
+          "calculatedMarks": 6.3,
+          "reason": "Lacked architectural depth, memory details, and time/space complexity analysis.",
+          "evidence": "\"Yeah...\""
+        },
+        "problemSolving": {
+          "score": 1.3,
+          "percent": 25,
+          "weight": 20,
+          "calculatedMarks": 5,
+          "reason": "Struggled to apply concepts to real-world scenarios or problem statements.",
+          "evidence": ""
+        },
+        "practical": {
+          "score": 1.1,
+          "percent": 22,
+          "weight": 15,
+          "calculatedMarks": 3.3,
+          "reason": "Little evidence of practical programming implementation or design principles.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 2,
+          "percent": 40,
+          "weight": 10,
+          "calculatedMarks": 4,
+          "reason": "Spoken communication delivery during oral examination.",
+          "evidence": ""
+        }
+      },
+      "strengths": [
+        {
+          "title": "Integrity Alert",
+          "desc": "Session terminated due to repeated proctoring violations."
+        }
+      ],
+      "improvements": [
+        {
+          "title": "Examination Adherence",
+          "desc": "Must follow anti-cheat guidelines, avoid tab switches and keep single person in frame."
+        }
+      ],
+      "suggestions": [
+        "Re-take viva after verifying webcam integrity and examination rules compliance."
+      ],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "How will you add the two digit sequences while producing a new reversed linked list, and how will you handle unequal lengths and a final carry?",
+          "timestamp": "00:06",
+          "stage": "Add Two Numbers"
+        },
+        {
+          "speaker": "student",
+          "text": "Tell",
+          "timestamp": "00:21",
+          "stage": "Add Two Numbers",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete answer",
+            "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+            "dimension": "Communication",
+            "supportsScore": "28 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "Sure—walk me through your planned algorithm step by step, beginning with how you access the least significant digit and decide when to stop.",
+          "timestamp": "00:26",
+          "stage": "Add Two Numbers"
+        },
+        {
+          "speaker": "student",
+          "text": "Yeah",
+          "timestamp": "00:52",
+          "stage": "Add Two Numbers",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete answer",
+            "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+            "dimension": "Communication",
+            "supportsScore": "28 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "No worries—let’s start with one digit: if the heads are 2 and 5, what result digit and carry do you compute, and how will you link that result node?",
+          "timestamp": "01:07",
+          "stage": "Add Two Numbers"
+        }
+      ]
+    },
+    "rubricBreakdown": {
+      "conceptual": {
+        "score": 1.5,
+        "percent": 30,
+        "weight": 30,
+        "calculatedMarks": 9,
+        "reason": "Evaluated against core technical criteria.",
+        "evidence": "\"Tell...\""
+      },
+      "depth": {
+        "score": 1.3,
+        "percent": 25,
+        "weight": 25,
+        "calculatedMarks": 6.3,
+        "reason": "Lacked architectural depth, memory details, and time/space complexity analysis.",
+        "evidence": "\"Yeah...\""
+      },
+      "problemSolving": {
+        "score": 1.3,
+        "percent": 25,
+        "weight": 20,
+        "calculatedMarks": 5,
+        "reason": "Struggled to apply concepts to real-world scenarios or problem statements.",
+        "evidence": ""
+      },
+      "practical": {
+        "score": 1.1,
+        "percent": 22,
+        "weight": 15,
+        "calculatedMarks": 3.3,
+        "reason": "Little evidence of practical programming implementation or design principles.",
+        "evidence": ""
+      },
+      "communication": {
+        "score": 2,
+        "percent": 40,
+        "weight": 10,
+        "calculatedMarks": 4,
+        "reason": "Spoken communication delivery during oral examination.",
+        "evidence": ""
+      }
+    },
+    "strengths": [
+      {
+        "title": "Integrity Alert",
+        "desc": "Session terminated due to repeated proctoring violations."
+      }
+    ],
+    "improvements": [
+      {
+        "title": "Examination Adherence",
+        "desc": "Must follow anti-cheat guidelines, avoid tab switches and keep single person in frame."
+      }
+    ],
+    "suggestions": [
+      "Re-take viva after verifying webcam integrity and examination rules compliance."
+    ],
+    "annotatedTranscript": [
+      {
+        "speaker": "mira",
+        "text": "How will you add the two digit sequences while producing a new reversed linked list, and how will you handle unequal lengths and a final carry?",
+        "timestamp": "00:06",
+        "stage": "Add Two Numbers"
+      },
+      {
+        "speaker": "student",
+        "text": "Tell",
+        "timestamp": "00:21",
+        "stage": "Add Two Numbers",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Incomplete answer",
+          "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+          "dimension": "Communication",
+          "supportsScore": "28 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "Sure—walk me through your planned algorithm step by step, beginning with how you access the least significant digit and decide when to stop.",
+        "timestamp": "00:26",
+        "stage": "Add Two Numbers"
+      },
+      {
+        "speaker": "student",
+        "text": "Yeah",
+        "timestamp": "00:52",
+        "stage": "Add Two Numbers",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Incomplete answer",
+          "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+          "dimension": "Communication",
+          "supportsScore": "28 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "No worries—let’s start with one digit: if the heads are 2 and 5, what result digit and carry do you compute, and how will you link that result node?",
+        "timestamp": "01:07",
+        "stage": "Add Two Numbers"
+      }
+    ],
+    "transcript": [
+      {
+        "interviewId": "AV-2746",
+        "speaker": "mira",
+        "text": "How will you add the two digit sequences while producing a new reversed linked list, and how will you handle unequal lengths and a final carry?",
+        "timestamp": "00:06",
+        "stage": "Add Two Numbers",
+        "followUpType": "deepen"
+      },
+      {
+        "interviewId": "AV-2746",
+        "speaker": "student",
+        "text": "Tell",
+        "timestamp": "00:21",
+        "stage": "Add Two Numbers",
+        "questionRef": "How will you add the two digit sequences while producing a new reversed linked list, and how will you handle unequal lengths and a final carry?"
+      },
+      {
+        "interviewId": "AV-2746",
+        "speaker": "mira",
+        "text": "Sure—walk me through your planned algorithm step by step, beginning with how you access the least significant digit and decide when to stop.",
+        "timestamp": "00:26",
+        "stage": "Add Two Numbers",
+        "followUpType": "nudge"
+      },
+      {
+        "interviewId": "AV-2746",
+        "speaker": "student",
+        "text": "Yeah",
+        "timestamp": "00:52",
+        "stage": "Add Two Numbers",
+        "questionRef": "Sure—walk me through your planned algorithm step by step, beginning with how you access the least significant digit and decide when to stop."
+      },
+      {
+        "interviewId": "AV-2746",
+        "speaker": "mira",
+        "text": "No worries—let’s start with one digit: if the heads are 2 and 5, what result digit and carry do you compute, and how will you link that result node?",
+        "timestamp": "01:07",
+        "stage": "Add Two Numbers",
+        "followUpType": "nudge"
+      }
+    ],
+    "transcripts": [
+      {
+        "interviewId": "AV-2746",
+        "speaker": "mira",
+        "text": "How will you add the two digit sequences while producing a new reversed linked list, and how will you handle unequal lengths and a final carry?",
+        "timestamp": "00:06",
+        "stage": "Add Two Numbers",
+        "followUpType": "deepen"
+      },
+      {
+        "interviewId": "AV-2746",
+        "speaker": "student",
+        "text": "Tell",
+        "timestamp": "00:21",
+        "stage": "Add Two Numbers",
+        "questionRef": "How will you add the two digit sequences while producing a new reversed linked list, and how will you handle unequal lengths and a final carry?"
+      },
+      {
+        "interviewId": "AV-2746",
+        "speaker": "mira",
+        "text": "Sure—walk me through your planned algorithm step by step, beginning with how you access the least significant digit and decide when to stop.",
+        "timestamp": "00:26",
+        "stage": "Add Two Numbers",
+        "followUpType": "nudge"
+      },
+      {
+        "interviewId": "AV-2746",
+        "speaker": "student",
+        "text": "Yeah",
+        "timestamp": "00:52",
+        "stage": "Add Two Numbers",
+        "questionRef": "Sure—walk me through your planned algorithm step by step, beginning with how you access the least significant digit and decide when to stop."
+      },
+      {
+        "interviewId": "AV-2746",
+        "speaker": "mira",
+        "text": "No worries—let’s start with one digit: if the heads are 2 and 5, what result digit and carry do you compute, and how will you link that result node?",
+        "timestamp": "01:07",
+        "stage": "Add Two Numbers",
+        "followUpType": "nudge"
+      }
+    ],
+    "sessionNumber": "AV-2746",
+    "feedback": {},
+    "createdAt": "2026-10-21T18:59:42.528Z"
+  },
+  {
     "id": "AV-2462",
     "candidateName": "pravin",
     "candidateEmail": "ghodakepravin154@gmail.com",

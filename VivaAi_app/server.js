@@ -2134,6 +2134,9 @@ const server = http.createServer(async (req, res) => {
         screenRecordingUrl: (body.screenRecordingUrl && !body.screenRecordingUrl.endsWith('-screen.webm'))
           ? body.screenRecordingUrl
           : (existingIv?.screenRecordingUrl || `/recordings/${targetId}-screen.webm`),
+        submittedCode: body.submittedCode || body.code || existingIv?.submittedCode || '',
+        candidateCodeSubmissions: Array.isArray(body.candidateCodeSubmissions) ? body.candidateCodeSubmissions : (existingIv?.candidateCodeSubmissions || []),
+        codingProblem: body.codingProblem || existingIv?.codingProblem || null,
         isDisqualified: !!body.isDisqualified,
         disqualificationReason: body.disqualificationReason || '',
         scorecard: {
@@ -2146,7 +2149,10 @@ const server = http.createServer(async (req, res) => {
           strengths: body.strengths || [],
           improvements: body.improvements || [],
           suggestions: body.suggestions || [],
-          annotatedTranscript: body.annotatedTranscript || body.transcript || []
+          annotatedTranscript: body.annotatedTranscript || body.transcript || [],
+          submittedCode: body.submittedCode || body.code || existingIv?.submittedCode || '',
+          candidateCodeSubmissions: Array.isArray(body.candidateCodeSubmissions) ? body.candidateCodeSubmissions : (existingIv?.candidateCodeSubmissions || []),
+          codingProblem: body.codingProblem || existingIv?.codingProblem || null
         },
         rubricBreakdown: body.rubricBreakdown || {},
         strengths: body.strengths || [],
