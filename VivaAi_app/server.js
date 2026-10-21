@@ -2050,14 +2050,8 @@ const server = http.createServer(async (req, res) => {
         transcripts: body.transcript || body.transcripts || []
       };
 
-      if (DB.isSqlite) {
-        DB.saveInterview(newInterview);
-      } else {
-        const interviews = readDb('interviews.json');
-        interviews.unshift(newInterview);
-        writeDb('interviews.json', interviews);
-      }
-      console.log(`[API] Saved Interview Session ${newInterview.id} with score ${newInterview.score}/100 to SQLite`);
+      DB.saveInterview(newInterview);
+      console.log(`[API] Saved Interview Session ${newInterview.id} with score ${newInterview.score}/100`);
       return sendJson(res, 201, newInterview);
     }
   }

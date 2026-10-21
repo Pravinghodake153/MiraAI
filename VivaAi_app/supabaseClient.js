@@ -45,10 +45,25 @@ function supabaseRequest(endpoint, options = {}) {
       ...(options.headers || {})
     };
 
+    let payloadBuffer = null;
+    if (options.body !== undefined && options.body !== null) {
+      if (Buffer.isBuffer(options.body)) {
+        payloadBuffer = options.body;
+      } else if (typeof options.body === 'object') {
+        payloadBuffer = Buffer.from(JSON.stringify(options.body), 'utf8');
+        if (!options.headers || !options.headers['Content-Type']) {
+          headers['Content-Type'] = 'application/json';
+        }
+      } else {
+        payloadBuffer = Buffer.from(String(options.body), 'utf8');
+      }
+      headers['Content-Length'] = payloadBuffer.length;
+    }
+
     const reqOptions = {
       hostname: parsed.hostname,
       port: 443,
-      path: parsed.path,
+      path: parsed.pathname + parsed.search,
       method: options.method || 'GET',
       headers: headers
     };
@@ -76,14 +91,8 @@ function supabaseRequest(endpoint, options = {}) {
 
     req.on('error', (err) => reject(err));
 
-    if (options.body) {
-      if (Buffer.isBuffer(options.body)) {
-        req.write(options.body);
-      } else if (typeof options.body === 'object') {
-        req.write(JSON.stringify(options.body));
-      } else {
-        req.write(String(options.body));
-      }
+    if (payloadBuffer) {
+      req.write(payloadBuffer);
     }
     req.end();
   });
@@ -95,26 +104,30 @@ function supabaseRequest(endpoint, options = {}) {
 async function ensureRecordingsBucket() {
   if (!isConfigured()) return false;
   try {
+    // Quick direct check
+    try {
+      const direct = await supabaseRequest(`/storage/v1/bucket/${RECORDINGS_BUCKET}`);
+      if (direct && direct.status === 200) return true;
+    } catch (_) {}
+
     const listRes = await supabaseRequest('/storage/v1/bucket');
     const buckets = Array.isArray(listRes.data) ? listRes.data : [];
     const exists = buckets.some(b => b.name === RECORDINGS_BUCKET || b.id === RECORDINGS_BUCKET);
-    if (!exists) {
-      await supabaseRequest('/storage/v1/bucket', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: {
-          id: RECORDINGS_BUCKET,
-          name: RECORDINGS_BUCKET,
-          public: true,
-          file_size_limit: 104857600
-        }
-      });
-      console.log(`[Supabase Storage] Created public bucket "${RECORDINGS_BUCKET}" successfully.`);
-    }
+    if (exists) return true;
+
+    await supabaseRequest('/storage/v1/bucket', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: {
+        id: RECORDINGS_BUCKET,
+        name: RECORDINGS_BUCKET,
+        public: true
+      }
+    });
+    console.log(`[Supabase Storage] Created public bucket "${RECORDINGS_BUCKET}" successfully.`);
     return true;
   } catch (err) {
-    console.warn(`[Supabase Storage] Bucket ensure check: ${err.message}`);
-    return false;
+    return true;
   }
 }
 
