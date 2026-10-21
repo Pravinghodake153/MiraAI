@@ -1,5 +1,1250 @@
 [
   {
+    "id": "AV-2462",
+    "candidateName": "pravin",
+    "candidateEmail": "ghodakepravin154@gmail.com",
+    "studentName": "pravin",
+    "studentEmail": "ghodakepravin154@gmail.com",
+    "topic": "Data Structures",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "duration": "15 min",
+    "score": 35,
+    "maxScore": 100,
+    "status": "Completed",
+    "durationSeconds": 900,
+    "readinessTier": "Needs Review",
+    "summary": "Candidate completed viva session on Data Structures across 15 response turns.",
+    "date": "Oct 21",
+    "fullDate": "Oct 21, 2026, 07:57 PM",
+    "cameraRecordingUrl": "/recordings/AV-2462-camera.webm",
+    "screenRecordingUrl": "/recordings/AV-2462-screen.webm",
+    "isDisqualified": false,
+    "disqualificationReason": "",
+    "scorecard": {
+      "score": 35,
+      "readinessTier": "Needs Review",
+      "summary": "Candidate completed viva session on Data Structures across 15 response turns.",
+      "isDisqualified": false,
+      "disqualificationReason": "",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 2,
+          "percent": 40,
+          "weight": 30,
+          "calculatedMarks": 12,
+          "reason": "Evaluated against core technical criteria.",
+          "evidence": "\"Could you...\""
+        },
+        "depth": {
+          "score": 1.8,
+          "percent": 35,
+          "weight": 25,
+          "calculatedMarks": 8.8,
+          "reason": "Lacked architectural depth, memory details, and time/space complexity analysis.",
+          "evidence": "\"So I'm looking for an...\""
+        },
+        "problemSolving": {
+          "score": 1.8,
+          "percent": 35,
+          "weight": 20,
+          "calculatedMarks": 7,
+          "reason": "Struggled to apply concepts to real-world scenarios or problem statements.",
+          "evidence": "\"Let me...\""
+        },
+        "practical": {
+          "score": 1.6,
+          "percent": 32,
+          "weight": 15,
+          "calculatedMarks": 4.8,
+          "reason": "Little evidence of practical programming implementation or design principles.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 1.3,
+          "percent": 25,
+          "weight": 10,
+          "calculatedMarks": 2.5,
+          "reason": "Frequently distracted by audio verification instead of technical content.",
+          "evidence": ""
+        }
+      },
+      "strengths": [
+        {
+          "title": "Oral Participation",
+          "desc": "Candidate engaged in the viva dialogue across 15 response turns."
+        }
+      ],
+      "improvements": [
+        {
+          "title": "Fundamental Concepts",
+          "desc": "Strengthen core theoretical definitions in Data Structures."
+        },
+        {
+          "title": "Technical Depth",
+          "desc": "Focus on time/space complexities and algorithmic mechanics rather than brief responses."
+        }
+      ],
+      "suggestions": [
+        "Review core textbook principles for Data Structures.",
+        "Practice oral technical explanations focusing on clear definitions and complexities.",
+        "Prepare directly for scenario-based questions."
+      ],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "Welcome! Ready to start? Let's begin: can you explain the difference between an array and a linked list?",
+          "timestamp": "00:06",
+          "stage": "Warm-up"
+        },
+        {
+          "speaker": "student",
+          "text": "Could you",
+          "timestamp": "00:20",
+          "stage": "Warm-up",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete answer",
+            "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+            "dimension": "Communication",
+            "supportsScore": "30 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "Could you describe how insertion at the beginning of an array differs from insertion at the beginning of a linked list?",
+          "timestamp": "00:45",
+          "stage": "Warm-up"
+        },
+        {
+          "speaker": "student",
+          "text": "So I'm looking for an",
+          "timestamp": "00:57",
+          "stage": "Warm-up",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete answer",
+            "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+            "dimension": "Communication",
+            "supportsScore": "30 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "No worries at all. Let's try a different angle: how would you describe the concept of time complexity in simple terms?",
+          "timestamp": "01:01",
+          "stage": "Warm-up"
+        },
+        {
+          "speaker": "student",
+          "text": "Let me",
+          "timestamp": "01:27",
+          "stage": "Fundamentals",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete answer",
+            "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+            "dimension": "Communication",
+            "supportsScore": "30 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "Can you explain the primary theoretical principles and memory layout trade-offs in Data Structures?",
+          "timestamp": "01:38",
+          "stage": "Fundamentals"
+        },
+        {
+          "speaker": "student",
+          "text": "Because you're far",
+          "timestamp": "02:03",
+          "stage": "Fundamentals",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete answer",
+            "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+            "dimension": "Communication",
+            "supportsScore": "30 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "Let's discuss fundamental concepts in Data Structures. How do core architectural definitions and standard complexities compare?",
+          "timestamp": "02:18",
+          "stage": "Fundamentals"
+        },
+        {
+          "speaker": "student",
+          "text": "Let me down slowly",
+          "timestamp": "02:34",
+          "stage": "Fundamentals",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete answer",
+            "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+            "dimension": "Communication",
+            "supportsScore": "30 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "No worries. Let's keep it simple: what does Big O notation represent?",
+          "timestamp": "02:38",
+          "stage": "Fundamentals"
+        },
+        {
+          "speaker": "student",
+          "text": "I used to believe",
+          "timestamp": "02:52",
+          "stage": "Fundamentals",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete answer",
+            "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+            "dimension": "Communication",
+            "supportsScore": "30 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "Good start. Now, can you compare the time complexity of searching in an array versus a linked list?",
+          "timestamp": "02:57",
+          "stage": "Fundamentals"
+        },
+        {
+          "speaker": "student",
+          "text": "You",
+          "timestamp": "05:06",
+          "stage": "Depth",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete answer",
+            "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+            "dimension": "Communication",
+            "supportsScore": "30 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "Good point. Now, let's dive deeper: how does memory allocation differ between arrays and linked lists, and what impact does this have on cache performance?",
+          "timestamp": "05:09",
+          "stage": "Depth"
+        },
+        {
+          "speaker": "student",
+          "text": "I will give up",
+          "timestamp": "05:47",
+          "stage": "Depth",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete answer",
+            "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+            "dimension": "Communication",
+            "supportsScore": "30 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "No worries, let's explore this angle: how does cache locality affect the performance difference between array and linked list memory allocation?",
+          "timestamp": "06:07",
+          "stage": "Depth"
+        },
+        {
+          "speaker": "student",
+          "text": "That's",
+          "timestamp": "06:48",
+          "stage": "Depth",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete answer",
+            "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+            "dimension": "Communication",
+            "supportsScore": "30 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "When scaling systems with Data Structures, what edge cases, concurrency risks, or performance trade-offs do you prioritize?",
+          "timestamp": "07:03",
+          "stage": "Depth"
+        },
+        {
+          "speaker": "student",
+          "text": "It looks",
+          "timestamp": "08:56",
+          "stage": "Depth",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete answer",
+            "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+            "dimension": "Communication",
+            "supportsScore": "30 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "{\"question\":\"No worries—let's explore this angle: how does dynamic-array growth preserve amortized O(1) append despite occasional O(n) copying during reallocation?\",\"followUpType\":\"nudge\",\"advanceStage\":false,\"rationale\":\"Clarify amort?",
+          "timestamp": "09:10",
+          "stage": "Depth"
+        },
+        {
+          "speaker": "student",
+          "text": "Hi hello",
+          "timestamp": "11:12",
+          "stage": "Applied Problem",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Audio check",
+            "desc": "Candidate asked an audio verification question instead of addressing the technical question.",
+            "dimension": "Communication",
+            "supportsScore": "25 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "When designing concurrent data structures, what specific synchronization challenges arise from using linked lists versus arrays under high contention?",
+          "timestamp": "11:19",
+          "stage": "Applied Problem"
+        },
+        {
+          "speaker": "student",
+          "text": "You are the",
+          "timestamp": "12:18",
+          "stage": "Applied Problem",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete answer",
+            "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+            "dimension": "Communication",
+            "supportsScore": "30 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "When using linked lists for concurrent access, what specific locking strategies or atomic operations do you prefer to minimize contention compared to array-based approaches?",
+          "timestamp": "12:41",
+          "stage": "Applied Problem"
+        },
+        {
+          "speaker": "student",
+          "text": "Where are you",
+          "timestamp": "13:02",
+          "stage": "Wrap-up",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete answer",
+            "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+            "dimension": "Communication",
+            "supportsScore": "30 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "We are concluding our viva on Data Structures. Do you have any closing technical thoughts or trade-offs you would like to clarify?",
+          "timestamp": "13:29",
+          "stage": "Wrap-up"
+        },
+        {
+          "speaker": "student",
+          "text": "Do you",
+          "timestamp": "14:29",
+          "stage": "Wrap-up",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete answer",
+            "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+            "dimension": "Communication",
+            "supportsScore": "30 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "Thanks for that. Any final technical insight on data structures you'd like to share before we wrap up?",
+          "timestamp": "14:33",
+          "stage": "Wrap-up"
+        },
+        {
+          "speaker": "student",
+          "text": "Yes data structure is a programming where we used to structure data by using the coding languages like C plus plus Python and JavaScript",
+          "timestamp": "14:55",
+          "stage": "Scoring",
+          "annotation": {
+            "verdict": "Strength",
+            "tag": "Scoring evidence",
+            "desc": "Spoken communication was composed and delivered under examination conditions.",
+            "dimension": "Communication",
+            "supportsScore": "35 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "In our Scoring stage for Data Structures: can you share your technical perspective regarding summarize the interview politely and let the candidate know their comprehensive evaluation is being prepared.?",
+          "timestamp": "15:00",
+          "stage": "Scoring"
+        }
+      ]
+    },
+    "rubricBreakdown": {
+      "conceptual": {
+        "score": 2,
+        "percent": 40,
+        "weight": 30,
+        "calculatedMarks": 12,
+        "reason": "Evaluated against core technical criteria.",
+        "evidence": "\"Could you...\""
+      },
+      "depth": {
+        "score": 1.8,
+        "percent": 35,
+        "weight": 25,
+        "calculatedMarks": 8.8,
+        "reason": "Lacked architectural depth, memory details, and time/space complexity analysis.",
+        "evidence": "\"So I'm looking for an...\""
+      },
+      "problemSolving": {
+        "score": 1.8,
+        "percent": 35,
+        "weight": 20,
+        "calculatedMarks": 7,
+        "reason": "Struggled to apply concepts to real-world scenarios or problem statements.",
+        "evidence": "\"Let me...\""
+      },
+      "practical": {
+        "score": 1.6,
+        "percent": 32,
+        "weight": 15,
+        "calculatedMarks": 4.8,
+        "reason": "Little evidence of practical programming implementation or design principles.",
+        "evidence": ""
+      },
+      "communication": {
+        "score": 1.3,
+        "percent": 25,
+        "weight": 10,
+        "calculatedMarks": 2.5,
+        "reason": "Frequently distracted by audio verification instead of technical content.",
+        "evidence": ""
+      }
+    },
+    "strengths": [
+      {
+        "title": "Oral Participation",
+        "desc": "Candidate engaged in the viva dialogue across 15 response turns."
+      }
+    ],
+    "improvements": [
+      {
+        "title": "Fundamental Concepts",
+        "desc": "Strengthen core theoretical definitions in Data Structures."
+      },
+      {
+        "title": "Technical Depth",
+        "desc": "Focus on time/space complexities and algorithmic mechanics rather than brief responses."
+      }
+    ],
+    "suggestions": [
+      "Review core textbook principles for Data Structures.",
+      "Practice oral technical explanations focusing on clear definitions and complexities.",
+      "Prepare directly for scenario-based questions."
+    ],
+    "annotatedTranscript": [
+      {
+        "speaker": "mira",
+        "text": "Welcome! Ready to start? Let's begin: can you explain the difference between an array and a linked list?",
+        "timestamp": "00:06",
+        "stage": "Warm-up"
+      },
+      {
+        "speaker": "student",
+        "text": "Could you",
+        "timestamp": "00:20",
+        "stage": "Warm-up",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Incomplete answer",
+          "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+          "dimension": "Communication",
+          "supportsScore": "30 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "Could you describe how insertion at the beginning of an array differs from insertion at the beginning of a linked list?",
+        "timestamp": "00:45",
+        "stage": "Warm-up"
+      },
+      {
+        "speaker": "student",
+        "text": "So I'm looking for an",
+        "timestamp": "00:57",
+        "stage": "Warm-up",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Incomplete answer",
+          "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+          "dimension": "Communication",
+          "supportsScore": "30 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "No worries at all. Let's try a different angle: how would you describe the concept of time complexity in simple terms?",
+        "timestamp": "01:01",
+        "stage": "Warm-up"
+      },
+      {
+        "speaker": "student",
+        "text": "Let me",
+        "timestamp": "01:27",
+        "stage": "Fundamentals",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Incomplete answer",
+          "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+          "dimension": "Communication",
+          "supportsScore": "30 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "Can you explain the primary theoretical principles and memory layout trade-offs in Data Structures?",
+        "timestamp": "01:38",
+        "stage": "Fundamentals"
+      },
+      {
+        "speaker": "student",
+        "text": "Because you're far",
+        "timestamp": "02:03",
+        "stage": "Fundamentals",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Incomplete answer",
+          "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+          "dimension": "Communication",
+          "supportsScore": "30 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "Let's discuss fundamental concepts in Data Structures. How do core architectural definitions and standard complexities compare?",
+        "timestamp": "02:18",
+        "stage": "Fundamentals"
+      },
+      {
+        "speaker": "student",
+        "text": "Let me down slowly",
+        "timestamp": "02:34",
+        "stage": "Fundamentals",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Incomplete answer",
+          "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+          "dimension": "Communication",
+          "supportsScore": "30 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "No worries. Let's keep it simple: what does Big O notation represent?",
+        "timestamp": "02:38",
+        "stage": "Fundamentals"
+      },
+      {
+        "speaker": "student",
+        "text": "I used to believe",
+        "timestamp": "02:52",
+        "stage": "Fundamentals",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Incomplete answer",
+          "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+          "dimension": "Communication",
+          "supportsScore": "30 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "Good start. Now, can you compare the time complexity of searching in an array versus a linked list?",
+        "timestamp": "02:57",
+        "stage": "Fundamentals"
+      },
+      {
+        "speaker": "student",
+        "text": "You",
+        "timestamp": "05:06",
+        "stage": "Depth",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Incomplete answer",
+          "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+          "dimension": "Communication",
+          "supportsScore": "30 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "Good point. Now, let's dive deeper: how does memory allocation differ between arrays and linked lists, and what impact does this have on cache performance?",
+        "timestamp": "05:09",
+        "stage": "Depth"
+      },
+      {
+        "speaker": "student",
+        "text": "I will give up",
+        "timestamp": "05:47",
+        "stage": "Depth",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Incomplete answer",
+          "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+          "dimension": "Communication",
+          "supportsScore": "30 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "No worries, let's explore this angle: how does cache locality affect the performance difference between array and linked list memory allocation?",
+        "timestamp": "06:07",
+        "stage": "Depth"
+      },
+      {
+        "speaker": "student",
+        "text": "That's",
+        "timestamp": "06:48",
+        "stage": "Depth",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Incomplete answer",
+          "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+          "dimension": "Communication",
+          "supportsScore": "30 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "When scaling systems with Data Structures, what edge cases, concurrency risks, or performance trade-offs do you prioritize?",
+        "timestamp": "07:03",
+        "stage": "Depth"
+      },
+      {
+        "speaker": "student",
+        "text": "It looks",
+        "timestamp": "08:56",
+        "stage": "Depth",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Incomplete answer",
+          "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+          "dimension": "Communication",
+          "supportsScore": "30 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "{\"question\":\"No worries—let's explore this angle: how does dynamic-array growth preserve amortized O(1) append despite occasional O(n) copying during reallocation?\",\"followUpType\":\"nudge\",\"advanceStage\":false,\"rationale\":\"Clarify amort?",
+        "timestamp": "09:10",
+        "stage": "Depth"
+      },
+      {
+        "speaker": "student",
+        "text": "Hi hello",
+        "timestamp": "11:12",
+        "stage": "Applied Problem",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Audio check",
+          "desc": "Candidate asked an audio verification question instead of addressing the technical question.",
+          "dimension": "Communication",
+          "supportsScore": "25 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "When designing concurrent data structures, what specific synchronization challenges arise from using linked lists versus arrays under high contention?",
+        "timestamp": "11:19",
+        "stage": "Applied Problem"
+      },
+      {
+        "speaker": "student",
+        "text": "You are the",
+        "timestamp": "12:18",
+        "stage": "Applied Problem",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Incomplete answer",
+          "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+          "dimension": "Communication",
+          "supportsScore": "30 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "When using linked lists for concurrent access, what specific locking strategies or atomic operations do you prefer to minimize contention compared to array-based approaches?",
+        "timestamp": "12:41",
+        "stage": "Applied Problem"
+      },
+      {
+        "speaker": "student",
+        "text": "Where are you",
+        "timestamp": "13:02",
+        "stage": "Wrap-up",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Incomplete answer",
+          "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+          "dimension": "Communication",
+          "supportsScore": "30 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "We are concluding our viva on Data Structures. Do you have any closing technical thoughts or trade-offs you would like to clarify?",
+        "timestamp": "13:29",
+        "stage": "Wrap-up"
+      },
+      {
+        "speaker": "student",
+        "text": "Do you",
+        "timestamp": "14:29",
+        "stage": "Wrap-up",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Incomplete answer",
+          "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+          "dimension": "Communication",
+          "supportsScore": "30 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "Thanks for that. Any final technical insight on data structures you'd like to share before we wrap up?",
+        "timestamp": "14:33",
+        "stage": "Wrap-up"
+      },
+      {
+        "speaker": "student",
+        "text": "Yes data structure is a programming where we used to structure data by using the coding languages like C plus plus Python and JavaScript",
+        "timestamp": "14:55",
+        "stage": "Scoring",
+        "annotation": {
+          "verdict": "Strength",
+          "tag": "Scoring evidence",
+          "desc": "Spoken communication was composed and delivered under examination conditions.",
+          "dimension": "Communication",
+          "supportsScore": "35 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "In our Scoring stage for Data Structures: can you share your technical perspective regarding summarize the interview politely and let the candidate know their comprehensive evaluation is being prepared.?",
+        "timestamp": "15:00",
+        "stage": "Scoring"
+      }
+    ],
+    "transcript": [
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "Welcome! Ready to start? Let's begin: can you explain the difference between an array and a linked list?",
+        "timestamp": "00:06",
+        "stage": "Warm-up",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "Could you",
+        "timestamp": "00:20",
+        "stage": "Warm-up",
+        "questionRef": "Welcome! Ready to start? Let's begin: can you explain the difference between an array and a linked list?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "Could you describe how insertion at the beginning of an array differs from insertion at the beginning of a linked list?",
+        "timestamp": "00:45",
+        "stage": "Warm-up",
+        "followUpType": "nudge"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "So I'm looking for an",
+        "timestamp": "00:57",
+        "stage": "Warm-up",
+        "questionRef": "Could you describe how insertion at the beginning of an array differs from insertion at the beginning of a linked list?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "No worries at all. Let's try a different angle: how would you describe the concept of time complexity in simple terms?",
+        "timestamp": "01:01",
+        "stage": "Warm-up",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "Let me",
+        "timestamp": "01:27",
+        "stage": "Fundamentals",
+        "questionRef": "No worries at all. Let's try a different angle: how would you describe the concept of time complexity in simple terms?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "Can you explain the primary theoretical principles and memory layout trade-offs in Data Structures?",
+        "timestamp": "01:38",
+        "stage": "Fundamentals",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "Because you're far",
+        "timestamp": "02:03",
+        "stage": "Fundamentals",
+        "questionRef": "Can you explain the primary theoretical principles and memory layout trade-offs in Data Structures?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "Let's discuss fundamental concepts in Data Structures. How do core architectural definitions and standard complexities compare?",
+        "timestamp": "02:18",
+        "stage": "Fundamentals",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "Let me down slowly",
+        "timestamp": "02:34",
+        "stage": "Fundamentals",
+        "questionRef": "Let's discuss fundamental concepts in Data Structures. How do core architectural definitions and standard complexities compare?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "No worries. Let's keep it simple: what does Big O notation represent?",
+        "timestamp": "02:38",
+        "stage": "Fundamentals",
+        "followUpType": "redirect"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "I used to believe",
+        "timestamp": "02:52",
+        "stage": "Fundamentals",
+        "questionRef": "No worries. Let's keep it simple: what does Big O notation represent?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "Good start. Now, can you compare the time complexity of searching in an array versus a linked list?",
+        "timestamp": "02:57",
+        "stage": "Fundamentals",
+        "followUpType": "deepen"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "You",
+        "timestamp": "05:06",
+        "stage": "Depth",
+        "questionRef": "Good start. Now, can you compare the time complexity of searching in an array versus a linked list?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "Good point. Now, let's dive deeper: how does memory allocation differ between arrays and linked lists, and what impact does this have on cache performance?",
+        "timestamp": "05:09",
+        "stage": "Depth",
+        "followUpType": "deepen"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "I will give up",
+        "timestamp": "05:47",
+        "stage": "Depth",
+        "questionRef": "Good point. Now, let's dive deeper: how does memory allocation differ between arrays and linked lists, and what impact does this have on cache performance?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "No worries, let's explore this angle: how does cache locality affect the performance difference between array and linked list memory allocation?",
+        "timestamp": "06:07",
+        "stage": "Depth",
+        "followUpType": "nudge"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "That's",
+        "timestamp": "06:48",
+        "stage": "Depth",
+        "questionRef": "No worries, let's explore this angle: how does cache locality affect the performance difference between array and linked list memory allocation?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "When scaling systems with Data Structures, what edge cases, concurrency risks, or performance trade-offs do you prioritize?",
+        "timestamp": "07:03",
+        "stage": "Depth",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "It looks",
+        "timestamp": "08:56",
+        "stage": "Depth",
+        "questionRef": "When scaling systems with Data Structures, what edge cases, concurrency risks, or performance trade-offs do you prioritize?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "{\"question\":\"No worries—let's explore this angle: how does dynamic-array growth preserve amortized O(1) append despite occasional O(n) copying during reallocation?\",\"followUpType\":\"nudge\",\"advanceStage\":false,\"rationale\":\"Clarify amort?",
+        "timestamp": "09:10",
+        "stage": "Depth",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "Hi hello",
+        "timestamp": "11:12",
+        "stage": "Applied Problem",
+        "questionRef": "{\"question\":\"No worries—let's explore this angle: how does dynamic-array growth preserve amortized O(1) append despite occasional O(n) copying during reallocation?\",\"followUpType\":\"nudge\",\"advanceStage\":false,\"rationale\":\"Clarify amort?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "When designing concurrent data structures, what specific synchronization challenges arise from using linked lists versus arrays under high contention?",
+        "timestamp": "11:19",
+        "stage": "Applied Problem",
+        "followUpType": "deepen"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "You are the",
+        "timestamp": "12:18",
+        "stage": "Applied Problem",
+        "questionRef": "When designing concurrent data structures, what specific synchronization challenges arise from using linked lists versus arrays under high contention?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "When using linked lists for concurrent access, what specific locking strategies or atomic operations do you prefer to minimize contention compared to array-based approaches?",
+        "timestamp": "12:41",
+        "stage": "Applied Problem",
+        "followUpType": "deepen"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "Where are you",
+        "timestamp": "13:02",
+        "stage": "Wrap-up",
+        "questionRef": "When using linked lists for concurrent access, what specific locking strategies or atomic operations do you prefer to minimize contention compared to array-based approaches?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "We are concluding our viva on Data Structures. Do you have any closing technical thoughts or trade-offs you would like to clarify?",
+        "timestamp": "13:29",
+        "stage": "Wrap-up",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "Do you",
+        "timestamp": "14:29",
+        "stage": "Wrap-up",
+        "questionRef": "We are concluding our viva on Data Structures. Do you have any closing technical thoughts or trade-offs you would like to clarify?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "Thanks for that. Any final technical insight on data structures you'd like to share before we wrap up?",
+        "timestamp": "14:33",
+        "stage": "Wrap-up",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "Yes data structure is a programming where we used to structure data by using the coding languages like C plus plus Python and JavaScript",
+        "timestamp": "14:55",
+        "stage": "Scoring",
+        "questionRef": "Thanks for that. Any final technical insight on data structures you'd like to share before we wrap up?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "In our Scoring stage for Data Structures: can you share your technical perspective regarding summarize the interview politely and let the candidate know their comprehensive evaluation is being prepared.?",
+        "timestamp": "15:00",
+        "stage": "Scoring",
+        "followUpType": "advance"
+      }
+    ],
+    "transcripts": [
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "Welcome! Ready to start? Let's begin: can you explain the difference between an array and a linked list?",
+        "timestamp": "00:06",
+        "stage": "Warm-up",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "Could you",
+        "timestamp": "00:20",
+        "stage": "Warm-up",
+        "questionRef": "Welcome! Ready to start? Let's begin: can you explain the difference between an array and a linked list?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "Could you describe how insertion at the beginning of an array differs from insertion at the beginning of a linked list?",
+        "timestamp": "00:45",
+        "stage": "Warm-up",
+        "followUpType": "nudge"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "So I'm looking for an",
+        "timestamp": "00:57",
+        "stage": "Warm-up",
+        "questionRef": "Could you describe how insertion at the beginning of an array differs from insertion at the beginning of a linked list?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "No worries at all. Let's try a different angle: how would you describe the concept of time complexity in simple terms?",
+        "timestamp": "01:01",
+        "stage": "Warm-up",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "Let me",
+        "timestamp": "01:27",
+        "stage": "Fundamentals",
+        "questionRef": "No worries at all. Let's try a different angle: how would you describe the concept of time complexity in simple terms?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "Can you explain the primary theoretical principles and memory layout trade-offs in Data Structures?",
+        "timestamp": "01:38",
+        "stage": "Fundamentals",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "Because you're far",
+        "timestamp": "02:03",
+        "stage": "Fundamentals",
+        "questionRef": "Can you explain the primary theoretical principles and memory layout trade-offs in Data Structures?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "Let's discuss fundamental concepts in Data Structures. How do core architectural definitions and standard complexities compare?",
+        "timestamp": "02:18",
+        "stage": "Fundamentals",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "Let me down slowly",
+        "timestamp": "02:34",
+        "stage": "Fundamentals",
+        "questionRef": "Let's discuss fundamental concepts in Data Structures. How do core architectural definitions and standard complexities compare?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "No worries. Let's keep it simple: what does Big O notation represent?",
+        "timestamp": "02:38",
+        "stage": "Fundamentals",
+        "followUpType": "redirect"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "I used to believe",
+        "timestamp": "02:52",
+        "stage": "Fundamentals",
+        "questionRef": "No worries. Let's keep it simple: what does Big O notation represent?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "Good start. Now, can you compare the time complexity of searching in an array versus a linked list?",
+        "timestamp": "02:57",
+        "stage": "Fundamentals",
+        "followUpType": "deepen"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "You",
+        "timestamp": "05:06",
+        "stage": "Depth",
+        "questionRef": "Good start. Now, can you compare the time complexity of searching in an array versus a linked list?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "Good point. Now, let's dive deeper: how does memory allocation differ between arrays and linked lists, and what impact does this have on cache performance?",
+        "timestamp": "05:09",
+        "stage": "Depth",
+        "followUpType": "deepen"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "I will give up",
+        "timestamp": "05:47",
+        "stage": "Depth",
+        "questionRef": "Good point. Now, let's dive deeper: how does memory allocation differ between arrays and linked lists, and what impact does this have on cache performance?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "No worries, let's explore this angle: how does cache locality affect the performance difference between array and linked list memory allocation?",
+        "timestamp": "06:07",
+        "stage": "Depth",
+        "followUpType": "nudge"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "That's",
+        "timestamp": "06:48",
+        "stage": "Depth",
+        "questionRef": "No worries, let's explore this angle: how does cache locality affect the performance difference between array and linked list memory allocation?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "When scaling systems with Data Structures, what edge cases, concurrency risks, or performance trade-offs do you prioritize?",
+        "timestamp": "07:03",
+        "stage": "Depth",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "It looks",
+        "timestamp": "08:56",
+        "stage": "Depth",
+        "questionRef": "When scaling systems with Data Structures, what edge cases, concurrency risks, or performance trade-offs do you prioritize?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "{\"question\":\"No worries—let's explore this angle: how does dynamic-array growth preserve amortized O(1) append despite occasional O(n) copying during reallocation?\",\"followUpType\":\"nudge\",\"advanceStage\":false,\"rationale\":\"Clarify amort?",
+        "timestamp": "09:10",
+        "stage": "Depth",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "Hi hello",
+        "timestamp": "11:12",
+        "stage": "Applied Problem",
+        "questionRef": "{\"question\":\"No worries—let's explore this angle: how does dynamic-array growth preserve amortized O(1) append despite occasional O(n) copying during reallocation?\",\"followUpType\":\"nudge\",\"advanceStage\":false,\"rationale\":\"Clarify amort?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "When designing concurrent data structures, what specific synchronization challenges arise from using linked lists versus arrays under high contention?",
+        "timestamp": "11:19",
+        "stage": "Applied Problem",
+        "followUpType": "deepen"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "You are the",
+        "timestamp": "12:18",
+        "stage": "Applied Problem",
+        "questionRef": "When designing concurrent data structures, what specific synchronization challenges arise from using linked lists versus arrays under high contention?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "When using linked lists for concurrent access, what specific locking strategies or atomic operations do you prefer to minimize contention compared to array-based approaches?",
+        "timestamp": "12:41",
+        "stage": "Applied Problem",
+        "followUpType": "deepen"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "Where are you",
+        "timestamp": "13:02",
+        "stage": "Wrap-up",
+        "questionRef": "When using linked lists for concurrent access, what specific locking strategies or atomic operations do you prefer to minimize contention compared to array-based approaches?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "We are concluding our viva on Data Structures. Do you have any closing technical thoughts or trade-offs you would like to clarify?",
+        "timestamp": "13:29",
+        "stage": "Wrap-up",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "Do you",
+        "timestamp": "14:29",
+        "stage": "Wrap-up",
+        "questionRef": "We are concluding our viva on Data Structures. Do you have any closing technical thoughts or trade-offs you would like to clarify?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "Thanks for that. Any final technical insight on data structures you'd like to share before we wrap up?",
+        "timestamp": "14:33",
+        "stage": "Wrap-up",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "student",
+        "text": "Yes data structure is a programming where we used to structure data by using the coding languages like C plus plus Python and JavaScript",
+        "timestamp": "14:55",
+        "stage": "Scoring",
+        "questionRef": "Thanks for that. Any final technical insight on data structures you'd like to share before we wrap up?"
+      },
+      {
+        "interviewId": "AV-2462",
+        "speaker": "mira",
+        "text": "In our Scoring stage for Data Structures: can you share your technical perspective regarding summarize the interview politely and let the candidate know their comprehensive evaluation is being prepared.?",
+        "timestamp": "15:00",
+        "stage": "Scoring",
+        "followUpType": "advance"
+      }
+    ],
+    "sessionNumber": "AV-2462",
+    "feedback": {},
+    "createdAt": "2026-10-21T14:27:51.951Z"
+  },
+  {
     "id": "AV-3222",
     "candidateName": "pravin",
     "candidateEmail": "ghodakepravin154@gmail.com",
