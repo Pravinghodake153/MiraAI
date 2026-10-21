@@ -2057,8 +2057,11 @@ const server = http.createServer(async (req, res) => {
         resolvedScore = body.scorecard.score;
       }
 
+      const targetId = body.id || ('AV-' + Math.floor(1000 + Math.random() * 9000));
+      const existingIv = DB.getInterviewById(targetId);
+
       const newInterview = {
-        id: body.id || ('AV-' + Math.floor(1000 + Math.random() * 9000)),
+        id: targetId,
         candidateName: body.candidateName || body.studentName || 'Candidate',
         candidateEmail: body.candidateEmail || body.studentEmail || 'student@college.edu',
         studentName: body.candidateName || body.studentName || 'Candidate',
@@ -2075,8 +2078,12 @@ const server = http.createServer(async (req, res) => {
         summary: body.summary || 'Viva examination successfully completed and evaluated.',
         date: body.date || new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
         fullDate: body.fullDate || new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
-        cameraRecordingUrl: body.cameraRecordingUrl || `/recordings/${body.id || 'viva'}-camera.webm`,
-        screenRecordingUrl: body.screenRecordingUrl || `/recordings/${body.id || 'viva'}-screen.webm`,
+        cameraRecordingUrl: (body.cameraRecordingUrl && !body.cameraRecordingUrl.endsWith('-cam.webm'))
+          ? body.cameraRecordingUrl
+          : (existingIv?.cameraRecordingUrl || `/recordings/${targetId}-camera.webm`),
+        screenRecordingUrl: (body.screenRecordingUrl && !body.screenRecordingUrl.endsWith('-screen.webm'))
+          ? body.screenRecordingUrl
+          : (existingIv?.screenRecordingUrl || `/recordings/${targetId}-screen.webm`),
         isDisqualified: !!body.isDisqualified,
         disqualificationReason: body.disqualificationReason || '',
         scorecard: {
@@ -2410,7 +2417,8 @@ const server = http.createServer(async (req, res) => {
       }
     } else {
       if (Supabase.isConfigured()) {
-        const cloudUrl = `${Supabase.getSupabaseUrl()}/storage/v1/object/public/${Supabase.RECORDINGS_BUCKET}/${encodeURIComponent(filename)}`;
+        const cloudFilename = filename.includes('-cam.webm') ? filename.replace('-cam.webm', '-camera.webm') : filename;
+        const cloudUrl = `${Supabase.getSupabaseUrl()}/storage/v1/object/public/${Supabase.RECORDINGS_BUCKET}/${encodeURIComponent(cloudFilename)}`;
         res.writeHead(302, { 'Location': cloudUrl });
         return res.end();
       }

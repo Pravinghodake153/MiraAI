@@ -1,5 +1,666 @@
 [
   {
+    "id": "AV-3222",
+    "candidateName": "pravin",
+    "candidateEmail": "ghodakepravin154@gmail.com",
+    "studentName": "pravin",
+    "studentEmail": "ghodakepravin154@gmail.com",
+    "topic": "Data Structures",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "duration": "15 min",
+    "score": 20,
+    "maxScore": 100,
+    "status": "Completed",
+    "durationSeconds": 900,
+    "readinessTier": "Disqualified",
+    "summary": "Candidate was terminated and kicked off from the interview examination due to 5 violations of integrity rules (e.g. multiple people, tab switches, out-of-frame, copy-paste).",
+    "date": "Oct 21",
+    "fullDate": "Oct 21, 2026, 02:50 PM",
+    "cameraRecordingUrl": "https://vveubzrxvlklepzthuvq.supabase.co/storage/v1/object/public/recordings/AV-3222-camera.webm",
+    "screenRecordingUrl": "https://vveubzrxvlklepzthuvq.supabase.co/storage/v1/object/public/recordings/AV-3222-screen.webm",
+    "isDisqualified": true,
+    "disqualificationReason": "Candidate disqualified and kicked off from examination due to 5 automated integrity rule violations.",
+    "scorecard": {
+      "score": 20,
+      "readinessTier": "Disqualified",
+      "summary": "Candidate was terminated and kicked off from the interview examination due to 5 violations of integrity rules (e.g. multiple people, tab switches, out-of-frame, copy-paste).",
+      "isDisqualified": true,
+      "disqualificationReason": "Candidate disqualified and kicked off from examination due to 5 automated integrity rule violations.",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 1,
+          "percent": 20,
+          "weight": 30,
+          "calculatedMarks": 6,
+          "reason": "Failed to provide a valid definition of data structures; hallucinated non-computing analogies.",
+          "evidence": ""
+        },
+        "depth": {
+          "score": 0.8,
+          "percent": 15,
+          "weight": 25,
+          "calculatedMarks": 3.8,
+          "reason": "Did not demonstrate any understanding of memory layout, pointers, or complexity.",
+          "evidence": ""
+        },
+        "problemSolving": {
+          "score": 1.3,
+          "percent": 25,
+          "weight": 20,
+          "calculatedMarks": 5,
+          "reason": "Unable to approach technical problems or scenarios.",
+          "evidence": ""
+        },
+        "practical": {
+          "score": 1,
+          "percent": 20,
+          "weight": 15,
+          "calculatedMarks": 3,
+          "reason": "Lacked foundational connection to actual software development.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 2,
+          "percent": 40,
+          "weight": 10,
+          "calculatedMarks": 4,
+          "reason": "Deflected technical prompts to check audio connectivity; struggled to maintain examination focus.",
+          "evidence": ""
+        }
+      },
+      "strengths": [
+        {
+          "title": "Integrity Alert",
+          "desc": "Session terminated due to repeated proctoring violations."
+        }
+      ],
+      "improvements": [
+        {
+          "title": "Examination Adherence",
+          "desc": "Must follow anti-cheat guidelines, avoid tab switches and keep single person in frame."
+        }
+      ],
+      "suggestions": [
+        "Re-take viva after verifying webcam integrity and examination rules compliance."
+      ],
+      "annotatedTranscript": [
+        {
+          "speaker": "student",
+          "text": "It's in",
+          "timestamp": "00:05",
+          "stage": "Warm-up",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete response",
+            "desc": "Candidate responded with 'It's in' to the opening introductory question, providing no meaningful technical content.",
+            "dimension": "Communication",
+            "supportsScore": "20 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "Welcome! Let's start with a gentle warm-up: Can you briefly describe what a binary search tree is and one key advantage it offers over an array?",
+          "timestamp": "00:18",
+          "stage": "Warm-up"
+        },
+        {
+          "speaker": "mira",
+          "text": "Welcome! Are you ready to begin? Let's start with a simple question — what is the difference between a stack and a queue?",
+          "timestamp": "00:31",
+          "stage": "Warm-up"
+        },
+        {
+          "speaker": "student",
+          "text": "Yes I know stack is a fundamental concept and Q is a q",
+          "timestamp": "00:51",
+          "stage": "Warm-up",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete response",
+            "desc": "Candidate gave a vague and incomplete answer ('Yes I know stack is a fundamental concept and Q is a q') without explaining the actual differences between stacks and queues.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "20 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "Welcome to your viva on Data Structures. Are you ready to begin, and could you briefly introduce your experience with Data Structures?",
+          "timestamp": "01:09",
+          "stage": "Warm-up"
+        },
+        {
+          "speaker": "student",
+          "text": "Is he okay",
+          "timestamp": "01:46",
+          "stage": "Fundamentals",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Evasive response",
+            "desc": "Candidate responded with 'Is he okay' instead of introducing their experience with Data Structures, showing evasion.",
+            "dimension": "Communication",
+            "supportsScore": "20 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "Can you explain the primary theoretical principles and memory layout trade-offs in Data Structures?",
+          "timestamp": "01:53",
+          "stage": "Fundamentals"
+        },
+        {
+          "speaker": "student",
+          "text": "I would",
+          "timestamp": "02:34",
+          "stage": "Fundamentals",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete response",
+            "desc": "Candidate responded with 'I would' to a question about theoretical principles and memory layout trade-offs, failing to address the technical content.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "20 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "Could you outline the fundamental theoretical principles of data structure design and compare the memory layout trade-offs across different approaches?",
+          "timestamp": "03:05",
+          "stage": "Fundamentals"
+        },
+        {
+          "speaker": "student",
+          "text": "Yeah",
+          "timestamp": "03:24",
+          "stage": "Fundamentals",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete response",
+            "desc": "Candidate responded with 'Yeah' to a question about fundamental theoretical principles of data structure design, providing no technical explanation.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "20 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "Can you explain the primary theoretical principles and memory layout trade-offs in Data Structures?",
+          "timestamp": "03:38",
+          "stage": "Fundamentals"
+        },
+        {
+          "speaker": "student",
+          "text": "And it could be",
+          "timestamp": "04:16",
+          "stage": "Fundamentals",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete response",
+            "desc": "Candidate responded with 'And it could be' to a repeated question about theoretical principles and memory layout trade-offs, failing to provide any meaningful answer.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "20 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "No worries. Let's try a concrete example: how does memory layout differ between an array and a linked list?",
+          "timestamp": "04:19",
+          "stage": "Fundamentals"
+        },
+        {
+          "speaker": "student",
+          "text": "Yeah",
+          "timestamp": "04:37",
+          "stage": "Fundamentals",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete response",
+            "desc": "Candidate responded with 'Yeah' to a concrete question about memory layout differences between arrays and linked lists, without explaining contiguous vs non-contiguous memory, time complexities, or pointer mechanics.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "20 / 100"
+          }
+        }
+      ]
+    },
+    "rubricBreakdown": {
+      "conceptual": {
+        "score": 1,
+        "percent": 20,
+        "weight": 30,
+        "calculatedMarks": 6,
+        "reason": "Failed to provide a valid definition of data structures; hallucinated non-computing analogies.",
+        "evidence": ""
+      },
+      "depth": {
+        "score": 0.8,
+        "percent": 15,
+        "weight": 25,
+        "calculatedMarks": 3.8,
+        "reason": "Did not demonstrate any understanding of memory layout, pointers, or complexity.",
+        "evidence": ""
+      },
+      "problemSolving": {
+        "score": 1.3,
+        "percent": 25,
+        "weight": 20,
+        "calculatedMarks": 5,
+        "reason": "Unable to approach technical problems or scenarios.",
+        "evidence": ""
+      },
+      "practical": {
+        "score": 1,
+        "percent": 20,
+        "weight": 15,
+        "calculatedMarks": 3,
+        "reason": "Lacked foundational connection to actual software development.",
+        "evidence": ""
+      },
+      "communication": {
+        "score": 2,
+        "percent": 40,
+        "weight": 10,
+        "calculatedMarks": 4,
+        "reason": "Deflected technical prompts to check audio connectivity; struggled to maintain examination focus.",
+        "evidence": ""
+      }
+    },
+    "strengths": [
+      {
+        "title": "Integrity Alert",
+        "desc": "Session terminated due to repeated proctoring violations."
+      }
+    ],
+    "improvements": [
+      {
+        "title": "Examination Adherence",
+        "desc": "Must follow anti-cheat guidelines, avoid tab switches and keep single person in frame."
+      }
+    ],
+    "suggestions": [
+      "Re-take viva after verifying webcam integrity and examination rules compliance."
+    ],
+    "annotatedTranscript": [
+      {
+        "speaker": "student",
+        "text": "It's in",
+        "timestamp": "00:05",
+        "stage": "Warm-up",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Incomplete response",
+          "desc": "Candidate responded with 'It's in' to the opening introductory question, providing no meaningful technical content.",
+          "dimension": "Communication",
+          "supportsScore": "20 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "Welcome! Let's start with a gentle warm-up: Can you briefly describe what a binary search tree is and one key advantage it offers over an array?",
+        "timestamp": "00:18",
+        "stage": "Warm-up"
+      },
+      {
+        "speaker": "mira",
+        "text": "Welcome! Are you ready to begin? Let's start with a simple question — what is the difference between a stack and a queue?",
+        "timestamp": "00:31",
+        "stage": "Warm-up"
+      },
+      {
+        "speaker": "student",
+        "text": "Yes I know stack is a fundamental concept and Q is a q",
+        "timestamp": "00:51",
+        "stage": "Warm-up",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Incomplete response",
+          "desc": "Candidate gave a vague and incomplete answer ('Yes I know stack is a fundamental concept and Q is a q') without explaining the actual differences between stacks and queues.",
+          "dimension": "Conceptual Understanding",
+          "supportsScore": "20 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "Welcome to your viva on Data Structures. Are you ready to begin, and could you briefly introduce your experience with Data Structures?",
+        "timestamp": "01:09",
+        "stage": "Warm-up"
+      },
+      {
+        "speaker": "student",
+        "text": "Is he okay",
+        "timestamp": "01:46",
+        "stage": "Fundamentals",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Evasive response",
+          "desc": "Candidate responded with 'Is he okay' instead of introducing their experience with Data Structures, showing evasion.",
+          "dimension": "Communication",
+          "supportsScore": "20 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "Can you explain the primary theoretical principles and memory layout trade-offs in Data Structures?",
+        "timestamp": "01:53",
+        "stage": "Fundamentals"
+      },
+      {
+        "speaker": "student",
+        "text": "I would",
+        "timestamp": "02:34",
+        "stage": "Fundamentals",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Incomplete response",
+          "desc": "Candidate responded with 'I would' to a question about theoretical principles and memory layout trade-offs, failing to address the technical content.",
+          "dimension": "Conceptual Understanding",
+          "supportsScore": "20 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "Could you outline the fundamental theoretical principles of data structure design and compare the memory layout trade-offs across different approaches?",
+        "timestamp": "03:05",
+        "stage": "Fundamentals"
+      },
+      {
+        "speaker": "student",
+        "text": "Yeah",
+        "timestamp": "03:24",
+        "stage": "Fundamentals",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Incomplete response",
+          "desc": "Candidate responded with 'Yeah' to a question about fundamental theoretical principles of data structure design, providing no technical explanation.",
+          "dimension": "Conceptual Understanding",
+          "supportsScore": "20 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "Can you explain the primary theoretical principles and memory layout trade-offs in Data Structures?",
+        "timestamp": "03:38",
+        "stage": "Fundamentals"
+      },
+      {
+        "speaker": "student",
+        "text": "And it could be",
+        "timestamp": "04:16",
+        "stage": "Fundamentals",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Incomplete response",
+          "desc": "Candidate responded with 'And it could be' to a repeated question about theoretical principles and memory layout trade-offs, failing to provide any meaningful answer.",
+          "dimension": "Conceptual Understanding",
+          "supportsScore": "20 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "No worries. Let's try a concrete example: how does memory layout differ between an array and a linked list?",
+        "timestamp": "04:19",
+        "stage": "Fundamentals"
+      },
+      {
+        "speaker": "student",
+        "text": "Yeah",
+        "timestamp": "04:37",
+        "stage": "Fundamentals",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Incomplete response",
+          "desc": "Candidate responded with 'Yeah' to a concrete question about memory layout differences between arrays and linked lists, without explaining contiguous vs non-contiguous memory, time complexities, or pointer mechanics.",
+          "dimension": "Conceptual Understanding",
+          "supportsScore": "20 / 100"
+        }
+      }
+    ],
+    "transcript": [
+      {
+        "interviewId": "AV-3222",
+        "speaker": "student",
+        "text": "It's in",
+        "timestamp": "00:05",
+        "stage": "Warm-up",
+        "questionRef": ""
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "mira",
+        "text": "Welcome! Let's start with a gentle warm-up: Can you briefly describe what a binary search tree is and one key advantage it offers over an array?",
+        "timestamp": "00:18",
+        "stage": "Warm-up",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "mira",
+        "text": "Welcome! Are you ready to begin? Let's start with a simple question — what is the difference between a stack and a queue?",
+        "timestamp": "00:31",
+        "stage": "Warm-up",
+        "followUpType": "deepen"
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "student",
+        "text": "Yes I know stack is a fundamental concept and Q is a q",
+        "timestamp": "00:51",
+        "stage": "Warm-up",
+        "questionRef": "Welcome! Are you ready to begin? Let's start with a simple question — what is the difference between a stack and a queue?"
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "mira",
+        "text": "Welcome to your viva on Data Structures. Are you ready to begin, and could you briefly introduce your experience with Data Structures?",
+        "timestamp": "01:09",
+        "stage": "Warm-up",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "student",
+        "text": "Is he okay",
+        "timestamp": "01:46",
+        "stage": "Fundamentals",
+        "questionRef": "Welcome to your viva on Data Structures. Are you ready to begin, and could you briefly introduce your experience with Data Structures?"
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "mira",
+        "text": "Can you explain the primary theoretical principles and memory layout trade-offs in Data Structures?",
+        "timestamp": "01:53",
+        "stage": "Fundamentals",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "student",
+        "text": "I would",
+        "timestamp": "02:34",
+        "stage": "Fundamentals",
+        "questionRef": "Can you explain the primary theoretical principles and memory layout trade-offs in Data Structures?"
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "mira",
+        "text": "Could you outline the fundamental theoretical principles of data structure design and compare the memory layout trade-offs across different approaches?",
+        "timestamp": "03:05",
+        "stage": "Fundamentals",
+        "followUpType": "deepen"
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "student",
+        "text": "Yeah",
+        "timestamp": "03:24",
+        "stage": "Fundamentals",
+        "questionRef": "Could you outline the fundamental theoretical principles of data structure design and compare the memory layout trade-offs across different approaches?"
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "mira",
+        "text": "Can you explain the primary theoretical principles and memory layout trade-offs in Data Structures?",
+        "timestamp": "03:38",
+        "stage": "Fundamentals",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "student",
+        "text": "And it could be",
+        "timestamp": "04:16",
+        "stage": "Fundamentals",
+        "questionRef": "Can you explain the primary theoretical principles and memory layout trade-offs in Data Structures?"
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "mira",
+        "text": "No worries. Let's try a concrete example: how does memory layout differ between an array and a linked list?",
+        "timestamp": "04:19",
+        "stage": "Fundamentals",
+        "followUpType": "redirect"
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "student",
+        "text": "Yeah",
+        "timestamp": "04:37",
+        "stage": "Fundamentals",
+        "questionRef": "No worries. Let's try a concrete example: how does memory layout differ between an array and a linked list?"
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "mira",
+        "text": "No worries. What are the time complexities for inserting at the beginning of an array versus a linked list?",
+        "timestamp": "04:52",
+        "stage": "Fundamentals",
+        "followUpType": "nudge"
+      }
+    ],
+    "transcripts": [
+      {
+        "interviewId": "AV-3222",
+        "speaker": "student",
+        "text": "It's in",
+        "timestamp": "00:05",
+        "stage": "Warm-up",
+        "questionRef": ""
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "mira",
+        "text": "Welcome! Let's start with a gentle warm-up: Can you briefly describe what a binary search tree is and one key advantage it offers over an array?",
+        "timestamp": "00:18",
+        "stage": "Warm-up",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "mira",
+        "text": "Welcome! Are you ready to begin? Let's start with a simple question — what is the difference between a stack and a queue?",
+        "timestamp": "00:31",
+        "stage": "Warm-up",
+        "followUpType": "deepen"
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "student",
+        "text": "Yes I know stack is a fundamental concept and Q is a q",
+        "timestamp": "00:51",
+        "stage": "Warm-up",
+        "questionRef": "Welcome! Are you ready to begin? Let's start with a simple question — what is the difference between a stack and a queue?"
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "mira",
+        "text": "Welcome to your viva on Data Structures. Are you ready to begin, and could you briefly introduce your experience with Data Structures?",
+        "timestamp": "01:09",
+        "stage": "Warm-up",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "student",
+        "text": "Is he okay",
+        "timestamp": "01:46",
+        "stage": "Fundamentals",
+        "questionRef": "Welcome to your viva on Data Structures. Are you ready to begin, and could you briefly introduce your experience with Data Structures?"
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "mira",
+        "text": "Can you explain the primary theoretical principles and memory layout trade-offs in Data Structures?",
+        "timestamp": "01:53",
+        "stage": "Fundamentals",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "student",
+        "text": "I would",
+        "timestamp": "02:34",
+        "stage": "Fundamentals",
+        "questionRef": "Can you explain the primary theoretical principles and memory layout trade-offs in Data Structures?"
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "mira",
+        "text": "Could you outline the fundamental theoretical principles of data structure design and compare the memory layout trade-offs across different approaches?",
+        "timestamp": "03:05",
+        "stage": "Fundamentals",
+        "followUpType": "deepen"
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "student",
+        "text": "Yeah",
+        "timestamp": "03:24",
+        "stage": "Fundamentals",
+        "questionRef": "Could you outline the fundamental theoretical principles of data structure design and compare the memory layout trade-offs across different approaches?"
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "mira",
+        "text": "Can you explain the primary theoretical principles and memory layout trade-offs in Data Structures?",
+        "timestamp": "03:38",
+        "stage": "Fundamentals",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "student",
+        "text": "And it could be",
+        "timestamp": "04:16",
+        "stage": "Fundamentals",
+        "questionRef": "Can you explain the primary theoretical principles and memory layout trade-offs in Data Structures?"
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "mira",
+        "text": "No worries. Let's try a concrete example: how does memory layout differ between an array and a linked list?",
+        "timestamp": "04:19",
+        "stage": "Fundamentals",
+        "followUpType": "redirect"
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "student",
+        "text": "Yeah",
+        "timestamp": "04:37",
+        "stage": "Fundamentals",
+        "questionRef": "No worries. Let's try a concrete example: how does memory layout differ between an array and a linked list?"
+      },
+      {
+        "interviewId": "AV-3222",
+        "speaker": "mira",
+        "text": "No worries. What are the time complexities for inserting at the beginning of an array versus a linked list?",
+        "timestamp": "04:52",
+        "stage": "Fundamentals",
+        "followUpType": "nudge"
+      }
+    ],
+    "sessionNumber": "AV-3222",
+    "feedback": {},
+    "createdAt": "2026-10-21T09:20:57.809Z"
+  },
+  {
     "id": "AV-6418",
     "candidateName": "Override Audit Test",
     "candidateEmail": "student@college.edu",
@@ -513,8 +1174,8 @@
     "summary": "Candidate pravin failed to define a data structure across core viva questions, responding with incomplete phrases such as 'Yes I am ready to' and 'Yes', evading with 'Can you tell me which flow currently running now', and uttering nonsensical",
     "date": "Oct 21",
     "fullDate": "Oct 21, 2026, 02:15 PM",
-    "cameraRecordingUrl": "/recordings/AV-1569-cam.webm",
-    "screenRecordingUrl": "/recordings/AV-1569-screen.webm",
+    "cameraRecordingUrl": "https://vveubzrxvlklepzthuvq.supabase.co/storage/v1/object/public/recordings/AV-1569-camera.webm",
+    "screenRecordingUrl": "https://vveubzrxvlklepzthuvq.supabase.co/storage/v1/object/public/recordings/AV-1569-screen.webm",
     "isDisqualified": false,
     "disqualificationReason": "",
     "scorecard": {

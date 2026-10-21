@@ -4160,6 +4160,10 @@ const App = {
             if (blob && blob.size > 0 && window.API) {
               const res = await API.uploadRecording(ivId, blob, type);
               console.log(`[flushAndUploadRecordings] Successfully saved ${type} recording:`, res);
+              if (res?.url) {
+                if (type === 'camera') this.uploadedCameraUrl = res.url;
+                if (type === 'screen') this.uploadedScreenUrl = res.url;
+              }
             } else {
               console.warn(`[flushAndUploadRecordings] Notice: ${type} recording blob is empty or missing`);
             }
@@ -4526,10 +4530,9 @@ const App = {
             isDisqualified: !!this.isDisqualifiedSession,
             disqualificationReason: this.disqualificationReason || (this.isDisqualifiedSession ? 'Violated examination integrity rules (5 warnings reached)' : ''),
             violationsCount: this.proctoringWarningsCount || (this.isDisqualifiedSession ? 5 : 0),
-            violations: this.proctoringViolations || [],
             durationSeconds: this.totalExamDuration || this.getTotalInterviewDurationSeconds(),
-            cameraRecordingUrl: `/recordings/${this.activeInterviewId || 'AV-viva'}-cam.webm`,
-            screenRecordingUrl: `/recordings/${this.activeInterviewId || 'AV-viva'}-screen.webm`,
+            cameraRecordingUrl: this.uploadedCameraUrl || `/recordings/${this.activeInterviewId || 'AV-viva'}-camera.webm`,
+            screenRecordingUrl: this.uploadedScreenUrl || `/recordings/${this.activeInterviewId || 'AV-viva'}-screen.webm`,
             rubricBreakdown: evalResult.rubricBreakdown,
             strengths: this.isDisqualifiedSession ? [{ title: 'Integrity Alert', desc: 'Session terminated due to repeated proctoring violations.' }] : evalResult.strengths,
             improvements: this.isDisqualifiedSession ? [{ title: 'Examination Adherence', desc: 'Must follow anti-cheat guidelines, avoid tab switches and keep single person in frame.' }] : evalResult.improvements,
