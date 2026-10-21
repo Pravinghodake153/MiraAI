@@ -11,6 +11,17 @@
     "lastLogin": "2026-10-20T18:35:37.176Z"
   },
   {
+    "id": "usr_6yH6f4Es",
+    "clerkId": "user_3KyYvUybi9T3V0PWkLZ6yH6f4Es",
+    "name": "Rahul Yadav",
+    "email": "rdxrahulyadav1434@gmail.com",
+    "avatar": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18zS3lZdlpxUHNQZlFaMUFQVHVMcFpmdnZ4eVgifQ",
+    "role": "student",
+    "status": "Active",
+    "joinedDate": "Oct 21, 2026",
+    "lastLogin": "2026-10-20T21:25:05.609Z"
+  },
+  {
     "id": "usr_mvge091c",
     "clerkId": "user_student99",
     "name": "Other Student",
@@ -85,7 +96,7 @@
     "role": "student",
     "status": "Active",
     "joinedDate": "Oct 19, 2026",
-    "lastLogin": "2026-10-20T21:12:23.834Z"
+    "lastLogin": "2026-10-21T06:33:12.795Z"
   },
   {
     "id": "usr_wV6Zp5hy",
@@ -107,7 +118,7 @@
     "role": "student",
     "status": "Active",
     "joinedDate": "Oct 19, 2026",
-    "lastLogin": "2026-10-20T21:12:23.835Z"
+    "lastLogin": "2026-10-21T06:33:12.796Z"
   },
   {
     "id": "usr_bHSFUOMz",
@@ -118,7 +129,7 @@
     "role": "admin",
     "status": "Active",
     "joinedDate": "Oct 19, 2026",
-    "lastLogin": "2026-10-21T06:26:00.249Z"
+    "lastLogin": "2026-10-21T06:59:54.736Z"
   },
   {
     "id": "usr_lAFTWo3p",
@@ -129,7 +140,7 @@
     "role": "student",
     "status": "Active",
     "joinedDate": "Oct 19, 2026",
-    "lastLogin": "2026-10-20T21:12:23.838Z"
+    "lastLogin": "2026-10-21T06:33:12.797Z"
   },
   {
     "id": "usr_nNi21Ckz",

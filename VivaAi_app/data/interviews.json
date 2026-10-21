@@ -1,5 +1,234 @@
 [
   {
+    "id": "AV-5704",
+    "sessionNumber": "AV-5704",
+    "studentName": "Test Student",
+    "studentEmail": "student@college.edu",
+    "candidateName": "Test Student",
+    "candidateEmail": "student@college.edu",
+    "topic": "Data Structures",
+    "score": 88,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 21",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/viva-camera.webm",
+    "screenRecordingUrl": "/recordings/viva-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "speaker": "mira",
+        "text": "Explain how binary search operates on an array."
+      },
+      {
+        "speaker": "student",
+        "text": "Binary search requires a sorted array. It divides the search space in half by comparing with the midpoint element, achieving logarithmic time complexity O(log n)."
+      },
+      {
+        "speaker": "mira",
+        "text": "What happens when elements are unsorted?"
+      },
+      {
+        "speaker": "student",
+        "text": "If unsorted, binary search fails because monotonicity is lost. We must sort in O(n log n) or use linear search O(n)."
+      }
+    ],
+    "scorecard": {
+      "score": 19,
+      "readinessTier": "Needs Review",
+      "summary": "Viva examination successfully completed and evaluated.",
+      "isDisqualified": false,
+      "disqualificationReason": "",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 1.4,
+          "percent": 28,
+          "weight": 30,
+          "calculatedMarks": 8.4,
+          "reason": "Correctly explained that binary search requires a sorted array, operates through midpoint comparisons, and reduces the search interval by half. The explanation that binary search fails on unsorted input was also conceptually sound.",
+          "evidence": ""
+        },
+        "depth": {
+          "score": 0.8,
+          "percent": 16,
+          "weight": 25,
+          "calculatedMarks": 4,
+          "reason": "Included the essential complexities O(log n), O(n log n), and O(n), but did not examine edge cases, loop invariants, midpoint overflow, duplicate values, or the distinction between sortedness and monotonicity.",
+          "evidence": ""
+        },
+        "problemSolving": {
+          "score": 1.1,
+          "percent": 22,
+          "weight": 20,
+          "calculatedMarks": 4.4,
+          "reason": "Correctly proposed sorting the array before binary search or using linear search for unsorted data. The response directly addressed how the algorithm choice changes with the input condition.",
+          "evidence": ""
+        },
+        "practical": {
+          "score": 0.4,
+          "percent": 8,
+          "weight": 15,
+          "calculatedMarks": 1.2,
+          "reason": "Connected the algorithmic behavior to practical alternatives and their costs, although the discussion did not include an implementation trace, pseudocode, or a concrete example.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 0.7,
+          "percent": 14,
+          "weight": 10,
+          "calculatedMarks": 1.4,
+          "reason": "Answered both technical prompts directly and concisely using appropriate terminology. No repetition, evasion, irrelevant analogy, or audio check occurred.",
+          "evidence": ""
+        }
+      },
+      "strengths": [],
+      "improvements": [],
+      "suggestions": [],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "Explain how binary search operates on an array."
+        },
+        {
+          "speaker": "student",
+          "text": "Binary search requires a sorted array. It divides the search space in half by comparing with the midpoint element, achieving logarithmic time complexity O(log n)."
+        },
+        {
+          "speaker": "mira",
+          "text": "What happens when elements are unsorted?"
+        },
+        {
+          "speaker": "student",
+          "text": "If unsorted, binary search fails because monotonicity is lost. We must sort in O(n log n) or use linear search O(n)."
+        }
+      ]
+    },
+    "feedback": {},
+    "createdAt": "2026-10-21T06:59:15.409Z",
+    "readinessTier": "Placement Ready",
+    "facultyOverride": {
+      "overridden": true,
+      "previousScore": 19,
+      "newScore": 88,
+      "facultyName": "Dr. S. Kulkarni (HOD)",
+      "reason": "Reviewed audio recording; candidate provided precise nuance on monotonicity.",
+      "timestamp": "2026-10-21T06:59:15.433Z"
+    }
+  },
+  {
+    "id": "AV-3263",
+    "sessionNumber": "AV-3263",
+    "studentName": "Test Student",
+    "studentEmail": "student@college.edu",
+    "candidateName": "Test Student",
+    "candidateEmail": "student@college.edu",
+    "topic": "Data Structures",
+    "score": 88,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 21",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/viva-camera.webm",
+    "screenRecordingUrl": "/recordings/viva-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "speaker": "mira",
+        "text": "Explain how binary search operates on an array."
+      },
+      {
+        "speaker": "student",
+        "text": "Binary search requires a sorted array. It divides the search space in half by comparing with the midpoint element, achieving logarithmic time complexity O(log n)."
+      },
+      {
+        "speaker": "mira",
+        "text": "What happens when elements are unsorted?"
+      },
+      {
+        "speaker": "student",
+        "text": "If unsorted, binary search fails because monotonicity is lost. We must sort in O(n log n) or use linear search O(n)."
+      }
+    ],
+    "scorecard": {
+      "score": 38,
+      "readinessTier": "Needs Review",
+      "summary": "Viva examination successfully completed and evaluated.",
+      "isDisqualified": false,
+      "disqualificationReason": "",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 2,
+          "percent": 40,
+          "weight": 30,
+          "calculatedMarks": 12,
+          "reason": "Evaluated against core technical criteria.",
+          "evidence": "\"Binary search requires a sorted array. It divides the search space in half by co...\""
+        },
+        "depth": {
+          "score": 1.8,
+          "percent": 35,
+          "weight": 25,
+          "calculatedMarks": 8.8,
+          "reason": "Lacked architectural depth, memory details, and time/space complexity analysis.",
+          "evidence": "\"If unsorted, binary search fails because monotonicity is lost. We must sort in O...\""
+        },
+        "problemSolving": {
+          "score": 1.8,
+          "percent": 35,
+          "weight": 20,
+          "calculatedMarks": 7,
+          "reason": "Struggled to apply concepts to real-world scenarios or problem statements.",
+          "evidence": ""
+        },
+        "practical": {
+          "score": 1.6,
+          "percent": 32,
+          "weight": 15,
+          "calculatedMarks": 4.8,
+          "reason": "Little evidence of practical programming implementation or design principles.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 2.5,
+          "percent": 50,
+          "weight": 10,
+          "calculatedMarks": 5,
+          "reason": "Spoken communication delivery during oral examination.",
+          "evidence": ""
+        }
+      },
+      "strengths": [],
+      "improvements": [],
+      "suggestions": [],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "Explain how binary search operates on an array."
+        },
+        {
+          "speaker": "student",
+          "text": "Binary search requires a sorted array. It divides the search space in half by comparing with the midpoint element, achieving logarithmic time complexity O(log n)."
+        },
+        {
+          "speaker": "mira",
+          "text": "What happens when elements are unsorted?"
+        },
+        {
+          "speaker": "student",
+          "text": "If unsorted, binary search fails because monotonicity is lost. We must sort in O(n log n) or use linear search O(n)."
+        }
+      ]
+    },
+    "feedback": {},
+    "createdAt": "2026-10-21T06:58:07.726Z"
+  },
+  {
     "id": "AV-4658",
     "sessionNumber": "AV-4658",
     "studentName": "Test Student",
@@ -107,16 +336,7 @@
       ]
     },
     "feedback": {},
-    "createdAt": "2026-10-20T21:10:53.611Z",
-    "readinessTier": "Placement Ready",
-    "facultyOverride": {
-      "overridden": true,
-      "previousScore": 38,
-      "newScore": 88,
-      "facultyName": "Dr. S. Kulkarni (HOD)",
-      "reason": "Reviewed audio recording; candidate provided precise nuance on monotonicity.",
-      "timestamp": "2026-10-20T21:10:53.635Z"
-    }
+    "createdAt": "2026-10-20T21:10:53.611Z"
   },
   {
     "id": "AV-4418",

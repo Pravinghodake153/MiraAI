@@ -30,7 +30,9 @@ const App = {
   isSystemSoundPlaying: false,
   systemSoundPlayingUntil: 0,
   timerInterval: null,
-  secondsLeft: 15 * 60, // 15:00
+  secondsLeft: 15 * 60, // Total remaining time in seconds
+  totalExamDuration: 15 * 60, // Dynamic total interview duration calculated from flow stages
+  isInterviewActive: false, // Guard flag: prevents re-rendering or resetting timer during active viva
   isMicActive: true,
   isCameraActive: true,
   currentQuestionIndex: 0,
@@ -144,6 +146,10 @@ const App = {
       if (Array.isArray(fl) && fl.length) {
         this.flowStages = fl;
         this.stages = fl;
+        this.totalExamDuration = this.calculateTotalFlowSeconds(fl);
+        if (!this.isInterviewActive) {
+          this.secondsLeft = this.totalExamDuration;
+        }
       }
       if (Array.isArray(wl) && wl.length) {
         this.adminWhitelistData = wl;
@@ -292,6 +298,11 @@ const App = {
         this.initScreenShareCheck();
         break;
       case '/interview':
+        // Guard: If candidate is ALREADY actively taking the viva, DO NOT wipe DOM, timer or recordings!
+        if (this.isInterviewActive) {
+          console.log('[Router] Preserving active examination session, timer, and media streams.');
+          break;
+        }
         if (!this.hardwareCheckPassed) {
           this.showToast('Please complete camera and microphone verification first.', 'warning');
           this.navigate('/device-check');
@@ -533,7 +544,9 @@ const App = {
               } catch (e) {}
 
               this.updateNavUserUI();
-              this.handleRoute();
+              if (!this.isInterviewActive) {
+                this.handleRoute();
+              }
             };
 
             // Sync user if session already active
@@ -548,7 +561,7 @@ const App = {
                   await syncClerkUserAccount(user);
                   const name = user.fullName || user.firstName || 'Candidate';
                   this.showToast(`Signed in as ${name}`);
-                  if (window.location.pathname.includes('sso-callback') || this.currentRoute === '/consent' || this.pendingRedirectRoute) {
+                  if (!this.isInterviewActive && (window.location.pathname.includes('sso-callback') || this.currentRoute === '/consent' || this.pendingRedirectRoute)) {
                     const targetRoute = this.pendingRedirectRoute || '/consent';
                     this.pendingRedirectRoute = null;
                     this.navigate(targetRoute);
@@ -3105,14 +3118,14 @@ const App = {
 
         <!-- Bottom Unified Dock -->
         <footer class="interview-bottom-dock">
-          <!-- Left: Time Remaining -->
+          <!-- Left: Time Remaining (Dynamic sum of flow stages) -->
           <div class="dock-timer-group">
             <div class="dock-clock-circle">
               ${ICONS.clock}
             </div>
             <div>
               <div class="dock-timer-caption">Time remaining</div>
-              <div class="dock-timer-digits" id="dock-timer">12:34</div>
+              <div class="dock-timer-digits" id="dock-timer">${this.formatDurationMmSs(this.secondsLeft || this.getTotalInterviewDurationSeconds())}</div>
             </div>
           </div>
 
@@ -3156,7 +3169,8 @@ const App = {
   },
 
   getFormattedSessionTime() {
-    const elapsed = Math.max(0, (15 * 60) - this.secondsLeft);
+    const total = this.totalExamDuration || this.getTotalInterviewDurationSeconds();
+    const elapsed = Math.max(0, total - (this.secondsLeft || 0));
     const m = Math.floor(elapsed / 60);
     const s = elapsed % 60;
     return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
@@ -3585,6 +3599,10 @@ const App = {
 
   startCameraRecorder(stream) {
     if (!window.MediaRecorder || !stream) return;
+    if (this.cameraRecorder && this.cameraRecorder.state === 'recording') {
+      console.log('[Camera Recorder] Already active and recording. Preserving video chunks.');
+      return;
+    }
     try {
       this.cameraBlobs = [];
       const opts = this.getOptimalVideoRecorderOptions();
@@ -3602,6 +3620,10 @@ const App = {
 
   startScreenRecorder(stream) {
     if (!window.MediaRecorder || !stream) return;
+    if (this.screenRecorder && this.screenRecorder.state === 'recording') {
+      console.log('[Screen Recorder] Already active and recording. Preserving video chunks.');
+      return;
+    }
     try {
       this.screenBlobs = [];
       const opts = this.getOptimalVideoRecorderOptions();
@@ -3887,32 +3909,47 @@ const App = {
   },
 
   initInterviewLive() {
-    // Reset state for new examination session
-    this.secondsLeft = 15 * 60; // Exact 15:00
+    // 0. Protect running session: NEVER reset timer or wipe recordings if already active!
+    if (this.isInterviewActive && this.timerInterval) {
+      console.log(`[Interview Live] Examination is already live (${this.secondsLeft}s left). Preserving ongoing countdown and media recorders.`);
+      return;
+    }
+
+    // Dynamic duration calculated strictly from the sum of all flow stages
+    const totalSecs = this.getTotalInterviewDurationSeconds();
+    this.totalExamDuration = totalSecs;
+    this.secondsLeft = totalSecs;
+    this.isInterviewActive = true;
     this.activeSessionTranscript = [];
     this.lastStudentSpeech = '';
     this.currentQuestionIndex = 0;
     this.currentAiQuestionText = '';
 
     const timerEl = document.getElementById('dock-timer');
-    if (timerEl) timerEl.textContent = '15:00';
+    if (timerEl) timerEl.textContent = this.formatDurationMmSs(totalSecs);
 
-    // 15-Minute Hard Deadline Timer
+    // Hard Deadline Timer (exact sum of all flow stages, stops cleanly at 00:00)
     if (this.timerInterval) clearInterval(this.timerInterval);
     this.timerInterval = setInterval(() => {
+      if (!this.isInterviewActive) {
+        clearInterval(this.timerInterval);
+        this.timerInterval = null;
+        return;
+      }
+
       this.secondsLeft--;
       if (this.secondsLeft <= 0) {
         clearInterval(this.timerInterval);
         this.timerInterval = null;
-        this.showToast('15-minute examination time reached. Ending session...', 'warning');
+        const totalMin = Math.round(this.totalExamDuration / 60);
+        this.showToast(`${totalMin}-minute examination duration reached. Finalizing session...`, 'warning');
         this.endInterview(true);
         return;
       }
 
-      const mins = Math.floor(this.secondsLeft / 60);
-      const secs = this.secondsLeft % 60;
-      const formatted = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-      if (timerEl) timerEl.textContent = formatted;
+      const formatted = this.formatDurationMmSs(this.secondsLeft);
+      const el = document.getElementById('dock-timer');
+      if (el) el.textContent = formatted;
     }, 1000);
 
     // Camera Stream & Recorder
@@ -4191,6 +4228,7 @@ const App = {
   async endInterview(isAutomaticDeadline = false) {
     if (this.isEndingInterview) return;
     this.isEndingInterview = true;
+    this.isInterviewActive = false; // Mark interview session finished
 
     // 1. Immediately cancel sound, speech synthesis, & timers so no audio continues playing
     this.isMiraSpeaking = false;
@@ -4476,7 +4514,7 @@ const App = {
             topic: topic,
             technology: 'Python',
             difficulty: 'Medium',
-            duration: '15 min',
+            duration: `${this.calculateTotalFlowMinutes()} min`,
             score: finalScore,
             readinessTier: finalReadinessTier,
             summary: finalSummary,
@@ -4484,7 +4522,7 @@ const App = {
             disqualificationReason: this.disqualificationReason || (this.isDisqualifiedSession ? 'Violated examination integrity rules (5 warnings reached)' : ''),
             violationsCount: this.proctoringWarningsCount || (this.isDisqualifiedSession ? 5 : 0),
             violations: this.proctoringViolations || [],
-            durationSeconds: 900,
+            durationSeconds: this.totalExamDuration || this.getTotalInterviewDurationSeconds(),
             cameraRecordingUrl: `/recordings/${this.activeInterviewId || 'AV-viva'}-cam.webm`,
             screenRecordingUrl: `/recordings/${this.activeInterviewId || 'AV-viva'}-screen.webm`,
             rubricBreakdown: evalResult.rubricBreakdown,
@@ -7112,17 +7150,64 @@ const App = {
     `;
   },
 
-  calculateTotalFlowMinutes() {
-    const stages = this.getCurrentFlowStages();
-    let maxMin = 15;
+  calculateStageDurationSeconds(stage) {
+    if (!stage) return 180;
+    const timing = (stage.timing || stage.duration || '').toString().trim();
+    // 1. Range format: "0:00 – 1:00" or "1:00 - 5:00"
+    const rangeMatch = timing.match(/(\d+):(\d+)\s*[–\-—]\s*(\d+):(\d+)/);
+    if (rangeMatch) {
+      const startSec = parseInt(rangeMatch[1], 10) * 60 + parseInt(rangeMatch[2], 10);
+      const endSec = parseInt(rangeMatch[3], 10) * 60 + parseInt(rangeMatch[4], 10);
+      return Math.max(30, endSec - startSec);
+    }
+    // 2. Format with mm:ss: "3:30"
+    const mmssMatch = timing.match(/^(\d+):(\d+)$/);
+    if (mmssMatch) {
+      return parseInt(mmssMatch[1], 10) * 60 + parseInt(mmssMatch[2], 10);
+    }
+    // 3. Format with minutes: "3 mins" or "3 min" or "3"
+    const minMatch = timing.match(/(\d+(?:\.\d+)?)\s*(?:m|min|minute|$)/i);
+    if (minMatch) {
+      return Math.round(parseFloat(minMatch[1]) * 60);
+    }
+    return 180;
+  },
+
+  calculateTotalFlowSeconds(customStages = null) {
+    const stages = Array.isArray(customStages) ? customStages : this.getCurrentFlowStages();
+    if (!stages || !stages.length) return 15 * 60;
+
+    let sumSeconds = 0;
+    let maxEndSec = 0;
     stages.forEach(s => {
-      const match = (s.timing || '').match(/(\d+):(\d+)\s*–\s*(\d+):(\d+)/);
-      if (match) {
-        const endMin = parseInt(match[3], 10);
-        if (endMin > maxMin) maxMin = endMin;
+      const dur = this.calculateStageDurationSeconds(s);
+      sumSeconds += dur;
+      const rangeMatch = (s.timing || '').toString().match(/(\d+):(\d+)\s*[–\-—]\s*(\d+):(\d+)/);
+      if (rangeMatch) {
+        const endSec = parseInt(rangeMatch[3], 10) * 60 + parseInt(rangeMatch[4], 10);
+        if (endSec > maxEndSec) maxEndSec = endSec;
       }
     });
-    return maxMin;
+
+    const total = Math.max(sumSeconds, maxEndSec);
+    return total > 0 ? total : 15 * 60;
+  },
+
+  calculateTotalFlowMinutes(customStages = null) {
+    const totalSecs = this.calculateTotalFlowSeconds(customStages);
+    const mins = totalSecs / 60;
+    return Number.isInteger(mins) ? mins : parseFloat(mins.toFixed(1));
+  },
+
+  getTotalInterviewDurationSeconds() {
+    return this.calculateTotalFlowSeconds();
+  },
+
+  formatDurationMmSs(seconds) {
+    const total = Math.max(0, Math.round(seconds || 0));
+    const m = Math.floor(total / 60);
+    const s = total % 60;
+    return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
   },
 
   async loadAdminFlows() {
@@ -7131,12 +7216,13 @@ const App = {
       const flows = await window.API.getFlows();
       if (Array.isArray(flows) && flows.length) {
         this.flowStages = flows;
+        this.stages = flows;
         const container = document.getElementById('flow-timeline-container');
         if (container) container.innerHTML = this.renderFlowRows();
         const durationText = document.getElementById('flow-duration-text');
         if (durationText) {
           const totalMin = this.calculateTotalFlowMinutes();
-          durationText.textContent = `${totalMin} min total (${flows.length} stages)`;
+          durationText.textContent = `${totalMin} min total (${flows.length} stages • Exact interview duration)`;
         }
       }
     } catch (e) {
@@ -7174,6 +7260,8 @@ const App = {
         <div class="flow-timeline-cards">
           ${visibleStages.map(stage => {
             const iconSvg = ICONS[stage.icon] || ICONS.codeSimple || ICONS.topics;
+            const stageDurSec = this.calculateStageDurationSeconds(stage);
+            const stageDurMin = Math.round((stageDurSec / 60) * 10) / 10;
             return `
               <div class="flow-stage-row" onclick="App.openStageDetail(${stage.step})">
                 <div class="flow-step-marker">
@@ -7187,7 +7275,7 @@ const App = {
                     <div class="flow-step-title">${stage.name}</div>
                     <div class="flow-step-subtitle">${stage.desc || ''}</div>
                   </div>
-                  <div class="flow-step-time-pill">${stage.timing || ''}</div>
+                  <div class="flow-step-time-pill" title="Stage duration: ${stageDurMin} min">${stage.timing || ''} (${stageDurMin} min)</div>
                   ${stages.length > 2 ? `
                     <button class="flow-step-delete-btn" title="Remove stage" onclick="App.deleteFlowStage(${stage.step}, event)">
                       ${ICONS.trash}
@@ -7261,17 +7349,23 @@ const App = {
       if (window.API && window.API.getFlows) {
         const updated = await window.API.getFlows();
         this.flowStages = updated;
+        this.stages = updated;
       } else {
         this.flowStages = this.flowStages.filter(s => s.step !== stepNum).map((s, idx) => ({ ...s, step: idx + 1 }));
+        this.stages = this.flowStages;
+      }
+      this.totalExamDuration = this.calculateTotalFlowSeconds(this.flowStages);
+      if (!this.isInterviewActive) {
+        this.secondsLeft = this.totalExamDuration;
       }
       const container = document.getElementById('flow-timeline-container');
       if (container) container.innerHTML = this.renderFlowRows();
       const durationText = document.getElementById('flow-duration-text');
       if (durationText) {
         const totalMin = this.calculateTotalFlowMinutes();
-        durationText.textContent = `${totalMin} min total (${this.flowStages.length} stages)`;
+        durationText.textContent = `${totalMin} min total (${this.flowStages.length} stages • Exact interview duration)`;
       }
-      this.showToast(`Removed "${stageTitle}" from interview flow`, 'success');
+      this.showToast(`Removed "${stageTitle}" from interview flow. Total duration: ${this.calculateTotalFlowMinutes()} min`, 'success');
     } catch (err) {
       this.showToast(`Failed to delete stage: ${err.message}`, 'error');
     }
@@ -7298,10 +7392,30 @@ const App = {
   // ==========================================================================
   selectedNewFlowIcon: 'codeSimple',
 
-  renderAdminAddFlowContent() {
+    let latestEndSec = 0;
+    stages.forEach(s => {
+      const m = (s.timing || '').match(/(\d+):(\d+)\s*[–\-—]\s*(\d+):(\d+)/);
+      if (m) {
+        const end = parseInt(m[3], 10) * 60 + parseInt(m[4], 10);
+        if (end > latestEndSec) latestEndSec = end;
+      } else {
+        latestEndSec += this.calculateStageDurationSeconds(s);
+      }
+    });
+
     const isEdit = this.editingFlowStep !== null && this.editingFlowStep !== undefined;
-    const stages = this.getCurrentFlowStages();
     const editingStage = isEdit ? stages.find(s => Number(s.step) === Number(this.editingFlowStep)) : null;
+
+    let stageDurMin = 3;
+    let timingVal = '';
+    if (isEdit && editingStage) {
+      const durSec = this.calculateStageDurationSeconds(editingStage);
+      stageDurMin = Math.round((durSec / 60) * 10) / 10;
+      timingVal = editingStage.timing || `${this.formatDurationMmSs(0)} – ${this.formatDurationMmSs(durSec)}`;
+    } else {
+      stageDurMin = 3;
+      timingVal = `${this.formatDurationMmSs(latestEndSec)} – ${this.formatDurationMmSs(latestEndSec + 180)}`;
+    }
 
     const nextStep = isEdit && editingStage ? editingStage.step : ((stages ? stages.length : 6) + 1);
     const initialIcon = (isEdit && editingStage && editingStage.icon) ? editingStage.icon : (this.selectedNewFlowIcon || 'codeSimple');
@@ -7315,7 +7429,6 @@ const App = {
     const submitBtnIcon = isEdit ? ICONS.check : ICONS.plus;
 
     const nameVal = isEdit && editingStage ? editingStage.name : '';
-    const timingVal = isEdit && editingStage ? editingStage.timing : '15:00 – 18:00';
     const categoryVal = isEdit && editingStage ? (editingStage.category || 'technical') : 'technical';
     const descVal = isEdit && editingStage ? (editingStage.desc || '') : '';
     const guidanceVal = isEdit && editingStage ? (editingStage.guidance || '') : '';
@@ -7364,11 +7477,30 @@ const App = {
                 />
               </div>
 
+              <!-- Stage Duration in Minutes -->
+              <div class="flow-form-group">
+                <label class="flow-form-label" for="flow-stage-dur-min">
+                  <span>Stage Duration (Minutes) <strong style="color:var(--primary); font-weight:800;">*</strong></span>
+                  <span class="helper">Time allocated for this stage</span>
+                </label>
+                <input
+                  type="number"
+                  id="flow-stage-dur-min"
+                  class="flow-form-input"
+                  min="0.5"
+                  max="60"
+                  step="0.5"
+                  value="${stageDurMin}"
+                  oninput="App.onStageDurationChanged(this.value)"
+                  required
+                />
+              </div>
+
               <!-- Timing Window -->
               <div class="flow-form-group">
                 <label class="flow-form-label" for="flow-stage-timing">
                   <span>Timing Window <strong style="color:var(--primary); font-weight:800;">*</strong></span>
-                  <span class="helper">Format mm:ss – mm:ss</span>
+                  <span class="helper">Format mm:ss – mm:ss (auto-syncs)</span>
                 </label>
                 <input
                   type="text"
@@ -7376,6 +7508,7 @@ const App = {
                   class="flow-form-input"
                   placeholder="e.g. 15:00 – 18:00"
                   value="${timingVal ? timingVal.replace(/"/g, '&quot;') : ''}"
+                  oninput="App.onStageTimingChanged(this.value)"
                   required
                 />
               </div>
@@ -7398,7 +7531,7 @@ const App = {
               <div class="flow-form-group">
                 <label class="flow-form-label">
                   <span>Sequence Step</span>
-                  <span class="helper">Stage position</span>
+                  <span class="helper">Stage position in viva</span>
                 </label>
                 <input
                   type="text"
@@ -7407,6 +7540,31 @@ const App = {
                   disabled
                   style="background:#F1F5F9; color:#64748B; font-weight:600;"
                 />
+              </div>
+
+              <!-- Live Total Interview Duration Calculation Banner -->
+              <div class="flow-timing-calculator-banner" style="grid-column: 1 / -1; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:12px; padding:16px 20px; display:flex; align-items:center; justify-content:space-between; gap:16px; margin: 4px 0 10px 0;">
+                <div style="display:flex; align-items:center; gap:12px;">
+                  <div style="width:38px; height:38px; border-radius:50%; background:#EFF6FF; display:flex; align-items:center; justify-content:center; color:#2563EB;">
+                    ${ICONS.clock}
+                  </div>
+                  <div>
+                    <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.5px; font-weight:700; color:#64748B;">This Stage Duration</div>
+                    <div id="flow-this-stage-dur-badge" style="font-size:15px; font-weight:800; color:#0F172A;">${stageDurMin} min</div>
+                  </div>
+                </div>
+
+                <div style="font-size:18px; color:#94A3B8; font-weight:700;">→</div>
+
+                <div style="display:flex; align-items:center; gap:12px;">
+                  <div style="width:38px; height:38px; border-radius:50%; background:#ECFDF5; display:flex; align-items:center; justify-content:center; color:#059669;">
+                    ${ICONS.chartBar}
+                  </div>
+                  <div>
+                    <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.5px; font-weight:700; color:#64748B;">Resulting Total Interview Duration</div>
+                    <div id="flow-total-interview-dur-badge" style="font-size:15px; font-weight:800; color:#059669;">Calculating...</div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -7475,6 +7633,84 @@ const App = {
     `;
   },
 
+  onStageDurationChanged(durVal) {
+    const min = parseFloat(durVal) || 1;
+    const durSec = Math.round(min * 60);
+    const stages = this.getCurrentFlowStages();
+    const isEdit = this.editingFlowStep !== null && this.editingFlowStep !== undefined;
+    const timingInput = document.getElementById('flow-stage-timing');
+
+    let startSec = 0;
+    if (isEdit) {
+      const currentStage = stages.find(s => Number(s.step) === Number(this.editingFlowStep));
+      const m = (currentStage?.timing || '').match(/(\d+):(\d+)\s*[–\-—]\s*(\d+):(\d+)/);
+      if (m) {
+        startSec = parseInt(m[1], 10) * 60 + parseInt(m[2], 10);
+      }
+    } else {
+      stages.forEach(s => {
+        const m = (s.timing || '').match(/(\d+):(\d+)\s*[–\-—]\s*(\d+):(\d+)/);
+        if (m) {
+          const end = parseInt(m[3], 10) * 60 + parseInt(m[4], 10);
+          if (end > startSec) startSec = end;
+        } else {
+          startSec += this.calculateStageDurationSeconds(s);
+        }
+      });
+    }
+
+    const endSec = startSec + durSec;
+    if (timingInput) {
+      timingInput.value = `${this.formatDurationMmSs(startSec)} – ${this.formatDurationMmSs(endSec)}`;
+    }
+    this.updateFlowDurationCalculationPreview();
+  },
+
+  onStageTimingChanged() {
+    this.updateFlowDurationCalculationPreview();
+  },
+
+  updateFlowDurationCalculationPreview() {
+    const timingInput = document.getElementById('flow-stage-timing');
+    const durInput = document.getElementById('flow-stage-dur-min');
+    const stageBadge = document.getElementById('flow-this-stage-dur-badge');
+    const totalBadge = document.getElementById('flow-total-interview-dur-badge');
+    if (!timingInput || !stageBadge || !totalBadge) return;
+
+    const currentTiming = timingInput.value.trim();
+    const isEdit = this.editingFlowStep !== null && this.editingFlowStep !== undefined;
+    const stages = this.getCurrentFlowStages();
+
+    // Parse current stage duration
+    let thisStageSec = 180;
+    const m = currentTiming.match(/(\d+):(\d+)\s*[–\-—]\s*(\d+):(\d+)/);
+    if (m) {
+      const s = parseInt(m[1], 10) * 60 + parseInt(m[2], 10);
+      const e = parseInt(m[3], 10) * 60 + parseInt(m[4], 10);
+      thisStageSec = Math.max(30, e - s);
+    } else if (durInput) {
+      thisStageSec = Math.round((parseFloat(durInput.value) || 3) * 60);
+    }
+
+    const thisMin = Math.round((thisStageSec / 60) * 10) / 10;
+    stageBadge.textContent = `${thisMin} min (${thisStageSec}s)`;
+
+    // Calculate simulated total interview duration
+    const simulatedStages = stages.map(s => ({ ...s }));
+    if (isEdit) {
+      const idx = simulatedStages.findIndex(s => Number(s.step) === Number(this.editingFlowStep));
+      if (idx !== -1) {
+        simulatedStages[idx] = { ...simulatedStages[idx], timing: currentTiming };
+      }
+    } else {
+      simulatedStages.push({ step: stages.length + 1, timing: currentTiming });
+    }
+
+    const totalSecs = this.calculateTotalFlowSeconds(simulatedStages);
+    const totalMins = this.calculateTotalFlowMinutes(simulatedStages);
+    totalBadge.textContent = `${totalMins} min (${this.formatDurationMmSs(totalSecs)} • ${simulatedStages.length} stages)`;
+  },
+
   initAdminAddFlowEvents() {
     const isEdit = this.editingFlowStep !== null && this.editingFlowStep !== undefined;
     if (isEdit) {
@@ -7486,6 +7722,10 @@ const App = {
     } else {
       this.selectedNewFlowIcon = 'codeSimple';
     }
+    // Update live calculation banner on render
+    setTimeout(() => {
+      this.updateFlowDurationCalculationPreview();
+    }, 50);
   },
 
   selectFlowIcon(iconKey) {
@@ -7545,14 +7785,20 @@ const App = {
         if (window.API && window.API.getFlows) {
           const fresh = await window.API.getFlows();
           this.flowStages = fresh;
+          this.stages = fresh;
         } else {
           const idx = this.flowStages.findIndex(s => Number(s.step) === stepNum);
           if (idx !== -1) {
             this.flowStages[idx] = stagePayload;
           }
+          this.stages = this.flowStages;
+        }
+        this.totalExamDuration = this.calculateTotalFlowSeconds(this.flowStages);
+        if (!this.isInterviewActive) {
+          this.secondsLeft = this.totalExamDuration;
         }
         this.editingFlowStep = null;
-        this.showToast(`Stage "${nameVal}" updated successfully!`, 'success');
+        this.showToast(`Stage "${nameVal}" updated successfully! Total interview duration: ${this.calculateTotalFlowMinutes()} min`, 'success');
       } else {
         if (window.API && window.API.createFlowStage) {
           await window.API.createFlowStage(stagePayload);
@@ -7560,10 +7806,16 @@ const App = {
         if (window.API && window.API.getFlows) {
           const fresh = await window.API.getFlows();
           this.flowStages = fresh;
+          this.stages = fresh;
         } else {
           this.flowStages.push(stagePayload);
+          this.stages = this.flowStages;
         }
-        this.showToast(`Stage "${nameVal}" added to interview flow successfully!`, 'success');
+        this.totalExamDuration = this.calculateTotalFlowSeconds(this.flowStages);
+        if (!this.isInterviewActive) {
+          this.secondsLeft = this.totalExamDuration;
+        }
+        this.showToast(`Stage "${nameVal}" added! Total interview duration: ${this.calculateTotalFlowMinutes()} min`, 'success');
       }
 
       this.navigate('/admin-flow');

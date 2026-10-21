@@ -199,7 +199,60 @@ async function runTestSuite() {
     }
   });
 
-  // 7. High Concurrency Throughput Test (Simulating 150 Simultaneous Requests)
+  // 7. Dynamic Flow Duration Sum & Media Recording Upload
+  await test('Dynamic Flow Duration Calculation & Video Upload', async () => {
+    // A. Verify flows list and total duration sum
+    const flowsRes = await request('/api/flows');
+    if (flowsRes.status !== 200 || !Array.isArray(flowsRes.body) || flowsRes.body.length === 0) {
+      throw new Error('Failed to fetch interview flow stages');
+    }
+    const stages = flowsRes.body;
+    let totalSecs = 0;
+    stages.forEach(s => {
+      const match = (s.timing || '').match(/(\d+):(\d+)\s*[–\-—]\s*(\d+):(\d+)/);
+      if (match) {
+        const start = parseInt(match[1], 10) * 60 + parseInt(match[2], 10);
+        const end = parseInt(match[3], 10) * 60 + parseInt(match[4], 10);
+        totalSecs = Math.max(totalSecs, end);
+      }
+    });
+    if (totalSecs !== 900) {
+      throw new Error(`Expected default 6-stage flow sum to be 900s (15 min), got ${totalSecs}s`);
+    }
+
+    // B. Test binary video recording upload endpoint
+    const mockIvId = 'AV-FLOW-TEST';
+    const fakeWebmBuffer = Buffer.from('FAKE-WEBM-VIDEO-BYTES-FOR-AUDIT-VERIFICATION');
+    const uploadRes = await new Promise((resolve, reject) => {
+      const url = new URL(`/api/recordings/upload?interviewId=${mockIvId}&type=camera`, BASE_URL);
+      const req = http.request({
+        hostname: url.hostname,
+        port: url.port,
+        path: url.pathname + url.search,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'video/webm',
+          'Content-Length': fakeWebmBuffer.length
+        }
+      }, (res) => {
+        let body = '';
+        res.on('data', chunk => body += chunk);
+        res.on('end', () => {
+          try { resolve({ status: res.statusCode, body: JSON.parse(body) }); }
+          catch (e) { resolve({ status: res.statusCode, body }); }
+        });
+      });
+      req.on('error', reject);
+      req.write(fakeWebmBuffer);
+      req.end();
+    });
+
+    if ((uploadRes.status !== 200 && uploadRes.status !== 201) || !uploadRes.body.url) {
+      throw new Error(`Video upload failed with status ${uploadRes.status}: ${JSON.stringify(uploadRes.body)}`);
+    }
+  });
+
+  // 8. High Concurrency Throughput Test (Simulating 150 Simultaneous Requests)
   await test('150 Concurrent Live Requests Load Benchmark', async () => {
     const CONCURRENT_COUNT = 150;
     const startTime = Date.now();

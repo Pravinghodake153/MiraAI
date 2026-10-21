@@ -379,14 +379,29 @@ async function generateMiraQuestion(payload) {
 
   // Check if OpenRouter key is present
   if (process.env.OPENROUTER_API_KEY && process.env.OPENROUTER_API_KEY.trim().length > 10) {
-    try {
+      // Calculate total examination duration dynamically from flow stages
+      let totalFlowSecs = 0;
+      const stagesForClock = (Array.isArray(allStages) && allStages.length > 0) ? allStages : (readDb('flows.json') || []);
+      (stagesForClock || []).forEach(s => {
+        const m = (s.timing || '').match(/(\d+):(\d+)\s*[–\-—]\s*(\d+):(\d+)/);
+        if (m) {
+          const end = parseInt(m[3], 10) * 60 + parseInt(m[4], 10);
+          if (end > totalFlowSecs) totalFlowSecs = end;
+        } else {
+          const numMatch = (s.timing || s.duration || '').toString().match(/(\d+)/);
+          totalFlowSecs += numMatch ? parseInt(numMatch[1], 10) * 60 : 180;
+        }
+      });
+      const examDurSecs = totalFlowSecs > 0 ? totalFlowSecs : 900;
+      const dynamicTotalDurationStr = `${Math.floor(examDurSecs / 60).toString().padStart(2, '0')}:${(examDurSecs % 60).toString().padStart(2, '0')}`;
+
       // Build clean JSON summary of session state for AI context
       const sessionContextSummary = {
         examinationTopic: currentTopic,
         clock: {
           elapsedTime: currentTime,
           timeRemaining: remainingTime,
-          totalDuration: "15:00"
+          totalDuration: dynamicTotalDurationStr
         },
         currentStage: {
           step: stageObj.step || 1,
