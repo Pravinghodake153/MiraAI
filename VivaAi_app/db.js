@@ -633,12 +633,39 @@ const DB = {
 
     // JSON fallback
     const list = readJson('interviews.json', []);
+    const sc = typeof data.scorecard === 'string' ? JSON.parse(data.scorecard) : (data.scorecard || {});
+    let authoritativeScore = typeof data.score === 'number' ? data.score : 80;
+    const rub = sc.rubricBreakdown || data.rubricBreakdown;
+    if (rub && (rub.conceptual || rub.depth || rub.problemSolving || rub.practical || rub.communication)) {
+      const pDim = (d) => {
+        if (!d) return 0;
+        if (typeof d.percent === 'number') return Math.min(100, Math.max(0, Math.round(d.percent)));
+        if (typeof d.score === 'number') return d.score <= 5 ? Math.round((d.score / 5) * 100) : Math.round(d.score);
+        return 0;
+      };
+      const c = pDim(rub.conceptual);
+      const d = pDim(rub.depth);
+      const p = pDim(rub.problemSolving);
+      const pr = pDim(rub.practical);
+      const cm = pDim(rub.communication);
+      const weighted = Math.round((c * 0.30) + (d * 0.25) + (p * 0.20) + (pr * 0.15) + (cm * 0.10));
+      if (weighted > 0) authoritativeScore = (data.isDisqualified || sc.isDisqualified) ? Math.min(20, weighted) : weighted;
+    } else if (typeof sc.score === 'number' && sc.score > 0) {
+      authoritativeScore = sc.score;
+    }
+
     const record = {
       ...data,
       id,
       sessionNumber: id,
+      score: authoritativeScore,
+      readinessTier: data.readinessTier || (authoritativeScore >= 70 ? 'Placement Ready' : 'Needs Review'),
       transcripts: typeof data.transcripts === 'string' ? JSON.parse(data.transcripts) : (data.transcripts || []),
-      scorecard: typeof data.scorecard === 'string' ? JSON.parse(data.scorecard) : (data.scorecard || {}),
+      scorecard: {
+        ...sc,
+        score: authoritativeScore,
+        readinessTier: data.readinessTier || (authoritativeScore >= 70 ? 'Placement Ready' : 'Needs Review')
+      },
       feedback: typeof data.feedback === 'string' ? JSON.parse(data.feedback) : (data.feedback || {}),
       date: data.date || new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
       createdAt: data.createdAt || new Date().toISOString()

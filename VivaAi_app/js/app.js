@@ -5234,7 +5234,7 @@ const App = {
     if (!iv && this.selectedInterviewId && Array.isArray(this.vivaHistoryList)) {
       iv = this.vivaHistoryList.find(x => x.id === this.selectedInterviewId || x.sessionNumber === this.selectedInterviewId);
     }
-    const finalScore = iv ? Number(iv.score) : ((this.lastEvaluationResult && this.lastEvaluationResult.score) || 84);
+    const finalScore = iv ? this.getInterviewOverallScore(iv) : ((this.lastEvaluationResult && this.lastEvaluationResult.score) || 84);
     const candidateName = iv?.candidateName || iv?.studentName || (this.currentUser && this.currentUser.name) || 'Student';
     const sc = (iv && iv.scorecard) ? (typeof iv.scorecard === 'string' ? JSON.parse(iv.scorecard) : iv.scorecard) : {};
     let rawTurns = (sc && sc.annotatedTranscript) || iv?.annotatedTranscript || iv?.transcripts || (this.lastEvaluationResult && (this.lastEvaluationResult.annotatedTranscript || this.lastEvaluationResult.transcript)) || this.activeSessionTranscript;
@@ -5579,6 +5579,50 @@ const App = {
     }
   },
 
+  getInterviewOverallScore(iv) {
+    if (!iv) return 0;
+    const sc = (iv.scorecard && typeof iv.scorecard === 'string') ? JSON.parse(iv.scorecard) : (iv.scorecard || {});
+    const rawRubric = sc.rubricBreakdown || iv.rubricBreakdown || (this.lastEvaluationResult && this.lastEvaluationResult.rubricBreakdown);
+    
+    if (rawRubric && (rawRubric.conceptual || rawRubric.depth || rawRubric.problemSolving || rawRubric.practical || rawRubric.communication)) {
+      const parseDimScore = (dimObj, defaultScore) => {
+        if (!dimObj) return defaultScore;
+        if (typeof dimObj.percent === 'number') return Math.min(100, Math.max(0, Math.round(dimObj.percent)));
+        if (typeof dimObj.score === 'number') {
+          return dimObj.score <= 5 ? Math.min(100, Math.max(0, Math.round((dimObj.score / 5) * 100))) : Math.min(100, Math.max(0, Math.round(dimObj.score)));
+        }
+        return defaultScore;
+      };
+
+      const cScore = parseDimScore(rawRubric.conceptual, 0);
+      const dScore = parseDimScore(rawRubric.depth, 0);
+      const pScore = parseDimScore(rawRubric.problemSolving, 0);
+      const prScore = parseDimScore(rawRubric.practical, 0);
+      const cmScore = parseDimScore(rawRubric.communication, 0);
+
+      const systemWeightedScore = Math.round(
+        (cScore * 0.30) +
+        (dScore * 0.25) +
+        (pScore * 0.20) +
+        (prScore * 0.15) +
+        (cmScore * 0.10)
+      );
+
+      if (systemWeightedScore > 0) {
+        const isDisqualified = !!(iv.isDisqualified || sc.isDisqualified || this.isDisqualifiedSession);
+        return isDisqualified ? Math.min(20, systemWeightedScore) : systemWeightedScore;
+      }
+    }
+
+    if (typeof sc.score === 'number' && sc.score > 0) return sc.score;
+    if (typeof sc.overallScore === 'number' && sc.overallScore > 0) return sc.overallScore;
+    return Number(iv.score) || 0;
+  },
+
+  getInterviewScore(iv) {
+    return this.getInterviewOverallScore(iv);
+  },
+
   scrollTrendChart(offset) {
     const el = document.getElementById('perf-chart-bars-wrap');
     if (el) el.scrollBy({ left: offset, behavior: 'smooth' });
@@ -5608,8 +5652,8 @@ const App = {
     // Calculate progression delta between latest interview and the one before it
     if (deltaText) {
       if (interviews.length >= 2) {
-        const latestScore = Number(interviews[0].score) || 0;
-        const prevScore = Number(interviews[1].score) || 0;
+        const latestScore = this.getInterviewOverallScore(interviews[0]);
+        const prevScore = this.getInterviewOverallScore(interviews[1]);
         const delta = latestScore - prevScore;
         if (delta >= 0) {
           deltaText.style.color = '#10B981';
@@ -5619,8 +5663,9 @@ const App = {
           deltaText.innerHTML = `<span style="display:inline-flex; width:16px; height:16px; align-items:center; transform:rotate(180deg);">${ICONS.trendUp}</span> <span>${delta} points from last interview</span>`;
         }
       } else if (interviews.length === 1) {
+        const baseScore = this.getInterviewOverallScore(interviews[0]);
         deltaText.style.color = '#10B981';
-        deltaText.innerHTML = `<span style="display:inline-flex; width:16px; height:16px; align-items:center;">${ICONS.trendUp}</span> <span>Baseline score: ${interviews[0].score || 0} pts</span>`;
+        deltaText.innerHTML = `<span style="display:inline-flex; width:16px; height:16px; align-items:center;">${ICONS.trendUp}</span> <span>Baseline score: ${baseScore} pts</span>`;
       }
     }
 
@@ -5628,7 +5673,7 @@ const App = {
     const chronological = [...interviews].reverse();
 
     const barsHtml = chronological.map((iv, idx) => {
-      const score = Number(iv.score) || 0;
+      const score = this.getInterviewOverallScore(iv);
       const isHigh = score >= 70;
       const heightPercent = Math.max(10, Math.min(100, Math.round((score / 100) * 100)));
       const dateLabel = iv.date || 'Recent';
@@ -5671,9 +5716,9 @@ const App = {
 
     let filtered = interviews;
     if (this.vivaActiveFilter === 'ready') {
-      filtered = interviews.filter(iv => (Number(iv.score) || 0) >= 70);
+      filtered = interviews.filter(iv => this.getInterviewOverallScore(iv) >= 70);
     } else if (this.vivaActiveFilter === 'review') {
-      filtered = interviews.filter(iv => (Number(iv.score) || 0) < 70);
+      filtered = interviews.filter(iv => this.getInterviewOverallScore(iv) < 70);
     }
 
     if (filtered.length === 0) {
@@ -5686,7 +5731,7 @@ const App = {
     }
 
     const cardsHtml = filtered.map(iv => {
-      const score = Number(iv.score) || 0;
+      const score = this.getInterviewOverallScore(iv);
       const isHigh = score >= 70;
       const topic = iv.topic || 'General Computer Science Viva';
       const tech = iv.technology || 'Python';
@@ -5753,7 +5798,7 @@ const App = {
     const modalRoot = document.getElementById('viva-detail-modal-root');
     if (!modalRoot) return;
 
-    const score = Number(iv.score) || 0;
+    const score = this.getInterviewOverallScore(iv);
     const isHigh = score >= 70;
     const diff = iv.difficulty || 'Medium';
 
@@ -6537,7 +6582,7 @@ const App = {
                     ? this.vivaHistoryList.slice(0, 5).map((iv, idx) => {
                         const candidate = iv.candidateName || iv.studentName || 'Candidate';
                         const initial = candidate.charAt(0).toUpperCase();
-                        const score = Number(iv.score) || 0;
+                        const score = this.getInterviewOverallScore(iv);
                         const scoreColor = score >= 75 ? 'var(--success)' : (score >= 50 ? 'var(--warning)' : 'var(--danger)');
                         const dateStr = iv.date || iv.timestamp || 'Today';
                         return `
@@ -6647,7 +6692,7 @@ const App = {
           tableBody.innerHTML = interviews.slice(0, 5).map((iv, idx) => {
             const candidate = iv.candidateName || iv.studentName || 'Candidate';
             const initial = candidate.charAt(0).toUpperCase();
-            const score = Number(iv.score) || 0;
+            const score = this.getInterviewOverallScore(iv);
             const scoreColor = score >= 75 ? 'var(--success)' : (score >= 50 ? 'var(--warning)' : 'var(--danger)');
             const dateStr = iv.date || iv.timestamp || 'Today';
             return `
@@ -6977,7 +7022,7 @@ const App = {
                 <div>This candidate has not completed any proctored oral viva sessions.</div>
               </div>
             ` : userIvs.map(iv => {
-              const score = Number(iv.score) || 0;
+              const score = this.getInterviewOverallScore(iv);
               const isHigh = score >= 70;
               const tech = iv.technology || 'Python';
               const diff = iv.difficulty || 'Medium';

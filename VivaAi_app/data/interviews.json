@@ -1,5 +1,1095 @@
 [
   {
+    "id": "AV-6695",
+    "candidateName": "Override Audit Test",
+    "candidateEmail": "student@college.edu",
+    "studentName": "Override Audit Test",
+    "studentEmail": "student@college.edu",
+    "topic": "Algorithm Analysis",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "duration": "15 min",
+    "score": 88,
+    "maxScore": 100,
+    "status": "Completed",
+    "durationSeconds": 900,
+    "readinessTier": "Placement Ready",
+    "summary": "Viva examination successfully completed and evaluated.",
+    "date": "Oct 21",
+    "fullDate": "Oct 21, 2026, 02:16 PM",
+    "cameraRecordingUrl": "/recordings/viva-camera.webm",
+    "screenRecordingUrl": "/recordings/viva-screen.webm",
+    "isDisqualified": false,
+    "disqualificationReason": "",
+    "scorecard": {
+      "score": 70,
+      "readinessTier": "Needs Review",
+      "summary": "Viva examination successfully completed and evaluated.",
+      "isDisqualified": false,
+      "disqualificationReason": "",
+      "rubricBreakdown": {},
+      "strengths": [],
+      "improvements": [],
+      "suggestions": [],
+      "annotatedTranscript": []
+    },
+    "rubricBreakdown": {},
+    "strengths": [],
+    "improvements": [],
+    "suggestions": [],
+    "annotatedTranscript": [],
+    "transcript": [],
+    "transcripts": [],
+    "sessionNumber": "AV-6695",
+    "feedback": {},
+    "createdAt": "2026-10-21T08:46:31.708Z",
+    "facultyOverride": {
+      "overridden": true,
+      "previousScore": 70,
+      "newScore": 88,
+      "facultyName": "Dr. S. Kulkarni (HOD)",
+      "reason": "Reviewed audio recording; candidate provided precise nuance on monotonicity.",
+      "timestamp": "2026-10-21T08:46:31.712Z"
+    }
+  },
+  {
+    "id": "AV-9614",
+    "candidateName": "Test Student",
+    "candidateEmail": "student@college.edu",
+    "studentName": "Test Student",
+    "studentEmail": "student@college.edu",
+    "topic": "Data Structures",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "duration": "15 min",
+    "score": 14,
+    "maxScore": 100,
+    "status": "Completed",
+    "durationSeconds": 900,
+    "readinessTier": "Needs Review",
+    "summary": "Viva examination successfully completed and evaluated.",
+    "date": "Oct 21",
+    "fullDate": "Oct 21, 2026, 02:16 PM",
+    "cameraRecordingUrl": "/recordings/viva-camera.webm",
+    "screenRecordingUrl": "/recordings/viva-screen.webm",
+    "isDisqualified": false,
+    "disqualificationReason": "",
+    "scorecard": {
+      "score": 14,
+      "readinessTier": "Needs Review",
+      "summary": "Viva examination successfully completed and evaluated.",
+      "isDisqualified": false,
+      "disqualificationReason": "",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 0.7,
+          "percent": 14,
+          "weight": 30,
+          "calculatedMarks": 4.2,
+          "reason": "Provided accurate definition of binary search, noted sorted array requirement, and stated O(log n) time complexity.",
+          "evidence": ""
+        },
+        "depth": {
+          "score": 0.7,
+          "percent": 14,
+          "weight": 25,
+          "calculatedMarks": 3.5,
+          "reason": "Stated correct time complexities (O(log n), O(n), O(n log n)) showing adequate depth of understanding.",
+          "evidence": ""
+        },
+        "problemSolving": {
+          "score": 0.8,
+          "percent": 16,
+          "weight": 20,
+          "calculatedMarks": 3.2,
+          "reason": "Correctly identified failure of binary search on unsorted data and suggested sorting or linear search with appropriate complexities.",
+          "evidence": ""
+        },
+        "practical": {
+          "score": 0.7,
+          "percent": 14,
+          "weight": 15,
+          "calculatedMarks": 2.1,
+          "reason": "Mentioned practical implications (sorting cost vs linear search) but did not elaborate on memory layout or low-level implementation details.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 0.7,
+          "percent": 14,
+          "weight": 10,
+          "calculatedMarks": 1.4,
+          "reason": "Clear, direct answers with proper technical terminology; no evasion or audio checks observed.",
+          "evidence": ""
+        }
+      },
+      "strengths": [],
+      "improvements": [],
+      "suggestions": [],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "Explain how binary search operates on an array."
+        },
+        {
+          "speaker": "student",
+          "text": "Binary search requires a sorted array. It divides the search space in half by comparing with the midpoint element, achieving logarithmic time complexity O(log n)."
+        },
+        {
+          "speaker": "mira",
+          "text": "What happens when elements are unsorted?"
+        },
+        {
+          "speaker": "student",
+          "text": "If unsorted, binary search fails because monotonicity is lost. We must sort in O(n log n) or use linear search O(n)."
+        }
+      ]
+    },
+    "rubricBreakdown": {
+      "conceptual": {
+        "score": 0.7,
+        "percent": 14,
+        "weight": 30,
+        "calculatedMarks": 4.2,
+        "reason": "Provided accurate definition of binary search, noted sorted array requirement, and stated O(log n) time complexity.",
+        "evidence": ""
+      },
+      "depth": {
+        "score": 0.7,
+        "percent": 14,
+        "weight": 25,
+        "calculatedMarks": 3.5,
+        "reason": "Stated correct time complexities (O(log n), O(n), O(n log n)) showing adequate depth of understanding.",
+        "evidence": ""
+      },
+      "problemSolving": {
+        "score": 0.8,
+        "percent": 16,
+        "weight": 20,
+        "calculatedMarks": 3.2,
+        "reason": "Correctly identified failure of binary search on unsorted data and suggested sorting or linear search with appropriate complexities.",
+        "evidence": ""
+      },
+      "practical": {
+        "score": 0.7,
+        "percent": 14,
+        "weight": 15,
+        "calculatedMarks": 2.1,
+        "reason": "Mentioned practical implications (sorting cost vs linear search) but did not elaborate on memory layout or low-level implementation details.",
+        "evidence": ""
+      },
+      "communication": {
+        "score": 0.7,
+        "percent": 14,
+        "weight": 10,
+        "calculatedMarks": 1.4,
+        "reason": "Clear, direct answers with proper technical terminology; no evasion or audio checks observed.",
+        "evidence": ""
+      }
+    },
+    "strengths": [],
+    "improvements": [],
+    "suggestions": [],
+    "annotatedTranscript": [
+      {
+        "speaker": "mira",
+        "text": "Explain how binary search operates on an array."
+      },
+      {
+        "speaker": "student",
+        "text": "Binary search requires a sorted array. It divides the search space in half by comparing with the midpoint element, achieving logarithmic time complexity O(log n)."
+      },
+      {
+        "speaker": "mira",
+        "text": "What happens when elements are unsorted?"
+      },
+      {
+        "speaker": "student",
+        "text": "If unsorted, binary search fails because monotonicity is lost. We must sort in O(n log n) or use linear search O(n)."
+      }
+    ],
+    "transcript": [
+      {
+        "speaker": "mira",
+        "text": "Explain how binary search operates on an array."
+      },
+      {
+        "speaker": "student",
+        "text": "Binary search requires a sorted array. It divides the search space in half by comparing with the midpoint element, achieving logarithmic time complexity O(log n)."
+      },
+      {
+        "speaker": "mira",
+        "text": "What happens when elements are unsorted?"
+      },
+      {
+        "speaker": "student",
+        "text": "If unsorted, binary search fails because monotonicity is lost. We must sort in O(n log n) or use linear search O(n)."
+      }
+    ],
+    "transcripts": [
+      {
+        "speaker": "mira",
+        "text": "Explain how binary search operates on an array."
+      },
+      {
+        "speaker": "student",
+        "text": "Binary search requires a sorted array. It divides the search space in half by comparing with the midpoint element, achieving logarithmic time complexity O(log n)."
+      },
+      {
+        "speaker": "mira",
+        "text": "What happens when elements are unsorted?"
+      },
+      {
+        "speaker": "student",
+        "text": "If unsorted, binary search fails because monotonicity is lost. We must sort in O(n log n) or use linear search O(n)."
+      }
+    ],
+    "sessionNumber": "AV-9614",
+    "feedback": {},
+    "createdAt": "2026-10-21T08:46:31.688Z"
+  },
+  {
+    "id": "AV-1569",
+    "candidateName": "pravin",
+    "candidateEmail": "ghodakepravin154@gmail.com",
+    "studentName": "pravin",
+    "studentEmail": "ghodakepravin154@gmail.com",
+    "topic": "Data Structures",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "duration": "15 min",
+    "score": 60,
+    "maxScore": 100,
+    "status": "Completed",
+    "durationSeconds": 900,
+    "readinessTier": "Needs Review",
+    "summary": "Candidate pravin failed to define a data structure across core viva questions, responding with incomplete phrases such as 'Yes I am ready to' and 'Yes', evading with 'Can you tell me which flow currently running now', and uttering nonsensical",
+    "date": "Oct 21",
+    "fullDate": "Oct 21, 2026, 02:15 PM",
+    "cameraRecordingUrl": "/recordings/AV-1569-cam.webm",
+    "screenRecordingUrl": "/recordings/AV-1569-screen.webm",
+    "isDisqualified": false,
+    "disqualificationReason": "",
+    "scorecard": {
+      "score": 60,
+      "readinessTier": "Needs Review",
+      "summary": "Candidate pravin failed to define a data structure across core viva questions, responding with incomplete phrases such as 'Yes I am ready to' and 'Yes', evading with 'Can you tell me which flow currently running now', and uttering nonsensical",
+      "isDisqualified": false,
+      "disqualificationReason": "",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 3,
+          "percent": 60,
+          "weight": 30,
+          "calculatedMarks": 18,
+          "reason": "Evaluated based on student responses in Conceptual Understanding.",
+          "evidence": ""
+        },
+        "depth": {
+          "score": 3,
+          "percent": 60,
+          "weight": 25,
+          "calculatedMarks": 15,
+          "reason": "Evaluated based on student responses in Depth & Reasoning.",
+          "evidence": ""
+        },
+        "problemSolving": {
+          "score": 3,
+          "percent": 60,
+          "weight": 20,
+          "calculatedMarks": 12,
+          "reason": "Evaluated based on student responses in Problem Solving.",
+          "evidence": ""
+        },
+        "practical": {
+          "score": 3,
+          "percent": 60,
+          "weight": 15,
+          "calculatedMarks": 9,
+          "reason": "Evaluated based on student responses in Practical / Project Knowledge.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 3,
+          "percent": 60,
+          "weight": 10,
+          "calculatedMarks": 6,
+          "reason": "Evaluated based on student responses in Communication.",
+          "evidence": ""
+        }
+      },
+      "strengths": [
+        {
+          "title": "Topic Engagement",
+          "desc": "Candidate participated in the Data Structures discussion and attempted responses to examiner questions."
+        }
+      ],
+      "improvements": [
+        {
+          "title": "Technical Depth",
+          "desc": "Answers would benefit from deeper analysis of system trade-offs and complexity constraints in Data Structures."
+        }
+      ],
+      "suggestions": [
+        "Review core principles and practical implementations in Data Structures.",
+        "Practice verbalizing algorithmic trade-offs and complexity calculations under exam conditions."
+      ],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "Good morning! I'm Professor Mira. Are you ready to start? Let's begin with a simple question: What is a data structure and why is it important?",
+          "timestamp": "00:15",
+          "stage": "Warm-up"
+        },
+        {
+          "speaker": "student",
+          "text": "Yes I am ready to",
+          "timestamp": "00:28",
+          "stage": "Warm-up",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete answer",
+            "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+            "dimension": "Communication",
+            "supportsScore": "30 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "Great, thank you. Could you now define a data structure and explain why it matters in computer science for efficient algorithm performance?",
+          "timestamp": "00:53",
+          "stage": "Warm-up"
+        },
+        {
+          "speaker": "student",
+          "text": "Because data is a management system where we need to manage the database",
+          "timestamp": "01:12",
+          "stage": "Fundamentals",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Conceptual check",
+            "desc": "Addressed the surface question, but lacked precise technical definitions and memory organization details.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "60 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "Let’s narrow that down. How would you define a data structure, and what problem does it solve when organizing data for an algorithm?",
+          "timestamp": "01:17",
+          "stage": "Fundamentals"
+        },
+        {
+          "speaker": "student",
+          "text": "Can you tell me which flow currently running now",
+          "timestamp": "01:33",
+          "stage": "Fundamentals",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Conceptual check",
+            "desc": "Addressed the surface question, but lacked precise technical definitions and memory organization details.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "60 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "Can you explain the primary theoretical principles and memory layout trade-offs in Data Structures?",
+          "timestamp": "02:04",
+          "stage": "Fundamentals"
+        },
+        {
+          "speaker": "student",
+          "text": "Yes",
+          "timestamp": "02:17",
+          "stage": "Depth",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete answer",
+            "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+            "dimension": "Communication",
+            "supportsScore": "30 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "{ \"question\": \"...\", \"followUpType\": \"...\", \"advanceStage\": true/false, \"rationale\": \"...\" }?",
+          "timestamp": "02:26",
+          "stage": "Depth"
+        },
+        {
+          "speaker": "student",
+          "text": "Mama follow-up type Karma Advanced stage true false rationale",
+          "timestamp": "02:35",
+          "stage": "Applied Problem",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Needs depth",
+            "desc": "Proposed partial approach but lacked implementation specificity.",
+            "dimension": "Problem Solving",
+            "supportsScore": "60 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "A university database system experiences slow query responses during peak hours. Lookup times on user records are particularly slow. Which data structure—hash table or B-tree index—would better optimize these queries, and what are the key trade-offs?",
+          "timestamp": "03:00",
+          "stage": "Applied Problem"
+        }
+      ]
+    },
+    "rubricBreakdown": {
+      "conceptual": {
+        "score": 3,
+        "percent": 60,
+        "weight": 30,
+        "calculatedMarks": 18,
+        "reason": "Evaluated based on student responses in Conceptual Understanding.",
+        "evidence": ""
+      },
+      "depth": {
+        "score": 3,
+        "percent": 60,
+        "weight": 25,
+        "calculatedMarks": 15,
+        "reason": "Evaluated based on student responses in Depth & Reasoning.",
+        "evidence": ""
+      },
+      "problemSolving": {
+        "score": 3,
+        "percent": 60,
+        "weight": 20,
+        "calculatedMarks": 12,
+        "reason": "Evaluated based on student responses in Problem Solving.",
+        "evidence": ""
+      },
+      "practical": {
+        "score": 3,
+        "percent": 60,
+        "weight": 15,
+        "calculatedMarks": 9,
+        "reason": "Evaluated based on student responses in Practical / Project Knowledge.",
+        "evidence": ""
+      },
+      "communication": {
+        "score": 3,
+        "percent": 60,
+        "weight": 10,
+        "calculatedMarks": 6,
+        "reason": "Evaluated based on student responses in Communication.",
+        "evidence": ""
+      }
+    },
+    "strengths": [
+      {
+        "title": "Topic Engagement",
+        "desc": "Candidate participated in the Data Structures discussion and attempted responses to examiner questions."
+      }
+    ],
+    "improvements": [
+      {
+        "title": "Technical Depth",
+        "desc": "Answers would benefit from deeper analysis of system trade-offs and complexity constraints in Data Structures."
+      }
+    ],
+    "suggestions": [
+      "Review core principles and practical implementations in Data Structures.",
+      "Practice verbalizing algorithmic trade-offs and complexity calculations under exam conditions."
+    ],
+    "annotatedTranscript": [
+      {
+        "speaker": "mira",
+        "text": "Good morning! I'm Professor Mira. Are you ready to start? Let's begin with a simple question: What is a data structure and why is it important?",
+        "timestamp": "00:15",
+        "stage": "Warm-up"
+      },
+      {
+        "speaker": "student",
+        "text": "Yes I am ready to",
+        "timestamp": "00:28",
+        "stage": "Warm-up",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Incomplete answer",
+          "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+          "dimension": "Communication",
+          "supportsScore": "30 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "Great, thank you. Could you now define a data structure and explain why it matters in computer science for efficient algorithm performance?",
+        "timestamp": "00:53",
+        "stage": "Warm-up"
+      },
+      {
+        "speaker": "student",
+        "text": "Because data is a management system where we need to manage the database",
+        "timestamp": "01:12",
+        "stage": "Fundamentals",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Conceptual check",
+          "desc": "Addressed the surface question, but lacked precise technical definitions and memory organization details.",
+          "dimension": "Conceptual Understanding",
+          "supportsScore": "60 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "Let’s narrow that down. How would you define a data structure, and what problem does it solve when organizing data for an algorithm?",
+        "timestamp": "01:17",
+        "stage": "Fundamentals"
+      },
+      {
+        "speaker": "student",
+        "text": "Can you tell me which flow currently running now",
+        "timestamp": "01:33",
+        "stage": "Fundamentals",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Conceptual check",
+          "desc": "Addressed the surface question, but lacked precise technical definitions and memory organization details.",
+          "dimension": "Conceptual Understanding",
+          "supportsScore": "60 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "Can you explain the primary theoretical principles and memory layout trade-offs in Data Structures?",
+        "timestamp": "02:04",
+        "stage": "Fundamentals"
+      },
+      {
+        "speaker": "student",
+        "text": "Yes",
+        "timestamp": "02:17",
+        "stage": "Depth",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Incomplete answer",
+          "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+          "dimension": "Communication",
+          "supportsScore": "30 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "{ \"question\": \"...\", \"followUpType\": \"...\", \"advanceStage\": true/false, \"rationale\": \"...\" }?",
+        "timestamp": "02:26",
+        "stage": "Depth"
+      },
+      {
+        "speaker": "student",
+        "text": "Mama follow-up type Karma Advanced stage true false rationale",
+        "timestamp": "02:35",
+        "stage": "Applied Problem",
+        "annotation": {
+          "verdict": "Needs depth",
+          "tag": "Needs depth",
+          "desc": "Proposed partial approach but lacked implementation specificity.",
+          "dimension": "Problem Solving",
+          "supportsScore": "60 / 100"
+        }
+      },
+      {
+        "speaker": "mira",
+        "text": "A university database system experiences slow query responses during peak hours. Lookup times on user records are particularly slow. Which data structure—hash table or B-tree index—would better optimize these queries, and what are the key trade-offs?",
+        "timestamp": "03:00",
+        "stage": "Applied Problem"
+      }
+    ],
+    "transcript": [
+      {
+        "interviewId": "AV-1569",
+        "speaker": "mira",
+        "text": "Good morning! I'm Professor Mira. Are you ready to start? Let's begin with a simple question: What is a data structure and why is it important?",
+        "timestamp": "00:15",
+        "stage": "Warm-up",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-1569",
+        "speaker": "student",
+        "text": "Yes I am ready to",
+        "timestamp": "00:28",
+        "stage": "Warm-up",
+        "questionRef": "Good morning! I'm Professor Mira. Are you ready to start? Let's begin with a simple question: What is a data structure and why is it important?"
+      },
+      {
+        "interviewId": "AV-1569",
+        "speaker": "mira",
+        "text": "Great, thank you. Could you now define a data structure and explain why it matters in computer science for efficient algorithm performance?",
+        "timestamp": "00:53",
+        "stage": "Warm-up",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-1569",
+        "speaker": "student",
+        "text": "Because data is a management system where we need to manage the database",
+        "timestamp": "01:12",
+        "stage": "Fundamentals",
+        "questionRef": "Great, thank you. Could you now define a data structure and explain why it matters in computer science for efficient algorithm performance?"
+      },
+      {
+        "interviewId": "AV-1569",
+        "speaker": "mira",
+        "text": "Let’s narrow that down. How would you define a data structure, and what problem does it solve when organizing data for an algorithm?",
+        "timestamp": "01:17",
+        "stage": "Fundamentals",
+        "followUpType": "nudge"
+      },
+      {
+        "interviewId": "AV-1569",
+        "speaker": "student",
+        "text": "Can you tell me which flow currently running now",
+        "timestamp": "01:33",
+        "stage": "Fundamentals",
+        "questionRef": "Let’s narrow that down. How would you define a data structure, and what problem does it solve when organizing data for an algorithm?"
+      },
+      {
+        "interviewId": "AV-1569",
+        "speaker": "mira",
+        "text": "Can you explain the primary theoretical principles and memory layout trade-offs in Data Structures?",
+        "timestamp": "02:04",
+        "stage": "Fundamentals",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-1569",
+        "speaker": "student",
+        "text": "Yes",
+        "timestamp": "02:17",
+        "stage": "Depth",
+        "questionRef": "Can you explain the primary theoretical principles and memory layout trade-offs in Data Structures?"
+      },
+      {
+        "interviewId": "AV-1569",
+        "speaker": "mira",
+        "text": "{ \"question\": \"...\", \"followUpType\": \"...\", \"advanceStage\": true/false, \"rationale\": \"...\" }?",
+        "timestamp": "02:26",
+        "stage": "Depth",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-1569",
+        "speaker": "student",
+        "text": "Mama follow-up type Karma Advanced stage true false rationale",
+        "timestamp": "02:35",
+        "stage": "Applied Problem",
+        "questionRef": "{ \"question\": \"...\", \"followUpType\": \"...\", \"advanceStage\": true/false, \"rationale\": \"...\" }?"
+      },
+      {
+        "interviewId": "AV-1569",
+        "speaker": "mira",
+        "text": "A university database system experiences slow query responses during peak hours. Lookup times on user records are particularly slow. Which data structure—hash table or B-tree index—would better optimize these queries, and what are the key trade-offs?",
+        "timestamp": "03:00",
+        "stage": "Applied Problem",
+        "followUpType": "advance"
+      }
+    ],
+    "transcripts": [
+      {
+        "interviewId": "AV-1569",
+        "speaker": "mira",
+        "text": "Good morning! I'm Professor Mira. Are you ready to start? Let's begin with a simple question: What is a data structure and why is it important?",
+        "timestamp": "00:15",
+        "stage": "Warm-up",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-1569",
+        "speaker": "student",
+        "text": "Yes I am ready to",
+        "timestamp": "00:28",
+        "stage": "Warm-up",
+        "questionRef": "Good morning! I'm Professor Mira. Are you ready to start? Let's begin with a simple question: What is a data structure and why is it important?"
+      },
+      {
+        "interviewId": "AV-1569",
+        "speaker": "mira",
+        "text": "Great, thank you. Could you now define a data structure and explain why it matters in computer science for efficient algorithm performance?",
+        "timestamp": "00:53",
+        "stage": "Warm-up",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-1569",
+        "speaker": "student",
+        "text": "Because data is a management system where we need to manage the database",
+        "timestamp": "01:12",
+        "stage": "Fundamentals",
+        "questionRef": "Great, thank you. Could you now define a data structure and explain why it matters in computer science for efficient algorithm performance?"
+      },
+      {
+        "interviewId": "AV-1569",
+        "speaker": "mira",
+        "text": "Let’s narrow that down. How would you define a data structure, and what problem does it solve when organizing data for an algorithm?",
+        "timestamp": "01:17",
+        "stage": "Fundamentals",
+        "followUpType": "nudge"
+      },
+      {
+        "interviewId": "AV-1569",
+        "speaker": "student",
+        "text": "Can you tell me which flow currently running now",
+        "timestamp": "01:33",
+        "stage": "Fundamentals",
+        "questionRef": "Let’s narrow that down. How would you define a data structure, and what problem does it solve when organizing data for an algorithm?"
+      },
+      {
+        "interviewId": "AV-1569",
+        "speaker": "mira",
+        "text": "Can you explain the primary theoretical principles and memory layout trade-offs in Data Structures?",
+        "timestamp": "02:04",
+        "stage": "Fundamentals",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-1569",
+        "speaker": "student",
+        "text": "Yes",
+        "timestamp": "02:17",
+        "stage": "Depth",
+        "questionRef": "Can you explain the primary theoretical principles and memory layout trade-offs in Data Structures?"
+      },
+      {
+        "interviewId": "AV-1569",
+        "speaker": "mira",
+        "text": "{ \"question\": \"...\", \"followUpType\": \"...\", \"advanceStage\": true/false, \"rationale\": \"...\" }?",
+        "timestamp": "02:26",
+        "stage": "Depth",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-1569",
+        "speaker": "student",
+        "text": "Mama follow-up type Karma Advanced stage true false rationale",
+        "timestamp": "02:35",
+        "stage": "Applied Problem",
+        "questionRef": "{ \"question\": \"...\", \"followUpType\": \"...\", \"advanceStage\": true/false, \"rationale\": \"...\" }?"
+      },
+      {
+        "interviewId": "AV-1569",
+        "speaker": "mira",
+        "text": "A university database system experiences slow query responses during peak hours. Lookup times on user records are particularly slow. Which data structure—hash table or B-tree index—would better optimize these queries, and what are the key trade-offs?",
+        "timestamp": "03:00",
+        "stage": "Applied Problem",
+        "followUpType": "advance"
+      }
+    ],
+    "sessionNumber": "AV-1569",
+    "feedback": {},
+    "createdAt": "2026-10-21T08:45:24.095Z"
+  },
+  {
+    "id": "VIVA-LIVE-mvhtr8mb",
+    "candidateName": "Pravin Ghodake",
+    "candidateEmail": "pravin@college.edu",
+    "studentName": "Pravin Ghodake",
+    "studentEmail": "pravin@college.edu",
+    "topic": "Data Structures & Algorithms",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "duration": "15 min",
+    "score": 88,
+    "maxScore": 100,
+    "status": "Completed",
+    "durationSeconds": 900,
+    "readinessTier": "Placement Ready",
+    "summary": "Viva examination successfully completed and evaluated.",
+    "date": "Oct 21",
+    "fullDate": "Oct 21, 2026, 01:32 PM",
+    "cameraRecordingUrl": "https://vveubzrxvlklepzthuvq.supabase.co/storage/v1/object/public/recordings/VIVA-LIVE-mvhtr8mb-camera.webm",
+    "screenRecordingUrl": "https://vveubzrxvlklepzthuvq.supabase.co/storage/v1/object/public/recordings/VIVA-LIVE-mvhtr8mb-screen.webm",
+    "isDisqualified": false,
+    "disqualificationReason": "",
+    "scorecard": {
+      "score": 88,
+      "readinessTier": "Placement Ready",
+      "summary": "Viva examination successfully completed and evaluated.",
+      "isDisqualified": false,
+      "disqualificationReason": "",
+      "rubricBreakdown": {},
+      "strengths": [],
+      "improvements": [],
+      "suggestions": [],
+      "annotatedTranscript": []
+    },
+    "rubricBreakdown": {},
+    "strengths": [],
+    "improvements": [],
+    "suggestions": [],
+    "annotatedTranscript": [],
+    "transcript": [
+      {
+        "speaker": "Interviewer",
+        "text": "Welcome to your viva examination."
+      },
+      {
+        "speaker": "Candidate",
+        "text": "Thank you Professor Mira."
+      }
+    ],
+    "transcripts": [
+      {
+        "speaker": "Interviewer",
+        "text": "Welcome to your viva examination."
+      },
+      {
+        "speaker": "Candidate",
+        "text": "Thank you Professor Mira."
+      }
+    ],
+    "sessionNumber": "VIVA-LIVE-mvhtr8mb",
+    "feedback": {},
+    "createdAt": "2026-10-21T08:02:47.388Z"
+  },
+  {
+    "id": "VIVA-mvhtolsk",
+    "sessionNumber": "VIVA-mvhtolsk",
+    "studentName": "Pravin Ghodake",
+    "studentEmail": "pravin@college.edu",
+    "candidateName": "Pravin Ghodake",
+    "candidateEmail": "pravin@college.edu",
+    "topic": "Data Structures & Algorithms",
+    "score": 53,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 21",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/VIVA-mvhtolsk-camera.webm",
+    "screenRecordingUrl": "/recordings/VIVA-mvhtolsk-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "speaker": "Interviewer",
+        "text": "Good morning! I'm Professor Mira. Are you ready to start? Let's begin with a simple question: What is a data structure and why is it important?",
+        "stage": "Warm-up"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "In Warm-up context, I analyze the time complexity, spatial overhead, and data structure trade-offs step by step.",
+        "stage": "Warm-up"
+      },
+      {
+        "speaker": "Interviewer",
+        "text": "Good, let's start. What are the key differences between arrays and linked lists in terms of memory layout and access time?",
+        "stage": "Fundamentals"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "In Fundamentals context, I analyze the time complexity, spatial overhead, and data structure trade-offs step by step.",
+        "stage": "Fundamentals"
+      },
+      {
+        "speaker": "Interviewer",
+        "text": "Let’s begin with hash tables. How does resizing affect memory use and average lookup latency, and what implementation choices determine worst-case behavior?",
+        "stage": "Depth"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "In Depth context, I analyze the time complexity, spatial overhead, and data structure trade-offs step by step.",
+        "stage": "Depth"
+      },
+      {
+        "speaker": "Interviewer",
+        "text": "Great, let's dive in. Imagine a sorted array where insertions cause O(n) shifts; how would you design a data structure to achieve O(log n) inserts?",
+        "stage": "Applied Problem"
+      },
+      {
+        "speaker": "Candidate",
+        "text": "In Applied Problem context, I analyze the time complexity, spatial overhead, and data structure trade-offs step by step.",
+        "stage": "Applied Problem"
+      }
+    ],
+    "scorecard": {
+      "score": 53,
+      "readinessTier": "Needs Review",
+      "summary": "Viva examination successfully completed and evaluated.",
+      "isDisqualified": false,
+      "disqualificationReason": "",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 0.5,
+          "percent": 10,
+          "weight": 30,
+          "calculatedMarks": 3,
+          "reason": "Candidate never provided a definition or explanation of any data structure concept; instead they posed questions or gave irrelevant template phrases.",
+          "evidence": ""
+        },
+        "depth": {
+          "score": 5,
+          "percent": 100,
+          "weight": 25,
+          "calculatedMarks": 25,
+          "reason": "No demonstration of memory layout, complexity analysis, or algorithmic trade-offs; all depth-stage prompts were met with evasion.",
+          "evidence": ""
+        },
+        "problemSolving": {
+          "score": 5,
+          "percent": 100,
+          "weight": 20,
+          "calculatedMarks": 20,
+          "reason": "Applied problem prompt was answered by asking another design question, showing inability to engage with problem-solving.",
+          "evidence": ""
+        },
+        "practical": {
+          "score": 0.5,
+          "percent": 10,
+          "weight": 15,
+          "calculatedMarks": 1.5,
+          "reason": "No connection to practical software development or implementation details was shown.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 1.5,
+          "percent": 30,
+          "weight": 10,
+          "calculatedMarks": 3,
+          "reason": "Candidate communicated fluently but entirely off-topic, deflecting every technical prompt by mirroring the examiner or reciting a fixed phrase.",
+          "evidence": ""
+        }
+      },
+      "strengths": [],
+      "improvements": [],
+      "suggestions": [],
+      "annotatedTranscript": [
+        {
+          "speaker": "Interviewer",
+          "text": "Good morning! I'm Professor Mira. Are you ready to start? Let's begin with a simple question: What is a data structure and why is it important?",
+          "stage": "Warm-up"
+        },
+        {
+          "speaker": "Candidate",
+          "text": "In Warm-up context, I analyze the time complexity, spatial overhead, and data structure trade-offs step by step.",
+          "stage": "Warm-up"
+        },
+        {
+          "speaker": "Interviewer",
+          "text": "Good, let's start. What are the key differences between arrays and linked lists in terms of memory layout and access time?",
+          "stage": "Fundamentals"
+        },
+        {
+          "speaker": "Candidate",
+          "text": "In Fundamentals context, I analyze the time complexity, spatial overhead, and data structure trade-offs step by step.",
+          "stage": "Fundamentals"
+        },
+        {
+          "speaker": "Interviewer",
+          "text": "Let’s begin with hash tables. How does resizing affect memory use and average lookup latency, and what implementation choices determine worst-case behavior?",
+          "stage": "Depth"
+        },
+        {
+          "speaker": "Candidate",
+          "text": "In Depth context, I analyze the time complexity, spatial overhead, and data structure trade-offs step by step.",
+          "stage": "Depth"
+        },
+        {
+          "speaker": "Interviewer",
+          "text": "Great, let's dive in. Imagine a sorted array where insertions cause O(n) shifts; how would you design a data structure to achieve O(log n) inserts?",
+          "stage": "Applied Problem"
+        },
+        {
+          "speaker": "Candidate",
+          "text": "In Applied Problem context, I analyze the time complexity, spatial overhead, and data structure trade-offs step by step.",
+          "stage": "Applied Problem"
+        }
+      ]
+    },
+    "feedback": {},
+    "createdAt": "2026-10-21T08:02:08.356Z"
+  },
+  {
+    "id": "TEST-AV-mvhtj5i4",
+    "sessionNumber": "TEST-AV-mvhtj5i4",
+    "studentName": "Pravin Ghodake",
+    "studentEmail": "pravin@college.edu",
+    "candidateName": "Pravin Ghodake",
+    "candidateEmail": "pravin@college.edu",
+    "topic": "Data Structures",
+    "score": 37,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 21",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/TEST-AV-mvhtj5i4-camera.webm",
+    "screenRecordingUrl": "/recordings/TEST-AV-mvhtj5i4-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "speaker": "Interviewer",
+        "text": "Welcome Pravin."
+      },
+      {
+        "speaker": "Candidate",
+        "text": "Thank you."
+      }
+    ],
+    "scorecard": {
+      "score": 37,
+      "readinessTier": "Needs Review",
+      "summary": "Viva examination successfully completed and evaluated.",
+      "isDisqualified": false,
+      "disqualificationReason": "",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 1,
+          "percent": 20,
+          "weight": 30,
+          "calculatedMarks": 6,
+          "reason": "Failed to provide a valid definition of data structures; hallucinated non‑computing analogies and missed core concepts.",
+          "evidence": ""
+        },
+        "depth": {
+          "score": 0.8,
+          "percent": 15,
+          "weight": 25,
+          "calculatedMarks": 3.8,
+          "reason": "Did not demonstrate understanding of memory layout, pointers, or algorithmic trade‑offs; answers were superficial or evasive.",
+          "evidence": ""
+        },
+        "problemSolving": {
+          "score": 3,
+          "percent": 60,
+          "weight": 20,
+          "calculatedMarks": 12,
+          "reason": "Evaluated based on student responses in Problem Solving.",
+          "evidence": ""
+        },
+        "practical": {
+          "score": 3,
+          "percent": 60,
+          "weight": 15,
+          "calculatedMarks": 9,
+          "reason": "Evaluated based on student responses in Practical / Project Knowledge.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 3,
+          "percent": 60,
+          "weight": 10,
+          "calculatedMarks": 6,
+          "reason": "Evaluated based on student responses in Communication.",
+          "evidence": ""
+        }
+      },
+      "strengths": [],
+      "improvements": [],
+      "suggestions": [],
+      "annotatedTranscript": []
+    },
+    "feedback": {},
+    "createdAt": "2026-10-21T07:56:29.987Z",
+    "readinessTier": "Needs Review"
+  },
+  {
     "id": "AV-5704",
     "sessionNumber": "AV-5704",
     "studentName": "Test Student",
@@ -7,7 +1097,7 @@
     "candidateName": "Test Student",
     "candidateEmail": "student@college.edu",
     "topic": "Data Structures",
-    "score": 88,
+    "score": 19,
     "integrityScore": 100,
     "duration": "15 min",
     "date": "Oct 21",
@@ -108,15 +1198,7 @@
     },
     "feedback": {},
     "createdAt": "2026-10-21T06:59:15.409Z",
-    "readinessTier": "Placement Ready",
-    "facultyOverride": {
-      "overridden": true,
-      "previousScore": 19,
-      "newScore": 88,
-      "facultyName": "Dr. S. Kulkarni (HOD)",
-      "reason": "Reviewed audio recording; candidate provided precise nuance on monotonicity.",
-      "timestamp": "2026-10-21T06:59:15.433Z"
-    }
+    "readinessTier": "Needs Review"
   },
   {
     "id": "AV-3263",
@@ -126,7 +1208,7 @@
     "candidateName": "Test Student",
     "candidateEmail": "student@college.edu",
     "topic": "Data Structures",
-    "score": 88,
+    "score": 38,
     "integrityScore": 100,
     "duration": "15 min",
     "date": "Oct 21",
@@ -226,7 +1308,8 @@
       ]
     },
     "feedback": {},
-    "createdAt": "2026-10-21T06:58:07.726Z"
+    "createdAt": "2026-10-21T06:58:07.726Z",
+    "readinessTier": "Needs Review"
   },
   {
     "id": "AV-4658",
@@ -236,7 +1319,7 @@
     "candidateName": "Test Student",
     "candidateEmail": "student@college.edu",
     "topic": "Data Structures",
-    "score": 88,
+    "score": 38,
     "integrityScore": 100,
     "duration": "15 min",
     "date": "Oct 21",
@@ -336,7 +1419,8 @@
       ]
     },
     "feedback": {},
-    "createdAt": "2026-10-20T21:10:53.611Z"
+    "createdAt": "2026-10-20T21:10:53.611Z",
+    "readinessTier": "Needs Review"
   },
   {
     "id": "AV-4418",
@@ -456,7 +1540,7 @@
     "candidateName": "Test Student",
     "candidateEmail": "student@college.edu",
     "topic": "Data Structures",
-    "score": 88,
+    "score": 38,
     "integrityScore": 100,
     "duration": "15 min",
     "date": "Oct 21",
@@ -556,7 +1640,8 @@
       ]
     },
     "feedback": {},
-    "createdAt": "2026-10-20T20:56:05.844Z"
+    "createdAt": "2026-10-20T20:56:05.844Z",
+    "readinessTier": "Needs Review"
   },
   {
     "id": "AV-7256",
@@ -566,7 +1651,7 @@
     "candidateName": "pravin",
     "candidateEmail": "ghodakepravin154@gmail.com",
     "topic": "Data Structures",
-    "score": 30,
+    "score": 28,
     "integrityScore": 100,
     "duration": "15 min",
     "date": "Oct 21",
@@ -596,7 +1681,7 @@
       }
     ],
     "scorecard": {
-      "score": 30,
+      "score": 28,
       "readinessTier": "Needs Review",
       "summary": "Candidate completed viva session on Data Structures across 0 response turns.",
       "isDisqualified": false,
@@ -674,7 +1759,8 @@
       ]
     },
     "feedback": {},
-    "createdAt": "2026-10-20T20:46:09.891Z"
+    "createdAt": "2026-10-20T20:46:09.891Z",
+    "readinessTier": "Needs Review"
   },
   {
     "id": "AV-2529",
@@ -684,7 +1770,7 @@
     "candidateName": "Test Student",
     "candidateEmail": "student@college.edu",
     "topic": "Data Structures",
-    "score": 88,
+    "score": 38,
     "integrityScore": 100,
     "duration": "15 min",
     "date": "Oct 21",
@@ -714,7 +1800,7 @@
       }
     ],
     "scorecard": {
-      "score": 40,
+      "score": 38,
       "readinessTier": "Needs Review",
       "summary": "Viva examination successfully completed and evaluated.",
       "isDisqualified": false,
@@ -784,7 +1870,8 @@
       ]
     },
     "feedback": {},
-    "createdAt": "2026-10-20T20:35:43.114Z"
+    "createdAt": "2026-10-20T20:35:43.114Z",
+    "readinessTier": "Needs Review"
   },
   {
     "id": "AV-4050",
@@ -939,7 +2026,7 @@
     "candidateName": "pravin",
     "candidateEmail": "ghodakepravin154@gmail.com",
     "topic": "Data Structures",
-    "score": 25,
+    "score": 22,
     "integrityScore": 100,
     "duration": "15 min",
     "date": "Oct 21",
@@ -1017,7 +2104,7 @@
       }
     ],
     "scorecard": {
-      "score": 25,
+      "score": 22,
       "readinessTier": "Needs Review",
       "summary": "Candidate gave non‑technical, evasive responses ('Relax', 'Type', 'Let's') and failed to define data structures or address the hash table debugging scenario, indicating critical gaps in fundamental understanding.",
       "isDisqualified": false,
@@ -1158,7 +2245,8 @@
       ]
     },
     "feedback": {},
-    "createdAt": "2026-10-20T20:14:41.918Z"
+    "createdAt": "2026-10-20T20:14:41.918Z",
+    "readinessTier": "Needs Review"
   },
   {
     "id": "AV-7871",
@@ -1168,7 +2256,7 @@
     "candidateName": "Test Student",
     "candidateEmail": "student@college.edu",
     "topic": "Data Structures",
-    "score": 88,
+    "score": 20,
     "integrityScore": 100,
     "duration": "15 min",
     "date": "Oct 21",
@@ -1198,7 +2286,7 @@
       }
     ],
     "scorecard": {
-      "score": 62,
+      "score": 20,
       "readinessTier": "Needs Review",
       "summary": "Viva examination successfully completed and evaluated.",
       "isDisqualified": false,
@@ -1268,7 +2356,8 @@
       ]
     },
     "feedback": {},
-    "createdAt": "2026-10-20T20:10:56.746Z"
+    "createdAt": "2026-10-20T20:10:56.746Z",
+    "readinessTier": "Needs Review"
   },
   {
     "id": "AV-5404",
@@ -1396,7 +2485,7 @@
     "candidateName": "Test Student",
     "candidateEmail": "student@college.edu",
     "topic": "Data Structures",
-    "score": 88,
+    "score": 38,
     "integrityScore": 100,
     "duration": "15 min",
     "date": "Oct 21",
@@ -1426,7 +2515,7 @@
       }
     ],
     "scorecard": {
-      "score": 40,
+      "score": 38,
       "readinessTier": "Needs Review",
       "summary": "Viva examination successfully completed and evaluated.",
       "isDisqualified": false,
@@ -1496,7 +2585,8 @@
       ]
     },
     "feedback": {},
-    "createdAt": "2026-10-20T18:35:45.162Z"
+    "createdAt": "2026-10-20T18:35:45.162Z",
+    "readinessTier": "Needs Review"
   },
   {
     "id": "AV-6512",
@@ -1819,7 +2909,7 @@
     "candidateName": "Pravin Ghodake",
     "candidateEmail": "pravin.msot@college.edu",
     "topic": "Data Structures",
-    "score": 50,
+    "score": 48,
     "integrityScore": 100,
     "duration": "15 min",
     "date": "Oct 20",
@@ -1863,7 +2953,7 @@
       }
     ],
     "scorecard": {
-      "score": 50,
+      "score": 48,
       "readinessTier": "Needs Review",
       "summary": "Candidate completed viva session on Data Structures across 3 response turns.",
       "isDisqualified": false,
@@ -1992,7 +3082,8 @@
       ]
     },
     "feedback": {},
-    "createdAt": "2026-10-20T06:24:55.151Z"
+    "createdAt": "2026-10-20T06:24:55.151Z",
+    "readinessTier": "Needs Review"
   },
   {
     "id": "AV-3874",
@@ -2105,7 +3196,7 @@
     "candidateName": "pravin",
     "candidateEmail": "ghodakepravin154@gmail.com",
     "topic": "Data Structures",
-    "score": 28,
+    "score": 22,
     "integrityScore": 100,
     "duration": "15 min",
     "date": "Oct 20",
@@ -2194,7 +3285,7 @@
       }
     ],
     "scorecard": {
-      "score": 28,
+      "score": 22,
       "readinessTier": "Needs Review",
       "summary": "Candidate completed viva examination on Data Structures. Evaluated score: 28/100.",
       "rubricBreakdown": {
@@ -2354,7 +3445,8 @@
       ]
     },
     "feedback": {},
-    "createdAt": "2026-10-19T20:23:28.752Z"
+    "createdAt": "2026-10-19T20:23:28.752Z",
+    "readinessTier": "Needs Review"
   },
   {
     "id": "AV-5453",
@@ -2364,7 +3456,7 @@
     "candidateName": "pravin",
     "candidateEmail": "ghodakepravin154@gmail.com",
     "topic": "Data Structures",
-    "score": 55,
+    "score": 52,
     "integrityScore": 100,
     "duration": "15 min",
     "date": "Oct 19",
@@ -2445,8 +3537,8 @@
       }
     ],
     "scorecard": {
-      "score": 55,
-      "readinessTier": "Developing",
+      "score": 52,
+      "readinessTier": "Needs Review",
       "summary": "Candidate completed viva session on Data Structures. Spoke in 4 response turns with an average length of 8 words per answer.",
       "rubricBreakdown": {
         "conceptual": {
@@ -2601,7 +3693,8 @@
       ]
     },
     "feedback": {},
-    "createdAt": "2026-10-19T20:23:28.752Z"
+    "createdAt": "2026-10-19T20:23:28.752Z",
+    "readinessTier": "Needs Review"
   },
   {
     "id": "AV-6265",
@@ -2611,7 +3704,7 @@
     "candidateName": "pravin",
     "candidateEmail": "ghodakepravin154@gmail.com",
     "topic": "Data Structures",
-    "score": 20,
+    "score": 14,
     "integrityScore": 100,
     "duration": "15 min",
     "date": "Oct 20",
@@ -2692,8 +3785,8 @@
       }
     ],
     "scorecard": {
-      "score": 20,
-      "readinessTier": "Disqualified",
+      "score": 14,
+      "readinessTier": "Needs Review",
       "summary": "Candidate was terminated and kicked off from the interview examination due to 5 violations of integrity rules (e.g. multiple people, tab switches, out-of-frame, copy-paste).",
       "rubricBreakdown": {
         "conceptual": {
@@ -2832,7 +3925,8 @@
       ]
     },
     "feedback": {},
-    "createdAt": "2026-10-19T20:23:28.750Z"
+    "createdAt": "2026-10-19T20:23:28.750Z",
+    "readinessTier": "Needs Review"
   },
   {
     "id": "AV-3715",
@@ -2842,7 +3936,7 @@
     "candidateName": "pravin",
     "candidateEmail": "ghodakepravin154@gmail.com",
     "topic": "Data Structures",
-    "score": 45,
+    "score": 42,
     "integrityScore": 100,
     "duration": "15 min",
     "date": "Oct 19",
@@ -2870,7 +3964,7 @@
       }
     ],
     "scorecard": {
-      "score": 45,
+      "score": 42,
       "readinessTier": "Needs Review",
       "summary": "Candidate completed viva session on Data Structures. Spoke in 0 response turns with an average length of 0 words per answer.",
       "rubricBreakdown": {
@@ -2956,7 +4050,8 @@
       ]
     },
     "feedback": {},
-    "createdAt": "2026-10-19T17:22:15.457Z"
+    "createdAt": "2026-10-19T17:22:15.457Z",
+    "readinessTier": "Needs Review"
   },
   {
     "id": "AV-4318",
@@ -2966,7 +4061,7 @@
     "candidateName": "pravin",
     "candidateEmail": "ghodakepravin154@gmail.com",
     "topic": "Data Structures",
-    "score": 73,
+    "score": 70,
     "integrityScore": 100,
     "duration": "15 min",
     "date": "Oct 19",
@@ -3077,8 +4172,8 @@
       }
     ],
     "scorecard": {
-      "score": 73,
-      "readinessTier": "Developing",
+      "score": 70,
+      "readinessTier": "Placement Ready",
       "summary": "Candidate completed viva session on Data Structures. Spoke in 6 response turns with an average length of 36 words per answer.",
       "rubricBreakdown": {
         "conceptual": {
@@ -3265,7 +4360,8 @@
       ]
     },
     "feedback": {},
-    "createdAt": "2026-10-19T17:14:35.312Z"
+    "createdAt": "2026-10-19T17:14:35.312Z",
+    "readinessTier": "Placement Ready"
   },
   {
     "id": "AV-9189",
@@ -3275,7 +4371,7 @@
     "candidateName": "pravin",
     "candidateEmail": "ghodakepravin154@gmail.com",
     "topic": "Data Structures",
-    "score": 22,
+    "score": 21,
     "integrityScore": 100,
     "duration": "15 min",
     "date": "Oct 19",
@@ -3341,7 +4437,7 @@
       }
     ],
     "scorecard": {
-      "score": 22,
+      "score": 21,
       "readinessTier": "Needs Review",
       "summary": "The candidate repeatedly echoed the examiner's questions instead of providing answers. They failed to define a data structure, explain stack versus queue differences, or state the time complexities of push/pop operations, demonstrating a lack of conceptual understanding and depth.",
       "rubricBreakdown": {
@@ -3483,7 +4579,8 @@
       ]
     },
     "feedback": {},
-    "createdAt": "2026-10-19T17:14:35.309Z"
+    "createdAt": "2026-10-19T17:14:35.309Z",
+    "readinessTier": "Needs Review"
   },
   {
     "id": "AV-4484",
@@ -3851,7 +4948,7 @@
     "candidateName": "pravin",
     "candidateEmail": "ghodakepravin154@gmail.com",
     "topic": "Data Structures",
-    "score": 45,
+    "score": 51,
     "integrityScore": 100,
     "duration": "15 min",
     "date": "Oct 19",
@@ -3977,7 +5074,7 @@
       }
     ],
     "scorecard": {
-      "score": 45,
+      "score": 51,
       "readinessTier": "Needs Review",
       "summary": "The candidate demonstrates limited understanding of core data structures concepts despite attempting to engage with the material. Multiple instances show repetition of questions, inability to provide substantive answers, and occasional evasion (e.g., referencing their own identity when asked about data structures). While basic topic recognition exists, the lack of coherent explanations and fundamental knowledge gaps indicate significant room for improvement.",
       "rubricBreakdown": {
@@ -4039,7 +5136,8 @@
       ]
     },
     "feedback": {},
-    "createdAt": "2026-10-19T14:47:28.569Z"
+    "createdAt": "2026-10-19T14:47:28.569Z",
+    "readinessTier": "Needs Review"
   },
   {
     "id": "AV-TEST-RAG1",
@@ -4049,7 +5147,7 @@
     "candidateName": "Pravin Ghodake",
     "candidateEmail": "ghodakepravin154@gmail.com",
     "topic": "Data Structures & Algorithms",
-    "score": 79,
+    "score": 43,
     "integrityScore": 100,
     "duration": "15 min",
     "date": "Oct 19",
@@ -4071,8 +5169,8 @@
       }
     ],
     "scorecard": {
-      "score": 79,
-      "readinessTier": "Placement Ready",
+      "score": 43,
+      "readinessTier": "Needs Review",
       "summary": "Candidate demonstrated solid foundational grasp in Data Structures & Algorithms with clear articulation during the 15-minute viva session.",
       "rubricBreakdown": {
         "conceptual": {
@@ -4124,7 +5222,8 @@
       ]
     },
     "feedback": {},
-    "createdAt": "2026-10-19T08:25:44.783Z"
+    "createdAt": "2026-10-19T08:25:44.783Z",
+    "readinessTier": "Needs Review"
   },
   {
     "id": "AV-2026-REAL1",
@@ -4134,7 +5233,7 @@
     "candidateName": "Pravin Ghodake",
     "candidateEmail": "ghodakepravin154@gmail.com",
     "topic": "Binary Search Trees & Balancing",
-    "score": 88,
+    "score": 86,
     "integrityScore": 100,
     "duration": "14:20",
     "date": "Oct 19",
@@ -4207,9 +5306,12 @@
       },
       "strengths": [],
       "improvements": [],
-      "suggestions": []
+      "suggestions": [],
+      "score": 86,
+      "readinessTier": "Placement Ready"
     },
     "feedback": {},
-    "createdAt": "2026-10-19T07:47:39.252Z"
+    "createdAt": "2026-10-19T07:47:39.252Z",
+    "readinessTier": "Placement Ready"
   }
 ]

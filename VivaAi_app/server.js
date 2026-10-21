@@ -1957,7 +1957,11 @@ const server = http.createServer(async (req, res) => {
     const previousScore = interviews[idx].score;
     const newScore = Math.min(100, Math.max(0, parseInt(body.newScore, 10) || previousScore));
     interviews[idx].score = newScore;
-    interviews[idx].readinessTier = newScore >= 75 ? 'Placement Ready' : 'Needs Review';
+    interviews[idx].readinessTier = newScore >= 70 ? 'Placement Ready' : 'Needs Review';
+    if (interviews[idx].scorecard) {
+      interviews[idx].scorecard.score = newScore;
+      interviews[idx].scorecard.readinessTier = interviews[idx].readinessTier;
+    }
     interviews[idx].facultyOverride = {
       overridden: true,
       previousScore: previousScore,
@@ -2014,6 +2018,28 @@ const server = http.createServer(async (req, res) => {
     }
     if (method === 'POST') {
       const body = await parseBody(req);
+
+      // Authoritative score computation from rubric dimensions (matches exact system formula)
+      let resolvedScore = typeof body.score === 'number' ? body.score : 80;
+      const rub = body.rubricBreakdown || body.scorecard?.rubricBreakdown;
+      if (rub && (rub.conceptual || rub.depth || rub.problemSolving || rub.practical || rub.communication)) {
+        const pDim = (d) => {
+          if (!d) return 0;
+          if (typeof d.percent === 'number') return Math.min(100, Math.max(0, Math.round(d.percent)));
+          if (typeof d.score === 'number') return d.score <= 5 ? Math.round((d.score / 5) * 100) : Math.round(d.score);
+          return 0;
+        };
+        const c = pDim(rub.conceptual);
+        const d = pDim(rub.depth);
+        const p = pDim(rub.problemSolving);
+        const pr = pDim(rub.practical);
+        const cm = pDim(rub.communication);
+        const weighted = Math.round((c * 0.30) + (d * 0.25) + (p * 0.20) + (pr * 0.15) + (cm * 0.10));
+        if (weighted > 0) resolvedScore = body.isDisqualified ? Math.min(20, weighted) : weighted;
+      } else if (typeof body.scorecard?.score === 'number' && body.scorecard.score > 0) {
+        resolvedScore = body.scorecard.score;
+      }
+
       const newInterview = {
         id: body.id || ('AV-' + Math.floor(1000 + Math.random() * 9000)),
         candidateName: body.candidateName || body.studentName || 'Candidate',
@@ -2024,11 +2050,11 @@ const server = http.createServer(async (req, res) => {
         technology: body.technology || 'Python',
         difficulty: body.difficulty || 'Medium',
         duration: body.duration || '15 min',
-        score: typeof body.score === 'number' ? body.score : 80,
+        score: resolvedScore,
         maxScore: 100,
         status: 'Completed',
         durationSeconds: body.durationSeconds || 900,
-        readinessTier: body.readinessTier || ((body.score || 80) >= 75 ? 'Placement Ready' : 'Needs Review'),
+        readinessTier: body.readinessTier || (resolvedScore >= 70 ? 'Placement Ready' : 'Needs Review'),
         summary: body.summary || 'Viva examination successfully completed and evaluated.',
         date: body.date || new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
         fullDate: body.fullDate || new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' }),
@@ -2037,8 +2063,8 @@ const server = http.createServer(async (req, res) => {
         isDisqualified: !!body.isDisqualified,
         disqualificationReason: body.disqualificationReason || '',
         scorecard: {
-          score: body.score || 80,
-          readinessTier: body.readinessTier || ((body.score || 80) >= 75 ? 'Placement Ready' : 'Needs Review'),
+          score: resolvedScore,
+          readinessTier: body.readinessTier || (resolvedScore >= 70 ? 'Placement Ready' : 'Needs Review'),
           summary: body.summary || 'Viva examination successfully completed and evaluated.',
           isDisqualified: !!body.isDisqualified,
           disqualificationReason: body.disqualificationReason || '',

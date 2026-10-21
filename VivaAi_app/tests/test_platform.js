@@ -185,8 +185,13 @@ async function runTestSuite() {
 
   // 6. Faculty Score Override
   await test('Faculty Grade Override Audit Trail', async () => {
-    if (!testInterviewId) testInterviewId = 'AV-1048';
-    const res = await request(`/api/interviews/${testInterviewId}/override`, 'PUT', {
+    const overrideTestSession = await request('/api/interviews', 'POST', {
+      candidateName: 'Override Audit Test',
+      topic: 'Algorithm Analysis',
+      score: 70
+    });
+    const overrideId = overrideTestSession.body?.id || testInterviewId || 'AV-1048';
+    const res = await request(`/api/interviews/${overrideId}/override`, 'PUT', {
       newScore: 88,
       facultyName: 'Dr. S. Kulkarni (HOD)',
       reason: 'Reviewed audio recording; candidate provided precise nuance on monotonicity.'
