@@ -258,6 +258,36 @@ const API = {
   async checkAdminStatus(email) {
     const res = await this.request(`/admin/check?email=${encodeURIComponent(email)}`);
     return res?.isAdmin || false;
+  },
+
+  // 15. LeetCode Problem Details Fetcher
+  async fetchLeetCodeProblem(url) {
+    try {
+      const response = await fetch(`${this.baseUrl}/api/leetcode/fetch`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ url })
+      });
+      return await response.json();
+    } catch (err) {
+      console.error('[API] Error fetching LeetCode problem:', err);
+      return { success: false, error: err.message };
+    }
+  },
+
+  // 16. Online Compiler Code Execution (api.onlinecompiler.io piston)
+  async executeCode(payload) {
+    try {
+      const response = await fetch(`${this.baseUrl}/api/compiler/execute`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      return await response.json();
+    } catch (err) {
+      console.error('[API] Error executing code via online compiler:', err);
+      return { success: false, error: err.message };
+    }
   }
 };
 

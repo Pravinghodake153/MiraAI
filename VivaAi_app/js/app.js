@@ -3041,79 +3041,82 @@ const App = {
           </div>
         </header>
 
-        <!-- Main 2-Column Stage (Fits within 100vh) -->
-        <main class="interview-main-stage">
-          <!-- Left: AI Avatar Mira -->
-          <div class="ai-orb-center">
-            <div class="orb-ring-outer">
-              <span class="orb-planet p1"></span>
-              <span class="orb-planet p2"></span>
-              <div class="orb-core-glow">
-                <span class="orb-core-name">Mira</span>
-              </div>
-            </div>
-
-            <div class="orb-status-text" id="ai-speaking-status">Speaking...</div>
-
-            <div class="mira-wave-container">
-              <span class="mbar" style="height:4px;"></span>
-              <span class="mbar" style="height:6px;"></span>
-              <span class="mbar" style="height:10px;"></span>
-              <span class="mbar" style="height:16px;"></span>
-              <span class="mbar" style="height:24px;"></span>
-              <span class="mbar" style="height:34px;"></span>
-              <span class="mbar" style="height:40px;"></span>
-              <span class="mbar" style="height:34px;"></span>
-              <span class="mbar" style="height:24px;"></span>
-              <span class="mbar" style="height:16px;"></span>
-              <span class="mbar" style="height:10px;"></span>
-              <span class="mbar" style="height:6px;"></span>
-              <span class="mbar" style="height:4px;"></span>
-            </div>
-          </div>
-
-          <!-- Right: Live Question & Student Webcam preview -->
-          <div class="interview-side-panel">
-            <!-- Question Lead & Text -->
-            <div class="question-lead-row">
-              <svg viewBox="0 0 64 36" fill="none" style="width:52px; height:28px;">
-                <rect x="2" y="12" width="4" height="12" rx="2" fill="#FF5722"/>
-                <rect x="10" y="8" width="4" height="20" rx="2" fill="#FF5722"/>
-                <rect x="18" y="4" width="4" height="28" rx="2" fill="#FF5722"/>
-                <rect x="26" y="2" width="4" height="32" rx="2" fill="#FF5722"/>
-                <rect x="34" y="2" width="4" height="32" rx="2" fill="#FF5722"/>
-                <rect x="42" y="6" width="4" height="24" rx="2" fill="#FF5722"/>
-                <rect x="50" y="10" width="4" height="16" rx="2" fill="#FF5722"/>
-                <rect x="58" y="14" width="4" height="8" rx="2" fill="#FF5722"/>
-              </svg>
-            </div>
-
-            <h2 class="live-question-headline" id="live-question-text">
-              ${currentQ}<span class="typewriter-cursor">|</span>
-            </h2>
-
-
-            <!-- Real-time Candidate Voice & Speech Transcription Box -->
-            <div class="candidate-live-answer-box ai-speaking" id="candidate-answer-box">
-              <div class="answer-box-header">
-                <div style="display:flex; align-items:center; gap:8px;">
-                  <span class="live-mic-pulse" id="mic-status-pulse"></span>
-                  <span style="font-size:12px; font-weight:700; color:var(--text-dark);" id="candidate-speaking-label">Mira Speaking... (System will listen when finished)</span>
+        <!-- Main Arena: Dynamically switched between Real Coding Round and Oral Viva Stage -->
+        ${(currentStage.isCodingStage || currentStage.codingProblem)
+          ? this.renderCodingArenaStage(currentStage, currentQ)
+          : `
+          <main class="interview-main-stage">
+            <!-- Left: AI Avatar Mira -->
+            <div class="ai-orb-center">
+              <div class="orb-ring-outer">
+                <span class="orb-planet p1"></span>
+                <span class="orb-planet p2"></span>
+                <div class="orb-core-glow">
+                  <span class="orb-core-name">Mira</span>
                 </div>
-                <span class="badge" style="font-size:11px; background:#FEF3C7; color:#92400E; border:1px solid #FDE68A;" id="silence-timer-badge">AI Speaking</span>
               </div>
-              <div class="candidate-interim-text" id="candidate-live-transcript">Mira is speaking. Listen carefully... When finished, speak your answer and it will transcribe here in real time.</div>
+
+              <div class="orb-status-text" id="ai-speaking-status">Speaking...</div>
+
+              <div class="mira-wave-container">
+                <span class="mbar" style="height:4px;"></span>
+                <span class="mbar" style="height:6px;"></span>
+                <span class="mbar" style="height:10px;"></span>
+                <span class="mbar" style="height:16px;"></span>
+                <span class="mbar" style="height:24px;"></span>
+                <span class="mbar" style="height:34px;"></span>
+                <span class="mbar" style="height:40px;"></span>
+                <span class="mbar" style="height:34px;"></span>
+                <span class="mbar" style="height:24px;"></span>
+                <span class="mbar" style="height:16px;"></span>
+                <span class="mbar" style="height:10px;"></span>
+                <span class="mbar" style="height:6px;"></span>
+                <span class="mbar" style="height:4px;"></span>
+              </div>
             </div>
 
-            <!-- Candidate Webcam Card -->
-            <div class="candidate-webcam-card">
-              <div class="webcam-pill-badge">
-                <span class="webcam-green-dot"></span> You
+            <!-- Right: Live Question & Student Webcam preview -->
+            <div class="interview-side-panel">
+              <!-- Question Lead & Text -->
+              <div class="question-lead-row">
+                <svg viewBox="0 0 64 36" fill="none" style="width:52px; height:28px;">
+                  <rect x="2" y="12" width="4" height="12" rx="2" fill="#FF5722"/>
+                  <rect x="10" y="8" width="4" height="20" rx="2" fill="#FF5722"/>
+                  <rect x="18" y="4" width="4" height="28" rx="2" fill="#FF5722"/>
+                  <rect x="26" y="2" width="4" height="32" rx="2" fill="#FF5722"/>
+                  <rect x="34" y="2" width="4" height="32" rx="2" fill="#FF5722"/>
+                  <rect x="42" y="6" width="4" height="24" rx="2" fill="#FF5722"/>
+                  <rect x="50" y="10" width="4" height="16" rx="2" fill="#FF5722"/>
+                  <rect x="58" y="14" width="4" height="8" rx="2" fill="#FF5722"/>
+                </svg>
               </div>
-              <video id="student-webcam" autoplay playsinline muted></video>
+
+              <h2 class="live-question-headline" id="live-question-text">
+                ${currentQ}<span class="typewriter-cursor">|</span>
+              </h2>
+
+              <!-- Real-time Candidate Voice & Speech Transcription Box -->
+              <div class="candidate-live-answer-box ai-speaking" id="candidate-answer-box">
+                <div class="answer-box-header">
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <span class="live-mic-pulse" id="mic-status-pulse"></span>
+                    <span style="font-size:12px; font-weight:700; color:var(--text-dark);" id="candidate-speaking-label">Mira Speaking... (System will listen when finished)</span>
+                  </div>
+                  <span class="badge" style="font-size:11px; background:#FEF3C7; color:#92400E; border:1px solid #FDE68A;" id="silence-timer-badge">AI Speaking</span>
+                </div>
+                <div class="candidate-interim-text" id="candidate-live-transcript">Mira is speaking. Listen carefully... When finished, speak your answer and it will transcribe here in real time.</div>
+              </div>
+
+              <!-- Candidate Webcam Card -->
+              <div class="candidate-webcam-card">
+                <div class="webcam-pill-badge">
+                  <span class="webcam-green-dot"></span> You
+                </div>
+                <video id="student-webcam" autoplay playsinline muted></video>
+              </div>
             </div>
-          </div>
-        </main>
+          </main>
+        `}
 
         <!-- Bottom Unified Dock -->
         <footer class="interview-bottom-dock">
@@ -3165,6 +3168,490 @@ const App = {
         </footer>
       </div>
     `;
+  },
+
+  renderCodingArenaStage(stage, currentQ) {
+    const prob = stage.codingProblem || {
+      title: stage.name || 'Add Two Numbers',
+      difficulty: 'Medium',
+      tags: ['Linked List', 'Data Structures', 'Algorithms'],
+      description: stage.desc || 'You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return the sum as a linked list.',
+      examples: [
+        {
+          input: 'l1 = [2,4,3], l2 = [5,6,4]',
+          output: '[7,0,8]',
+          explanation: '342 + 465 = 807.'
+        },
+        {
+          input: 'l1 = [0], l2 = [0]',
+          output: '[0]'
+        },
+        {
+          input: 'l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]',
+          output: '[8,9,9,9,0,0,0,1]'
+        }
+      ],
+      constraints: [
+        'The number of nodes in each linked list is in the range [1, 100].',
+        '0 <= Node.val <= 9',
+        'It is guaranteed that the list represents a number that does not have leading zeros.'
+      ],
+      codeSnippets: {
+        cpp: `/**\n * Definition for singly-linked list.\n * struct ListNode {\n *     int val;\n *     ListNode *next;\n *     ListNode() : val(0), next(nullptr) {}\n *     ListNode(int x) : val(x), next(nullptr) {}\n *     ListNode(int x, ListNode *next) : val(x), next(next) {}\n * };\n */\nclass Solution {\npublic:\n    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {\n        // Write your solution here\n        \n    }\n};`,
+        python: `# Definition for singly-linked list.\n# class ListNode:\n#     def __init__(self, val=0, next=None):\n#         self.val = val\n#         self.next = next\nclass Solution:\n    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:\n        # Write your solution here\n        pass`,
+        java: `/**\n * Definition for singly-linked list.\n * public class ListNode {\n *     int val;\n *     ListNode next;\n *     ListNode() {}\n *     ListNode(int val) { this.val = val; }\n *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }\n * }\n */\nclass Solution {\n    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {\n        // Write your solution here\n        return null;\n    }\n}`,
+        javascript: `/**\n * Definition for singly-linked list.\n * function ListNode(val, next) {\n *     this.val = (val===undefined ? 0 : val)\n *     this.next = (next===undefined ? null : next)\n * }\n */\n/**\n * @param {ListNode} l1\n * @param {ListNode} l2\n * @return {ListNode}\n */\nvar addTwoNumbers = function(l1, l2) {\n    // Write your solution here\n    \n};`
+      }
+    };
+
+    // Keep active language or default to C++ as in reference screenshot
+    if (!this.currentCodingLang) {
+      this.currentCodingLang = 'cpp';
+    }
+
+    const currentCode = this.candidateCodes?.[this.currentCodingLang] || prob.codeSnippets?.[this.currentCodingLang] || prob.codeSnippets?.cpp || '// Write your solution here';
+    this.currentCodeSnippet = currentCode;
+
+    const diffClass = prob.difficulty === 'Easy' ? 'badge-diff-easy' : (prob.difficulty === 'Hard' ? 'badge-diff-hard' : 'badge-diff-medium');
+
+    const examplesHtml = (prob.examples && prob.examples.length > 0)
+      ? prob.examples.map((eg, idx) => `
+        <div class="coding-problem-example-card">
+          <div class="eg-title">Example ${idx + 1}:</div>
+          <pre><strong>Input:</strong> ${eg.input || ''}\n<strong>Output:</strong> ${eg.output || ''}${eg.explanation ? `\n<strong>Explanation:</strong> ${eg.explanation}` : ''}</pre>
+        </div>
+      `).join('')
+      : '';
+
+    const constraintsHtml = (prob.constraints && prob.constraints.length > 0)
+      ? `
+        <div class="coding-problem-constraints">
+          <h4>Constraints:</h4>
+          <ul>
+            ${prob.constraints.map(c => `<li>${c}</li>`).join('')}
+          </ul>
+        </div>
+      `
+      : '';
+
+    const tagsHtml = (prob.tags || ['Algorithms', 'Data Structures']).map(t => `<span class="badge-tag-pill">${t}</span>`).join('');
+
+    // Pre-calculate line numbers
+    const lineCount = Math.max(16, (currentCode.split('\n').length || 1));
+    let lineNumsHtml = '';
+    for (let i = 1; i <= lineCount; i++) {
+      lineNumsHtml += `${i}<br/>`;
+    }
+
+    return `
+      <main class="interview-main-stage coding-arena-mode">
+        <!-- Col 1: Problem Statement -->
+        <div class="coding-problem-panel">
+          <div class="coding-problem-header">
+            <div class="coding-problem-icon-badge">
+              ${ICONS.codeSimple}
+            </div>
+            <div class="coding-problem-header-text">
+              <h3>${stage.name || 'Applied Problem — Coding Round'}</h3>
+              <p>Solve the problem below and explain your approach to Mira.</p>
+            </div>
+          </div>
+
+          <div class="coding-problem-title-row">
+            <h2>${prob.title || 'Coding Problem'}</h2>
+            <div class="coding-problem-badges">
+              <span class="${diffClass}">${prob.difficulty || 'Medium'}</span>
+              ${tagsHtml}
+            </div>
+          </div>
+
+          <div class="coding-problem-desc">
+            ${prob.description || ''}
+          </div>
+
+          ${examplesHtml}
+          ${constraintsHtml}
+        </div>
+
+        <!-- Col 2: Code Editor & Online Compiler Test Runner -->
+        <div class="coding-editor-container">
+          <div class="coding-editor-toolbar">
+            <div class="coding-lang-picker">
+              <span style="color:#2563EB; display:flex; align-items:center;">${ICONS.codeSimple}</span>
+              <select id="coding-lang-select" onchange="App.switchCodingLanguage(this.value)">
+                <option value="cpp" ${this.currentCodingLang === 'cpp' ? 'selected' : ''}>C++</option>
+                <option value="python" ${this.currentCodingLang === 'python' ? 'selected' : ''}>Python</option>
+                <option value="java" ${this.currentCodingLang === 'java' ? 'selected' : ''}>Java</option>
+                <option value="javascript" ${this.currentCodingLang === 'javascript' ? 'selected' : ''}>JavaScript</option>
+              </select>
+            </div>
+
+            <div class="coding-editor-actions">
+              <button class="btn-code-reset" onclick="App.resetCandidateCode()">
+                ${ICONS.refresh || ICONS.clock} <span>Reset</span>
+              </button>
+              <button class="btn-code-run" id="btn-run-code" onclick="App.runCandidateCode()">
+                ${ICONS.play || ICONS.codeSimple} <span id="btn-run-code-text">Run Code</span>
+              </button>
+              <button class="btn-code-submit" id="btn-submit-code" onclick="App.submitCandidateCode()">
+                ${ICONS.send || ICONS.check} <span id="btn-submit-code-text">Submit</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Dark Code Editing Workspace -->
+          <div class="coding-code-workspace">
+            <div class="coding-line-numbers" id="coding-line-numbers">
+              ${lineNumsHtml}
+            </div>
+            <textarea
+              class="coding-code-textarea"
+              id="candidate-code-editor"
+              spellcheck="false"
+              oninput="App.updateCodingLineNumbers(this)"
+              onkeydown="App.handleCodeEditorKeyDown(event, this)"
+            >${currentCode}</textarea>
+          </div>
+
+          <!-- Bottom: Test Cases & Test Result console -->
+          <div class="coding-test-panel">
+            <div class="coding-test-tabs">
+              <div class="coding-test-tab ${(!this.activeConsoleTab || this.activeConsoleTab === 'cases') ? 'active' : ''}" id="tab-btn-cases" onclick="App.switchCodingConsoleTab('cases')">
+                ${ICONS.clipboard || ICONS.codeSimple} <span>Test Cases</span>
+              </div>
+              <div class="coding-test-tab ${this.activeConsoleTab === 'result' ? 'active' : ''}" id="tab-btn-result" onclick="App.switchCodingConsoleTab('result')">
+                ${ICONS.chartBar || ICONS.bulb} <span>Test Result</span>
+              </div>
+            </div>
+
+            <div class="coding-test-body" id="console-body-cases" style="display:${(!this.activeConsoleTab || this.activeConsoleTab === 'cases') ? 'flex' : 'none'};">
+              <div class="test-cases-sidebar">
+                <button class="test-case-btn ${(!this.activeTestCaseIdx || this.activeTestCaseIdx === 0) ? 'active' : ''}" onclick="App.selectCodingTestCase(0)" id="tc-btn-0">Test Case 1</button>
+                <button class="test-case-btn ${this.activeTestCaseIdx === 1 ? 'active' : ''}" onclick="App.selectCodingTestCase(1)" id="tc-btn-1">Test Case 2</button>
+                <button class="test-case-btn ${this.activeTestCaseIdx === 2 ? 'active' : ''}" onclick="App.selectCodingTestCase(2)" id="tc-btn-2">Test Case 3</button>
+              </div>
+
+              <div class="test-case-detail" id="test-case-detail-content">
+                <div class="test-io-box">
+                  <div class="io-label">Input</div>
+                  <pre id="test-case-input-preview">${prob.examples?.[this.activeTestCaseIdx || 0]?.input || 'l1 = [2,4,3], l2 = [5,6,4]'}</pre>
+                </div>
+                <div class="test-io-box">
+                  <div class="io-label">Expected Output</div>
+                  <pre id="test-case-output-preview">${prob.examples?.[this.activeTestCaseIdx || 0]?.output || '[7,0,8]'}</pre>
+                </div>
+              </div>
+            </div>
+
+            <div class="test-results-view" id="console-body-result" style="display:${this.activeConsoleTab === 'result' ? 'block' : 'none'};">
+              <div id="compiler-run-output-box" style="line-height:1.6; color:#1E293B;">
+                ${this.latestExecutionResultHtml || '<span style="color:#64748B;">Click <strong>Run Code</strong> or <strong>Submit</strong> to compile and execute via piston compiler.</span>'}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Col 3: Mira Speaking Orb & Live Question & Student Webcam -->
+        <div class="coding-mira-panel">
+          <div class="coding-mira-orb-card">
+            <div class="coding-mira-orb-mini">
+              <span class="mira-letter">Mira</span>
+            </div>
+            <div class="coding-mira-speaking-text" id="ai-speaking-status">Speaking...</div>
+            <h3 class="coding-mira-question-headline" id="live-question-text">
+              ${currentQ}
+            </h3>
+          </div>
+
+          <!-- Real-time Candidate Voice & Speech Transcription Box -->
+          <div class="candidate-live-answer-box ai-speaking" id="candidate-answer-box" style="margin-bottom:0;">
+            <div class="answer-box-header">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span class="live-mic-pulse" id="mic-status-pulse"></span>
+                <span style="font-size:12px; font-weight:700; color:var(--text-dark);" id="candidate-speaking-label">Mira Speaking... (System will listen when finished)</span>
+              </div>
+              <span class="badge" style="font-size:11px; background:#FEF3C7; color:#92400E; border:1px solid #FDE68A;" id="silence-timer-badge">AI Speaking</span>
+            </div>
+            <div class="candidate-interim-text" id="candidate-live-transcript">Mira is speaking. Listen carefully... When finished, speak your answer and it will transcribe here in real time.</div>
+          </div>
+
+          <!-- Candidate Webcam Card -->
+          <div class="coding-webcam-card">
+            <div class="coding-webcam-pill">
+              <span class="dot"></span> You
+            </div>
+            <video id="student-webcam" autoplay playsinline muted></video>
+          </div>
+        </div>
+      </main>
+    `;
+  },
+
+  updateCodingLineNumbers(textarea) {
+    if (!textarea) return;
+    const linesEl = document.getElementById('coding-line-numbers');
+    if (!linesEl) return;
+    const linesCount = Math.max(16, textarea.value.split('\n').length);
+    let html = '';
+    for (let i = 1; i <= linesCount; i++) {
+      html += `${i}<br/>`;
+    }
+    linesEl.innerHTML = html;
+
+    // Track active code
+    if (!this.candidateCodes) this.candidateCodes = {};
+    this.candidateCodes[this.currentCodingLang || 'cpp'] = textarea.value;
+  },
+
+  handleCodeEditorKeyDown(e, textarea) {
+    // Support Tab key indentation inside editor
+    if (e.key === 'Tab') {
+      e.preventDefault();
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      textarea.value = textarea.value.substring(0, start) + '    ' + textarea.value.substring(end);
+      textarea.selectionStart = textarea.selectionEnd = start + 4;
+      this.updateCodingLineNumbers(textarea);
+    }
+  },
+
+  switchCodingLanguage(newLang) {
+    this.currentCodingLang = newLang;
+    const stages = this.getCurrentFlowStages();
+    const activeStageIdx = this.getCurrentFlowStageIndexByTime();
+    const currentStage = stages[activeStageIdx] || {};
+    const prob = currentStage.codingProblem;
+
+    const textarea = document.getElementById('candidate-code-editor');
+    if (textarea) {
+      const code = this.candidateCodes?.[newLang] || prob?.codeSnippets?.[newLang] || `// Write your ${newLang} solution here`;
+      textarea.value = code;
+      this.updateCodingLineNumbers(textarea);
+    }
+    this.showToast(`Switched editor to ${newLang.toUpperCase()}`, 'info');
+  },
+
+  resetCandidateCode() {
+    const stages = this.getCurrentFlowStages();
+    const activeStageIdx = this.getCurrentFlowStageIndexByTime();
+    const currentStage = stages[activeStageIdx] || {};
+    const prob = currentStage.codingProblem;
+    const lang = this.currentCodingLang || 'cpp';
+
+    const defaultCode = prob?.codeSnippets?.[lang] || `// Write your ${lang} solution here`;
+    if (!this.candidateCodes) this.candidateCodes = {};
+    this.candidateCodes[lang] = defaultCode;
+
+    const textarea = document.getElementById('candidate-code-editor');
+    if (textarea) {
+      textarea.value = defaultCode;
+      this.updateCodingLineNumbers(textarea);
+    }
+    this.showToast('Code reset to starter template.', 'info');
+  },
+
+  selectCodingTestCase(idx) {
+    this.activeTestCaseIdx = idx;
+    const stages = this.getCurrentFlowStages();
+    const activeStageIdx = this.getCurrentFlowStageIndexByTime();
+    const currentStage = stages[activeStageIdx] || {};
+    const prob = currentStage.codingProblem;
+
+    [0, 1, 2].forEach(i => {
+      const btn = document.getElementById(`tc-btn-${i}`);
+      if (btn) {
+        if (i === idx) btn.classList.add('active');
+        else btn.classList.remove('active');
+      }
+    });
+
+    const inPre = document.getElementById('test-case-input-preview');
+    const outPre = document.getElementById('test-case-output-preview');
+    const eg = prob?.examples?.[idx] || {};
+
+    if (inPre) inPre.textContent = eg.input || '(None)';
+    if (outPre) outPre.textContent = eg.output || '(None)';
+  },
+
+  switchCodingConsoleTab(tabKey) {
+    this.activeConsoleTab = tabKey;
+    const casesBtn = document.getElementById('tab-btn-cases');
+    const resultBtn = document.getElementById('tab-btn-result');
+    const casesBody = document.getElementById('console-body-cases');
+    const resultBody = document.getElementById('console-body-result');
+
+    if (tabKey === 'cases') {
+      if (casesBtn) casesBtn.classList.add('active');
+      if (resultBtn) resultBtn.classList.remove('active');
+      if (casesBody) casesBody.style.display = 'flex';
+      if (resultBody) resultBody.style.display = 'none';
+    } else {
+      if (casesBtn) casesBtn.classList.remove('active');
+      if (resultBtn) resultBtn.classList.add('active');
+      if (casesBody) casesBody.style.display = 'none';
+      if (resultBody) resultBody.style.display = 'block';
+    }
+  },
+
+  async runCandidateCode() {
+    const editor = document.getElementById('candidate-code-editor');
+    const btn = document.getElementById('btn-run-code');
+    const btnText = document.getElementById('btn-run-code-text');
+    if (!editor) return;
+
+    const code = editor.value;
+    const lang = this.currentCodingLang || 'cpp';
+
+    this.switchCodingConsoleTab('result');
+    const outputBox = document.getElementById('compiler-run-output-box');
+    if (outputBox) {
+      outputBox.innerHTML = `<span style="color:#D97706; font-weight:700;">Compiling and running code on online compiler...</span>`;
+    }
+
+    if (btn) btn.disabled = true;
+    if (btnText) btnText.textContent = 'Running...';
+
+    try {
+      const res = await window.API.executeCode({
+        language: lang,
+        code: code,
+        stdin: ''
+      });
+
+      if (res && res.success) {
+        const out = res.output || {};
+        const stdout = out.stdout || '';
+        const stderr = out.stderr || '';
+        const isError = Boolean(stderr) || (out.code && out.code !== 0);
+
+        const html = `
+          <div style="margin-bottom:8px;">
+            <span class="badge" style="background:${isError ? '#FEE2E2' : '#DCFCE7'}; color:${isError ? '#B91C1C' : '#15803D'}; font-weight:700;">
+              ${isError ? 'Execution Finished (with Stderr/Error)' : 'Execution Successful'}
+            </span>
+            <span style="font-size:11px; color:#64748B; margin-left:8px;">Language: ${res.language} ${res.version || ''}</span>
+          </div>
+          ${stdout ? `<div style="margin-top:6px;"><strong style="color:#0F172A;">Stdout:</strong><pre style="background:#F8FAFC; border:1px solid #E2E8F0; padding:8px 10px; border-radius:6px; color:#0F172A; margin-top:4px; font-size:12px;">${stdout}</pre></div>` : ''}
+          ${stderr ? `<div style="margin-top:6px;"><strong style="color:#B91C1C;">Stderr / Diagnostics:</strong><pre style="background:#FFF1F2; border:1px solid #FECDD3; padding:8px 10px; border-radius:6px; color:#9F1239; margin-top:4px; font-size:12px;">${stderr}</pre></div>` : ''}
+          ${(!stdout && !stderr) ? '<div style="color:#64748B;">Program finished with code 0 (no stdout output).</div>' : ''}
+        `;
+        this.latestExecutionResultHtml = html;
+        if (outputBox) outputBox.innerHTML = html;
+        this.showToast('Code execution completed!', 'success');
+      } else {
+        const errorHtml = `<div style="color:#DC2626;"><strong>Execution Failed:</strong> ${res?.error || 'Compiler error'}</div>`;
+        this.latestExecutionResultHtml = errorHtml;
+        if (outputBox) outputBox.innerHTML = errorHtml;
+        this.showToast('Compiler failed to run code.', 'error');
+      }
+    } catch (err) {
+      console.error('Compiler run error:', err);
+      const errHtml = `<div style="color:#DC2626;">Network failure connecting to compiler service.</div>`;
+      this.latestExecutionResultHtml = errHtml;
+      if (outputBox) outputBox.innerHTML = errHtml;
+    } finally {
+      if (btn) btn.disabled = false;
+      if (btnText) btnText.textContent = 'Run Code';
+    }
+  },
+
+  async submitCandidateCode() {
+    const editor = document.getElementById('candidate-code-editor');
+    const btn = document.getElementById('btn-submit-code');
+    const btnText = document.getElementById('btn-submit-code-text');
+    if (!editor) return;
+
+    const code = editor.value;
+    const lang = this.currentCodingLang || 'cpp';
+
+    this.switchCodingConsoleTab('result');
+    const outputBox = document.getElementById('compiler-run-output-box');
+    if (outputBox) {
+      outputBox.innerHTML = `<span style="color:#D97706; font-weight:700;">Submitting solution and running test suite...</span>`;
+    }
+
+    if (btn) btn.disabled = true;
+    if (btnText) btnText.textContent = 'Submitting...';
+
+    try {
+      const res = await window.API.executeCode({
+        language: lang,
+        code: code,
+        stdin: ''
+      });
+
+      if (res && res.success) {
+        const out = res.output || {};
+        const stdout = out.stdout || '';
+        const stderr = out.stderr || '';
+        const isError = Boolean(stderr) || (out.code && out.code !== 0);
+
+        const html = `
+          <div style="margin-bottom:8px;">
+            <span class="badge" style="background:${isError ? '#FEF3C7' : '#DCFCE7'}; color:${isError ? '#B45309' : '#15803D'}; font-weight:800; font-size:13px; padding:4px 12px;">
+              ${isError ? 'Submitted — Review Errors with Mira' : 'Accepted — Solution Passed Initial Evaluation'}
+            </span>
+          </div>
+          <p style="font-size:12px; color:#475569; margin-bottom:8px;">
+            Professor Mira has received your submitted code. Please explain your logic, time complexity, and edge case handling to Mira now.
+          </p>
+          ${stdout ? `<div><strong style="color:#0F172A;">Compiler Output:</strong><pre style="background:#F8FAFC; border:1px solid #E2E8F0; padding:8px 10px; border-radius:6px; color:#0F172A; margin-top:4px; font-size:12px;">${stdout}</pre></div>` : ''}
+          ${stderr ? `<div style="margin-top:6px;"><strong style="color:#B91C1C;">Runtime Feedback:</strong><pre style="background:#FFF1F2; border:1px solid #FECDD3; padding:8px 10px; border-radius:6px; color:#9F1239; margin-top:4px; font-size:12px;">${stderr}</pre></div>` : ''}
+        `;
+        this.latestExecutionResultHtml = html;
+        if (outputBox) outputBox.innerHTML = html;
+        this.showToast('Solution submitted to Professor Mira!', 'success');
+
+        // Immediately trigger Mira follow-up prompt acknowledging code submission!
+        this.triggerMiraCodingFollowUp(code);
+      } else {
+        const errorHtml = `<div style="color:#DC2626;"><strong>Submission Error:</strong> ${res?.error || 'Compiler error'}</div>`;
+        this.latestExecutionResultHtml = errorHtml;
+        if (outputBox) outputBox.innerHTML = errorHtml;
+        this.showToast('Failed to compile submission.', 'error');
+      }
+    } catch (err) {
+      console.error('Submission error:', err);
+    } finally {
+      if (btn) btn.disabled = false;
+      if (btnText) btnText.textContent = 'Submit';
+    }
+  },
+
+  async triggerMiraCodingFollowUp(submittedCode) {
+    const stages = this.getCurrentFlowStages();
+    const activeStageIdx = this.getCurrentFlowStageIndexByTime();
+    const currentStage = stages[activeStageIdx] || {};
+
+    try {
+      const payload = {
+        topic: this.activeTopic || 'Data Structures & Algorithms',
+        stage: currentStage.name || 'Applied Problem',
+        currentStage: currentStage,
+        completedStages: stages.slice(0, activeStageIdx),
+        remainingStages: stages.slice(activeStageIdx + 1),
+        allStages: stages,
+        currentTime: this.getFormattedSessionTime(),
+        remainingTime: this.formatDurationMmSs(this.secondsLeft),
+        questionHistory: this.questionHistory || [],
+        candidateCode: submittedCode || '',
+        lastStudentAnswer: 'Candidate just submitted their code implementation for the coding problem.'
+      };
+
+      const res = await window.API.generateAiQuestion(payload);
+      if (res && res.question) {
+        this.currentAiQuestionText = res.question;
+        const qHeadline = document.getElementById('live-question-text');
+        if (qHeadline) {
+          qHeadline.innerHTML = `${res.question}<span class="typewriter-cursor">|</span>`;
+        }
+        if (this.speakAiResponse) {
+          this.speakAiResponse(res.question);
+        }
+      }
+    } catch (err) {
+      console.warn('Mira coding follow-up prompt error:', err);
+    }
   },
 
   getFormattedSessionTime() {
@@ -7555,6 +8042,12 @@ const App = {
     const descVal = isEdit && editingStage ? (editingStage.desc || '') : '';
     const guidanceVal = isEdit && editingStage ? (editingStage.guidance || '') : '';
 
+    const isCodingVal = isEdit && editingStage ? Boolean(editingStage.isCodingStage || editingStage.codingProblem) : false;
+    const leetcodeUrlVal = isEdit && editingStage ? (editingStage.leetcodeUrl || '') : '';
+    const customAiVal = isEdit && editingStage ? (editingStage.customAiInstructions || '') : '';
+    const codingProblemObj = isEdit && editingStage ? (editingStage.codingProblem || null) : null;
+    this.currentFetchedProblem = codingProblemObj || null;
+
     const iconsList = [
       { key: 'codeSimple', label: 'Code' },
       { key: 'bulb', label: 'Reasoning' },
@@ -7582,6 +8075,104 @@ const App = {
         <!-- Main Form Card -->
         <div class="add-flow-card">
           <form id="new-flow-form" onsubmit="App.submitNewFlowForm(event)">
+
+            <!-- Stage Type Selector: Oral Viva vs Real Coding Round -->
+            <div class="flow-stage-type-selector-card" style="margin-bottom:24px; padding:18px 22px; background:linear-gradient(135deg, #FFF7ED 0%, #FFF 100%); border:1.5px solid #FFEDD5; border-radius:14px;">
+              <label class="flow-form-label" style="margin-bottom:12px;">
+                <span style="font-size:14px; font-weight:800; color:#9A3412;">Round Type & Format</span>
+                <span class="helper">Choose if this is oral conceptual dialogue or an interactive live coding problem</span>
+              </label>
+              <div style="display:grid; grid-template-columns: 1fr 1fr; gap:14px;">
+                <label class="stage-type-radio-card ${!isCodingVal ? 'selected' : ''}" id="radio-card-oral" onclick="App.setFlowRoundType(false)" style="display:flex; align-items:flex-start; gap:12px; padding:14px 16px; background:#FFF; border:2px solid ${!isCodingVal ? '#EA580C' : '#E2E8F0'}; border-radius:12px; cursor:pointer; transition:all 0.2s ease;">
+                  <input type="radio" name="flow-round-type" value="oral" ${!isCodingVal ? 'checked' : ''} style="margin-top:3px; accent-color:#EA580C;" />
+                  <div>
+                    <div style="font-weight:700; font-size:14px; color:#0F172A; display:flex; align-items:center; gap:6px;">
+                      ${ICONS.chat} <span>Technical Oral Viva</span>
+                    </div>
+                    <div style="font-size:12px; color:#64748B; margin-top:3px;">Verbal Q&A discussion with Professor Mira with speech-to-text.</div>
+                  </div>
+                </label>
+
+                <label class="stage-type-radio-card ${isCodingVal ? 'selected' : ''}" id="radio-card-coding" onclick="App.setFlowRoundType(true)" style="display:flex; align-items:flex-start; gap:12px; padding:14px 16px; background:#FFF; border:2px solid ${isCodingVal ? '#EA580C' : '#E2E8F0'}; border-radius:12px; cursor:pointer; transition:all 0.2s ease;">
+                  <input type="radio" name="flow-round-type" value="coding" ${isCodingVal ? 'checked' : ''} style="margin-top:3px; accent-color:#EA580C;" />
+                  <div>
+                    <div style="font-weight:700; font-size:14px; color:#0F172A; display:flex; align-items:center; gap:6px;">
+                      ${ICONS.codeSimple} <span>Live Coding Problem Round</span>
+                    </div>
+                    <div style="font-size:12px; color:#64748B; margin-top:3px;">LeetCode problem statement, online compiler, live code editor & test cases.</div>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Coding Problem Details Panel (Shown when Coding Round is chosen) -->
+            <div id="coding-problem-panel" style="display:${isCodingVal ? 'block' : 'none'}; margin-bottom:24px; padding:20px; background:#F8FAFC; border:1.5px solid #CBD5E1; border-radius:14px;">
+              <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:12px;">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span style="display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; border-radius:6px; background:#FEF3C7; color:#D97706;">
+                    ${ICONS.codeSimple}
+                  </span>
+                  <span style="font-weight:800; font-size:14px; color:#0F172A;">LeetCode Problem Integration</span>
+                </div>
+                <span class="badge" style="background:#EEF2FF; color:#4338CA; border:1px solid #C7D2FE; font-size:11px; font-weight:700;">Online Compiler Powered</span>
+              </div>
+              <p style="font-size:12px; color:#64748B; margin-bottom:14px;">
+                Paste a LeetCode problem URL (or problem title slug like <code>two-sum</code> or <code>add-two-numbers</code>). Mira will automatically retrieve the question statement, examples, constraints, starter code snippets, and test cases!
+              </p>
+
+              <div style="display:flex; gap:10px; margin-bottom:12px;">
+                <input
+                  type="text"
+                  id="flow-leetcode-url"
+                  class="flow-form-input"
+                  placeholder="https://leetcode.com/problems/two-sum/ or add-two-numbers"
+                  value="${leetcodeUrlVal ? leetcodeUrlVal.replace(/"/g, '&quot;') : ''}"
+                  style="flex:1;"
+                />
+                <button
+                  type="button"
+                  id="btn-fetch-leetcode"
+                  class="btn btn-secondary"
+                  onclick="App.fetchLeetCodeDetails()"
+                  style="white-space:nowrap; padding:0 18px; font-weight:700; border-color:#CBD5E1; display:flex; align-items:center; gap:8px;"
+                >
+                  ${ICONS.search || ICONS.codeSimple} <span id="fetch-leetcode-btn-text">Fetch Code Details</span>
+                </button>
+              </div>
+
+              <!-- Fetched Problem Preview Card -->
+              <div id="leetcode-preview-card" style="display:${codingProblemObj ? 'block' : 'none'}; background:#FFF; border:1px solid #E2E8F0; border-radius:10px; padding:14px 16px; margin-bottom:14px;">
+                <div style="display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px;">
+                  <div style="font-size:14px; font-weight:800; color:#0F172A;" id="preview-problem-title">
+                    ${codingProblemObj?.title || 'Problem Title'}
+                  </div>
+                  <span id="preview-problem-difficulty" class="badge" style="font-size:11px; font-weight:700; background:#FEF3C7; color:#B45309;">
+                    ${codingProblemObj?.difficulty || 'Medium'}
+                  </span>
+                </div>
+                <div style="font-size:12px; color:#64748B; max-height:80px; overflow-y:auto; line-height:1.5;" id="preview-problem-desc">
+                  ${codingProblemObj?.description ? codingProblemObj.description.slice(0, 240) + '...' : 'Problem description will preview here.'}
+                </div>
+                <div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap;" id="preview-problem-tags">
+                  ${(codingProblemObj?.tags || ['Algorithms']).map(t => `<span class="badge" style="font-size:10px; background:#F1F5F9; color:#475569;">${t}</span>`).join('')}
+                </div>
+              </div>
+
+              <!-- Custom AI Instructions for Mira during Coding Problem -->
+              <div class="flow-form-group" style="margin-bottom:0;">
+                <label class="flow-form-label" for="flow-custom-ai-instructions">
+                  <span>Custom Instruction for Mira AI during this Coding Round</span>
+                  <span class="helper">Tell Mira how to interview the candidate on this specific problem</span>
+                </label>
+                <textarea
+                  id="flow-custom-ai-instructions"
+                  class="flow-form-textarea"
+                  rows="3"
+                  placeholder="e.g. Ask candidate to state the brute-force O(N^2) first, then guide them to O(N) hash map or two-pointer approach. Once written, ask what happens if numbers contain negatives or duplicates."
+                >${customAiVal}</textarea>
+              </div>
+            </div>
+
             <div class="flow-form-grid">
               <!-- Stage Name -->
               <div class="flow-form-group">
@@ -7593,7 +8184,7 @@ const App = {
                   type="text"
                   id="flow-stage-name"
                   class="flow-form-input"
-                  placeholder="e.g. System Architecture & Scalability"
+                  placeholder="e.g. Applied Problem — Coding Round"
                   value="${nameVal ? nameVal.replace(/"/g, '&quot;') : ''}"
                   required
                 />
@@ -7643,7 +8234,7 @@ const App = {
                 </label>
                 <select id="flow-stage-category" class="flow-form-select">
                   <option value="technical" ${categoryVal === 'technical' ? 'selected' : ''}>Technical Core</option>
-                  <option value="problem" ${categoryVal === 'problem' ? 'selected' : ''}>Applied / System Design</option>
+                  <option value="problem" ${categoryVal === 'problem' ? 'selected' : ''}>Applied / Coding Problem</option>
                   <option value="opening" ${categoryVal === 'opening' ? 'selected' : ''}>Opening & Rapport</option>
                   <option value="evaluation" ${categoryVal === 'evaluation' ? 'selected' : ''}>Scoring & Wrap-up</option>
                 </select>
@@ -7700,7 +8291,7 @@ const App = {
                 id="flow-stage-desc"
                 class="flow-form-textarea"
                 rows="2"
-                placeholder="e.g. Probe distributed consensus, load balancing strategies, cache invalidation, and failure modes."
+                placeholder="e.g. Solve the applied coding problem on linked lists, explain edge cases and analyze asymptotic runtime."
                 required
               >${descVal}</textarea>
             </div>
@@ -7715,7 +8306,7 @@ const App = {
                 id="flow-stage-guidance"
                 class="flow-form-textarea"
                 rows="4"
-                placeholder="e.g. Ask the candidate to explain how they would design a resilient event-driven architecture using Kafka or RabbitMQ. Follow up specifically on duplicate delivery, idempotent consumers, and backpressure handling."
+                placeholder="e.g. Prompt the candidate to solve the problem and explain their approach. Ask for time and space complexity."
                 required
               >${guidanceVal}</textarea>
             </div>
@@ -7747,7 +8338,6 @@ const App = {
               </button>
               <button type="submit" class="btn btn-primary" id="save-flow-btn">
                 ${submitBtnIcon} <span>${submitBtnText}</span>
-              </button>
             </div>
           </form>
         </div>
@@ -7850,6 +8440,115 @@ const App = {
     }, 50);
   },
 
+  setFlowRoundType(isCoding) {
+    const oralCard = document.getElementById('radio-card-oral');
+    const codingCard = document.getElementById('radio-card-coding');
+    const codingPanel = document.getElementById('coding-problem-panel');
+    const nameInput = document.getElementById('flow-stage-name');
+    const descInput = document.getElementById('flow-stage-desc');
+    const guidanceInput = document.getElementById('flow-stage-guidance');
+
+    if (oralCard) {
+      oralCard.style.borderColor = !isCoding ? '#EA580C' : '#E2E8F0';
+      const input = oralCard.querySelector('input');
+      if (input) input.checked = !isCoding;
+    }
+    if (codingCard) {
+      codingCard.style.borderColor = isCoding ? '#EA580C' : '#E2E8F0';
+      const input = codingCard.querySelector('input');
+      if (input) input.checked = isCoding;
+    }
+    if (codingPanel) {
+      codingPanel.style.display = isCoding ? 'block' : 'none';
+    }
+
+    if (isCoding) {
+      this.selectedNewFlowIcon = 'codeSimple';
+      const codeOpt = document.getElementById('icon-opt-codeSimple');
+      if (codeOpt) this.selectFlowIcon('codeSimple');
+
+      if (nameInput && (!nameInput.value || nameInput.value.includes('System Architecture'))) {
+        nameInput.value = 'Applied Problem — Coding Round';
+      }
+      if (descInput && !descInput.value) {
+        descInput.value = 'Solve the problem and explain your approach to Mira.';
+      }
+      if (guidanceInput && !guidanceInput.value) {
+        guidanceInput.value = 'Please solve the problem and explain your approach. What is the time complexity?';
+      }
+    }
+  },
+
+  async fetchLeetCodeDetails() {
+    const urlInput = document.getElementById('flow-leetcode-url');
+    const btn = document.getElementById('btn-fetch-leetcode');
+    const btnText = document.getElementById('fetch-leetcode-btn-text');
+    const previewCard = document.getElementById('leetcode-preview-card');
+    const nameInput = document.getElementById('flow-stage-name');
+    const descInput = document.getElementById('flow-stage-desc');
+    const guidanceInput = document.getElementById('flow-stage-guidance');
+    const customAiInput = document.getElementById('flow-custom-ai-instructions');
+
+    if (!urlInput || !urlInput.value.trim()) {
+      this.showToast('Please enter a LeetCode problem URL or slug (e.g. two-sum or add-two-numbers)', 'warning');
+      return;
+    }
+
+    const query = urlInput.value.trim();
+    if (btn) btn.disabled = true;
+    if (btnText) btnText.textContent = 'Fetching from LeetCode...';
+
+    try {
+      const res = await window.API.fetchLeetCodeProblem(query);
+      if (res && res.success && res.problem) {
+        const prob = res.problem;
+        this.currentFetchedProblem = prob;
+
+        if (previewCard) {
+          previewCard.style.display = 'block';
+          const titleEl = document.getElementById('preview-problem-title');
+          const diffEl = document.getElementById('preview-problem-difficulty');
+          const descEl = document.getElementById('preview-problem-desc');
+          const tagsEl = document.getElementById('preview-problem-tags');
+
+          if (titleEl) titleEl.textContent = `${prob.questionFrontendId ? prob.questionFrontendId + '. ' : ''}${prob.title}`;
+          if (diffEl) {
+            diffEl.textContent = prob.difficulty || 'Medium';
+            diffEl.style.background = prob.difficulty === 'Easy' ? '#DCFCE7' : (prob.difficulty === 'Hard' ? '#FEE2E2' : '#FEF3C7');
+            diffEl.style.color = prob.difficulty === 'Easy' ? '#15803D' : (prob.difficulty === 'Hard' ? '#B91C1C' : '#B45309');
+          }
+          if (descEl) descEl.textContent = prob.description ? prob.description.slice(0, 240) + '...' : '';
+          if (tagsEl) {
+            tagsEl.innerHTML = (prob.tags || ['Algorithms']).map(t => `<span class="badge" style="font-size:10px; background:#F1F5F9; color:#475569;">${t}</span>`).join('');
+          }
+        }
+
+        if (nameInput) {
+          nameInput.value = prob.title || 'Applied Problem — Coding Round';
+        }
+        if (descInput && (!descInput.value || descInput.value.includes('Solve the problem'))) {
+          descInput.value = prob.description ? prob.description.slice(0, 200) + '...' : `Solve ${prob.title} and explain your approach to Mira.`;
+        }
+        if (guidanceInput && (!guidanceInput.value || guidanceInput.value.includes('Please solve the problem'))) {
+          guidanceInput.value = `Ask the candidate to solve ${prob.title}. Inquire about their algorithmic intuition, edge case handling, and Big-O runtime complexity.`;
+        }
+        if (customAiInput && !customAiInput.value) {
+          customAiInput.value = `Probe how the candidate approaches ${prob.title} (${prob.difficulty || 'Medium'}). What data structures do they pick? Ask what happens on empty or single-element inputs.`;
+        }
+
+        this.showToast(`Successfully fetched "${prob.title}" from LeetCode!`, 'success');
+      } else {
+        this.showToast(res?.error || 'Could not fetch LeetCode problem. Please check the URL/slug.', 'error');
+      }
+    } catch (err) {
+      console.error('Error fetching LeetCode:', err);
+      this.showToast('Network error while contacting LeetCode scraper.', 'error');
+    } finally {
+      if (btn) btn.disabled = false;
+      if (btnText) btnText.textContent = 'Fetch Code Details';
+    }
+  },
+
   selectFlowIcon(iconKey) {
     this.selectedNewFlowIcon = iconKey;
     document.querySelectorAll('.flow-icon-opt').forEach(el => el.classList.remove('active'));
@@ -7866,6 +8565,12 @@ const App = {
     const guidanceInput = document.getElementById('flow-stage-guidance');
     const saveBtn = document.getElementById('save-flow-btn');
 
+    // Real coding problem inputs
+    const codingRadio = document.querySelector('input[name="flow-round-type"]:checked');
+    const isCodingRound = codingRadio ? (codingRadio.value === 'coding') : false;
+    const leetcodeUrlInput = document.getElementById('flow-leetcode-url');
+    const customAiInput = document.getElementById('flow-custom-ai-instructions');
+
     if (!nameInput || !timingInput || !descInput || !guidanceInput) return;
 
     const nameVal = nameInput.value.trim();
@@ -7873,6 +8578,8 @@ const App = {
     const categoryVal = categoryInput ? categoryInput.value : 'technical';
     const descVal = descInput.value.trim();
     const guidanceVal = guidanceInput.value.trim();
+    const leetcodeUrl = leetcodeUrlInput ? leetcodeUrlInput.value.trim() : '';
+    const customAiInstructions = customAiInput ? customAiInput.value.trim() : '';
 
     if (!nameVal || !timingVal || !descVal || !guidanceVal) {
       this.showToast('Please fill in all required stage fields.', 'warning');
@@ -7894,9 +8601,18 @@ const App = {
       name: nameVal,
       desc: descVal,
       timing: timingVal,
-      category: categoryVal,
+      category: isCodingRound ? 'problem' : categoryVal,
       guidance: guidanceVal,
-      icon: this.selectedNewFlowIcon || 'codeSimple'
+      icon: this.selectedNewFlowIcon || (isCodingRound ? 'codeSimple' : 'chat'),
+      isCodingStage: isCodingRound,
+      leetcodeUrl: isCodingRound ? leetcodeUrl : '',
+      customAiInstructions: isCodingRound ? customAiInstructions : '',
+      codingProblem: isCodingRound ? (this.currentFetchedProblem || {
+        title: nameVal,
+        difficulty: 'Medium',
+        description: descVal,
+        tags: ['Algorithms', 'Data Structures']
+      }) : null
     };
 
     try {

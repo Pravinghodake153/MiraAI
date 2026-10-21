@@ -398,6 +398,11 @@ async function generateMiraQuestion(payload) {
       const dynamicTotalDurationStr = `${Math.floor(examDurSecs / 60).toString().padStart(2, '0')}:${(examDurSecs % 60).toString().padStart(2, '0')}`;
 
       // Build clean JSON summary of session state for AI context
+      const isCodingStage = Boolean(stageObj.isCodingStage || stageObj.codingProblem);
+      const codingProblem = stageObj.codingProblem || null;
+      const customAiInstructions = stageObj.customAiInstructions || '';
+      const candidateCode = payload.candidateCode || '';
+
       const sessionContextSummary = {
         examinationTopic: currentTopic,
         clock: {
@@ -410,6 +415,15 @@ async function generateMiraQuestion(payload) {
           name: stageName,
           category: stageCategory,
           timingWindow: stageTiming,
+          isCodingStage: isCodingStage,
+          codingProblem: codingProblem ? {
+            title: codingProblem.title,
+            difficulty: codingProblem.difficulty,
+            tags: codingProblem.tags,
+            description: codingProblem.description ? (codingProblem.description.slice(0, 500) + '...') : ''
+          } : null,
+          customAiInstructions: customAiInstructions,
+          candidateCurrentCode: candidateCode ? (candidateCode.slice(0, 1000)) : '(Candidate is currently reading/writing code)',
           objectivesAndDescription: stageDescription,
           questioningDirectives: stageDirectives
         },
@@ -425,12 +439,25 @@ async function generateMiraQuestion(payload) {
         isCandidateOverTimeOrStalling: Boolean(isStallingOrOverTime)
       };
 
+      let codingSpecificRules = '';
+      if (isCodingStage && codingProblem) {
+        codingSpecificRules = `
+CODING PROBLEM ROUND ACTIVE:
+- The candidate is in a LIVE CODING ROUND solving "${codingProblem.title}" (${codingProblem.difficulty || 'Medium'}).
+- Candidate's current code:
+${candidateCode || '(Candidate is currently formulating their solution)'}
+${customAiInstructions ? `- ADMIN CUSTOM INSTRUCTIONS FOR THIS CODING PROBLEM: "${customAiInstructions}"` : ''}
+- Guide, discuss, and evaluate the candidate's algorithmic approach, time/space complexity, edge cases, and code structure.
+- Invite the candidate to explain their thought process, walk through an example, or analyze Big-O complexity.`;
+      }
+
       const systemPrompt = `You are Professor Mira, a warm, professional, human professor conducting a live oral technical viva examination in a university classroom.
 
 SESSION CONTEXT:
 \`\`\`json
 ${JSON.stringify(sessionContextSummary, null, 2)}
 \`\`\`
+${codingSpecificRules}
 
 CRITICAL STAGE TIMING & DEEP DIVE RULES (PACING):
 - Current Stage: "${stageName}" (Timing Window: ${stageTiming || 'as per admin flow'}).
@@ -2229,7 +2256,11 @@ const server = http.createServer(async (req, res) => {
         guidance: body.guidance || 'Probe core concepts, trade-offs, and practical implementations.',
         timing: body.timing || '15:00 – 17:00',
         category: body.category || 'technical',
-        icon: body.icon || 'codeSimple'
+        icon: body.icon || 'codeSimple',
+        isCodingStage: Boolean(body.isCodingStage || body.codingProblem),
+        leetcodeUrl: body.leetcodeUrl || '',
+        codingProblem: body.codingProblem || null,
+        customAiInstructions: body.customAiInstructions || body.guidance || ''
       };
 
       flows.push(newStage);
@@ -2250,7 +2281,7 @@ const server = http.createServer(async (req, res) => {
         }, 'step').catch(err => console.warn('[Supabase Sync Warning] Failed to sync flow stage:', err.message));
       }
 
-      console.log(`[API] Added Interview Flow Stage: ${newStage.name} (Step ${newStage.step})`);
+      console.log(`[API] Added Interview Flow Stage: ${newStage.name} (Step ${newStage.step}, isCodingStage: ${newStage.isCodingStage})`);
       return sendJson(res, 201, newStage);
     }
     if (method === 'PUT') {
@@ -2298,7 +2329,11 @@ const server = http.createServer(async (req, res) => {
         guidance: body.guidance !== undefined ? body.guidance : flows[stageIndex].guidance,
         timing: body.timing !== undefined ? body.timing : flows[stageIndex].timing,
         category: body.category !== undefined ? body.category : flows[stageIndex].category,
-        icon: body.icon !== undefined ? body.icon : flows[stageIndex].icon
+        icon: body.icon !== undefined ? body.icon : flows[stageIndex].icon,
+        isCodingStage: body.isCodingStage !== undefined ? Boolean(body.isCodingStage) : flows[stageIndex].isCodingStage,
+        leetcodeUrl: body.leetcodeUrl !== undefined ? body.leetcodeUrl : flows[stageIndex].leetcodeUrl,
+        codingProblem: body.codingProblem !== undefined ? body.codingProblem : flows[stageIndex].codingProblem,
+        customAiInstructions: body.customAiInstructions !== undefined ? body.customAiInstructions : flows[stageIndex].customAiInstructions
       };
 
       writeDb('flows.json', flows);
@@ -2339,6 +2374,195 @@ const server = http.createServer(async (req, res) => {
 
       console.log(`[API] Deleted Interview Flow Step ${stepNum}`);
       return sendJson(res, 200, flows);
+    }
+  }
+
+  // --------------------------------------------------------------------------
+  // REST API: LEETCODE PROBLEM DETAILS FETCH (/api/leetcode/fetch)
+  // --------------------------------------------------------------------------
+  if (pathname === '/api/leetcode/fetch' && method === 'POST') {
+    const body = await parseBody(req);
+    const rawUrl = (body.url || body.slug || '').trim();
+
+    if (!rawUrl) {
+      return sendJson(res, 400, { error: 'Please provide a valid LeetCode problem link or title slug' });
+    }
+
+    // Extract title slug (e.g. "https://leetcode.com/problems/add-two-numbers/description/" -> "add-two-numbers")
+    let slug = rawUrl;
+    const match = rawUrl.match(/leetcode\.com\/problems\/([a-zA-Z0-9\-]+)/i);
+    if (match) {
+      slug = match[1];
+    } else {
+      slug = slug.replace(/[^a-zA-Z0-9\-]/g, '-').toLowerCase();
+    }
+
+    try {
+      console.log(`[LeetCode Fetch] Querying problem: "${slug}"...`);
+      const gqlQuery = `query getQuestionDetail($titleSlug: String!) {
+        question(titleSlug: $titleSlug) {
+          questionId
+          title
+          titleSlug
+          content
+          difficulty
+          topicTags { name slug }
+          codeSnippets { lang langSlug code }
+          exampleTestcases
+        }
+      }`;
+
+      const gqlResponse = await fetch('https://leetcode.com/graphql', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'
+        },
+        body: JSON.stringify({ query: gqlQuery, variables: { titleSlug: slug } })
+      });
+
+      const gqlData = await gqlResponse.json();
+      const question = gqlData?.data?.question;
+
+      if (!question || !question.title) {
+        return sendJson(res, 404, { error: `Could not find LeetCode problem for slug: "${slug}"` });
+      }
+
+      // Clean HTML description into readable plaintext paragraphs, examples, constraints
+      const rawHtml = question.content || '';
+      
+      // Extract Examples & Constraints cleanly
+      const textClean = rawHtml
+        .replace(/<strong class="example">Example/gi, '\n\nExample')
+        .replace(/<strong>Constraints:?<\/strong>/gi, '\n\nConstraints:\n')
+        .replace(/<p>&nbsp;<\/p>/gi, '')
+        .replace(/<pre>/gi, '\n```\n')
+        .replace(/<\/pre>/gi, '\n```\n')
+        .replace(/<[^>]+>/g, '')
+        .replace(/&nbsp;/g, ' ')
+        .replace(/&lt;/g, '<')
+        .replace(/&gt;/g, '>')
+        .replace(/&quot;/g, '"')
+        .replace(/&#39;/g, "'")
+        .replace(/&amp;/g, '&')
+        .trim();
+
+      // Extract structured examples if possible
+      const rawExamples = question.exampleTestcases ? question.exampleTestcases.split('\n').filter(Boolean) : [];
+      const testCasesList = [];
+
+      if (rawExamples.length > 0) {
+        testCasesList.push({
+          id: 1,
+          input: rawExamples.slice(0, 2).join(', '),
+          expectedOutput: 'Check execution'
+        });
+        if (rawExamples.length > 2) {
+          testCasesList.push({
+            id: 2,
+            input: rawExamples.slice(2, 4).join(', '),
+            expectedOutput: 'Check execution'
+          });
+        }
+      }
+
+      // Map starter code snippets
+      const snippets = {};
+      (question.codeSnippets || []).forEach(s => {
+        if (s.langSlug === 'cpp' || s.langSlug === 'c++') snippets['cpp'] = s.code;
+        if (s.langSlug === 'python3' || s.langSlug === 'python') snippets['python'] = s.code;
+        if (s.langSlug === 'java') snippets['java'] = s.code;
+        if (s.langSlug === 'javascript') snippets['javascript'] = s.code;
+      });
+
+      // Default fallback starter codes if snippet missing
+      if (!snippets['python']) snippets['python'] = `# ${question.title}\nclass Solution:\n    def solve(self):\n        pass\n`;
+      if (!snippets['cpp']) snippets['cpp'] = `// ${question.title}\n#include <iostream>\nusing namespace std;\n\nclass Solution {\npublic:\n    void solve() {\n        // Your code here\n    }\n};\n`;
+      if (!snippets['javascript']) snippets['javascript'] = `// ${question.title}\nfunction solve() {\n    // Your code here\n}\n`;
+      if (!snippets['java']) snippets['java'] = `// ${question.title}\nclass Solution {\n    public void solve() {\n        // Your code here\n    }\n}\n`;
+
+      const problemData = {
+        questionId: question.questionId,
+        title: question.title,
+        slug: question.titleSlug,
+        difficulty: question.difficulty || 'Medium',
+        tags: (question.topicTags || []).map(t => t.name),
+        description: textClean,
+        snippets: snippets,
+        testCases: testCasesList.length > 0 ? testCasesList : [
+          { id: 1, input: 'l1 = [2,4,3], l2 = [5,6,4]', expectedOutput: '[7,0,8]' },
+          { id: 2, input: 'l1 = [0], l2 = [0]', expectedOutput: '[0]' },
+          { id: 3, input: 'l1 = [9,9,9,9,9,9,9], l2 = [9,9,9,9]', expectedOutput: '[8,9,9,9,0,0,0,1]' }
+        ]
+      };
+
+      console.log(`[LeetCode Fetch] Successfully parsed: "${problemData.title}" (${problemData.difficulty})`);
+      return sendJson(res, 200, problemData);
+    } catch (err) {
+      console.error('[LeetCode Fetch Error]', err.message);
+      return sendJson(res, 500, { error: 'Failed to fetch LeetCode problem: ' + err.message });
+    }
+  }
+
+  // --------------------------------------------------------------------------
+  // REST API: ONLINE CODE COMPILER EXECUTION (/api/compiler/execute)
+  // --------------------------------------------------------------------------
+  if (pathname === '/api/compiler/execute' && method === 'POST') {
+    const body = await parseBody(req);
+    const language = (body.language || 'python').toLowerCase();
+    const code = body.code || '';
+    const stdin = body.stdin || '';
+
+    if (!code || code.trim().length === 0) {
+      return sendJson(res, 400, { error: 'Code content cannot be empty' });
+    }
+
+    const COMPILER_URL = 'https://api.onlinecompiler.io/api/v2/piston/execute';
+    const COMPILER_KEY = process.env.ONLINE_COMPILER_KEY || '6e94a19707feb2b330424fe7622eb941';
+
+    // Map language aliases to Piston standard
+    const langMap = {
+      'python': { lang: 'python', version: '3.14' },
+      'python3': { lang: 'python', version: '3.14' },
+      'cpp': { lang: 'c++', version: '15' },
+      'c++': { lang: 'c++', version: '15' },
+      'java': { lang: 'java', version: '15.0.2' },
+      'javascript': { lang: 'javascript', version: '18.15.0' },
+      'js': { lang: 'javascript', version: '18.15.0' }
+    };
+
+    const targetLang = langMap[language] || { lang: language, version: '*' };
+
+    try {
+      console.log(`[Compiler Execute] Compiling ${targetLang.lang} (${code.length} chars, stdin: "${stdin.slice(0, 30)}")...`);
+      const pistonRes = await fetch(COMPILER_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': COMPILER_KEY,
+          'x-api-key': COMPILER_KEY
+        },
+        body: JSON.stringify({
+          language: targetLang.lang,
+          version: targetLang.version,
+          files: [{ content: code }],
+          stdin: stdin
+        })
+      });
+
+      const result = await pistonRes.json();
+      console.log(`[Compiler Execute] Result: code=${result?.run?.code}, stdout=${result?.run?.stdout ? result.run.stdout.length : 0} bytes`);
+      return sendJson(res, 200, {
+        success: true,
+        run: result?.run || {
+          stdout: result?.stdout || '',
+          stderr: result?.stderr || '',
+          code: 0
+        }
+      });
+    } catch (err) {
+      console.error('[Compiler Execution Error]', err.message);
+      return sendJson(res, 500, { error: 'Execution engine error: ' + err.message });
     }
   }
 
