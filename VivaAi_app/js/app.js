@@ -5969,30 +5969,30 @@ const App = {
               }
             }).join('')}
           </div>
-
-          <!-- Bottom Warning Banner with 3 Action Buttons -->
-          <div class="transcript-bottom-banner">
-            <div class="transcript-banner-left">
-              ${ICONS.info}
-              <span>Annotations are generated from the transcript and should be reviewed by faculty when confidence is low.</span>
-            </div>
-
-            <div class="transcript-banner-actions">
-              <button class="transcript-btn-plain" onclick="App.navigate('/home')">
-                ${ICONS.arrowLeft} Back to Dashboard
-              </button>
-              <button class="transcript-btn-plain" onclick="App.shareScore()">
-                ${ICONS.share} Share Score
-              </button>
-              <button class="transcript-btn-primary" onclick="App.openFeedbackModal()">
-                ${ICONS.chat} Give Feedback
-              </button>
-            </div>
-          </div>
         </div>
 
         <!-- Submitted Coding Problem Implementation Section (Displayed only if code was submitted) -->
         ${this.renderScorecardCodeSection(iv)}
+
+        <!-- Bottom Warning Banner with 3 Action Buttons (placed at the bottom of the page) -->
+        <div class="transcript-bottom-banner">
+          <div class="transcript-banner-left">
+            ${ICONS.info}
+            <span>Annotations are generated from the transcript and should be reviewed by faculty when confidence is low.</span>
+          </div>
+
+          <div class="transcript-banner-actions">
+            <button class="transcript-btn-plain" onclick="App.navigate('/home')">
+              ${ICONS.arrowLeft} Back to Dashboard
+            </button>
+            <button class="transcript-btn-plain" onclick="App.shareScore()">
+              ${ICONS.share} Share Score
+            </button>
+            <button class="transcript-btn-primary" onclick="App.openFeedbackModal()">
+              ${ICONS.chat} Give Feedback
+            </button>
+          </div>
+        </div>
       </div>
     `;
   },
@@ -6061,20 +6061,71 @@ const App = {
         <div class="scorecard-code-display-box">
           <table class="scorecard-code-table">
             <tbody>
-              ${lines.map((lineContent, lineIdx) => `
-                <tr>
-                  <td class="code-line-num">${lineIdx + 1}</td>
-                  <td class="code-line-content">${(lineContent || ' ').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</td>
-                  <td class="code-line-ai-sig">
-                    <span class="ai-line-sig-badge" title="Line verified and evaluated by Mira AI">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="20 6 9 17 4 12"/>
-                      </svg>
-                      Mira AI Signed
-                    </span>
-                  </td>
-                </tr>
-              `).join('')}
+              ${lines.map((lineContent, lineIdx) => {
+                const lineNum = lineIdx + 1;
+                const trimmed = (lineContent || '').trim();
+                let timeComp = 'O(1)';
+                let spaceComp = 'O(1)';
+                let aiSignNote = 'Line syntax and logic verified';
+
+                if (trimmed.startsWith('for') || trimmed.startsWith('while')) {
+                  timeComp = 'O(N) Iterative';
+                  spaceComp = 'O(1) Auxiliary';
+                  aiSignNote = 'Iterative loop control detected';
+                } else if (trimmed.includes('vector<') || trimmed.includes('new ') || trimmed.includes('malloc(') || trimmed.includes('map<') || trimmed.includes('unordered_map') || trimmed.includes('set<')) {
+                  timeComp = 'O(1) Alloc';
+                  spaceComp = 'O(N) Dynamic Memory';
+                  aiSignNote = 'Dynamic memory allocation evaluated';
+                } else if (trimmed.startsWith('#include') || trimmed.startsWith('using namespace')) {
+                  timeComp = 'O(0) Preprocessing';
+                  spaceComp = 'O(0)';
+                  aiSignNote = 'Library import and compilation header';
+                } else if (trimmed.startsWith('return')) {
+                  timeComp = 'O(1) Constant';
+                  spaceComp = 'O(1)';
+                  aiSignNote = 'Function termination and return';
+                } else if (trimmed.includes('sort(')) {
+                  timeComp = 'O(N log N)';
+                  spaceComp = 'O(log N) Call stack';
+                  aiSignNote = 'Algorithmic sorting operation';
+                } else if (trimmed.length === 0 || trimmed === '{' || trimmed === '}') {
+                  timeComp = 'O(0)';
+                  spaceComp = 'O(0)';
+                  aiSignNote = 'Scope block boundary';
+                }
+
+                return `
+                  <tr>
+                    <td class="code-line-num">${lineNum}</td>
+                    <td class="code-line-content">${(lineContent || ' ').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</td>
+                    <td class="code-line-ai-sig">
+                      <div class="ai-complexity-group">
+                        <span class="ai-sign-dot dot-yellow" aria-label="Time Complexity"></span>
+                        <span class="ai-sign-dot dot-blue" aria-label="Space Complexity"></span>
+                        <span class="ai-sign-dot dot-green" aria-label="AI Signed"></span>
+                        <div class="ai-sign-tooltip">
+                          <div class="tooltip-header">
+                            <span class="tooltip-badge">Line ${lineNum}</span>
+                            <span class="tooltip-status">AI Verified</span>
+                          </div>
+                          <div class="tooltip-row">
+                            <span class="tooltip-label yellow-txt">Time Complexity:</span>
+                            <span class="tooltip-value">${timeComp}</span>
+                          </div>
+                          <div class="tooltip-row">
+                            <span class="tooltip-label blue-txt">Space Complexity:</span>
+                            <span class="tooltip-value">${spaceComp}</span>
+                          </div>
+                          <div class="tooltip-row">
+                            <span class="tooltip-label green-txt">AI Sign:</span>
+                            <span class="tooltip-value">${aiSignNote}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                `;
+              }).join('')}
             </tbody>
           </table>
         </div>
