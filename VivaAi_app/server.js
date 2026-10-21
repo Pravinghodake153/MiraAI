@@ -2180,6 +2180,19 @@ const server = http.createServer(async (req, res) => {
       flows.forEach((s, idx) => { s.step = idx + 1; });
 
       writeDb('flows.json', flows);
+
+      if (Supabase && Supabase.isConfigured()) {
+        Supabase.dbUpsert('flows', {
+          step: newStage.step,
+          name: newStage.name,
+          description: newStage.desc,
+          guidance: newStage.guidance,
+          timing: newStage.timing,
+          category: newStage.category,
+          icon: newStage.icon
+        }, 'step').catch(err => console.warn('[Supabase Sync Warning] Failed to sync flow stage:', err.message));
+      }
+
       console.log(`[API] Added Interview Flow Stage: ${newStage.name} (Step ${newStage.step})`);
       return sendJson(res, 201, newStage);
     }
@@ -2187,6 +2200,20 @@ const server = http.createServer(async (req, res) => {
       const body = await parseBody(req);
       if (Array.isArray(body)) {
         writeDb('flows.json', body);
+
+        if (Supabase && Supabase.isConfigured()) {
+          const flowRows = body.map(s => ({
+            step: Number(s.step),
+            name: s.name,
+            description: s.desc || s.description,
+            guidance: s.guidance,
+            timing: s.timing,
+            category: s.category || 'technical',
+            icon: s.icon || 'codeSimple'
+          }));
+          Supabase.dbUpsert('flows', flowRows, 'step').catch(err => console.warn('[Supabase Sync Warning] Failed to sync flows list:', err.message));
+        }
+
         console.log(`[API] Updated entire interview flows list (${body.length} stages)`);
         return sendJson(res, 200, body);
       }
@@ -2218,6 +2245,19 @@ const server = http.createServer(async (req, res) => {
       };
 
       writeDb('flows.json', flows);
+
+      if (Supabase && Supabase.isConfigured()) {
+        Supabase.dbUpsert('flows', {
+          step: flows[stageIndex].step,
+          name: flows[stageIndex].name,
+          description: flows[stageIndex].desc,
+          guidance: flows[stageIndex].guidance,
+          timing: flows[stageIndex].timing,
+          category: flows[stageIndex].category,
+          icon: flows[stageIndex].icon
+        }, 'step').catch(err => console.warn('[Supabase Sync Warning] Failed to sync flow update:', err.message));
+      }
+
       console.log(`[API] Updated Interview Flow Stage ${stepNum}: "${flows[stageIndex].name}"`);
       return sendJson(res, 200, flows[stageIndex]);
     }
@@ -2226,6 +2266,20 @@ const server = http.createServer(async (req, res) => {
       flows = flows.filter(f => Number(f.step) !== stepNum);
       flows.forEach((s, idx) => { s.step = idx + 1; });
       writeDb('flows.json', flows);
+
+      if (Supabase && Supabase.isConfigured()) {
+        const flowRows = flows.map(s => ({
+          step: Number(s.step),
+          name: s.name,
+          description: s.desc || s.description,
+          guidance: s.guidance,
+          timing: s.timing,
+          category: s.category || 'technical',
+          icon: s.icon || 'codeSimple'
+        }));
+        Supabase.dbUpsert('flows', flowRows, 'step').catch(err => console.warn('[Supabase Sync Warning] Failed to sync flows on delete:', err.message));
+      }
+
       console.log(`[API] Deleted Interview Flow Step ${stepNum}`);
       return sendJson(res, 200, flows);
     }

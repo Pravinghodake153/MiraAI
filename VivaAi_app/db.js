@@ -395,7 +395,7 @@ const DB = {
         writeJson('users.json', users);
       } catch (e) {}
 
-      return {
+      const resUser = {
         id: saved.id,
         clerkId: saved.clerk_id,
         name: saved.name,
@@ -406,15 +406,32 @@ const DB = {
         joinedDate: saved.joined_date,
         lastLogin: saved.last_login
       };
+
+      if (Supabase && Supabase.isConfigured()) {
+        Supabase.dbUpsert('users', {
+          id: resUser.id,
+          clerk_id: resUser.clerkId,
+          name: resUser.name,
+          email: resUser.email,
+          avatar: resUser.avatar,
+          role: resUser.role,
+          status: resUser.status,
+          joined_date: resUser.joinedDate,
+          last_login: resUser.lastLogin
+        }, 'email').catch(err => console.warn('[Supabase Sync Warning] Failed to sync user:', err.message));
+      }
+
+      return resUser;
     }
 
     // JSON fallback
     const users = readJson('users.json', []);
     let existingIndex = users.findIndex(u => (u.email || '').toLowerCase() === email);
+    let targetUser = null;
     if (existingIndex >= 0) {
       users[existingIndex] = { ...users[existingIndex], ...user, role: resolvedRole, lastLogin: new Date().toISOString() };
       writeJson('users.json', users);
-      return users[existingIndex];
+      targetUser = users[existingIndex];
     } else {
       const newUser = {
         id: user.id || 'usr_' + Date.now().toString(36),
@@ -429,8 +446,24 @@ const DB = {
       };
       users.unshift(newUser);
       writeJson('users.json', users);
-      return newUser;
+      targetUser = newUser;
     }
+
+    if (Supabase && Supabase.isConfigured() && targetUser) {
+      Supabase.dbUpsert('users', {
+        id: targetUser.id,
+        clerk_id: targetUser.clerkId,
+        name: targetUser.name,
+        email: targetUser.email,
+        avatar: targetUser.avatar,
+        role: targetUser.role,
+        status: targetUser.status,
+        joined_date: targetUser.joinedDate,
+        last_login: targetUser.lastLogin
+      }, 'email').catch(err => console.warn('[Supabase Sync Warning] Failed to sync user:', err.message));
+    }
+
+    return targetUser;
   },
 
   // INTERVIEWS & RECORDINGS
@@ -700,13 +733,44 @@ const DB = {
         writeJson('cheating_logs.json', logs);
       } catch (e) {}
 
-      return { ...log, id, sessionNumber, interviewId: sessionNumber, time, timestamp, reviewStatus, snapshot };
+      const finalLog = { ...log, id, sessionNumber, interviewId: sessionNumber, time, timestamp, reviewStatus, snapshot };
+      if (Supabase && Supabase.isConfigured()) {
+        Supabase.dbUpsert('cheating_logs', {
+          id: finalLog.id,
+          student_name: finalLog.studentName,
+          student_email: finalLog.studentEmail,
+          session_number: finalLog.sessionNumber,
+          event: finalLog.event,
+          severity: finalLog.severity || finalLog.risk || 'Medium',
+          risk: finalLog.risk || finalLog.severity || 'Medium',
+          details: finalLog.details,
+          time: finalLog.time,
+          timestamp: finalLog.timestamp
+        }).catch(err => console.warn('[Supabase Sync Warning] Failed to sync cheating log:', err.message));
+      }
+      return finalLog;
     }
 
     const logs = readJson('cheating_logs.json', []);
     const newLog = { ...log, id, sessionNumber, interviewId: sessionNumber, time, timestamp, reviewStatus, snapshot };
     logs.unshift(newLog);
     writeJson('cheating_logs.json', logs);
+
+    if (Supabase && Supabase.isConfigured()) {
+      Supabase.dbUpsert('cheating_logs', {
+        id: newLog.id,
+        student_name: newLog.studentName,
+        student_email: newLog.studentEmail,
+        session_number: newLog.sessionNumber,
+        event: newLog.event,
+        severity: newLog.severity || newLog.risk || 'Medium',
+        risk: newLog.risk || newLog.severity || 'Medium',
+        details: newLog.details,
+        time: newLog.time,
+        timestamp: newLog.timestamp
+      }).catch(err => console.warn('[Supabase Sync Warning] Failed to sync cheating log:', err.message));
+    }
+
     return newLog;
   },
 
@@ -767,13 +831,39 @@ const DB = {
         writeJson('feedbacks.json', feedbacks);
       } catch (e) {}
 
-      return { ...fb, id, date };
+      const resFb = { ...fb, id, date };
+      if (Supabase && Supabase.isConfigured()) {
+        Supabase.dbUpsert('feedbacks', {
+          id: resFb.id,
+          name: resFb.name,
+          email: resFb.email,
+          topic: resFb.topic,
+          rating: resFb.rating,
+          comment: resFb.comment,
+          date: resFb.date
+        }).catch(err => console.warn('[Supabase Sync Warning] Failed to sync feedback:', err.message));
+      }
+
+      return resFb;
     }
 
     const list = readJson('feedbacks.json', []);
     const newFb = { ...fb, id, date };
     list.unshift(newFb);
     writeJson('feedbacks.json', list);
+
+    if (Supabase && Supabase.isConfigured()) {
+      Supabase.dbUpsert('feedbacks', {
+        id: newFb.id,
+        name: newFb.name,
+        email: newFb.email,
+        topic: newFb.topic,
+        rating: newFb.rating,
+        comment: newFb.comment,
+        date: newFb.date
+      }).catch(err => console.warn('[Supabase Sync Warning] Failed to sync feedback:', err.message));
+    }
+
     return newFb;
   },
 
@@ -877,6 +967,15 @@ const DB = {
     }
     if (userModified) writeJson('users.json', users);
 
+    if (Supabase && Supabase.isConfigured()) {
+      Supabase.dbUpsert('admin_whitelist', {
+        email: newAdmin.email,
+        added_by: newAdmin.addedBy,
+        added_at: newAdmin.addedAt,
+        is_root: newAdmin.isRoot
+      }, 'email').catch(err => console.warn('[Supabase Sync Warning] Failed to sync admin add:', err.message));
+    }
+
     return { success: true, message: `Administrator access granted to ${cleanEmail}`, admins: this.getAdminWhitelist() };
   },
 
@@ -908,6 +1007,14 @@ const DB = {
       }
     }
     if (userModified) writeJson('users.json', users);
+
+    if (Supabase && Supabase.isConfigured()) {
+      // Delete from cloud admin_whitelist
+      Supabase.dbUpsert('admin_whitelist', {
+        email: cleanEmail,
+        is_root: false
+      }, 'email').catch(err => console.warn('[Supabase Sync Warning] Failed to sync admin remove:', err.message));
+    }
 
     return { success: true, message: `Administrator access revoked from ${cleanEmail}`, admins: this.getAdminWhitelist() };
   }

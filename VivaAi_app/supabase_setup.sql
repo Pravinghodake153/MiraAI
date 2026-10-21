@@ -107,3 +107,29 @@ CREATE POLICY "Public select recordings" ON storage.objects FOR SELECT USING (bu
 CREATE POLICY "Public insert recordings" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'recordings');
 CREATE POLICY "Public update recordings" ON storage.objects FOR UPDATE USING (bucket_id = 'recordings');
 CREATE POLICY "Public delete recordings" ON storage.objects FOR DELETE USING (bucket_id = 'recordings');
+
+-- 7. Create flows table (for customizable interview flow stages)
+CREATE TABLE IF NOT EXISTS public.flows (
+  step INTEGER PRIMARY KEY,
+  name TEXT NOT NULL,
+  description TEXT,
+  guidance TEXT,
+  timing TEXT,
+  category TEXT DEFAULT 'technical',
+  icon TEXT DEFAULT 'codeSimple'
+);
+ALTER TABLE public.flows ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public access flows" ON public.flows;
+CREATE POLICY "Public access flows" ON public.flows FOR ALL USING (true) WITH CHECK (true);
+
+-- 8. Create admin_whitelist table
+CREATE TABLE IF NOT EXISTS public.admin_whitelist (
+  email TEXT PRIMARY KEY,
+  added_by TEXT DEFAULT 'System',
+  added_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  is_root BOOLEAN DEFAULT false
+);
+ALTER TABLE public.admin_whitelist ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Public access admin_whitelist" ON public.admin_whitelist;
+CREATE POLICY "Public access admin_whitelist" ON public.admin_whitelist FOR ALL USING (true) WITH CHECK (true);
+
