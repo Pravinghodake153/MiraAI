@@ -1,5 +1,253 @@
 [
   {
+    "id": "AV-6418",
+    "candidateName": "Override Audit Test",
+    "candidateEmail": "student@college.edu",
+    "studentName": "Override Audit Test",
+    "studentEmail": "student@college.edu",
+    "topic": "Algorithm Analysis",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "duration": "15 min",
+    "score": 88,
+    "maxScore": 100,
+    "status": "Completed",
+    "durationSeconds": 900,
+    "readinessTier": "Placement Ready",
+    "summary": "Viva examination successfully completed and evaluated.",
+    "date": "Oct 21",
+    "fullDate": "Oct 21, 2026, 02:33 PM",
+    "cameraRecordingUrl": "/recordings/viva-camera.webm",
+    "screenRecordingUrl": "/recordings/viva-screen.webm",
+    "isDisqualified": false,
+    "disqualificationReason": "",
+    "scorecard": {
+      "score": 88,
+      "readinessTier": "Placement Ready",
+      "summary": "Viva examination successfully completed and evaluated.",
+      "isDisqualified": false,
+      "disqualificationReason": "",
+      "rubricBreakdown": {},
+      "strengths": [],
+      "improvements": [],
+      "suggestions": [],
+      "annotatedTranscript": []
+    },
+    "rubricBreakdown": {},
+    "strengths": [],
+    "improvements": [],
+    "suggestions": [],
+    "annotatedTranscript": [],
+    "transcript": [],
+    "transcripts": [],
+    "sessionNumber": "AV-6418",
+    "feedback": {},
+    "createdAt": "2026-10-21T09:03:12.435Z",
+    "facultyOverride": {
+      "overridden": true,
+      "previousScore": 70,
+      "newScore": 88,
+      "facultyName": "Dr. S. Kulkarni (HOD)",
+      "reason": "Reviewed audio recording; candidate provided precise nuance on monotonicity.",
+      "timestamp": "2026-10-21T09:03:12.438Z"
+    }
+  },
+  {
+    "id": "AV-9421",
+    "candidateName": "Test Student",
+    "candidateEmail": "student@college.edu",
+    "studentName": "Test Student",
+    "studentEmail": "student@college.edu",
+    "topic": "Data Structures",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "duration": "15 min",
+    "score": 83,
+    "maxScore": 100,
+    "status": "Completed",
+    "durationSeconds": 900,
+    "readinessTier": "Placement Ready",
+    "summary": "Viva examination successfully completed and evaluated.",
+    "date": "Oct 21",
+    "fullDate": "Oct 21, 2026, 02:33 PM",
+    "cameraRecordingUrl": "/recordings/viva-camera.webm",
+    "screenRecordingUrl": "/recordings/viva-screen.webm",
+    "isDisqualified": false,
+    "disqualificationReason": "",
+    "scorecard": {
+      "score": 83,
+      "readinessTier": "Placement Ready",
+      "summary": "Viva examination successfully completed and evaluated.",
+      "isDisqualified": false,
+      "disqualificationReason": "",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 4.3,
+          "percent": 85,
+          "weight": 30,
+          "calculatedMarks": 25.5,
+          "reason": "Demonstrated accurate definitions of binary search requirements and complexity.",
+          "evidence": ""
+        },
+        "depth": {
+          "score": 4,
+          "percent": 80,
+          "weight": 25,
+          "calculatedMarks": 20,
+          "reason": "Covered core mechanisms and trade‑offs; minor opportunity to discuss edge cases such as duplicate elements.",
+          "evidence": ""
+        },
+        "problemSolving": {
+          "score": 4,
+          "percent": 80,
+          "weight": 20,
+          "calculatedMarks": 16,
+          "reason": "Correctly identified the need to sort or fallback to linear search when data is unsorted.",
+          "evidence": ""
+        },
+        "practical": {
+          "score": 4,
+          "percent": 80,
+          "weight": 15,
+          "calculatedMarks": 12,
+          "reason": "Showed practical awareness of algorithm selection based on data ordering.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 4.5,
+          "percent": 90,
+          "weight": 10,
+          "calculatedMarks": 9,
+          "reason": "Clear, concise technical responses without deflection or filler.",
+          "evidence": ""
+        }
+      },
+      "strengths": [],
+      "improvements": [],
+      "suggestions": [],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "Explain how binary search operates on an array."
+        },
+        {
+          "speaker": "student",
+          "text": "Binary search requires a sorted array. It divides the search space in half by comparing with the midpoint element, achieving logarithmic time complexity O(log n)."
+        },
+        {
+          "speaker": "mira",
+          "text": "What happens when elements are unsorted?"
+        },
+        {
+          "speaker": "student",
+          "text": "If unsorted, binary search fails because monotonicity is lost. We must sort in O(n log n) or use linear search O(n)."
+        }
+      ]
+    },
+    "rubricBreakdown": {
+      "conceptual": {
+        "score": 4.3,
+        "percent": 85,
+        "weight": 30,
+        "calculatedMarks": 25.5,
+        "reason": "Demonstrated accurate definitions of binary search requirements and complexity.",
+        "evidence": ""
+      },
+      "depth": {
+        "score": 4,
+        "percent": 80,
+        "weight": 25,
+        "calculatedMarks": 20,
+        "reason": "Covered core mechanisms and trade‑offs; minor opportunity to discuss edge cases such as duplicate elements.",
+        "evidence": ""
+      },
+      "problemSolving": {
+        "score": 4,
+        "percent": 80,
+        "weight": 20,
+        "calculatedMarks": 16,
+        "reason": "Correctly identified the need to sort or fallback to linear search when data is unsorted.",
+        "evidence": ""
+      },
+      "practical": {
+        "score": 4,
+        "percent": 80,
+        "weight": 15,
+        "calculatedMarks": 12,
+        "reason": "Showed practical awareness of algorithm selection based on data ordering.",
+        "evidence": ""
+      },
+      "communication": {
+        "score": 4.5,
+        "percent": 90,
+        "weight": 10,
+        "calculatedMarks": 9,
+        "reason": "Clear, concise technical responses without deflection or filler.",
+        "evidence": ""
+      }
+    },
+    "strengths": [],
+    "improvements": [],
+    "suggestions": [],
+    "annotatedTranscript": [
+      {
+        "speaker": "mira",
+        "text": "Explain how binary search operates on an array."
+      },
+      {
+        "speaker": "student",
+        "text": "Binary search requires a sorted array. It divides the search space in half by comparing with the midpoint element, achieving logarithmic time complexity O(log n)."
+      },
+      {
+        "speaker": "mira",
+        "text": "What happens when elements are unsorted?"
+      },
+      {
+        "speaker": "student",
+        "text": "If unsorted, binary search fails because monotonicity is lost. We must sort in O(n log n) or use linear search O(n)."
+      }
+    ],
+    "transcript": [
+      {
+        "speaker": "mira",
+        "text": "Explain how binary search operates on an array."
+      },
+      {
+        "speaker": "student",
+        "text": "Binary search requires a sorted array. It divides the search space in half by comparing with the midpoint element, achieving logarithmic time complexity O(log n)."
+      },
+      {
+        "speaker": "mira",
+        "text": "What happens when elements are unsorted?"
+      },
+      {
+        "speaker": "student",
+        "text": "If unsorted, binary search fails because monotonicity is lost. We must sort in O(n log n) or use linear search O(n)."
+      }
+    ],
+    "transcripts": [
+      {
+        "speaker": "mira",
+        "text": "Explain how binary search operates on an array."
+      },
+      {
+        "speaker": "student",
+        "text": "Binary search requires a sorted array. It divides the search space in half by comparing with the midpoint element, achieving logarithmic time complexity O(log n)."
+      },
+      {
+        "speaker": "mira",
+        "text": "What happens when elements are unsorted?"
+      },
+      {
+        "speaker": "student",
+        "text": "If unsorted, binary search fails because monotonicity is lost. We must sort in O(n log n) or use linear search O(n)."
+      }
+    ],
+    "sessionNumber": "AV-9421",
+    "feedback": {},
+    "createdAt": "2026-10-21T09:03:12.422Z"
+  },
+  {
     "id": "AV-6695",
     "candidateName": "Override Audit Test",
     "candidateEmail": "student@college.edu",

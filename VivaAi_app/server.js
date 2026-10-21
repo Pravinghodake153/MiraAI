@@ -432,13 +432,26 @@ SESSION CONTEXT:
 ${JSON.stringify(sessionContextSummary, null, 2)}
 \`\`\`
 
+CRITICAL STAGE TIMING & DEEP DIVE RULES (PACING):
+- Current Stage: "${stageName}" (Timing Window: ${stageTiming || 'as per admin flow'}).
+- Clock: Elapsed time is ${currentTime}, remaining session time is ${remainingTime}.
+- DIG DEEPER RULE: If there is still time remaining in this current stage ("${stageName}"), DO NOT rush or skip to the next stage!
+- You MUST dig deeper into the candidate's answers:
+  * Probe edge cases, time/space complexity, performance bottlenecks, real-world trade-offs, or concurrency.
+  * If the student gives a partial or surface-level answer, provide a constructive hint/nudge and ask them to expand or justify their choice.
+  * Set "advanceStage": false and "followUpType": "deepen" or "nudge" while exploring within this stage.
+- ONLY set "advanceStage": true and "followUpType": "advance" when:
+  1. The time window for "${stageName}" has naturally concluded according to the clock, OR
+  2. The candidate has demonstrated thorough mastery of this stage's directives and it is time to transition.
+- NEVER skip to wrap-up or scoring while there is substantial time left on the clock!
+
 CRITICAL LENGTH & CONCISENESS RULES:
 - STRICT WORD LIMIT: Try to use 20–30 words per ask only.
 - DO NOT EXCEED 50 WORDS for each question under any circumstances.
 - Ask ONLY ONE focused technical question at a time.
 - Keep the spoken words to 1–2 crisp, natural sentences:
   1. A very short, natural transition (e.g. "Good point," or "Thanks for that,").
-  2. The next technical question fulfilling: "${stageDirectives}".
+  2. The next technical probe or question fulfilling: "${stageDirectives}".
 
 CRITICAL ZERO-REASONING RULE:
 - NEVER output reasoning, thinking process, chain-of-thought, or planning steps.
@@ -447,15 +460,15 @@ CRITICAL ZERO-REASONING RULE:
 
 FOLLOW-UP RULES:
 1. Strong answer: Acknowledge insight in 3-5 words, probe one level deeper (trade-offs, concurrency, scaling).
-2. Partial answer: Give one brief nudge without giving away the answer.
-3. Stuck / "I don't know": Empathize briefly ("No worries at all, let's explore this angle instead") and smoothly ask next question.
+2. Partial answer: Give one brief nudge without giving away the answer, and ask them to elaborate.
+3. Stuck / "I don't know": Empathize briefly ("No worries at all, let's explore this angle instead") and guide them with a focused smaller question.
 4. Off-topic: Politely steer back to the topic.
 
 RESPONSE FORMAT (STRICT JSON ONLY):
 {
   "question": "Spoken question Mira says aloud (STRICTLY 20-30 WORDS, MAXIMUM 50 WORDS).",
   "followUpType": "deepen | nudge | advance | redirect",
-  "advanceStage": true,
+  "advanceStage": false,
   "rationale": "One brief phrase"
 }`;
 
@@ -535,10 +548,14 @@ RESPONSE FORMAT (STRICT JSON ONLY):
   // Dynamic Generation strictly aligned with Admin Flow Stage directives (NO fake static questions)
   const dynamicQuestion = generateAdminFlowStageQuestion(currentTopic, stageObj, history);
 
+  // If this stage already has turns in history, deepen or nudge rather than prematurely skipping
+  const turnsInCurrentStage = history.filter(h => (h.stage || '').toLowerCase() === stageName.toLowerCase()).length;
+  const isEarlyInStage = turnsInCurrentStage < 2;
+
   return {
     question: dynamicQuestion,
-    followUpType: 'advance',
-    advanceStage: true,
+    followUpType: isEarlyInStage ? 'deepen' : 'advance',
+    advanceStage: !isEarlyInStage,
     provider: `Admin Flow Engine (${stageName})`,
     stage: stageName
   };

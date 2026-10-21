@@ -2993,16 +2993,15 @@ const App = {
   // Strict Viewport Fit (No Scroll) - Matches AI Viva Live Interview Dashboard.png
   // ==========================================================================
   renderInterview() {
-    const qIndex = this.currentQuestionIndex;
     const stages = this.getCurrentFlowStages();
-    const currentStage = stages[qIndex] || stages[0] || { name: 'Warm-up' };
+    const activeStageIdx = this.getCurrentFlowStageIndexByTime();
+    const currentStage = stages[activeStageIdx] || stages[0] || { name: 'Warm-up' };
     const currentQ = this.currentAiQuestionText || `Mira is initiating your viva for ${this.activeTopic || 'Data Structures'} (${currentStage.name})...`;
-
 
     const stepperHtml = stages.map((s, idx) => {
       let stateClass = '';
-      if (idx === qIndex) stateClass = 'active';
-      else if (idx < qIndex) stateClass = 'completed';
+      if (idx === activeStageIdx) stateClass = 'active';
+      else if (idx < activeStageIdx) stateClass = 'completed';
 
       return `
         <div class="stepper-step ${stateClass}">
@@ -3548,8 +3547,7 @@ const App = {
     }
     if (statusEl) statusEl.textContent = 'Mira analyzing answer depth & follow-up logic...';
 
-    const stages = this.getCurrentFlowStages();
-    const currentStageObj = stages[this.currentQuestionIndex] || stages[0];
+    const currentStageObj = this.getCurrentFlowStageByTime();
     const currentStage = currentStageObj.name;
 
     // 1. Arrange & record in session transcript
@@ -3706,22 +3704,25 @@ const App = {
     if (qEl) qEl.innerHTML = `<span style="opacity:0.75; font-style:italic;">Formulating next question...</span><span class="typewriter-cursor">|</span>`;
 
     const stages = this.getCurrentFlowStages();
+    const currentActiveIdx = this.getCurrentFlowStageIndexByTime();
     let stageObj = null;
     if (targetStage && typeof targetStage === 'object') {
       stageObj = targetStage;
     } else if (typeof targetStage === 'string') {
       stageObj = stages.find(s => s.name.toLowerCase() === targetStage.toLowerCase()) || { name: targetStage };
     } else {
-      stageObj = stages[this.currentQuestionIndex] || stages[0];
+      stageObj = stages[currentActiveIdx] || stages[0];
     }
+
+    this.currentQuestionIndex = currentActiveIdx;
 
     const stageName = stageObj.name || 'Fundamentals';
     const currentTimeStr = this.getFormattedSessionTime();
     const remainingTimeStr = this.getFormattedRemainingTime();
 
-    // Partition stages into completed, current, and remaining
-    const completedStages = stages.slice(0, this.currentQuestionIndex);
-    const remainingStages = stages.slice(this.currentQuestionIndex + 1);
+    // Partition stages into completed, current, and remaining strictly based on the flow timeline
+    const completedStages = stages.slice(0, currentActiveIdx);
+    const remainingStages = stages.slice(currentActiveIdx + 1);
 
     // Helper to detect wrong, half, corrupted, or cut-off AI output
     const isQuestionCorruptedOrHalf = (txt) => {
@@ -3848,29 +3849,9 @@ const App = {
       statusEl.textContent = `${badgeDesc} (${stageName})`;
     }
 
-    // Handle Stepper progression based on AI decision
-    if (this.lastStudentSpeech && shouldAdvance) {
-      const nextIdx = this.currentQuestionIndex + 1;
-      if (nextIdx >= stages.length || (stages[nextIdx] && stages[nextIdx].name.toLowerCase() === 'scoring')) {
-        this.currentQuestionIndex = nextIdx;
-        const steps = document.querySelectorAll('.interview-stepper-container .stepper-step');
-        steps.forEach((step, idx) => {
-          step.classList.toggle('active', idx === nextIdx);
-          step.classList.toggle('completed', idx < nextIdx);
-        });
-        this.showToast('All interview flow stages completed! Wrapping up examination...');
-        setTimeout(() => {
-          this.endInterview(false);
-        }, 3000);
-      } else {
-        this.currentQuestionIndex = nextIdx;
-        const steps = document.querySelectorAll('.interview-stepper-container .stepper-step');
-        steps.forEach((step, idx) => {
-          step.classList.toggle('active', idx === this.currentQuestionIndex);
-          step.classList.toggle('completed', idx < this.currentQuestionIndex);
-        });
-      }
-    }
+    // Update Stepper progression strictly synchronized with the admin timeline
+    this.updateInterviewFlowStepper();
+    this.currentQuestionIndex = this.getCurrentFlowStageIndexByTime();
 
     this.lastMiraQuestionText = qText;
     const timestamp = this.getFormattedSessionTime();
@@ -3962,6 +3943,9 @@ const App = {
       const formatted = this.formatDurationMmSs(this.secondsLeft);
       const el = document.getElementById('dock-timer');
       if (el) el.textContent = formatted;
+
+      // Keep upper flow stepper progress strictly in sync with the countdown clock
+      this.updateInterviewFlowStepper();
     }, 1000);
 
     // Camera Stream & Recorder
@@ -7257,6 +7241,73 @@ const App = {
 
     const total = Math.max(sumSeconds, maxEndSec);
     return total > 0 ? total : 15 * 60;
+  },
+
+  getFlowStageTimeWindows(customStages = null) {
+    const stages = Array.isArray(customStages) ? customStages : this.getCurrentFlowStages();
+    if (!stages || !stages.length) return [];
+
+    let currentStart = 0;
+    return stages.map((s, idx) => {
+      const timing = (s.timing || s.duration || '').toString().trim();
+      const rangeMatch = timing.match(/(\d+):(\d+)\s*[–\-—]\s*(\d+):(\d+)/);
+      let startSec, endSec;
+      if (rangeMatch) {
+        startSec = parseInt(rangeMatch[1], 10) * 60 + parseInt(rangeMatch[2], 10);
+        endSec = parseInt(rangeMatch[3], 10) * 60 + parseInt(rangeMatch[4], 10);
+        currentStart = endSec;
+      } else {
+        const dur = this.calculateStageDurationSeconds(s);
+        startSec = currentStart;
+        endSec = startSec + dur;
+        currentStart = endSec;
+      }
+      return {
+        stage: s,
+        index: idx,
+        name: s.name,
+        step: s.step || (idx + 1),
+        startSec,
+        endSec
+      };
+    });
+  },
+
+  getElapsedSessionSeconds() {
+    const total = this.totalExamDuration || this.getTotalInterviewDurationSeconds();
+    return Math.max(0, total - (this.secondsLeft !== undefined ? this.secondsLeft : total));
+  },
+
+  getCurrentFlowStageIndexByTime() {
+    const windows = this.getFlowStageTimeWindows();
+    if (!windows.length) return 0;
+    const elapsed = this.getElapsedSessionSeconds();
+
+    for (let i = 0; i < windows.length; i++) {
+      if (elapsed >= windows[i].startSec && elapsed < windows[i].endSec) {
+        return i;
+      }
+    }
+
+    if (elapsed >= windows[windows.length - 1].startSec) {
+      return windows.length - 1;
+    }
+    return 0;
+  },
+
+  getCurrentFlowStageByTime() {
+    const stages = this.getCurrentFlowStages();
+    const idx = this.getCurrentFlowStageIndexByTime();
+    return stages[idx] || stages[0] || { name: 'Fundamentals' };
+  },
+
+  updateInterviewFlowStepper() {
+    const activeIdx = this.getCurrentFlowStageIndexByTime();
+    const steps = document.querySelectorAll('.interview-stepper-container .stepper-step');
+    steps.forEach((step, idx) => {
+      step.classList.toggle('active', idx === activeIdx);
+      step.classList.toggle('completed', idx < activeIdx);
+    });
   },
 
   calculateTotalFlowMinutes(customStages = null) {
