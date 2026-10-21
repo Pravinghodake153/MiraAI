@@ -1,0 +1,15 @@
+{
+  "name": "vivaai-app",
+  "version": "1.0.0",
+  "description": "VivaAI - Technical Viva & Placement Evaluation Platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "bun": "bun server.js",
+    "node": "node server.js"
+  },
+  "keywords": ["viva", "ai", "interview", "evaluation"],
+  "author": "MSOT Team",
+  "license": "ISC"
+}

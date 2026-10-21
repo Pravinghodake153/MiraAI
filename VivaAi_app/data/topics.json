@@ -1,0 +1,44 @@
+[
+  {
+    "id": "top_1",
+    "name": "Data Structures",
+    "description": "Arrays, Linked Lists, Stacks, Queues, Trees, Graphs, Hashing, etc.",
+    "status": "Active"
+  },
+  {
+    "id": "top_2",
+    "name": "Operating Systems",
+    "description": "Processes, Threads, Scheduling, Memory Management, File Systems, etc.",
+    "status": "Active"
+  },
+  {
+    "id": "top_3",
+    "name": "DBMS",
+    "description": "Normalization, SQL, Transactions, Indexing, Concurrency Control, etc.",
+    "status": "Active"
+  },
+  {
+    "id": "top_4",
+    "name": "Computer Networks",
+    "description": "OSI Model, TCP/IP, Routing, Switching, HTTP, DNS, etc.",
+    "status": "Active"
+  },
+  {
+    "id": "top_5",
+    "name": "Web Development",
+    "description": "HTML, CSS, JavaScript, React, Node.js, REST APIs, etc.",
+    "status": "Active"
+  },
+  {
+    "id": "top_6",
+    "name": "Algorithms",
+    "description": "Sorting, Searching, Dynamic Programming, Greedy, Graph Algorithms, etc.",
+    "status": "Active"
+  },
+  {
+    "id": "top_mve48gtd",
+    "name": "Cybersecurity & Cryptography",
+    "description": "Authentication, OAuth, Encryption, Public Key Infrastructure, OWASP Top 10",
+    "status": "Active"
+  }
+]

@@ -1,0 +1,56 @@
+[
+  {
+    "step": 1,
+    "name": "Warm-up",
+    "desc": "Greeting, identity confirmation and opening question",
+    "guidance": "Welcome the candidate warmly, confirm their readiness, and ask a gentle introductory technical question.",
+    "timing": "0:00 – 1:00",
+    "category": "opening",
+    "icon": "wavingHand"
+  },
+  {
+    "step": 2,
+    "name": "Fundamentals",
+    "desc": "2–3 core concept questions with follow-ups",
+    "guidance": "Ask fundamental concept questions on the chosen topic, focusing on definitions, standard complexities, and basics.",
+    "timing": "1:00 – 5:00",
+    "category": "technical",
+    "icon": "book"
+  },
+  {
+    "step": 3,
+    "name": "Depth",
+    "desc": "Probe reasoning, trade-offs and edge cases",
+    "guidance": "Dive deep into internal mechanisms, memory allocations, concurrency safety, and performance trade-offs.",
+    "timing": "5:00 – 10:00",
+    "category": "technical",
+    "icon": "bulb"
+  },
+  {
+    "step": 4,
+    "name": "Applied Problem",
+    "desc": "Scenario or debugging question",
+    "guidance": "Present a realistic system scenario, debugging challenge, or algorithmic problem for the candidate to solve step-by-step.",
+    "timing": "10:00 – 13:00",
+    "category": "technical",
+    "icon": "codeSimple"
+  },
+  {
+    "step": 5,
+    "name": "Wrap-up",
+    "desc": "Final opportunity for the student to add context",
+    "guidance": "Ask if the candidate has any closing thoughts or additional technical insights to share regarding the topic.",
+    "timing": "13:00 – 14:30",
+    "category": "evaluation",
+    "icon": "chat"
+  },
+  {
+    "step": 6,
+    "name": "Scoring",
+    "desc": "Evaluate transcript and prepare evidence-linked feedback",
+    "guidance": "Summarize the interview politely and let the candidate know their comprehensive evaluation is being prepared.",
+    "timing": "14:30 – 15:00",
+    "category": "evaluation",
+    "icon": "chartBar"
+  }
+]

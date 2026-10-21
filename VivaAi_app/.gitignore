@@ -1,0 +1,30 @@
+# Environment variables & secrets
+.env
+.env.*
+!.env.example
+
+# Node dependencies
+node_modules/
+package-lock.json
+
+# Operating System files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+server.log
+npm-debug.log*
+
+# Database & SQLite binaries/locks
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.db
+viva.sqlite*
+viva_database.sqlite*
+
+# Media & Recorded Videos
+data/recordings/*.webm
+data/recordings/*.mp4
+!data/recordings/.gitkeep

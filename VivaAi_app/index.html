@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>MiraAI • Technical Viva & Placement Evaluation Platform</title>
+  
+  <!-- Modern Clean Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Clerk Authentication JS SDK -->
+  <script async crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js"></script>
+</head>
+<body>
+
+  <!-- Top Global Header -->
+  <header class="global-nav">
+    <div class="brand-container" onclick="App.navigate('/home')">
+      <div class="brand-logo-icon">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 2C16 2 24 10 24 18.5C24 23.5 19.5 28 16 28C12.5 28 8 23.5 8 18.5C8 13.5 13.5 9 16 2Z" fill="url(#navFlameGrad)"/>
+          <path d="M16 11C16 11 20 15 20 19C20 21.5 18 24 16 24C14 24 12 21.5 12 19C12 16.5 14.5 14 16 11Z" fill="#FFF" fill-opacity="0.35"/>
+          <defs>
+            <linearGradient id="navFlameGrad" x1="16" y1="2" x2="16" y2="28" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#FF7A00"/>
+              <stop offset="1" stop-color="#FF3D00"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <span class="brand-title"><span class="brand-mira">Mira</span><span class="brand-ai">AI</span></span>
+    </div>
+
+    <!-- Right Action Items (Notifications & Account) -->
+    <div class="nav-actions">
+      <!-- Mobile Sidebar Toggle -->
+      <button class="mobile-nav-toggle" id="mobile-sidebar-toggle" onclick="App.toggleMobileSidebar()" aria-label="Toggle Navigation">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      <button class="nav-bell-btn" id="nav-bell-btn" onclick="App.showToast('No new notifications')" aria-label="Notifications" title="Notifications">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+        <span class="nav-bell-dot"></span>
+      </button>
+
+      <div id="nav-auth-container" style="display:flex; align-items:center; gap:8px;">
+        <button class="btn btn-secondary" onclick="App.openLoginModal()">Login</button>
+        <button class="btn btn-primary" onclick="App.openSignupModal()">Get Started</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Sidebar Backdrop Overlay -->
+  <div class="sidebar-overlay" id="mobile-sidebar-overlay" onclick="App.toggleMobileSidebar(false)"></div>
+
+  <!-- Application Dynamic Viewport -->
+  <main id="app-viewport"></main>
+
+  <!-- Student Signup Modal -->
+  <div class="modal-overlay" id="signup-modal">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="App.closeSignupModal()" aria-label="Close dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="modal-brand-icon">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 2C16 2 24 10 24 18.5C24 23.5 19.5 28 16 28C12.5 28 8 23.5 8 18.5C8 13.5 13.5 9 16 2Z" fill="url(#modalFlameGrad)"/>
+          <path d="M16 11C16 11 20 15 20 19C20 21.5 18 24 16 24C14 24 12 21.5 12 19C12 16.5 14.5 14 16 11Z" fill="#FFF" fill-opacity="0.35"/>
+          <defs>
+            <linearGradient id="modalFlameGrad" x1="16" y1="2" x2="16" y2="28" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#FF7A00"/>
+              <stop offset="1" stop-color="#FF3D00"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <h2 class="modal-title">Create your account</h2>
+      <p class="modal-subtitle">Join <span class="brand-mira">Mira</span><span class="brand-ai">AI</span> and start your technical interview.</p>
+
+      <div class="social-login-grid" style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px;">
+        <button type="button" class="btn btn-secondary social-btn" onclick="App.authWithOAuth('oauth_google')" style="width:100%; justify-content:center; padding:12px 16px; font-weight:600; border:1px solid #CBD5E1; color:var(--text-dark); background:#FFFFFF; border-radius:10px; display:flex; align-items:center; gap:10px; box-shadow:0 1px 2px rgba(0,0,0,0.05); cursor:pointer;">
+          <svg viewBox="0 0 24 24" style="width:18px; height:18px; flex-shrink:0;">
+            <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
+            <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.15C3.25 21.36 7.33 24 12 24z"/>
+            <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.26C.46 8.16 0 9.97 0 12s.46 3.84 1.26 5.42l4.02-3.15z"/>
+            <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.25 2.64 1.26 6.58l4.02 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+          </svg>
+          Continue with Google
+        </button>
+        <button type="button" class="btn btn-secondary social-btn" onclick="App.authWithOAuth('oauth_github')" style="width:100%; justify-content:center; padding:12px 16px; font-weight:600; border:1px solid #CBD5E1; color:var(--text-dark); background:#FFFFFF; border-radius:10px; display:flex; align-items:center; gap:10px; box-shadow:0 1px 2px rgba(0,0,0,0.05); cursor:pointer;">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px; height:18px; flex-shrink:0; color:#181717;">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+          Continue with GitHub
+        </button>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:18px;">
+        <div style="flex:1; height:1px; background:#E2E8F0;"></div>
+        <span style="font-size:11px; color:var(--text-muted); font-weight:700; text-transform:uppercase; letter-spacing:0.5px;">Or continue with email</span>
+        <div style="flex:1; height:1px; background:#E2E8F0;"></div>
+      </div>
+
+      <form id="signup-form" onsubmit="event.preventDefault(); App.submitSignup(event);">
+        <div class="form-group">
+          <div class="form-input-wrap">
+            <span class="form-icon-lead">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </span>
+            <input type="text" id="signup-name" class="form-control" placeholder="Full Name *" required autocomplete="name">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-input-wrap">
+            <span class="form-icon-lead">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </span>
+            <input type="email" id="signup-email" class="form-control" placeholder="College Email ID *" required autocomplete="email">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-input-wrap">
+            <span class="form-icon-lead">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+            </span>
+            <input type="password" id="signup-password" class="form-control" placeholder="Create Password *" required autocomplete="new-password">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-input-wrap">
+            <span class="form-icon-lead">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+            </span>
+            <input type="tel" class="form-control" placeholder="Phone Number (Optional)">
+          </div>
+        </div>
+
+        <div class="terms-row">
+          <input type="checkbox" id="terms-check" checked required>
+          <label for="terms-check">
+            I agree to the <a href="#/home">Terms of Service</a> and <a href="#/home">Privacy Policy</a> (consenting to voice & video recording for academic evaluation).
+          </label>
+        </div>
+
+        <button type="submit" id="signup-submit-btn" onclick="App.submitSignup(event)" class="btn btn-primary" style="width:100%; padding:14px; font-size:15px; border-radius:10px;">
+          Sign Up & Enter Viva
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px; height:16px;">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+
+        <div class="modal-footer-text">
+          Already have an account? <a href="javascript:void(0)" onclick="App.closeSignupModal(); App.openLoginModal();">Login</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Student / Faculty Login Modal -->
+  <div class="modal-overlay" id="login-modal">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="App.closeLoginModal()" aria-label="Close dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <div class="modal-brand-icon">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 2C16 2 24 10 24 18.5C24 23.5 19.5 28 16 28C12.5 28 8 23.5 8 18.5C8 13.5 13.5 9 16 2Z" fill="url(#loginFlameGrad)"/>
+          <path d="M16 11C16 11 20 15 20 19C20 21.5 18 24 16 24C14 24 12 21.5 12 19C12 16.5 14.5 14 16 11Z" fill="#FFF" fill-opacity="0.35"/>
+          <defs>
+            <linearGradient id="loginFlameGrad" x1="16" y1="2" x2="16" y2="28" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#FF7A00"/>
+              <stop offset="1" stop-color="#FF3D00"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <h2 class="modal-title">Sign In to <span class="brand-mira">Mira</span><span class="brand-ai">AI</span></h2>
+      <p class="modal-subtitle">Enter your college credentials to start your viva examination.</p>
+
+      <div class="social-login-grid" style="display:flex; flex-direction:column; gap:10px; margin-bottom:16px;">
+        <button type="button" class="btn btn-secondary social-btn" onclick="App.authWithOAuth('oauth_google')" style="width:100%; justify-content:center; padding:12px 16px; font-weight:600; border:1px solid #CBD5E1; color:var(--text-dark); background:#FFFFFF; border-radius:10px; display:flex; align-items:center; gap:10px; box-shadow:0 1px 2px rgba(0,0,0,0.05); cursor:pointer;">
+          <svg viewBox="0 0 24 24" style="width:18px; height:18px; flex-shrink:0;">
+            <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
+            <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.15C3.25 21.36 7.33 24 12 24z"/>
+            <path fill="#FBBC05" d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.26C.46 8.16 0 9.97 0 12s.46 3.84 1.26 5.42l4.02-3.15z"/>
+            <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.25 2.64 1.26 6.58l4.02 3.15c.95-2.83 3.6-4.98 6.72-4.98z"/>
+          </svg>
+          Continue with Google
+        </button>
+        <button type="button" class="btn btn-secondary social-btn" onclick="App.authWithOAuth('oauth_github')" style="width:100%; justify-content:center; padding:12px 16px; font-weight:600; border:1px solid #CBD5E1; color:var(--text-dark); background:#FFFFFF; border-radius:10px; display:flex; align-items:center; gap:10px; box-shadow:0 1px 2px rgba(0,0,0,0.05); cursor:pointer;">
+          <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px; height:18px; flex-shrink:0; color:#181717;">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+          </svg>
+          Continue with GitHub
+        </button>
+      </div>
+
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:18px;">
+        <div style="flex:1; height:1px; background:#E2E8F0;"></div>
+        <span style="font-size:11px; color:var(--text-muted); font-weight:700; text-transform:uppercase; letter-spacing:0.5px;">Or with email & password</span>
+        <div style="flex:1; height:1px; background:#E2E8F0;"></div>
+      </div>
+
+      <form id="local-login-form" onsubmit="event.preventDefault(); App.submitLocalLogin(event);">
+        <div class="form-group">
+          <div class="form-input-wrap">
+            <span class="form-icon-lead">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </span>
+            <input type="email" id="login-email" class="form-control" placeholder="College Email ID *" required autocomplete="email">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-input-wrap">
+            <span class="form-icon-lead">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+            </span>
+            <input type="password" id="login-password" class="form-control" placeholder="Password *" required autocomplete="current-password">
+          </div>
+        </div>
+
+        <button type="submit" id="login-submit-btn" onclick="App.submitLocalLogin(event)" class="btn btn-primary" style="width:100%; padding:14px; font-size:15px; border-radius:10px;">
+          Sign In & Continue
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px; height:16px;">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+
+        <div class="modal-footer-text">
+          Don't have an account? <a href="javascript:void(0)" onclick="App.closeLoginModal(); App.openSignupModal();">Create one</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Add User Modal -->
+  <div class="modal-overlay" id="add-user-modal">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="App.closeAddUserModal()" aria-label="Close dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <h2 class="modal-title">Add Student to Roster</h2>
+      <p class="modal-subtitle">Enroll candidate into the MSOT Technical Viva cohort.</p>
+      <form onsubmit="event.preventDefault(); App.submitNewUser();">
+        <div class="form-group">
+          <input type="text" id="new-user-name" class="form-control" style="padding-left:14px;" placeholder="Full Student Name *" required>
+        </div>
+        <div class="form-group">
+          <input type="email" id="new-user-email" class="form-control" style="padding-left:14px;" placeholder="College Email ID *" required>
+        </div>
+        <div class="form-group">
+          <input type="text" id="new-user-roll" class="form-control" style="padding-left:14px;" placeholder="Roll Number (e.g. MSOT-2026-042)" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; padding:12px;">Add Student</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Evidence Inspector Modal -->
+  <div class="modal-overlay" id="evidence-modal">
+    <div class="modal-card" style="max-width:540px;">
+      <button class="modal-close-btn" onclick="App.closeEvidenceModal()" aria-label="Close dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <h2 class="modal-title" id="evidence-modal-title">Proctoring Evidence Details</h2>
+      <p class="modal-subtitle" id="evidence-modal-subtitle">Audit timestamped event and recorded telemetry.</p>
+      <div class="evidence-modal-body">
+        <div class="evidence-snapshot-img" id="evidence-snapshot-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:36px; height:36px; margin-bottom:8px;">
+            <polygon points="23 7 16 12 23 17 23 7"></polygon>
+            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+          </svg>
+          <span>Webcam Anomaly Frame Captured</span>
+        </div>
+        <div class="evidence-meta-row">
+          <span>Incident: <b id="evidence-event-name">Multiple voices detected</b></span>
+          <span id="evidence-risk-badge" class="status-badge high"><span class="dot"></span> High Risk</span>
+        </div>
+        <div class="evidence-meta-row">
+          <span>Student: <b id="evidence-student-name">Aarya Patil</b></span>
+          <span id="evidence-time">Oct 17, 10:32 AM</span>
+        </div>
+        <div style="font-size:13px; color:var(--text-muted); background:var(--bg-subtle); padding:10px 14px; border-radius:var(--radius-sm);" id="evidence-desc">
+          Audio transcription engine detected a secondary speaker assisting candidate.
+        </div>
+        <div style="display:flex; gap:10px; margin-top:8px;">
+          <button class="btn btn-secondary" style="flex:1;" onclick="App.closeEvidenceModal()">Dismiss</button>
+          <button class="btn btn-danger" style="flex:1;" onclick="App.markReviewedEvidence()">Confirm Flag & Log</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Faculty Score Override Modal -->
+  <div class="modal-overlay" id="override-score-modal">
+    <div class="modal-card" style="max-width:500px;">
+      <button class="modal-close-btn" onclick="App.closeOverrideModal()" aria-label="Close dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <h2 class="modal-title">Faculty Score Override</h2>
+      <p class="modal-subtitle" id="override-modal-sub">Modify viva mark with official faculty audit trail.</p>
+      <form onsubmit="event.preventDefault(); App.submitFacultyOverride();">
+        <input type="hidden" id="override-interview-id" value="">
+        <div class="form-group">
+          <label style="font-size:12.5px; font-weight:700; margin-bottom:6px; display:block;">Candidate Name</label>
+          <input type="text" id="override-candidate-name" class="form-control" style="padding-left:14px;" readonly>
+        </div>
+        <div class="form-group">
+          <label style="font-size:12.5px; font-weight:700; margin-bottom:6px; display:block;">Current Score</label>
+          <input type="number" id="override-old-score" class="form-control" style="padding-left:14px;" readonly>
+        </div>
+        <div class="form-group">
+          <label style="font-size:12.5px; font-weight:700; margin-bottom:6px; display:block;">New Overridden Score (0 - 100) *</label>
+          <input type="number" id="override-new-score" class="form-control" style="padding-left:14px;" min="0" max="100" required>
+        </div>
+        <div class="form-group">
+          <label style="font-size:12.5px; font-weight:700; margin-bottom:6px; display:block;">Faculty Examiner Name *</label>
+          <input type="text" id="override-faculty-name" class="form-control" style="padding-left:14px;" value="Dr. S. Kulkarni (HOD)" required>
+        </div>
+        <div class="form-group">
+          <label style="font-size:12.5px; font-weight:700; margin-bottom:6px; display:block;">Official Reason for Override *</label>
+          <textarea id="override-reason" class="form-control" style="padding:10px 14px; min-height:80px;" placeholder="Document technical justification for grade change..." required>Reviewed voice recording and student's depth on collision handling; awarded partial credit.</textarea>
+        </div>
+        <div style="display:flex; gap:10px; margin-top:16px;">
+          <button type="button" class="btn btn-secondary" style="flex:1;" onclick="App.closeOverrideModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary" style="flex:1;">Save Override</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Feedback Submission Modal -->
+  <div class="modal-overlay" id="feedback-modal">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="App.closeFeedbackModal()" aria-label="Close dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <h2 class="modal-title">Share Viva Feedback</h2>
+      <p class="modal-subtitle">Help us improve the AI interviewer experience.</p>
+      <form onsubmit="event.preventDefault(); App.submitFeedbackForm();">
+        <div style="margin-bottom:16px;">
+          <label style="font-size:13px; font-weight:700; display:block; margin-bottom:8px;">Your Rating</label>
+          <div style="display:flex; gap:8px; cursor:pointer;" id="feedback-star-row">
+            <span class="star-rating-item" onclick="App.setStarRating(1)" data-star="1" style="display:inline-flex; width:28px; height:28px; color:#F59E0B;" title="1 Star">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </span>
+            <span class="star-rating-item" onclick="App.setStarRating(2)" data-star="2" style="display:inline-flex; width:28px; height:28px; color:#F59E0B;" title="2 Stars">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </span>
+            <span class="star-rating-item" onclick="App.setStarRating(3)" data-star="3" style="display:inline-flex; width:28px; height:28px; color:#F59E0B;" title="3 Stars">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </span>
+            <span class="star-rating-item" onclick="App.setStarRating(4)" data-star="4" style="display:inline-flex; width:28px; height:28px; color:#F59E0B;" title="4 Stars">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </span>
+            <span class="star-rating-item" onclick="App.setStarRating(5)" data-star="5" style="display:inline-flex; width:28px; height:28px; color:#F59E0B;" title="5 Stars">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </span>
+          </div>
+        </div>
+        <div class="form-group">
+          <textarea id="feedback-comment-input" class="form-control" style="padding-left:14px; height:90px;" placeholder="Share your experience with the AI voice interviewer, question difficulty, clarity..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; padding:12px;">Submit Feedback</button>
+      </form>
+    </div>
+  </div>
+
+
+  <!-- Proctoring Warning Horizontal Light-Red Banner Pop-Up (3.5s notification) -->
+  <div class="proctor-warning-banner" id="proctor-warning-banner" role="alert" aria-live="assertive">
+    <div class="proctor-warning-left">
+      <div class="proctor-warning-icon-wrap" id="proctor-warning-icon-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+      </div>
+      <div class="proctor-warning-text-block">
+        <div class="proctor-warning-title-row">
+          <span class="proctor-warning-headline" id="proctor-warning-title">Integrity Warning</span>
+          <span class="proctor-warning-counter-pill" id="proctor-warning-counter">Warning 1 of 5</span>
+        </div>
+        <div class="proctor-warning-desc" id="proctor-warning-desc">
+          Multiple people detected in webcam feed. Ensure you are alone during the examination.
+        </div>
+      </div>
+    </div>
+    <button class="proctor-warning-dismiss-btn" onclick="App.hideProctorWarningBanner()" aria-label="Dismiss warning">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="app-toast-container" id="toast-container"></div>
+
+  <!-- Industry Standard High-Accuracy Face & Multi-Person Detector (Google BlazeFace via TensorFlow.js) -->
+  <script src="js/vendor/tf.min.js"></script>
+  <script src="js/vendor/blazeface.min.js"></script>
+  <!-- Real-Time Mobile Device & Object Detector (COCO-SSD via TensorFlow.js) -->
+  <script src="js/vendor/coco-ssd.min.js"></script>
+  <!-- Fallback Lightweight Computer Vision Detectors -->
+  <script src="js/vendor/tracking-min.js"></script>
+  <script src="js/vendor/face-min.js"></script>
+
+  <!-- Scripts -->
+  <script src="js/icons.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

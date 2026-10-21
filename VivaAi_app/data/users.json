@@ -1,0 +1,145 @@
+[
+  {
+    "id": "usr_mvh0x7pz",
+    "clerkId": null,
+    "name": "Test Student",
+    "email": "test.student@msot.edu",
+    "avatar": null,
+    "role": "student",
+    "status": "Active",
+    "joinedDate": "Oct 21, 2026",
+    "lastLogin": "2026-10-20T18:35:37.176Z"
+  },
+  {
+    "id": "usr_mvge091c",
+    "clerkId": "user_student99",
+    "name": "Other Student",
+    "email": "other.student@msot.edu",
+    "avatar": null,
+    "role": "student",
+    "status": "Active",
+    "joinedDate": "Oct 20, 2026",
+    "lastLogin": "2026-10-20T07:54:07.680Z"
+  },
+  {
+    "id": "usr_mvge3dzo",
+    "clerkId": null,
+    "name": "Google Candidate",
+    "email": "student.google@msot.edu",
+    "avatar": null,
+    "role": "student",
+    "status": "Active",
+    "joinedDate": "Oct 20, 2026",
+    "lastLogin": "2026-10-20T07:56:34.068Z"
+  },
+  {
+    "id": "usr_ha4Q5czE",
+    "clerkId": "user_3Kv0fAVv8KzjgfLnVhKha4Q5czE",
+    "name": "Ayush",
+    "email": "onew4182@gmail.com",
+    "avatar": "https://img.clerk.com/eyJ0eXBlIjoiZGVmYXVsdCIsImlpZCI6Imluc18zS3NkUXRKM1hrN3dscXl2MHlyQUhPNFBEdzMiLCJyaWQiOiJ1c2VyXzNLdjBmQVZ2OEt6amdmTG5WaEtoYTRRNWN6RSIsImluaXRpYWxzIjoiQSJ9",
+    "role": "student",
+    "status": "Active",
+    "joinedDate": "Oct 19, 2026",
+    "lastLogin": "2026-10-19T15:13:54.619Z"
+  },
+  {
+    "id": "usr_Y2ZdYguE",
+    "clerkId": "user_3Kus4g1TFjH9Y0mW0HIY2ZdYguE",
+    "name": "Anuj Chavan 01",
+    "email": "anujschavan97@gmail.com",
+    "avatar": "https://img.clerk.com/eyJ0eXBlIjoiZGVmYXVsdCIsImlpZCI6Imluc18zS3NkUXRKM1hrN3dscXl2MHlyQUhPNFBEdzMiLCJyaWQiOiJ1c2VyXzNLdXM0ZzFURmpIOVkwbVcwSElZMlpkWWd1RSIsImluaXRpYWxzIjoiQUMifQ",
+    "role": "student",
+    "status": "Active",
+    "joinedDate": "Oct 19, 2026",
+    "lastLogin": "2026-10-19T14:03:17.705Z"
+  },
+  {
+    "id": "usr_ACzz1HLw",
+    "clerkId": "user_3KsoMa3ogXYIxCl8Ee4ACzz1HLw",
+    "name": "AC Don",
+    "email": "acdon370@gmail.com",
+    "avatar": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18zS3NvTWNKUVVHMzZsdUtpRjRyTUVWY2RjcXAifQ",
+    "role": "student",
+    "status": "Active",
+    "joinedDate": "Oct 19, 2026",
+    "lastLogin": "2026-10-18T20:34:24.100Z"
+  },
+  {
+    "id": "usr_48HD96jT",
+    "clerkId": "user_3KsjrEUXEntz0wUNJ4g48HD96jT",
+    "name": "Pranav",
+    "email": "pranavsajagane725@gmail.com",
+    "avatar": "https://img.clerk.com/eyJ0eXBlIjoiZGVmYXVsdCIsImlpZCI6Imluc18zS3NkUXRKM1hrN3dscXl2MHlyQUhPNFBEdzMiLCJyaWQiOiJ1c2VyXzNLc2pyRVVYRW50ejB3VU5KNGc0OEhEOTZqVCIsImluaXRpYWxzIjoiUCJ9",
+    "role": "student",
+    "status": "Active",
+    "joinedDate": "Oct 19, 2026",
+    "lastLogin": "2026-10-20T11:15:53.908Z"
+  },
+  {
+    "id": "usr_vOLLZfco",
+    "clerkId": "user_3KsjVrowsbwao6bVL9AvOLLZfco",
+    "name": "Ananya Sharma",
+    "email": "ananya.sharma99@gmail.com",
+    "avatar": "https://img.clerk.com/eyJ0eXBlIjoiZGVmYXVsdCIsImlpZCI6Imluc18zS3NkUXRKM1hrN3dscXl2MHlyQUhPNFBEdzMiLCJyaWQiOiJ1c2VyXzNLc2pWcm93c2J3YW82YlZMOUF2T0xMWmZjbyIsImluaXRpYWxzIjoiQVMifQ",
+    "role": "student",
+    "status": "Active",
+    "joinedDate": "Oct 19, 2026",
+    "lastLogin": "2026-10-20T21:12:23.834Z"
+  },
+  {
+    "id": "usr_wV6Zp5hy",
+    "clerkId": "user_3Ksj83PLWte1XoEAcKJwV6Zp5hy",
+    "name": "X Yz",
+    "email": "xyz577616@gmail.com",
+    "avatar": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18zS3NqODJaVlF0NkY5NktNeVM4NGxIcjlNS0oifQ",
+    "role": "student",
+    "status": "Active",
+    "joinedDate": "Oct 19, 2026",
+    "lastLogin": "2026-10-18T19:50:06.548Z"
+  },
+  {
+    "id": "usr_jv33x6dE",
+    "clerkId": "user_3Ksizl6nVnyAZiY2Szijv33x6dE",
+    "name": "Pranav",
+    "email": "pranav725@gmail.com",
+    "avatar": "https://img.clerk.com/eyJ0eXBlIjoiZGVmYXVsdCIsImlpZCI6Imluc18zS3NkUXRKM1hrN3dscXl2MHlyQUhPNFBEdzMiLCJyaWQiOiJ1c2VyXzNLc2l6bDZuVm55QVppWTJTemlqdjMzeDZkRSIsImluaXRpYWxzIjoiUCJ9",
+    "role": "student",
+    "status": "Active",
+    "joinedDate": "Oct 19, 2026",
+    "lastLogin": "2026-10-20T21:12:23.835Z"
+  },
+  {
+    "id": "usr_bHSFUOMz",
+    "clerkId": "user_3KsiEELEE8LB1wlhnzXbHSFUOMz",
+    "name": "pravin",
+    "email": "ghodakepravin154@gmail.com",
+    "avatar": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18zS3NpRUQwSmJoMVQ2NDRTcU1ZNkl4N1V6c1AifQ",
+    "role": "admin",
+    "status": "Active",
+    "joinedDate": "Oct 19, 2026",
+    "lastLogin": "2026-10-21T06:26:00.249Z"
+  },
+  {
+    "id": "usr_lAFTWo3p",
+    "clerkId": "user_3Ksi43rGm3NozmbimJalAFTWo3p",
+    "name": "Pravin Ghodake Live",
+    "email": "pravin.student@msot.edu",
+    "avatar": "https://img.clerk.com/eyJ0eXBlIjoiZGVmYXVsdCIsImlpZCI6Imluc18zS3NkUXRKM1hrN3dscXl2MHlyQUhPNFBEdzMiLCJyaWQiOiJ1c2VyXzNLc2k0M3JHbTNOb3ptYmltSmFsQUZUV28zcCIsImluaXRpYWxzIjoiUEcifQ",
+    "role": "student",
+    "status": "Active",
+    "joinedDate": "Oct 19, 2026",
+    "lastLogin": "2026-10-20T21:12:23.838Z"
+  },
+  {
+    "id": "usr_nNi21Ckz",
+    "clerkId": "user_3Kshtv2Tr4EjXlDpIi9nNi21Ckz",
+    "name": "Anuj Chavan",
+    "email": "anujschavan007@gmail.com",
+    "avatar": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2F2YXRhcnMuZ2l0aHVidXNlcmNvbnRlbnQuY29tL3UvMjk2OTE3MzY4P3Y9NCIsInMiOiIvSjE5YW44a2h2cmJYT2sxRlJUbW9CaFRhNTFsVmhjK1pVN2ZlVFgxbTZjIn0",
+    "role": "student",
+    "status": "Active",
+    "joinedDate": "Oct 19, 2026",
+    "lastLogin": "2026-10-20T11:00:43.745Z"
+  }
+]

@@ -1,0 +1,3995 @@
+[
+  {
+    "id": "AV-4658",
+    "sessionNumber": "AV-4658",
+    "studentName": "Test Student",
+    "studentEmail": "student@college.edu",
+    "candidateName": "Test Student",
+    "candidateEmail": "student@college.edu",
+    "topic": "Data Structures",
+    "score": 88,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 21",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/viva-camera.webm",
+    "screenRecordingUrl": "/recordings/viva-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "speaker": "mira",
+        "text": "Explain how binary search operates on an array."
+      },
+      {
+        "speaker": "student",
+        "text": "Binary search requires a sorted array. It divides the search space in half by comparing with the midpoint element, achieving logarithmic time complexity O(log n)."
+      },
+      {
+        "speaker": "mira",
+        "text": "What happens when elements are unsorted?"
+      },
+      {
+        "speaker": "student",
+        "text": "If unsorted, binary search fails because monotonicity is lost. We must sort in O(n log n) or use linear search O(n)."
+      }
+    ],
+    "scorecard": {
+      "score": 38,
+      "readinessTier": "Needs Review",
+      "summary": "Viva examination successfully completed and evaluated.",
+      "isDisqualified": false,
+      "disqualificationReason": "",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 2,
+          "percent": 40,
+          "weight": 30,
+          "calculatedMarks": 12,
+          "reason": "Evaluated against core technical criteria.",
+          "evidence": "\"Binary search requires a sorted array. It divides the search space in half by co...\""
+        },
+        "depth": {
+          "score": 1.8,
+          "percent": 35,
+          "weight": 25,
+          "calculatedMarks": 8.8,
+          "reason": "Lacked architectural depth, memory details, and time/space complexity analysis.",
+          "evidence": "\"If unsorted, binary search fails because monotonicity is lost. We must sort in O...\""
+        },
+        "problemSolving": {
+          "score": 1.8,
+          "percent": 35,
+          "weight": 20,
+          "calculatedMarks": 7,
+          "reason": "Struggled to apply concepts to real-world scenarios or problem statements.",
+          "evidence": ""
+        },
+        "practical": {
+          "score": 1.6,
+          "percent": 32,
+          "weight": 15,
+          "calculatedMarks": 4.8,
+          "reason": "Little evidence of practical programming implementation or design principles.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 2.5,
+          "percent": 50,
+          "weight": 10,
+          "calculatedMarks": 5,
+          "reason": "Spoken communication delivery during oral examination.",
+          "evidence": ""
+        }
+      },
+      "strengths": [],
+      "improvements": [],
+      "suggestions": [],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "Explain how binary search operates on an array."
+        },
+        {
+          "speaker": "student",
+          "text": "Binary search requires a sorted array. It divides the search space in half by comparing with the midpoint element, achieving logarithmic time complexity O(log n)."
+        },
+        {
+          "speaker": "mira",
+          "text": "What happens when elements are unsorted?"
+        },
+        {
+          "speaker": "student",
+          "text": "If unsorted, binary search fails because monotonicity is lost. We must sort in O(n log n) or use linear search O(n)."
+        }
+      ]
+    },
+    "feedback": {},
+    "createdAt": "2026-10-20T21:10:53.611Z",
+    "readinessTier": "Placement Ready",
+    "facultyOverride": {
+      "overridden": true,
+      "previousScore": 38,
+      "newScore": 88,
+      "facultyName": "Dr. S. Kulkarni (HOD)",
+      "reason": "Reviewed audio recording; candidate provided precise nuance on monotonicity.",
+      "timestamp": "2026-10-20T21:10:53.635Z"
+    }
+  },
+  {
+    "id": "AV-4418",
+    "sessionNumber": "AV-4418",
+    "studentName": "pravin",
+    "studentEmail": "ghodakepravin154@gmail.com",
+    "candidateName": "pravin",
+    "candidateEmail": "ghodakepravin154@gmail.com",
+    "topic": "Data Structures",
+    "score": 22,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 21",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/AV-4418-cam.webm",
+    "screenRecordingUrl": "/recordings/AV-4418-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "interviewId": "AV-4418",
+        "speaker": "mira",
+        "text": "Welcome to your viva. Could you briefly introduce yourself and share which data structure you have worked with most frequently in your coursework?",
+        "timestamp": "00:08",
+        "stage": "Warm-up",
+        "followUpType": "advance"
+      }
+    ],
+    "scorecard": {
+      "score": 22,
+      "readinessTier": "Needs Review",
+      "summary": "Candidate demonstrated critical gaps in fundamental computer science definitions, incorrectly describing a data structure as \"a structure of food\" and evading questions with audio checks.",
+      "isDisqualified": false,
+      "disqualificationReason": "",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 1,
+          "percent": 20,
+          "weight": 30,
+          "calculatedMarks": 6,
+          "reason": "Failed to provide a valid definition of data structures; hallucinated non-computing analogies.",
+          "evidence": ""
+        },
+        "depth": {
+          "score": 0.8,
+          "percent": 15,
+          "weight": 25,
+          "calculatedMarks": 3.8,
+          "reason": "Did not demonstrate any understanding of memory layout, pointers, or complexity.",
+          "evidence": ""
+        },
+        "problemSolving": {
+          "score": 1.3,
+          "percent": 25,
+          "weight": 20,
+          "calculatedMarks": 5,
+          "reason": "Unable to approach technical problems or scenarios.",
+          "evidence": ""
+        },
+        "practical": {
+          "score": 1,
+          "percent": 20,
+          "weight": 15,
+          "calculatedMarks": 3,
+          "reason": "Lacked foundational connection to actual software development.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 2,
+          "percent": 40,
+          "weight": 10,
+          "calculatedMarks": 4,
+          "reason": "Deflected technical prompts to check audio connectivity; struggled to maintain examination focus.",
+          "evidence": ""
+        }
+      },
+      "strengths": [
+        {
+          "title": "Viva Participation",
+          "desc": "Candidate attended the examination and responded to the examiner prompts."
+        }
+      ],
+      "improvements": [
+        {
+          "title": "Fundamental Definitions",
+          "desc": "Candidate must study standard definitions of computer data structures and understand they organize memory, not food or physical items."
+        },
+        {
+          "title": "Technical Oral Preparedness",
+          "desc": "Focus directly on answering the questions asked rather than evading with microphone checks."
+        }
+      ],
+      "suggestions": [
+        "Read Chapter 1 of a standard Data Structures textbook, such as CLRS, on memory organization.",
+        "Practice defining basic terms aloud in clear technical English.",
+        "Learn the distinction between software data structures such as arrays and trees and non-computing physical structures."
+      ],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "Welcome to your viva. Could you briefly introduce yourself and share which data structure you have worked with most frequently in your coursework?",
+          "timestamp": "00:08",
+          "stage": "Warm-up"
+        }
+      ]
+    },
+    "feedback": {},
+    "createdAt": "2026-10-20T21:00:35.196Z"
+  },
+  {
+    "id": "AV-9140",
+    "sessionNumber": "AV-9140",
+    "studentName": "Test Student",
+    "studentEmail": "student@college.edu",
+    "candidateName": "Test Student",
+    "candidateEmail": "student@college.edu",
+    "topic": "Data Structures",
+    "score": 88,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 21",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/viva-camera.webm",
+    "screenRecordingUrl": "/recordings/viva-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "speaker": "mira",
+        "text": "Explain how binary search operates on an array."
+      },
+      {
+        "speaker": "student",
+        "text": "Binary search requires a sorted array. It divides the search space in half by comparing with the midpoint element, achieving logarithmic time complexity O(log n)."
+      },
+      {
+        "speaker": "mira",
+        "text": "What happens when elements are unsorted?"
+      },
+      {
+        "speaker": "student",
+        "text": "If unsorted, binary search fails because monotonicity is lost. We must sort in O(n log n) or use linear search O(n)."
+      }
+    ],
+    "scorecard": {
+      "score": 38,
+      "readinessTier": "Needs Review",
+      "summary": "Viva examination successfully completed and evaluated.",
+      "isDisqualified": false,
+      "disqualificationReason": "",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 2,
+          "percent": 40,
+          "weight": 30,
+          "calculatedMarks": 12,
+          "reason": "Evaluated against core technical criteria.",
+          "evidence": "\"Binary search requires a sorted array. It divides the search space in half by co...\""
+        },
+        "depth": {
+          "score": 1.8,
+          "percent": 35,
+          "weight": 25,
+          "calculatedMarks": 8.8,
+          "reason": "Lacked architectural depth, memory details, and time/space complexity analysis.",
+          "evidence": "\"If unsorted, binary search fails because monotonicity is lost. We must sort in O...\""
+        },
+        "problemSolving": {
+          "score": 1.8,
+          "percent": 35,
+          "weight": 20,
+          "calculatedMarks": 7,
+          "reason": "Struggled to apply concepts to real-world scenarios or problem statements.",
+          "evidence": ""
+        },
+        "practical": {
+          "score": 1.6,
+          "percent": 32,
+          "weight": 15,
+          "calculatedMarks": 4.8,
+          "reason": "Little evidence of practical programming implementation or design principles.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 2.5,
+          "percent": 50,
+          "weight": 10,
+          "calculatedMarks": 5,
+          "reason": "Spoken communication delivery during oral examination.",
+          "evidence": ""
+        }
+      },
+      "strengths": [],
+      "improvements": [],
+      "suggestions": [],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "Explain how binary search operates on an array."
+        },
+        {
+          "speaker": "student",
+          "text": "Binary search requires a sorted array. It divides the search space in half by comparing with the midpoint element, achieving logarithmic time complexity O(log n)."
+        },
+        {
+          "speaker": "mira",
+          "text": "What happens when elements are unsorted?"
+        },
+        {
+          "speaker": "student",
+          "text": "If unsorted, binary search fails because monotonicity is lost. We must sort in O(n log n) or use linear search O(n)."
+        }
+      ]
+    },
+    "feedback": {},
+    "createdAt": "2026-10-20T20:56:05.844Z"
+  },
+  {
+    "id": "AV-7256",
+    "sessionNumber": "AV-7256",
+    "studentName": "pravin",
+    "studentEmail": "ghodakepravin154@gmail.com",
+    "candidateName": "pravin",
+    "candidateEmail": "ghodakepravin154@gmail.com",
+    "topic": "Data Structures",
+    "score": 30,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 21",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/AV-7256-cam.webm",
+    "screenRecordingUrl": "/recordings/AV-7256-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "interviewId": "AV-7256",
+        "speaker": "mira",
+        "text": "No worries—let's make it concrete. If a sorted array has 1,000 elements, how many comparisons can binary search need, and how does that compare with linear search?",
+        "timestamp": "00:01",
+        "stage": "Fundamentals",
+        "followUpType": "nudge"
+      },
+      {
+        "interviewId": "AV-7256",
+        "speaker": "mira",
+        "text": "Welcome! You're ready to begin. Let's start with a gentle question: What is a data structure, and can you name a few common ones you've worked with?",
+        "timestamp": "00:05",
+        "stage": "Warm-up",
+        "followUpType": "advance"
+      }
+    ],
+    "scorecard": {
+      "score": 30,
+      "readinessTier": "Needs Review",
+      "summary": "Candidate completed viva session on Data Structures across 0 response turns.",
+      "isDisqualified": false,
+      "disqualificationReason": "",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 1.5,
+          "percent": 30,
+          "weight": 30,
+          "calculatedMarks": 9,
+          "reason": "Evaluated against core technical criteria.",
+          "evidence": ""
+        },
+        "depth": {
+          "score": 1.3,
+          "percent": 25,
+          "weight": 25,
+          "calculatedMarks": 6,
+          "reason": "Lacked architectural depth, memory details, and time/space complexity analysis.",
+          "evidence": ""
+        },
+        "problemSolving": {
+          "score": 1.3,
+          "percent": 25,
+          "weight": 20,
+          "calculatedMarks": 5,
+          "reason": "Struggled to apply concepts to real-world scenarios or problem statements.",
+          "evidence": ""
+        },
+        "practical": {
+          "score": 1.3,
+          "percent": 25,
+          "weight": 15,
+          "calculatedMarks": 4,
+          "reason": "Little evidence of practical programming implementation or design principles.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 2,
+          "percent": 40,
+          "weight": 10,
+          "calculatedMarks": 4,
+          "reason": "Spoken communication delivery during oral examination.",
+          "evidence": ""
+        }
+      },
+      "strengths": [
+        {
+          "title": "Oral Participation",
+          "desc": "Candidate engaged in the viva dialogue across 0 response turns."
+        }
+      ],
+      "improvements": [
+        {
+          "title": "Fundamental Concepts",
+          "desc": "Strengthen core theoretical definitions in Data Structures."
+        },
+        {
+          "title": "Technical Depth",
+          "desc": "Focus on time/space complexities and algorithmic mechanics rather than brief responses."
+        }
+      ],
+      "suggestions": [
+        "Review core textbook principles for Data Structures.",
+        "Practice oral technical explanations focusing on clear definitions and complexities.",
+        "Prepare directly for scenario-based questions."
+      ],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "No worries—let's make it concrete. If a sorted array has 1,000 elements, how many comparisons can binary search need, and how does that compare with linear search?",
+          "timestamp": "00:01",
+          "stage": "Fundamentals"
+        }
+      ]
+    },
+    "feedback": {},
+    "createdAt": "2026-10-20T20:46:09.891Z"
+  },
+  {
+    "id": "AV-2529",
+    "sessionNumber": "AV-2529",
+    "studentName": "Test Student",
+    "studentEmail": "student@college.edu",
+    "candidateName": "Test Student",
+    "candidateEmail": "student@college.edu",
+    "topic": "Data Structures",
+    "score": 88,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 21",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/viva-camera.webm",
+    "screenRecordingUrl": "/recordings/viva-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "speaker": "mira",
+        "text": "Explain how binary search operates on an array."
+      },
+      {
+        "speaker": "student",
+        "text": "Binary search requires a sorted array. It divides the search space in half by comparing with the midpoint element, achieving logarithmic time complexity O(log n)."
+      },
+      {
+        "speaker": "mira",
+        "text": "What happens when elements are unsorted?"
+      },
+      {
+        "speaker": "student",
+        "text": "If unsorted, binary search fails because monotonicity is lost. We must sort in O(n log n) or use linear search O(n)."
+      }
+    ],
+    "scorecard": {
+      "score": 40,
+      "readinessTier": "Needs Review",
+      "summary": "Viva examination successfully completed and evaluated.",
+      "isDisqualified": false,
+      "disqualificationReason": "",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 2,
+          "percent": 40,
+          "weight": 30,
+          "calculatedMarks": 12,
+          "reason": "Evaluated against core technical criteria.",
+          "evidence": "\"Binary search requires a sorted array. It divides the search space in half by co...\""
+        },
+        "depth": {
+          "score": 1.8,
+          "percent": 35,
+          "weight": 25,
+          "calculatedMarks": 9,
+          "reason": "Lacked architectural depth, memory details, and time/space complexity analysis.",
+          "evidence": "\"If unsorted, binary search fails because monotonicity is lost. We must sort in O...\""
+        },
+        "problemSolving": {
+          "score": 1.8,
+          "percent": 35,
+          "weight": 20,
+          "calculatedMarks": 7,
+          "reason": "Struggled to apply concepts to real-world scenarios or problem statements.",
+          "evidence": ""
+        },
+        "practical": {
+          "score": 1.8,
+          "percent": 35,
+          "weight": 15,
+          "calculatedMarks": 5,
+          "reason": "Little evidence of practical programming implementation or design principles.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 2.5,
+          "percent": 50,
+          "weight": 10,
+          "calculatedMarks": 5,
+          "reason": "Spoken communication delivery during oral examination.",
+          "evidence": ""
+        }
+      },
+      "strengths": [],
+      "improvements": [],
+      "suggestions": [],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "Explain how binary search operates on an array."
+        },
+        {
+          "speaker": "student",
+          "text": "Binary search requires a sorted array. It divides the search space in half by comparing with the midpoint element, achieving logarithmic time complexity O(log n)."
+        },
+        {
+          "speaker": "mira",
+          "text": "What happens when elements are unsorted?"
+        },
+        {
+          "speaker": "student",
+          "text": "If unsorted, binary search fails because monotonicity is lost. We must sort in O(n log n) or use linear search O(n)."
+        }
+      ]
+    },
+    "feedback": {},
+    "createdAt": "2026-10-20T20:35:43.114Z"
+  },
+  {
+    "id": "AV-4050",
+    "sessionNumber": "AV-4050",
+    "studentName": "pravin",
+    "studentEmail": "ghodakepravin154@gmail.com",
+    "candidateName": "pravin",
+    "candidateEmail": "ghodakepravin154@gmail.com",
+    "topic": "Data Structures",
+    "score": 10,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 21",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/AV-4050-cam.webm",
+    "screenRecordingUrl": "/recordings/AV-4050-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "interviewId": "AV-4050",
+        "speaker": "mira",
+        "text": "Welcome, and thank you for joining me—I'm Professor Mira. Could you tell me your name and how you'd prefer to be addressed? To ease in, what do you consider the main difference between an array and a linked list?",
+        "timestamp": "00:06",
+        "stage": "Warm-up",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-4050",
+        "speaker": "student",
+        "text": "Could",
+        "timestamp": "00:15",
+        "stage": "Warm-up",
+        "questionRef": "Welcome, and thank you for joining me—I'm Professor Mira. Could you tell me your name and how you'd prefer to be addressed? To ease in, what do you consider the main difference between an array and a linked list?"
+      },
+      {
+        "interviewId": "AV-4050",
+        "speaker": "mira",
+        "text": "I didn't quite catch that—could you share your name and how you'd like to be addressed? Once we have that sorted, feel free to walk me through the main difference between an array and a linked list.",
+        "timestamp": "00:18",
+        "stage": "Warm-up",
+        "followUpType": "redirect"
+      }
+    ],
+    "scorecard": {
+      "score": 10,
+      "readinessTier": "Needs Review",
+      "summary": "Candidate provided only a single-word fragment 'Could' in response to both the introduction request and the core technical question about array versus linked list differences, demonstrating a complete failure to engage with the examination.",
+      "isDisqualified": false,
+      "disqualificationReason": "",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 0.5,
+          "percent": 10,
+          "weight": 30,
+          "calculatedMarks": 3,
+          "reason": "Candidate did not offer any definition or comparison of arrays and linked lists; the response 'Could' contains zero technical content.",
+          "evidence": ""
+        },
+        "depth": {
+          "score": 0.5,
+          "percent": 10,
+          "weight": 25,
+          "calculatedMarks": 2.5,
+          "reason": "No evidence of understanding memory layout, pointer mechanics, or time complexities was presented.",
+          "evidence": ""
+        },
+        "problemSolving": {
+          "score": 0.5,
+          "percent": 10,
+          "weight": 20,
+          "calculatedMarks": 2,
+          "reason": "Candidate did not attempt to address the technical problem posed by the examiner.",
+          "evidence": ""
+        },
+        "practical": {
+          "score": 0.5,
+          "percent": 10,
+          "weight": 15,
+          "calculatedMarks": 1.5,
+          "reason": "No connection to software development practice or data structure usage was shown.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 0.5,
+          "percent": 10,
+          "weight": 10,
+          "calculatedMarks": 1,
+          "reason": "Candidate uttered a single incomplete word ('Could') instead of answering the examiner's two-part prompt, indicating severe communication breakdown.",
+          "evidence": ""
+        }
+      },
+      "strengths": [
+        {
+          "title": "Examination Attendance",
+          "desc": "Candidate was present and produced an audible response, however minimal."
+        }
+      ],
+      "improvements": [
+        {
+          "title": "Basic Technical Definitions",
+          "desc": "Must learn and be able to articulate the fundamental differences between arrays (contiguous memory, O(1) index access, fixed size) and linked lists (node-based, dynamic size, O(1) insertion at head, O(n) search)."
+        },
+        {
+          "title": "Oral Examination Technique",
+          "desc": "Practice responding to multi-part questions fully; avoid one-word fragments that do not address the prompt."
+        }
+      ],
+      "suggestions": [
+        "Study Chapter 10 (Elementary Data Structures) of CLRS or equivalent textbook covering arrays and linked lists.",
+        "Rehearse answering standard viva questions aloud, ensuring each part of a compound question is addressed.",
+        "Participate in mock oral exams to build confidence and fluency in technical English."
+      ],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "Welcome, and thank you for joining me—I'm Professor Mira. Could you tell me your name and how you'd prefer to be addressed? To ease in, what do you consider the main difference between an array and a linked list?",
+          "timestamp": "00:06",
+          "stage": "Warm-up"
+        },
+        {
+          "speaker": "student",
+          "text": "Could",
+          "timestamp": "00:15",
+          "stage": "Warm-up",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Non-responsive",
+            "desc": "Candidate replied 'Could' to the examiner's request for name/preference and the array vs linked list comparison, providing no usable answer to either component.",
+            "dimension": "Communication",
+            "supportsScore": "20 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "I didn't quite catch that—could you share your name and how you'd like to be addressed? Once we have that sorted, feel free to walk me through the main difference between an array and a linked list.",
+          "timestamp": "00:18",
+          "stage": "Warm-up"
+        }
+      ]
+    },
+    "feedback": {},
+    "createdAt": "2026-10-20T20:29:35.926Z"
+  },
+  {
+    "id": "AV-9861",
+    "sessionNumber": "AV-9861",
+    "studentName": "pravin",
+    "studentEmail": "ghodakepravin154@gmail.com",
+    "candidateName": "pravin",
+    "candidateEmail": "ghodakepravin154@gmail.com",
+    "topic": "Data Structures",
+    "score": 25,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 21",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/AV-9861-cam.webm",
+    "screenRecordingUrl": "/recordings/AV-9861-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "interviewId": "AV-9861",
+        "speaker": "student",
+        "text": "Relax",
+        "timestamp": "00:03",
+        "stage": "Warm-up",
+        "questionRef": "Welcome! I'm Professor Mira, and I'm delighted to have you here today. To get us started, could you tell me briefly what data structure you find most interesting or why you think it's particularly powerful in real-world applications?"
+      },
+      {
+        "interviewId": "AV-9861",
+        "speaker": "mira",
+        "text": "3.  **Formulate the Response:**\n   - I need to output JSON with three fields: `question`, `followUpType`, `advanceStage`, `rationale`.\n   - `question`: What Professor Mira says aloud. Must be 2-3 natural sentences. Should greet, confirm readiness, and ask a gentle intro technical question.\n   - `followUpType`: Since this is the very start, and the candidate is ready, I'll likely set this to something appropriate, but the options are: `deepen | nudge | advance | redirect`. Given it's the first question, maybe `advance` or something else? Actually, looking at the rules: \"Strong answer: Acknowledge insight, probe one level deeper... Partial answer: Give one brief hint... 'I don't know'... Off-topic/Stalling...\". But this is before any answer is given. The candidate just said they're ready. So the followUpType might be `advance` to move to the next part, or perhaps I need to ask the question first. Wait, the JSON structure is for my response *after* the candidate's answer. The prompt says: \"Latest candidate answer: '(Candidate is ready to begin the viva)'\". So I need to respond to that, i.e., give the opening question.\n   - `advanceStage`: The stage is Warm-up (step 1). After I ask the opening question, should I advance to the next stage? The timing for Warm-up is 0:00 – 1:00. I should probably stay in step 1 for a brief moment, ask the question, and then maybe advance after they answer. But the `advanceStage` boolean likely indicates whether to move to the next configured stage. Given the structure, after the warm",
+        "timestamp": "00:04",
+        "stage": "Warm-up",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-9861",
+        "speaker": "mira",
+        "text": "Welcome to the viva! I'm so glad you're here and ready to dig into data structures together. Let's start with something straightforward — can you tell me what a singly linked list is and how it differs from an array in terms of access time?",
+        "timestamp": "00:08",
+        "stage": "Warm-up",
+        "followUpType": "deepen"
+      },
+      {
+        "interviewId": "AV-9861",
+        "speaker": "mira",
+        "text": "followUpType: Since this is the opening and we're asking the first question, \"advance\" might not be right because we haven't gotten an answer to evaluate. But the options are deepen | nudge | advance | redirect. Since the student said \"Relax\" (off-topic/non-answer), maybe \"redirect\" to steer back? Or \"advance\" because we're moving forward with the actual question? Actually, looking at the context, this is the first professor response. The student's \"Relax\" might be them trying to tell the professor to relax, or just a weird input. I should treat it as a stalling/off-topic but politely steer back. However, the directive for this stage is",
+        "timestamp": "00:10",
+        "stage": "Warm-up",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-9861",
+        "speaker": "student",
+        "text": "Type",
+        "timestamp": "00:14",
+        "stage": "Applied Problem",
+        "questionRef": "followUpType: Since this is the opening and we're asking the first question, \"advance\" might not be right because we haven't gotten an answer to evaluate. But the options are deepen | nudge | advance | redirect. Since the student said \"Relax\" (off-topic/non-answer), maybe \"redirect\" to steer back? Or \"advance\" because we're moving forward with the actual question? Actually, looking at the context, this is the first professor response. The student's \"Relax\" might be them trying to tell the professor to relax, or just a weird input. I should treat it as a stalling/off-topic but politely steer back. However, the directive for this stage is"
+      },
+      {
+        "interviewId": "AV-9861",
+        "speaker": "mira",
+        "text": "Thanks for that. Let's move into a practical debugging scenario — imagine you're working with a hash table that uses separate chaining, and you notice that lookups are taking much longer than expected, even though the load factor seems reasonable. How would you go about diagnosing what's going wrong?",
+        "timestamp": "00:18",
+        "stage": "Applied Problem",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-9861",
+        "speaker": "student",
+        "text": "Let's",
+        "timestamp": "00:23",
+        "stage": "Wrap-up",
+        "questionRef": "Thanks for that. Let's move into a practical debugging scenario — imagine you're working with a hash table that uses separate chaining, and you notice that lookups are taking much longer than expected, even though the load factor seems reasonable. How would you go about diagnosing what's going wrong?"
+      },
+      {
+        "interviewId": "AV-9861",
+        "speaker": "mira",
+        "text": "That works—let’s wrap things up thoughtfully. Before we finish, do you have any closing thoughts or additional technical insights about data structures that you’d like to share?",
+        "timestamp": "00:28",
+        "stage": "Wrap-up",
+        "followUpType": "advance"
+      }
+    ],
+    "scorecard": {
+      "score": 25,
+      "readinessTier": "Needs Review",
+      "summary": "Candidate gave non‑technical, evasive responses ('Relax', 'Type', 'Let's') and failed to define data structures or address the hash table debugging scenario, indicating critical gaps in fundamental understanding.",
+      "isDisqualified": false,
+      "disqualificationReason": "",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 1,
+          "percent": 20,
+          "weight": 30,
+          "calculatedMarks": 6,
+          "reason": "Failed to provide a valid definition of data structures; responded with non‑technical, meaningless terms.",
+          "evidence": ""
+        },
+        "depth": {
+          "score": 0.8,
+          "percent": 15,
+          "weight": 25,
+          "calculatedMarks": 3.8,
+          "reason": "Did not demonstrate any understanding of memory layout, pointers, or complexity.",
+          "evidence": ""
+        },
+        "problemSolving": {
+          "score": 1.3,
+          "percent": 25,
+          "weight": 20,
+          "calculatedMarks": 5,
+          "reason": "Unable to approach the technical debugging scenario or propose any diagnostic steps.",
+          "evidence": ""
+        },
+        "practical": {
+          "score": 1,
+          "percent": 20,
+          "weight": 15,
+          "calculatedMarks": 3,
+          "reason": "Lacked any connection to actual software development concepts or implementation details.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 2,
+          "percent": 40,
+          "weight": 10,
+          "calculatedMarks": 4,
+          "reason": "Deflected technical prompts with non‑answers, showing poor communication and focus during the viva.",
+          "evidence": ""
+        }
+      },
+      "strengths": [
+        {
+          "title": "Viva Participation",
+          "desc": "Candidate attended the examination and responded to the examiner prompts."
+        }
+      ],
+      "improvements": [
+        {
+          "title": "Fundamental Definitions",
+          "desc": "Study standard definitions of computer data structures and understand they organize memory, not physical or food items."
+        },
+        {
+          "title": "Technical Oral Preparedness",
+          "desc": "Focus directly on answering the questions asked rather than evading with non‑technical or audio‑check statements."
+        }
+      ],
+      "suggestions": [
+        "Read Chapter 1 of a standard Data Structures textbook (e.g., Cormen / CLRS) on memory organization.",
+        "Practice defining basic terms aloud in clear technical English.",
+        "Learn the distinction between software data structures (arrays, trees) and physical concepts."
+      ],
+      "annotatedTranscript": [
+        {
+          "speaker": "student",
+          "text": "Relax",
+          "timestamp": "00:03",
+          "stage": "Warm-up",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Audio check",
+            "desc": "Candidate responded with 'Relax' instead of providing a definition or addressing the question, indicating a failure to engage with the technical prompt.",
+            "dimension": "Communication",
+            "supportsScore": "20 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "3.  **Formulate the Response:**\n   - I need to output JSON with three fields: `question`, `followUpType`, `advanceStage`, `rationale`.\n   - `question`: What Professor Mira says aloud. Must be 2-3 natural sentences. Should greet, confirm readiness, and ask a gentle intro technical question.\n   - `followUpType`: Since this is the very start, and the candidate is ready, I'll likely set this to something appropriate, but the options are: `deepen | nudge | advance | redirect`. Given it's the first question, maybe `advance` or something else? Actually, looking at the rules: \"Strong answer: Acknowledge insight, probe one level deeper... Partial answer: Give one brief hint... 'I don't know'... Off-topic/Stalling...\". But this is before any answer is given. The candidate just said they're ready. So the followUpType might be `advance` to move to the next part, or perhaps I need to ask the question first. Wait, the JSON structure is for my response *after* the candidate's answer. The prompt says: \"Latest candidate answer: '(Candidate is ready to begin the viva)'\". So I need to respond to that, i.e., give the opening question.\n   - `advanceStage`: The stage is Warm-up (step 1). After I ask the opening question, should I advance to the next stage? The timing for Warm-up is 0:00 – 1:00. I should probably stay in step 1 for a brief moment, ask the question, and then maybe advance after they answer. But the `advanceStage` boolean likely indicates whether to move to the next configured stage. Given the structure, after the warm",
+          "timestamp": "00:04",
+          "stage": "Warm-up"
+        },
+        {
+          "speaker": "mira",
+          "text": "Welcome to the viva! I'm so glad you're here and ready to dig into data structures together. Let's start with something straightforward — can you tell me what a singly linked list is and how it differs from an array in terms of access time?",
+          "timestamp": "00:08",
+          "stage": "Warm-up"
+        },
+        {
+          "speaker": "mira",
+          "text": "followUpType: Since this is the opening and we're asking the first question, \"advance\" might not be right because we haven't gotten an answer to evaluate. But the options are deepen | nudge | advance | redirect. Since the student said \"Relax\" (off-topic/non-answer), maybe \"redirect\" to steer back? Or \"advance\" because we're moving forward with the actual question? Actually, looking at the context, this is the first professor response. The student's \"Relax\" might be them trying to tell the professor to relax, or just a weird input. I should treat it as a stalling/off-topic but politely steer back. However, the directive for this stage is",
+          "timestamp": "00:10",
+          "stage": "Warm-up"
+        },
+        {
+          "speaker": "student",
+          "text": "Type",
+          "timestamp": "00:14",
+          "stage": "Applied Problem",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Inaccurate definition",
+            "desc": "Candidate answered 'Type' which does not constitute a valid definition of a data structure, showing a severe misunderstanding of the concept.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "20 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "Thanks for that. Let's move into a practical debugging scenario — imagine you're working with a hash table that uses separate chaining, and you notice that lookups are taking much longer than expected, even though the load factor seems reasonable. How would you go about diagnosing what's going wrong?",
+          "timestamp": "00:18",
+          "stage": "Applied Problem"
+        },
+        {
+          "speaker": "student",
+          "text": "Let's",
+          "timestamp": "00:23",
+          "stage": "Wrap-up",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete",
+            "desc": "Candidate replied 'Let's' without offering any diagnostic steps for the hash table issue, demonstrating lack of problem‑solving ability.",
+            "dimension": "ProblemSolving",
+            "supportsScore": "20 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "That works—let’s wrap things up thoughtfully. Before we finish, do you have any closing thoughts or additional technical insights about data structures that you’d like to share?",
+          "timestamp": "00:28",
+          "stage": "Wrap-up"
+        }
+      ]
+    },
+    "feedback": {},
+    "createdAt": "2026-10-20T20:14:41.918Z"
+  },
+  {
+    "id": "AV-7871",
+    "sessionNumber": "AV-7871",
+    "studentName": "Test Student",
+    "studentEmail": "student@college.edu",
+    "candidateName": "Test Student",
+    "candidateEmail": "student@college.edu",
+    "topic": "Data Structures",
+    "score": 88,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 21",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/viva-camera.webm",
+    "screenRecordingUrl": "/recordings/viva-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "speaker": "mira",
+        "text": "Explain how binary search operates on an array."
+      },
+      {
+        "speaker": "student",
+        "text": "Binary search requires a sorted array. It divides the search space in half by comparing with the midpoint element, achieving logarithmic time complexity O(log n)."
+      },
+      {
+        "speaker": "mira",
+        "text": "What happens when elements are unsorted?"
+      },
+      {
+        "speaker": "student",
+        "text": "If unsorted, binary search fails because monotonicity is lost. We must sort in O(n log n) or use linear search O(n)."
+      }
+    ],
+    "scorecard": {
+      "score": 62,
+      "readinessTier": "Needs Review",
+      "summary": "Viva examination successfully completed and evaluated.",
+      "isDisqualified": false,
+      "disqualificationReason": "",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 1.1,
+          "percent": 22,
+          "weight": 30,
+          "calculatedMarks": 6.6,
+          "reason": "Candidate correctly explained binary search mechanics and unsorted array behavior, demonstrating foundational conceptual understanding.",
+          "evidence": ""
+        },
+        "depth": {
+          "score": 0.9,
+          "percent": 18,
+          "weight": 25,
+          "calculatedMarks": 4.5,
+          "reason": "Candidate showed basic complexity awareness (O(log n), O(n log n)) but lacked depth in memory layout, pointer operations, or architectural trade-offs.",
+          "evidence": ""
+        },
+        "problemSolving": {
+          "score": 1.1,
+          "percent": 22,
+          "weight": 20,
+          "calculatedMarks": 4.4,
+          "reason": "Candidate correctly identified solutions to the unsorted array problem, demonstrating appropriate problem-solving approach.",
+          "evidence": ""
+        },
+        "practical": {
+          "score": 0.9,
+          "percent": 18,
+          "weight": 15,
+          "calculatedMarks": 2.7,
+          "reason": "Candidate connected algorithmic concepts to practical scenarios but lacked deeper software development context.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 1,
+          "percent": 20,
+          "weight": 10,
+          "calculatedMarks": 2,
+          "reason": "Answers were clear, direct, and technically precise without deflection or evasion.",
+          "evidence": ""
+        }
+      },
+      "strengths": [],
+      "improvements": [],
+      "suggestions": [],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "Explain how binary search operates on an array."
+        },
+        {
+          "speaker": "student",
+          "text": "Binary search requires a sorted array. It divides the search space in half by comparing with the midpoint element, achieving logarithmic time complexity O(log n)."
+        },
+        {
+          "speaker": "mira",
+          "text": "What happens when elements are unsorted?"
+        },
+        {
+          "speaker": "student",
+          "text": "If unsorted, binary search fails because monotonicity is lost. We must sort in O(n log n) or use linear search O(n)."
+        }
+      ]
+    },
+    "feedback": {},
+    "createdAt": "2026-10-20T20:10:56.746Z"
+  },
+  {
+    "id": "AV-5404",
+    "sessionNumber": "AV-5404",
+    "studentName": "pravin",
+    "studentEmail": "ghodakepravin154@gmail.com",
+    "candidateName": "pravin",
+    "candidateEmail": "ghodakepravin154@gmail.com",
+    "topic": "Data Structures",
+    "score": 20,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 21",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/AV-5404-cam.webm",
+    "screenRecordingUrl": "/recordings/AV-5404-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "interviewId": "AV-5404",
+        "speaker": "mira",
+        "text": "Good morning, and welcome—I'm glad you're ready. Could you tell me your name and then describe one key difference between an array and a linked list?",
+        "timestamp": "00:03",
+        "stage": "Warm-up",
+        "followUpType": "redirect"
+      },
+      {
+        "interviewId": "AV-5404",
+        "speaker": "mira",
+        "text": "Welcome! I'm glad you're ready. To start us off gently, could you briefly explain what a data structure is and give me one example of where you might use one in everyday programming?",
+        "timestamp": "00:04",
+        "stage": "Warm-up",
+        "followUpType": "nudge"
+      }
+    ],
+    "scorecard": {
+      "score": 20,
+      "readinessTier": "Disqualified",
+      "summary": "Candidate was terminated and kicked off from the interview examination due to 5 violations of integrity rules (e.g. multiple people, tab switches, out-of-frame, copy-paste).",
+      "isDisqualified": true,
+      "disqualificationReason": "Candidate disqualified and kicked off from examination due to 5 automated integrity rule violations.",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 1,
+          "percent": 20,
+          "weight": 30,
+          "calculatedMarks": 6,
+          "reason": "Failed to provide a valid definition of data structures; hallucinated a non-computing food analogy.",
+          "evidence": ""
+        },
+        "depth": {
+          "score": 0.8,
+          "percent": 15,
+          "weight": 25,
+          "calculatedMarks": 3.8,
+          "reason": "Did not demonstrate any understanding of memory layout, pointers, or time and space complexity.",
+          "evidence": ""
+        },
+        "problemSolving": {
+          "score": 1.3,
+          "percent": 25,
+          "weight": 20,
+          "calculatedMarks": 5,
+          "reason": "Unable to approach the technical questions or explain how data structures organize data in programs.",
+          "evidence": ""
+        },
+        "practical": {
+          "score": 1,
+          "percent": 20,
+          "weight": 15,
+          "calculatedMarks": 3,
+          "reason": "Lacked a foundational connection between data structures and practical software development.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 2,
+          "percent": 40,
+          "weight": 10,
+          "calculatedMarks": 4,
+          "reason": "Deflected technical prompts with a microphone check and struggled to maintain examination focus.",
+          "evidence": ""
+        }
+      },
+      "strengths": [
+        {
+          "title": "Integrity Alert",
+          "desc": "Session terminated due to repeated proctoring violations."
+        }
+      ],
+      "improvements": [
+        {
+          "title": "Examination Adherence",
+          "desc": "Must follow anti-cheat guidelines, avoid tab switches and keep single person in frame."
+        }
+      ],
+      "suggestions": [
+        "Re-take viva after verifying webcam integrity and examination rules compliance."
+      ],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "Good morning, and welcome—I'm glad you're ready. Could you tell me your name and then describe one key difference between an array and a linked list?",
+          "timestamp": "00:03",
+          "stage": "Warm-up"
+        },
+        {
+          "speaker": "mira",
+          "text": "Welcome! I'm glad you're ready. To start us off gently, could you briefly explain what a data structure is and give me one example of where you might use one in everyday programming?",
+          "timestamp": "00:04",
+          "stage": "Warm-up"
+        }
+      ]
+    },
+    "feedback": {},
+    "createdAt": "2026-10-20T19:44:57.491Z"
+  },
+  {
+    "id": "AV-5135",
+    "sessionNumber": "AV-5135",
+    "studentName": "Test Student",
+    "studentEmail": "student@college.edu",
+    "candidateName": "Test Student",
+    "candidateEmail": "student@college.edu",
+    "topic": "Data Structures",
+    "score": 88,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 21",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/viva-camera.webm",
+    "screenRecordingUrl": "/recordings/viva-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "speaker": "mira",
+        "text": "Explain how binary search operates on an array."
+      },
+      {
+        "speaker": "student",
+        "text": "Binary search requires a sorted array. It divides the search space in half by comparing with the midpoint element, achieving logarithmic time complexity O(log n)."
+      },
+      {
+        "speaker": "mira",
+        "text": "What happens when elements are unsorted?"
+      },
+      {
+        "speaker": "student",
+        "text": "If unsorted, binary search fails because monotonicity is lost. We must sort in O(n log n) or use linear search O(n)."
+      }
+    ],
+    "scorecard": {
+      "score": 40,
+      "readinessTier": "Needs Review",
+      "summary": "Viva examination successfully completed and evaluated.",
+      "isDisqualified": false,
+      "disqualificationReason": "",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 2,
+          "percent": 40,
+          "weight": 30,
+          "calculatedMarks": 12,
+          "reason": "Evaluated against core technical criteria.",
+          "evidence": "\"Binary search requires a sorted array. It divides the search space in half by co...\""
+        },
+        "depth": {
+          "score": 1.8,
+          "percent": 35,
+          "weight": 25,
+          "calculatedMarks": 9,
+          "reason": "Lacked architectural depth, memory details, and time/space complexity analysis.",
+          "evidence": "\"If unsorted, binary search fails because monotonicity is lost. We must sort in O...\""
+        },
+        "problemSolving": {
+          "score": 1.8,
+          "percent": 35,
+          "weight": 20,
+          "calculatedMarks": 7,
+          "reason": "Struggled to apply concepts to real-world scenarios or problem statements.",
+          "evidence": ""
+        },
+        "practical": {
+          "score": 1.8,
+          "percent": 35,
+          "weight": 15,
+          "calculatedMarks": 5,
+          "reason": "Little evidence of practical programming implementation or design principles.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 2.5,
+          "percent": 50,
+          "weight": 10,
+          "calculatedMarks": 5,
+          "reason": "Spoken communication delivery during oral examination.",
+          "evidence": ""
+        }
+      },
+      "strengths": [],
+      "improvements": [],
+      "suggestions": [],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "Explain how binary search operates on an array."
+        },
+        {
+          "speaker": "student",
+          "text": "Binary search requires a sorted array. It divides the search space in half by comparing with the midpoint element, achieving logarithmic time complexity O(log n)."
+        },
+        {
+          "speaker": "mira",
+          "text": "What happens when elements are unsorted?"
+        },
+        {
+          "speaker": "student",
+          "text": "If unsorted, binary search fails because monotonicity is lost. We must sort in O(n log n) or use linear search O(n)."
+        }
+      ]
+    },
+    "feedback": {},
+    "createdAt": "2026-10-20T18:35:45.162Z"
+  },
+  {
+    "id": "AV-6512",
+    "sessionNumber": "AV-6512",
+    "studentName": "pravin",
+    "studentEmail": "ghodakepravin154@gmail.com",
+    "candidateName": "pravin",
+    "candidateEmail": "ghodakepravin154@gmail.com",
+    "topic": "Data Structures",
+    "score": 20,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 20",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/AV-6512-cam.webm",
+    "screenRecordingUrl": "/recordings/AV-6512-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "interviewId": "AV-6512",
+        "speaker": "mira",
+        "text": "Hello! I'm Professor Mira, and I'm delighted to meet you today. How are you feeling about this viva? To start, could you briefly explain what a data structure is and mention a simple scenario where you'd prefer using an array instead of a linked list?",
+        "timestamp": "00:12",
+        "stage": "Warm-up",
+        "followUpType": "advance"
+      },
+      {
+        "interviewId": "AV-6512",
+        "speaker": "student",
+        "text": "Hi do you know about me",
+        "timestamp": "00:36",
+        "stage": "Warm-up",
+        "questionRef": "Hello! I'm Professor Mira, and I'm delighted to meet you today. How are you feeling about this viva? To start, could you briefly explain what a data structure is and mention a simple scenario where you'd prefer using an array instead of a linked list?"
+      },
+      {
+        "interviewId": "AV-6512",
+        "speaker": "mira",
+        "text": "Hello! I'm Professor Mira, and I'm delighted to meet you today. How are you feeling about this viva? To start, could you briefly explain what a data structure is and mention a simple scenario where you'd prefer using an array instead of a linked list?",
+        "timestamp": "00:39",
+        "stage": "Warm-up",
+        "followUpType": "redirect"
+      },
+      {
+        "interviewId": "AV-6512",
+        "speaker": "student",
+        "text": "Yeah can you please explain what is the data structure is and mentioned",
+        "timestamp": "01:02",
+        "stage": "Fundamentals",
+        "questionRef": "Hello! I'm Professor Mira, and I'm delighted to meet you today. How are you feeling about this viva? To start, could you briefly explain what a data structure is and mention a simple scenario where you'd prefer using an array instead of a linked list?"
+      },
+      {
+        "interviewId": "AV-6512",
+        "speaker": "mira",
+        "text": "To help me understand your thinking, could you give me a precise definition of what a data structure is? And then think of one simple real-world scenario where choosing an array would be better than using a linked list.",
+        "timestamp": "01:26",
+        "stage": "Fundamentals",
+        "followUpType": "deepen"
+      },
+      {
+        "interviewId": "AV-6512",
+        "speaker": "student",
+        "text": "Programming language where we use to modify data by using code",
+        "timestamp": "01:52",
+        "stage": "Depth",
+        "questionRef": "To help me understand your thinking, could you give me a precise definition of what a data structure is? And then think of one simple real-world scenario where choosing an array would be better than using a linked list."
+      },
+      {
+        "interviewId": "AV-6512",
+        "speaker": "mira",
+        "text": "Explain the trade-offs between a Hash Table and a Balanced Binary Search Tree.",
+        "timestamp": "01:57",
+        "stage": "Depth",
+        "followUpType": "advance"
+      }
+    ],
+    "scorecard": {
+      "score": 20,
+      "readinessTier": "Disqualified",
+      "summary": "Candidate was terminated and kicked off from the interview examination due to 5 violations of integrity rules (e.g. multiple people, tab switches, out-of-frame, copy-paste).",
+      "isDisqualified": true,
+      "disqualificationReason": "Candidate disqualified and kicked off from examination due to 5 automated integrity rule violations.",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 2.5,
+          "percent": 50,
+          "weight": 30,
+          "calculatedMarks": 15,
+          "reason": "Evaluated against core technical criteria.",
+          "evidence": "\"Hi do you know about me...\""
+        },
+        "depth": {
+          "score": 2.3,
+          "percent": 45,
+          "weight": 25,
+          "calculatedMarks": 11,
+          "reason": "Lacked architectural depth, memory details, and time/space complexity analysis.",
+          "evidence": "\"Yeah can you please explain what is the data structure is and mentioned...\""
+        },
+        "problemSolving": {
+          "score": 2.3,
+          "percent": 45,
+          "weight": 20,
+          "calculatedMarks": 9,
+          "reason": "Struggled to apply concepts to real-world scenarios or problem statements.",
+          "evidence": "\"Programming language where we use to modify data by using code...\""
+        },
+        "practical": {
+          "score": 2.3,
+          "percent": 45,
+          "weight": 15,
+          "calculatedMarks": 7,
+          "reason": "Little evidence of practical programming implementation or design principles.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 3,
+          "percent": 60,
+          "weight": 10,
+          "calculatedMarks": 6,
+          "reason": "Spoken communication delivery during oral examination.",
+          "evidence": ""
+        }
+      },
+      "strengths": [
+        {
+          "title": "Integrity Alert",
+          "desc": "Session terminated due to repeated proctoring violations."
+        }
+      ],
+      "improvements": [
+        {
+          "title": "Examination Adherence",
+          "desc": "Must follow anti-cheat guidelines, avoid tab switches and keep single person in frame."
+        }
+      ],
+      "suggestions": [
+        "Re-take viva after verifying webcam integrity and examination rules compliance."
+      ],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "Hello! I'm Professor Mira, and I'm delighted to meet you today. How are you feeling about this viva? To start, could you briefly explain what a data structure is and mention a simple scenario where you'd prefer using an array instead of a linked list?",
+          "timestamp": "00:12",
+          "stage": "Warm-up"
+        },
+        {
+          "speaker": "student",
+          "text": "Hi do you know about me",
+          "timestamp": "00:36",
+          "stage": "Warm-up",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Conceptual check",
+            "desc": "Addressed the surface question, but can be improved with precise technical definitions and memory details.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "50 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "Hello! I'm Professor Mira, and I'm delighted to meet you today. How are you feeling about this viva? To start, could you briefly explain what a data structure is and mention a simple scenario where you'd prefer using an array instead of a linked list?",
+          "timestamp": "00:39",
+          "stage": "Warm-up"
+        },
+        {
+          "speaker": "student",
+          "text": "Yeah can you please explain what is the data structure is and mentioned",
+          "timestamp": "01:02",
+          "stage": "Fundamentals",
+          "annotation": {
+            "verdict": "Strength",
+            "tag": "Evidence for score",
+            "desc": "Accurately framed core definition in Data Structures with appropriate technical vocabulary.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "50 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "To help me understand your thinking, could you give me a precise definition of what a data structure is? And then think of one simple real-world scenario where choosing an array would be better than using a linked list.",
+          "timestamp": "01:26",
+          "stage": "Fundamentals"
+        },
+        {
+          "speaker": "student",
+          "text": "Programming language where we use to modify data by using code",
+          "timestamp": "01:52",
+          "stage": "Depth",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Needs depth",
+            "desc": "Addressed the question at a high level, but missed explaining the underlying algorithmic trade-offs.",
+            "dimension": "Depth & Reasoning",
+            "supportsScore": "46 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "Explain the trade-offs between a Hash Table and a Balanced Binary Search Tree.",
+          "timestamp": "01:57",
+          "stage": "Depth"
+        }
+      ]
+    },
+    "feedback": {},
+    "createdAt": "2026-10-20T06:47:33.024Z"
+  },
+  {
+    "id": "AV-1972",
+    "sessionNumber": "AV-1972",
+    "studentName": "pravin",
+    "studentEmail": "ghodakepravin154@gmail.com",
+    "candidateName": "pravin",
+    "candidateEmail": "ghodakepravin154@gmail.com",
+    "topic": "Data Structures",
+    "score": 20,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 20",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/AV-1972-cam.webm",
+    "screenRecordingUrl": "/recordings/AV-1972-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "interviewId": "AV-1972",
+        "speaker": "mira",
+        "text": "Can you explain how binary search works and why it is more efficient than linear search?",
+        "timestamp": "00:04",
+        "stage": "Warm-up",
+        "followUpType": "advance"
+      }
+    ],
+    "scorecard": {
+      "score": 20,
+      "readinessTier": "Disqualified",
+      "summary": "Candidate was terminated and kicked off from the interview examination due to 5 violations of integrity rules (e.g. multiple people, tab switches, out-of-frame, copy-paste).",
+      "isDisqualified": true,
+      "disqualificationReason": "Candidate disqualified and kicked off from examination due to 5 automated integrity rule violations.",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 1,
+          "percent": 20,
+          "weight": 30,
+          "calculatedMarks": 6,
+          "reason": "Failed to provide a valid definition of data structures; hallucinated non-computing analogies.",
+          "evidence": ""
+        },
+        "depth": {
+          "score": 0.8,
+          "percent": 15,
+          "weight": 25,
+          "calculatedMarks": 3.8,
+          "reason": "Did not demonstrate any understanding of memory layout, pointers, or complexity.",
+          "evidence": ""
+        },
+        "problemSolving": {
+          "score": 1.3,
+          "percent": 25,
+          "weight": 20,
+          "calculatedMarks": 5,
+          "reason": "Unable to approach technical problems or scenarios.",
+          "evidence": ""
+        },
+        "practical": {
+          "score": 1,
+          "percent": 20,
+          "weight": 15,
+          "calculatedMarks": 3,
+          "reason": "Lacked foundational connection to actual software development.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 2,
+          "percent": 40,
+          "weight": 10,
+          "calculatedMarks": 4,
+          "reason": "Deflected technical prompts to check audio connectivity; struggled to maintain examination focus.",
+          "evidence": ""
+        }
+      },
+      "strengths": [
+        {
+          "title": "Integrity Alert",
+          "desc": "Session terminated due to repeated proctoring violations."
+        }
+      ],
+      "improvements": [
+        {
+          "title": "Examination Adherence",
+          "desc": "Must follow anti-cheat guidelines, avoid tab switches and keep single person in frame."
+        }
+      ],
+      "suggestions": [
+        "Re-take viva after verifying webcam integrity and examination rules compliance."
+      ],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "Can you explain how binary search works and why it is more efficient than linear search?",
+          "timestamp": "00:04",
+          "stage": "Warm-up"
+        }
+      ]
+    },
+    "feedback": {},
+    "createdAt": "2026-10-20T06:34:24.073Z"
+  },
+  {
+    "id": "AV-5378",
+    "sessionNumber": "AV-5378",
+    "studentName": "Pravin Ghodake",
+    "studentEmail": "pravin.msot@college.edu",
+    "candidateName": "Pravin Ghodake",
+    "candidateEmail": "pravin.msot@college.edu",
+    "topic": "Data Structures",
+    "score": 50,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 20",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/AV-viva-cam.webm",
+    "screenRecordingUrl": "/recordings/AV-viva-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "speaker": "mira",
+        "text": "Welcome to your viva. Can you explain the difference between an Array and a Linked List, specifically focusing on memory layout and access time complexity?",
+        "timestamp": "00:15"
+      },
+      {
+        "speaker": "student",
+        "text": "An array uses contiguous memory allocation with O(1) index access, while a linked list uses nodes with pointers allowing dynamic sizing but O(n) access time.",
+        "timestamp": "01:10"
+      },
+      {
+        "speaker": "mira",
+        "text": "How does a Hash Table achieve average O(1) lookup and how are collisions resolved?",
+        "timestamp": "03:40"
+      },
+      {
+        "speaker": "student",
+        "text": "It uses a hash function to map keys to bucket indices. Collisions are handled via separate chaining using linked lists or open addressing like linear probing.",
+        "timestamp": "04:55"
+      },
+      {
+        "speaker": "mira",
+        "text": "How would you design the undo and redo mechanism for a collaborative editor?",
+        "timestamp": "08:20"
+      },
+      {
+        "speaker": "student",
+        "text": "I would use a dual stack architecture. One stack for undo history and another for redo. When a new action is performed, redo stack is cleared.",
+        "timestamp": "09:45"
+      }
+    ],
+    "scorecard": {
+      "score": 50,
+      "readinessTier": "Needs Review",
+      "summary": "Candidate completed viva session on Data Structures across 3 response turns.",
+      "isDisqualified": false,
+      "disqualificationReason": "",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 2.5,
+          "percent": 50,
+          "weight": 30,
+          "calculatedMarks": 15,
+          "reason": "Evaluated against core technical criteria.",
+          "evidence": "\"An array uses contiguous memory allocation with O(1) index access, while a linke...\""
+        },
+        "depth": {
+          "score": 2.3,
+          "percent": 45,
+          "weight": 25,
+          "calculatedMarks": 11,
+          "reason": "Lacked architectural depth, memory details, and time/space complexity analysis.",
+          "evidence": "\"It uses a hash function to map keys to bucket indices. Collisions are handled vi...\""
+        },
+        "problemSolving": {
+          "score": 2.3,
+          "percent": 45,
+          "weight": 20,
+          "calculatedMarks": 9,
+          "reason": "Struggled to apply concepts to real-world scenarios or problem statements.",
+          "evidence": "\"I would use a dual stack architecture. One stack for undo history and another fo...\""
+        },
+        "practical": {
+          "score": 2.3,
+          "percent": 45,
+          "weight": 15,
+          "calculatedMarks": 7,
+          "reason": "Little evidence of practical programming implementation or design principles.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 3,
+          "percent": 60,
+          "weight": 10,
+          "calculatedMarks": 6,
+          "reason": "Spoken communication delivery during oral examination.",
+          "evidence": ""
+        }
+      },
+      "strengths": [
+        {
+          "title": "Oral Participation",
+          "desc": "Candidate engaged in the viva dialogue across 3 response turns."
+        }
+      ],
+      "improvements": [
+        {
+          "title": "Fundamental Concepts",
+          "desc": "Strengthen core theoretical definitions in Data Structures."
+        },
+        {
+          "title": "Technical Depth",
+          "desc": "Focus on time/space complexities and algorithmic mechanics rather than brief responses."
+        }
+      ],
+      "suggestions": [
+        "Review core textbook principles for Data Structures.",
+        "Practice oral technical explanations focusing on clear definitions and complexities.",
+        "Prepare directly for scenario-based questions."
+      ],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "Welcome to your viva. Can you explain the difference between an Array and a Linked List, specifically focusing on memory layout and access time complexity?",
+          "timestamp": "00:15",
+          "stage": "Question"
+        },
+        {
+          "speaker": "student",
+          "text": "An array uses contiguous memory allocation with O(1) index access, while a linked list uses nodes with pointers allowing dynamic sizing but O(n) access time.",
+          "timestamp": "01:10",
+          "stage": "Warm-up",
+          "annotation": {
+            "verdict": "Strength",
+            "tag": "Evidence for score",
+            "desc": "Accurately framed core definition in Data Structures with appropriate technical vocabulary.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "50 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "How does a Hash Table achieve average O(1) lookup and how are collisions resolved?",
+          "timestamp": "03:40",
+          "stage": "Question"
+        },
+        {
+          "speaker": "student",
+          "text": "It uses a hash function to map keys to bucket indices. Collisions are handled via separate chaining using linked lists or open addressing like linear probing.",
+          "timestamp": "04:55",
+          "stage": "Fundamentals",
+          "annotation": {
+            "verdict": "Strength",
+            "tag": "Evidence for score",
+            "desc": "Accurately framed core definition in Data Structures with appropriate technical vocabulary.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "50 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "How would you design the undo and redo mechanism for a collaborative editor?",
+          "timestamp": "08:20",
+          "stage": "Question"
+        },
+        {
+          "speaker": "student",
+          "text": "I would use a dual stack architecture. One stack for undo history and another for redo. When a new action is performed, redo stack is cleared.",
+          "timestamp": "09:45",
+          "stage": "Depth",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Needs depth",
+            "desc": "Addressed the question at a high level, but missed explaining the underlying algorithmic trade-offs.",
+            "dimension": "Depth & Reasoning",
+            "supportsScore": "46 / 100"
+          }
+        }
+      ]
+    },
+    "feedback": {},
+    "createdAt": "2026-10-20T06:24:55.151Z"
+  },
+  {
+    "id": "AV-3874",
+    "sessionNumber": "AV-3874",
+    "studentName": "pravin",
+    "studentEmail": "ghodakepravin154@gmail.com",
+    "candidateName": "pravin",
+    "candidateEmail": "ghodakepravin154@gmail.com",
+    "topic": "Data Structures",
+    "score": 20,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 20",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/AV-3874-cam.webm",
+    "screenRecordingUrl": "/recordings/AV-3874-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "interviewId": "AV-3874",
+        "speaker": "mira",
+        "text": "provided in the prompt, so I should just skip the acknowledgment if it doesn't apply, or frame it as welcoming them), then ask the next focused Warm-up technical question.\n\n2.  **Determine the Output:**\n    *   Since there is no prior answer from the candidate, I will focus on the greeting and the opening question.\n    *   Sentence 1: Welcome the candidate warmly.\n    *   Sentence 2: Ask a gentle introductory technical question about Data Structures.\n    *   Constraint check: 2 to 3 sentences max. No markdown. No thinking.\n\n3.  **Drafting the response:**\n    *   *Draft 1:* Hello there, and welcome to our Data Structures viva! It's great to see you ready to dive into the subject. To start us off, can you tell me what a data structure is and why we use them in programming?\n    *   *Critique 1:* Meets all criteria. 3 sentences. Friendly but rigorous (",
+        "timestamp": "00:11",
+        "stage": "Warm-up"
+      }
+    ],
+    "scorecard": {
+      "score": 20,
+      "readinessTier": "Disqualified",
+      "summary": "Candidate was terminated and kicked off from the interview examination due to 5 violations of integrity rules (e.g. multiple people, tab switches, out-of-frame, copy-paste).",
+      "isDisqualified": true,
+      "disqualificationReason": "Candidate disqualified and kicked off from examination due to 5 automated integrity rule violations.",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 1.5,
+          "percent": 30,
+          "weight": 30,
+          "calculatedMarks": 9,
+          "reason": "Evaluated against core technical criteria.",
+          "evidence": ""
+        },
+        "depth": {
+          "score": 1.3,
+          "percent": 25,
+          "weight": 25,
+          "calculatedMarks": 6,
+          "reason": "Lacked architectural depth, memory details, and time/space complexity analysis.",
+          "evidence": ""
+        },
+        "problemSolving": {
+          "score": 1.3,
+          "percent": 25,
+          "weight": 20,
+          "calculatedMarks": 5,
+          "reason": "Struggled to apply concepts to real-world scenarios or problem statements.",
+          "evidence": ""
+        },
+        "practical": {
+          "score": 1.3,
+          "percent": 25,
+          "weight": 15,
+          "calculatedMarks": 4,
+          "reason": "Little evidence of practical programming implementation or design principles.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 2,
+          "percent": 40,
+          "weight": 10,
+          "calculatedMarks": 4,
+          "reason": "Spoken communication delivery during oral examination.",
+          "evidence": ""
+        }
+      },
+      "strengths": [
+        {
+          "title": "Integrity Alert",
+          "desc": "Session terminated due to repeated proctoring violations."
+        }
+      ],
+      "improvements": [
+        {
+          "title": "Examination Adherence",
+          "desc": "Must follow anti-cheat guidelines, avoid tab switches and keep single person in frame."
+        }
+      ],
+      "suggestions": [
+        "Re-take viva after verifying webcam integrity and examination rules compliance."
+      ],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "provided in the prompt, so I should just skip the acknowledgment if it doesn't apply, or frame it as welcoming them), then ask the next focused Warm-up technical question.\n\n2.  **Determine the Output:**\n    *   Since there is no prior answer from the candidate, I will focus on the greeting and the opening question.\n    *   Sentence 1: Welcome the candidate warmly.\n    *   Sentence 2: Ask a gentle introductory technical question about Data Structures.\n    *   Constraint check: 2 to 3 sentences max. No markdown. No thinking.\n\n3.  **Drafting the response:**\n    *   *Draft 1:* Hello there, and welcome to our Data Structures viva! It's great to see you ready to dive into the subject. To start us off, can you tell me what a data structure is and why we use them in programming?\n    *   *Critique 1:* Meets all criteria. 3 sentences. Friendly but rigorous (",
+          "timestamp": "00:11",
+          "stage": "Warm-up"
+        }
+      ]
+    },
+    "feedback": {},
+    "createdAt": "2026-10-20T06:07:00.477Z"
+  },
+  {
+    "id": "AV-9424",
+    "sessionNumber": "AV-9424",
+    "studentName": "pravin",
+    "studentEmail": "ghodakepravin154@gmail.com",
+    "candidateName": "pravin",
+    "candidateEmail": "ghodakepravin154@gmail.com",
+    "topic": "Data Structures",
+    "score": 28,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 20",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/AV-9424-cam.webm",
+    "screenRecordingUrl": "/recordings/AV-9424-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "interviewId": "AV-9424",
+        "speaker": "student",
+        "text": "There's a photo",
+        "timestamp": "00:31",
+        "stage": "Warm-up",
+        "questionRef": ""
+      },
+      {
+        "interviewId": "AV-9424",
+        "speaker": "mira",
+        "text": "I understand you mentioned there's a photo, but for our Data Structures fundamentals examination, could you please focus on the theoretical concepts? Let's begin with a core definition: what is the primary difference between a stack and a queue in terms of element access order?",
+        "timestamp": "00:32",
+        "stage": "Fundamentals"
+      },
+      {
+        "interviewId": "AV-9424",
+        "speaker": "mira",
+        "text": "mentioned in the prompt, but I should acknowledge their presence/readiness or just start the greeting), then ask the next focused Warm-up technical question.\n\n2.  **Formulate the Output:**\n    *   *Sentence 1 (Greeting & Readiness):* Welcome to the viva examination, and I'm glad you are ready to dive into Data Structures today! (Or something similar that acknowledges readiness). Let's make it natural for a professor talking to a student.",
+        "timestamp": "00:38",
+        "stage": "Warm-up"
+      },
+      {
+        "interviewId": "AV-9424",
+        "speaker": "student",
+        "text": "I understand you mentioned there's a photo but for our data structures fundamentals examination could you mentioned in the prom but I should acknowledge their presence Readiness or",
+        "timestamp": "00:45",
+        "stage": "Fundamentals",
+        "questionRef": "mentioned in the prompt, but I should acknowledge their presence/readiness or just start the greeting), then ask the next focused Warm-up technical question.\n\n2.  **Formulate the Output:**\n    *   *Sentence 1 (Greeting & Readiness):* Welcome to the viva examination, and I'm glad you are ready to dive into Data Structures today! (Or something similar that acknowledges readiness). Let's make it natural for a professor talking to a student."
+      },
+      {
+        "interviewId": "AV-9424",
+        "speaker": "mira",
+        "text": "I see you're ready to focus on the fundamentals. Could you elaborate on how a hash table handles collisions, comparing separate chaining and open addressing in terms of memory overhead and performance under high load factors?",
+        "timestamp": "00:50",
+        "stage": "Depth"
+      },
+      {
+        "interviewId": "AV-9424",
+        "speaker": "student",
+        "text": "I understand you mentioned there's a photo but for our data structures fundamentals examination could you mentioned in the prompt but I should acknowledge their presence Readiness or just start the greeting then ask the next focused warm-up technical question two formulate the output sentence one I see you're ready to focus on the fundamentals could you elaborate on how a hash",
+        "timestamp": "00:59",
+        "stage": "Depth",
+        "questionRef": "I see you're ready to focus on the fundamentals. Could you elaborate on how a hash table handles collisions, comparing separate chaining and open addressing in terms of memory overhead and performance under high load factors?"
+      },
+      {
+        "interviewId": "AV-9424",
+        "speaker": "mira",
+        "text": "I hear you focusing on the hash table concepts, and let's use that as a bridge to a practical scenario.",
+        "timestamp": "01:06",
+        "stage": "Applied Problem"
+      },
+      {
+        "interviewId": "AV-9424",
+        "speaker": "student",
+        "text": "Yeah yeah yeah yes",
+        "timestamp": "01:25",
+        "stage": "Applied Problem",
+        "questionRef": "I hear you focusing on the hash table concepts, and let's use that as a bridge to a practical scenario."
+      },
+      {
+        "interviewId": "AV-9424",
+        "speaker": "mira",
+        "text": "I appreciate your enthusiasm. Before we conclude, do you have any closing thoughts or additional technical insights you’d like to share regarding the data structures we discussed today?",
+        "timestamp": "01:27",
+        "stage": "Wrap-up"
+      },
+      {
+        "interviewId": "AV-9424",
+        "speaker": "student",
+        "text": "Nothing",
+        "timestamp": "01:43",
+        "stage": "Wrap-up",
+        "questionRef": "I appreciate your enthusiasm. Before we conclude, do you have any closing thoughts or additional technical insights you’d like to share regarding the data structures we discussed today?"
+      }
+    ],
+    "scorecard": {
+      "score": 28,
+      "readinessTier": "Needs Review",
+      "summary": "Candidate completed viva examination on Data Structures. Evaluated score: 28/100.",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 1,
+          "percent": 20,
+          "weight": 30,
+          "calculatedMarks": 6,
+          "reason": "...",
+          "evidence": ""
+        },
+        "depth": {
+          "score": 0.8,
+          "percent": 15,
+          "weight": 25,
+          "calculatedMarks": 3.8,
+          "reason": "...",
+          "evidence": ""
+        },
+        "problemSolving": {
+          "score": 1.3,
+          "percent": 25,
+          "weight": 20,
+          "calculatedMarks": 5,
+          "reason": "...",
+          "evidence": ""
+        },
+        "practical": {
+          "score": 1,
+          "percent": 20,
+          "weight": 15,
+          "calculatedMarks": 3,
+          "reason": "...",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 2,
+          "percent": 40,
+          "weight": 10,
+          "calculatedMarks": 4,
+          "reason": "...",
+          "evidence": ""
+        }
+      },
+      "strengths": [
+        {
+          "title": "Topic Engagement",
+          "desc": "Candidate participated in the Data Structures discussion and attempted responses to examiner questions."
+        }
+      ],
+      "improvements": [
+        {
+          "title": "Technical Depth",
+          "desc": "Answers would benefit from deeper analysis of system trade-offs and complexity constraints in Data Structures."
+        }
+      ],
+      "suggestions": [
+        "Review core principles and practical implementations in Data Structures.",
+        "Practice verbalizing algorithmic trade-offs and complexity calculations under exam conditions."
+      ],
+      "annotatedTranscript": [
+        {
+          "speaker": "student",
+          "text": "There's a photo",
+          "timestamp": "00:31",
+          "stage": "Warm-up",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete answer",
+            "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+            "dimension": "Communication",
+            "supportsScore": "25 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "I understand you mentioned there's a photo, but for our Data Structures fundamentals examination, could you please focus on the theoretical concepts? Let's begin with a core definition: what is the primary difference between a stack and a queue in terms of element access order?",
+          "timestamp": "00:32",
+          "stage": "Fundamentals"
+        },
+        {
+          "speaker": "mira",
+          "text": "mentioned in the prompt, but I should acknowledge their presence/readiness or just start the greeting), then ask the next focused Warm-up technical question.\n\n2.  **Formulate the Output:**\n    *   *Sentence 1 (Greeting & Readiness):* Welcome to the viva examination, and I'm glad you are ready to dive into Data Structures today! (Or something similar that acknowledges readiness). Let's make it natural for a professor talking to a student.",
+          "timestamp": "00:38",
+          "stage": "Warm-up"
+        },
+        {
+          "speaker": "student",
+          "text": "I understand you mentioned there's a photo but for our data structures fundamentals examination could you mentioned in the prom but I should acknowledge their presence Readiness or",
+          "timestamp": "00:45",
+          "stage": "Fundamentals",
+          "annotation": {
+            "verdict": "Strength",
+            "tag": "Evidence for score",
+            "desc": "Accurately framed core definition in Data Structures with appropriate technical vocabulary.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "20 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "I see you're ready to focus on the fundamentals. Could you elaborate on how a hash table handles collisions, comparing separate chaining and open addressing in terms of memory overhead and performance under high load factors?",
+          "timestamp": "00:50",
+          "stage": "Depth"
+        },
+        {
+          "speaker": "student",
+          "text": "I understand you mentioned there's a photo but for our data structures fundamentals examination could you mentioned in the prompt but I should acknowledge their presence Readiness or just start the greeting then ask the next focused warm-up technical question two formulate the output sentence one I see you're ready to focus on the fundamentals could you elaborate on how a hash",
+          "timestamp": "00:59",
+          "stage": "Depth",
+          "annotation": {
+            "verdict": "Strength",
+            "tag": "Evidence for score",
+            "desc": "Demonstrated clear reasoning on collisions, algorithmic trade-offs, and worst-case scenarios.",
+            "dimension": "Depth & Reasoning",
+            "supportsScore": "16 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "I hear you focusing on the hash table concepts, and let's use that as a bridge to a practical scenario.",
+          "timestamp": "01:06",
+          "stage": "Applied Problem"
+        },
+        {
+          "speaker": "student",
+          "text": "Yeah yeah yeah yes",
+          "timestamp": "01:25",
+          "stage": "Applied Problem",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete answer",
+            "desc": "Candidate gave a very brief response lacking technical explanation and depth.",
+            "dimension": "Communication",
+            "supportsScore": "25 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "I appreciate your enthusiasm. Before we conclude, do you have any closing thoughts or additional technical insights you’d like to share regarding the data structures we discussed today?",
+          "timestamp": "01:27",
+          "stage": "Wrap-up"
+        },
+        {
+          "speaker": "student",
+          "text": "Nothing",
+          "timestamp": "01:43",
+          "stage": "Wrap-up",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Inaccurate definition",
+            "desc": "Response contained conceptual inaccuracies and did not correctly define computer science principles for Data Structures.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "25 / 100"
+          }
+        }
+      ]
+    },
+    "feedback": {},
+    "createdAt": "2026-10-19T20:23:28.752Z"
+  },
+  {
+    "id": "AV-5453",
+    "sessionNumber": "AV-5453",
+    "studentName": "pravin",
+    "studentEmail": "ghodakepravin154@gmail.com",
+    "candidateName": "pravin",
+    "candidateEmail": "ghodakepravin154@gmail.com",
+    "topic": "Data Structures",
+    "score": 55,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 19",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/AV-5453-cam.webm",
+    "screenRecordingUrl": "/recordings/AV-5453-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "interviewId": "AV-5453",
+        "speaker": "mira",
+        "text": "Hello, welcome to your viva. Are you ready to begin? To start, could you tell me what a data structure is and give a simple example?",
+        "timestamp": "00:09",
+        "stage": "Warm-up"
+      },
+      {
+        "interviewId": "AV-5453",
+        "speaker": "student",
+        "text": "Can you hear me now",
+        "timestamp": "00:22",
+        "stage": "Warm-up",
+        "questionRef": "Hello, welcome to your viva. Are you ready to begin? To start, could you tell me what a data structure is and give a simple example?"
+      },
+      {
+        "interviewId": "AV-5453",
+        "speaker": "mira",
+        "text": "I can hear you clearly. Now, could you define a data structure and mention its primary purpose?",
+        "timestamp": "00:26",
+        "stage": "Fundamentals"
+      },
+      {
+        "interviewId": "AV-5453",
+        "speaker": "student",
+        "text": "Data structure is a structure of food by using the specific languages which computer can understand and execute in this binary code",
+        "timestamp": "00:54",
+        "stage": "Fundamentals",
+        "questionRef": "I can hear you clearly. Now, could you define a data structure and mention its primary purpose?"
+      },
+      {
+        "interviewId": "AV-5453",
+        "speaker": "mira",
+        "text": ".\n    *   **Current Viva Stage:**",
+        "timestamp": "01:08",
+        "stage": "Depth"
+      },
+      {
+        "interviewId": "AV-5453",
+        "speaker": "student",
+        "text": "Tell me",
+        "timestamp": "01:19",
+        "stage": "Depth",
+        "questionRef": ".\n    *   **Current Viva Stage:**"
+      },
+      {
+        "interviewId": "AV-5453",
+        "speaker": "mira",
+        "text": "I see you responded with “Tell me,” which shows you’d like clarification. Could you describe how a stack operates and give a real‑world example where it is applied?",
+        "timestamp": "01:25",
+        "stage": "Applied Problem"
+      },
+      {
+        "interviewId": "AV-5453",
+        "speaker": "student",
+        "text": "Of this interview",
+        "timestamp": "01:43",
+        "stage": "Applied Problem",
+        "questionRef": "I see you responded with “Tell me,” which shows you’d like clarification. Could you describe how a stack operates and give a real‑world example where it is applied?"
+      },
+      {
+        "interviewId": "AV-5453",
+        "speaker": "mira",
+        "text": "I understand you are ready to wrap up our discussion on data structures. Do you have any closing thoughts or additional technical insights to share regarding",
+        "timestamp": "02:00",
+        "stage": "Wrap-up"
+      }
+    ],
+    "scorecard": {
+      "score": 55,
+      "readinessTier": "Developing",
+      "summary": "Candidate completed viva session on Data Structures. Spoke in 4 response turns with an average length of 8 words per answer.",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 2.8,
+          "percent": 55,
+          "weight": 30,
+          "calculatedMarks": 17,
+          "reason": "Assessed based on student conceptual explanations in the recorded transcript.",
+          "evidence": "\"Can you hear me now...\""
+        },
+        "depth": {
+          "score": 2.5,
+          "percent": 50,
+          "weight": 25,
+          "calculatedMarks": 13,
+          "reason": "Demonstrated initial understanding but requires deeper complexity analysis.",
+          "evidence": "\"Data structure is a structure of food by using the specific languages which comp...\""
+        },
+        "problemSolving": {
+          "score": 2.4,
+          "percent": 47,
+          "weight": 20,
+          "calculatedMarks": 9,
+          "reason": "Addressed scenario with basic intuition, can strengthen edge cases.",
+          "evidence": "\"Tell me...\""
+        },
+        "practical": {
+          "score": 2.5,
+          "percent": 51,
+          "weight": 15,
+          "calculatedMarks": 8,
+          "reason": "Practical software knowledge grounded in foundational examples.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 3.1,
+          "percent": 63,
+          "weight": 10,
+          "calculatedMarks": 6,
+          "reason": "Clear spoken cadence and responsive delivery throughout the oral exam.",
+          "evidence": ""
+        }
+      },
+      "strengths": [
+        {
+          "title": "Session Participation",
+          "desc": "Actively engaged in the viva dialogue across 4 response turns."
+        },
+        {
+          "title": "Verbal Articulation",
+          "desc": "Communicated thoughts clearly without long pauses."
+        }
+      ],
+      "improvements": [
+        {
+          "title": "Technical Depth",
+          "desc": "Provide more formal definitions and explicit time/space trade-offs for Data Structures."
+        },
+        {
+          "title": "Comparative Analysis",
+          "desc": "When comparing algorithms, explicitly detail best, average, and worst-case Big-O bounds."
+        }
+      ],
+      "suggestions": [
+        "Review fundamental definitions and data structures in Data Structures.",
+        "Practice explaining technical concepts aloud with structured bullet points.",
+        "Solve algorithmic problems with a strict focus on memory complexity trade-offs."
+      ],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "Hello, welcome to your viva. Are you ready to begin? To start, could you tell me what a data structure is and give a simple example?",
+          "timestamp": "00:09",
+          "stage": "Warm-up"
+        },
+        {
+          "speaker": "student",
+          "text": "Can you hear me now",
+          "timestamp": "00:22",
+          "stage": "Warm-up",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Conceptual check",
+            "desc": "Identified the main concept, but can be improved by adding memory layout trade-offs and complexity.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "56 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "I can hear you clearly. Now, could you define a data structure and mention its primary purpose?",
+          "timestamp": "00:26",
+          "stage": "Fundamentals"
+        },
+        {
+          "speaker": "student",
+          "text": "Data structure is a structure of food by using the specific languages which computer can understand and execute in this binary code",
+          "timestamp": "00:54",
+          "stage": "Fundamentals",
+          "annotation": {
+            "verdict": "Strength",
+            "tag": "Evidence for score",
+            "desc": "Accurately framed core definition in Data Structures with appropriate technical vocabulary.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "56 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": ".\n    *   **Current Viva Stage:**",
+          "timestamp": "01:08",
+          "stage": "Depth"
+        },
+        {
+          "speaker": "student",
+          "text": "Tell me",
+          "timestamp": "01:19",
+          "stage": "Depth",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Needs depth",
+            "desc": "Addressed the surface question, but missed explaining the underlying algorithmic mechanism and amortized bounds.",
+            "dimension": "Depth & Reasoning",
+            "supportsScore": "50 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "I see you responded with “Tell me,” which shows you’d like clarification. Could you describe how a stack operates and give a real‑world example where it is applied?",
+          "timestamp": "01:25",
+          "stage": "Applied Problem"
+        },
+        {
+          "speaker": "student",
+          "text": "Of this interview",
+          "timestamp": "01:43",
+          "stage": "Applied Problem",
+          "annotation": {
+            "verdict": "Strength",
+            "tag": "Evidence for score",
+            "desc": "Selected appropriate architectural design pattern and justified structural choices.",
+            "dimension": "Problem Solving",
+            "supportsScore": "48 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "I understand you are ready to wrap up our discussion on data structures. Do you have any closing thoughts or additional technical insights to share regarding",
+          "timestamp": "02:00",
+          "stage": "Wrap-up"
+        }
+      ]
+    },
+    "feedback": {},
+    "createdAt": "2026-10-19T20:23:28.752Z"
+  },
+  {
+    "id": "AV-6265",
+    "sessionNumber": "AV-6265",
+    "studentName": "pravin",
+    "studentEmail": "ghodakepravin154@gmail.com",
+    "candidateName": "pravin",
+    "candidateEmail": "ghodakepravin154@gmail.com",
+    "topic": "Data Structures",
+    "score": 20,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 20",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/AV-6265-cam.webm",
+    "screenRecordingUrl": "/recordings/AV-6265-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "interviewId": "AV-6265",
+        "speaker": "mira",
+        "text": "Good morning! Please confirm your name and registration number for the record. To begin, can you briefly explain the fundamental difference between a linear and a non-linear data structure?",
+        "timestamp": "00:02",
+        "stage": "Warm-up"
+      },
+      {
+        "interviewId": "AV-6265",
+        "speaker": "student",
+        "text": "What is your name",
+        "timestamp": "00:24",
+        "stage": "Warm-up",
+        "questionRef": "Good morning! Please confirm your name and registration number for the record. To begin, can you briefly explain the fundamental difference between a linear and a non-linear data structure?"
+      },
+      {
+        "interviewId": "AV-6265",
+        "speaker": "mira",
+        "text": "Thank you for your response. Could you briefly explain the fundamental difference between a linear data structure and a non-linear data structure?",
+        "timestamp": "00:27",
+        "stage": "Fundamentals"
+      },
+      {
+        "interviewId": "AV-6265",
+        "speaker": "student",
+        "text": "Hi can you hear me",
+        "timestamp": "00:46",
+        "stage": "Fundamentals",
+        "questionRef": "Thank you for your response. Could you briefly explain the fundamental difference between a linear data structure and a non-linear data structure?"
+      },
+      {
+        "interviewId": "AV-6265",
+        "speaker": "mira",
+        "text": "Yes, I can hear you clearly. Now, explain how a hash table handles collisions internally, and analyze the performance trade-offs between chaining and open addressing.",
+        "timestamp": "00:47",
+        "stage": "Depth"
+      },
+      {
+        "interviewId": "AV-6265",
+        "speaker": "student",
+        "text": "Nothing I know",
+        "timestamp": "01:03",
+        "stage": "Depth",
+        "questionRef": "Yes, I can hear you clearly. Now, explain how a hash table handles collisions internally, and analyze the performance trade-offs between chaining and open addressing."
+      },
+      {
+        "interviewId": "AV-6265",
+        "speaker": "mira",
+        "text": "That's perfectly fine—let's work through it together. Here's a practical scenario: you're designing a parking lot management system. Which data structure would you use to efficiently track available parking spots, and why?",
+        "timestamp": "01:05",
+        "stage": "Applied Problem"
+      },
+      {
+        "interviewId": "AV-6265",
+        "speaker": "student",
+        "text": "Yes no yes no yes no S",
+        "timestamp": "01:30",
+        "stage": "Applied Problem",
+        "questionRef": "That's perfectly fine—let's work through it together. Here's a practical scenario: you're designing a parking lot management system. Which data structure would you use to efficiently track available parking spots, and why?"
+      },
+      {
+        "interviewId": "AV-6265",
+        "speaker": "mira",
+        "text": "I see you provided a pattern of responses; could you describe a real-world application where you would use a stack data structure?",
+        "timestamp": "01:36",
+        "stage": "Wrap-up"
+      }
+    ],
+    "scorecard": {
+      "score": 20,
+      "readinessTier": "Disqualified",
+      "summary": "Candidate was terminated and kicked off from the interview examination due to 5 violations of integrity rules (e.g. multiple people, tab switches, out-of-frame, copy-paste).",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 0.8,
+          "percent": 15,
+          "weight": 30,
+          "calculatedMarks": 4.5,
+          "reason": "Failed to define linear vs non-linear data structures; offered no accurate definition and resorted to evasion.",
+          "evidence": ""
+        },
+        "depth": {
+          "score": 0.5,
+          "percent": 10,
+          "weight": 25,
+          "calculatedMarks": 2.5,
+          "reason": "Did not explain hash table collision handling, memory layout, or complexity analysis.",
+          "evidence": ""
+        },
+        "problemSolving": {
+          "score": 0.6,
+          "percent": 12,
+          "weight": 20,
+          "calculatedMarks": 2.4,
+          "reason": "Unable to propose a suitable data structure for the parking lot scenario; gave nonsensical answer.",
+          "evidence": ""
+        },
+        "practical": {
+          "score": 0.5,
+          "percent": 10,
+          "weight": 15,
+          "calculatedMarks": 1.5,
+          "reason": "Lacked connection to real-world software development; no mention of implementation considerations.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 1.8,
+          "percent": 35,
+          "weight": 10,
+          "calculatedMarks": 3.5,
+          "reason": "Repeatedly deflected technical prompts with audio checks and repetitive statements, hindering effective dialogue.",
+          "evidence": ""
+        }
+      },
+      "strengths": [
+        {
+          "title": "Integrity Alert",
+          "desc": "Session terminated due to repeated proctoring violations."
+        }
+      ],
+      "improvements": [
+        {
+          "title": "Examination Adherence",
+          "desc": "Must follow anti-cheat guidelines, avoid tab switches and keep single person in frame."
+        }
+      ],
+      "suggestions": [
+        "Re-take viva after verifying webcam integrity and examination rules compliance."
+      ],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "Good morning! Please confirm your name and registration number for the record. To begin, can you briefly explain the fundamental difference between a linear and a non-linear data structure?",
+          "timestamp": "00:02",
+          "stage": "Warm-up"
+        },
+        {
+          "speaker": "student",
+          "text": "What is your name",
+          "timestamp": "00:24",
+          "stage": "Warm-up",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Repeating question",
+            "desc": "Candidate repeated the examiner's request for name instead of providing name and registration number.",
+            "dimension": "Communication",
+            "supportsScore": "20 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "Thank you for your response. Could you briefly explain the fundamental difference between a linear data structure and a non-linear data structure?",
+          "timestamp": "00:27",
+          "stage": "Fundamentals"
+        },
+        {
+          "speaker": "student",
+          "text": "Hi can you hear me",
+          "timestamp": "00:46",
+          "stage": "Fundamentals",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Audio check",
+            "desc": "Candidate deflected with 'Hi can you hear me' instead of explaining difference between linear and non-linear data structures.",
+            "dimension": "Communication",
+            "supportsScore": "20 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "Yes, I can hear you clearly. Now, explain how a hash table handles collisions internally, and analyze the performance trade-offs between chaining and open addressing.",
+          "timestamp": "00:47",
+          "stage": "Depth"
+        },
+        {
+          "speaker": "student",
+          "text": "Nothing I know",
+          "timestamp": "01:03",
+          "stage": "Depth",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Evasive response",
+            "desc": "Candidate stated 'Nothing I know' when asked to explain hash table collision handling and trade‑offs.",
+            "dimension": "Depth",
+            "supportsScore": "20 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "That's perfectly fine—let's work through it together. Here's a practical scenario: you're designing a parking lot management system. Which data structure would you use to efficiently track available parking spots, and why?",
+          "timestamp": "01:05",
+          "stage": "Applied Problem"
+        },
+        {
+          "speaker": "student",
+          "text": "Yes no yes no yes no S",
+          "timestamp": "01:30",
+          "stage": "Applied Problem",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Incomplete response",
+            "desc": "Candidate replied with 'Yes no yes no yes no S' when asked to choose a data structure for a parking lot management system.",
+            "dimension": "ProblemSolving",
+            "supportsScore": "20 / 100"
+          }
+        }
+      ]
+    },
+    "feedback": {},
+    "createdAt": "2026-10-19T20:23:28.750Z"
+  },
+  {
+    "id": "AV-3715",
+    "sessionNumber": "AV-3715",
+    "studentName": "pravin",
+    "studentEmail": "ghodakepravin154@gmail.com",
+    "candidateName": "pravin",
+    "candidateEmail": "ghodakepravin154@gmail.com",
+    "topic": "Data Structures",
+    "score": 45,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 19",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/AV-3715-cam.webm",
+    "screenRecordingUrl": "/recordings/AV-3715-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "interviewId": "AV-3715",
+        "speaker": "mira",
+        "text": "Thank you for your introduction. Could you briefly define what a data structure is and explain why it is important in computer science?",
+        "timestamp": "00:04",
+        "stage": "Warm-up"
+      },
+      {
+        "interviewId": "AV-3715",
+        "speaker": "mira",
+        "text": ".\n    *   **Current Viva Stage:**",
+        "timestamp": "01:03",
+        "stage": "Fundamentals"
+      }
+    ],
+    "scorecard": {
+      "score": 45,
+      "readinessTier": "Needs Review",
+      "summary": "Candidate completed viva session on Data Structures. Spoke in 0 response turns with an average length of 0 words per answer.",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 2.3,
+          "percent": 45,
+          "weight": 30,
+          "calculatedMarks": 14,
+          "reason": "Assessed based on student conceptual explanations in the recorded transcript.",
+          "evidence": ""
+        },
+        "depth": {
+          "score": 2,
+          "percent": 40,
+          "weight": 25,
+          "calculatedMarks": 10,
+          "reason": "Demonstrated initial understanding but requires deeper complexity analysis.",
+          "evidence": ""
+        },
+        "problemSolving": {
+          "score": 1.9,
+          "percent": 37,
+          "weight": 20,
+          "calculatedMarks": 7,
+          "reason": "Addressed scenario with basic intuition, can strengthen edge cases.",
+          "evidence": ""
+        },
+        "practical": {
+          "score": 2,
+          "percent": 41,
+          "weight": 15,
+          "calculatedMarks": 6,
+          "reason": "Practical software knowledge grounded in foundational examples.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 2.6,
+          "percent": 53,
+          "weight": 10,
+          "calculatedMarks": 5,
+          "reason": "Clear spoken cadence and responsive delivery throughout the oral exam.",
+          "evidence": ""
+        }
+      },
+      "strengths": [
+        {
+          "title": "Session Participation",
+          "desc": "Actively engaged in the viva dialogue across 0 response turns."
+        },
+        {
+          "title": "Verbal Articulation",
+          "desc": "Communicated thoughts clearly without long pauses."
+        }
+      ],
+      "improvements": [
+        {
+          "title": "Technical Depth",
+          "desc": "Provide more formal definitions and explicit time/space trade-offs for Data Structures."
+        },
+        {
+          "title": "Comparative Analysis",
+          "desc": "When comparing algorithms, explicitly detail best, average, and worst-case Big-O bounds."
+        }
+      ],
+      "suggestions": [
+        "Review fundamental definitions and data structures in Data Structures.",
+        "Practice explaining technical concepts aloud with structured bullet points.",
+        "Solve algorithmic problems with a strict focus on memory complexity trade-offs."
+      ],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "Thank you for your introduction. Could you briefly define what a data structure is and explain why it is important in computer science?",
+          "timestamp": "00:04",
+          "stage": "Warm-up"
+        },
+        {
+          "speaker": "mira",
+          "text": ".\n    *   **Current Viva Stage:**",
+          "timestamp": "01:03",
+          "stage": "Fundamentals"
+        }
+      ]
+    },
+    "feedback": {},
+    "createdAt": "2026-10-19T17:22:15.457Z"
+  },
+  {
+    "id": "AV-4318",
+    "sessionNumber": "AV-4318",
+    "studentName": "pravin",
+    "studentEmail": "ghodakepravin154@gmail.com",
+    "candidateName": "pravin",
+    "candidateEmail": "ghodakepravin154@gmail.com",
+    "topic": "Data Structures",
+    "score": 73,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 19",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/AV-4318-cam.webm",
+    "screenRecordingUrl": "/recordings/AV-4318-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "interviewId": "AV-4318",
+        "speaker": "mira",
+        "text": "Good morning; let’s begin with a warm-up question. What is the main difference between an array and a linked list?",
+        "timestamp": "00:03",
+        "stage": "Warm-up"
+      },
+      {
+        "interviewId": "AV-4318",
+        "speaker": "student",
+        "text": "Good morning let's begin with the warm-up question what is the main difference between an array and a link list",
+        "timestamp": "00:13",
+        "stage": "Warm-up",
+        "questionRef": "Good morning; let’s begin with a warm-up question. What is the main difference between an array and a linked list?"
+      },
+      {
+        "interviewId": "AV-4318",
+        "speaker": "mira",
+        "text": "You've restated the question rather than answering it—arrays store elements contiguously in memory with fixed size, while linked lists use nodes with pointers and dynamic size. What is the time complexity of accessing the i-th element in a singly linked list?",
+        "timestamp": "00:14",
+        "stage": "Fundamentals"
+      },
+      {
+        "interviewId": "AV-4318",
+        "speaker": "student",
+        "text": "Rather than answering it erase door elements contiguously in memory with fixed size my linked list use notes with pointers and dynamic size what is the time complexity of accessing the if element in a singly linked list",
+        "timestamp": "00:32",
+        "stage": "Warm-up",
+        "questionRef": "You've restated the question rather than answering it—arrays store elements contiguously in memory with fixed size, while linked lists use nodes with pointers and dynamic size. What is the time complexity of accessing the i-th element in a singly linked list?"
+      },
+      {
+        "interviewId": "AV-4318",
+        "speaker": "mira",
+        "text": "It seems there was a transcription issue; the answer you gave mirrors my previous explanation rather than stating the complexity. The correct answer is O(i) or O(n) in the worst case because you must traverse from the head. Moving on: can you explain the difference between a stack and a queue in terms of their access policies?",
+        "timestamp": "00:37",
+        "stage": "Fundamentals"
+      },
+      {
+        "interviewId": "AV-4318",
+        "speaker": "student",
+        "text": "It seems there was a transcription issue the answer you gave near is my previous explanation rather than stating the complexity the correct answer is oh I or o n in the worst case because you must Traverse from the head moving on can you explain the difference between a stack and a queue in terms of their access policies",
+        "timestamp": "00:59",
+        "stage": "Warm-up",
+        "questionRef": "It seems there was a transcription issue; the answer you gave mirrors my previous explanation rather than stating the complexity. The correct answer is O(i) or O(n) in the worst case because you must traverse from the head. Moving on: can you explain the difference between a stack and a queue in terms of their access policies?"
+      },
+      {
+        "interviewId": "AV-4318",
+        "speaker": "student",
+        "text": "Metrop",
+        "timestamp": "01:21",
+        "stage": "Fundamentals",
+        "questionRef": "It seems there was a transcription issue; the answer you gave mirrors my previous explanation rather than stating the complexity. The correct answer is O(i) or O(n) in the worst case because you must traverse from the head. Moving on: can you explain the difference between a stack and a queue in terms of their access policies?"
+      },
+      {
+        "interviewId": "AV-4318",
+        "speaker": "mira",
+        "text": "It seems there was a transcription issue the answer you gave near is my previous explanation rather than stating the complexity the correct answer is oh I or o n in the worst case because you must Traverse from the head moving on can you explain the difference between a stack and a queue in terms of their access policies",
+        "timestamp": "01:22",
+        "stage": "Fundamentals"
+      },
+      {
+        "interviewId": "AV-4318",
+        "speaker": "mira",
+        "text": "I didn't quite catch that—\"Metrop\" doesn't address the question about stack and queue access policies. To continue: what is the key difference between a stack's LIFO policy and a queue's FIFO policy, and can you name one real-world scenario where each is used?",
+        "timestamp": "01:27",
+        "stage": "Depth"
+      },
+      {
+        "interviewId": "AV-4318",
+        "speaker": "student",
+        "text": "There was a transcription issue the answer you gave near is my previous explanation rather than I didn't quite catch that metric doesn't address the question about stack and Q access policies to continue what is the key difference between a Stack's lifo policy and accused fifo policy and can you name one real world scenario where each is used",
+        "timestamp": "01:46",
+        "stage": "Fundamentals",
+        "questionRef": "I didn't quite catch that—\"Metrop\" doesn't address the question about stack and queue access policies. To continue: what is the key difference between a stack's LIFO policy and a queue's FIFO policy, and can you name one real-world scenario where each is used?"
+      },
+      {
+        "interviewId": "AV-4318",
+        "speaker": "mira",
+        "text": "I see the answer got mixed up; let's focus on implementation details. Can you describe how a stack is typically implemented using an array versus a linked list, and discuss the trade‑offs in terms of memory and performance?",
+        "timestamp": "01:50",
+        "stage": "Depth"
+      },
+      {
+        "interviewId": "AV-4318",
+        "speaker": "student",
+        "text": "I see the answer got mixed up let's focus on implementation details can you describe how a stack is typically implemented using an array versus a linked list and discuss the trade-offs in terms of memory and performance",
+        "timestamp": "02:07",
+        "stage": "Fundamentals",
+        "questionRef": "I see the answer got mixed up; let's focus on implementation details. Can you describe how a stack is typically implemented using an array versus a linked list, and discuss the trade‑offs in terms of memory and performance?"
+      },
+      {
+        "interviewId": "AV-4318",
+        "speaker": "mira",
+        "text": "Your response restates the question instead of describing the implementations. Can you explain how the array‑based stack’s push and pop operations differ in time complexity and memory usage from those of a linked‑list stack?",
+        "timestamp": "02:13",
+        "stage": "Depth"
+      }
+    ],
+    "scorecard": {
+      "score": 73,
+      "readinessTier": "Developing",
+      "summary": "Candidate completed viva session on Data Structures. Spoke in 6 response turns with an average length of 36 words per answer.",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 3.6,
+          "percent": 73,
+          "weight": 30,
+          "calculatedMarks": 22,
+          "reason": "Assessed based on student conceptual explanations in the recorded transcript.",
+          "evidence": "\"Good morning let's begin with the warm-up question what is the main difference b...\""
+        },
+        "depth": {
+          "score": 3.4,
+          "percent": 68,
+          "weight": 25,
+          "calculatedMarks": 17,
+          "reason": "Demonstrated initial understanding but requires deeper complexity analysis.",
+          "evidence": "\"Rather than answering it erase door elements contiguously in memory with fixed s...\""
+        },
+        "problemSolving": {
+          "score": 3.3,
+          "percent": 65,
+          "weight": 20,
+          "calculatedMarks": 13,
+          "reason": "Addressed scenario with basic intuition, can strengthen edge cases.",
+          "evidence": "\"It seems there was a transcription issue the answer you gave near is my previous...\""
+        },
+        "practical": {
+          "score": 3.5,
+          "percent": 69,
+          "weight": 15,
+          "calculatedMarks": 10,
+          "reason": "Practical software knowledge grounded in foundational examples.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 4,
+          "percent": 81,
+          "weight": 10,
+          "calculatedMarks": 8,
+          "reason": "Clear spoken cadence and responsive delivery throughout the oral exam.",
+          "evidence": ""
+        }
+      },
+      "strengths": [
+        {
+          "title": "Session Participation",
+          "desc": "Actively engaged in the viva dialogue across 6 response turns."
+        },
+        {
+          "title": "Verbal Articulation",
+          "desc": "Communicated thoughts clearly without long pauses."
+        }
+      ],
+      "improvements": [
+        {
+          "title": "Technical Depth",
+          "desc": "Provide more formal definitions and explicit time/space trade-offs for Data Structures."
+        },
+        {
+          "title": "Comparative Analysis",
+          "desc": "When comparing algorithms, explicitly detail best, average, and worst-case Big-O bounds."
+        }
+      ],
+      "suggestions": [
+        "Review fundamental definitions and data structures in Data Structures.",
+        "Practice explaining technical concepts aloud with structured bullet points.",
+        "Solve algorithmic problems with a strict focus on memory complexity trade-offs."
+      ],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "Good morning; let’s begin with a warm-up question. What is the main difference between an array and a linked list?",
+          "timestamp": "00:03",
+          "stage": "Warm-up"
+        },
+        {
+          "speaker": "student",
+          "text": "Good morning let's begin with the warm-up question what is the main difference between an array and a link list",
+          "timestamp": "00:13",
+          "stage": "Warm-up",
+          "annotation": {
+            "verdict": "Strength",
+            "tag": "Evidence for score",
+            "desc": "Accurately framed core definition in Data Structures with appropriate technical vocabulary.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "72 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "You've restated the question rather than answering it—arrays store elements contiguously in memory with fixed size, while linked lists use nodes with pointers and dynamic size. What is the time complexity of accessing the i-th element in a singly linked list?",
+          "timestamp": "00:14",
+          "stage": "Fundamentals"
+        },
+        {
+          "speaker": "student",
+          "text": "Rather than answering it erase door elements contiguously in memory with fixed size my linked list use notes with pointers and dynamic size what is the time complexity of accessing the if element in a singly linked list",
+          "timestamp": "00:32",
+          "stage": "Warm-up",
+          "annotation": {
+            "verdict": "Strength",
+            "tag": "Evidence for score",
+            "desc": "Accurately framed core definition in Data Structures with appropriate technical vocabulary.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "72 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "It seems there was a transcription issue; the answer you gave mirrors my previous explanation rather than stating the complexity. The correct answer is O(i) or O(n) in the worst case because you must traverse from the head. Moving on: can you explain the difference between a stack and a queue in terms of their access policies?",
+          "timestamp": "00:37",
+          "stage": "Fundamentals"
+        },
+        {
+          "speaker": "student",
+          "text": "It seems there was a transcription issue the answer you gave near is my previous explanation rather than stating the complexity the correct answer is oh I or o n in the worst case because you must Traverse from the head moving on can you explain the difference between a stack and a queue in terms of their access policies",
+          "timestamp": "00:59",
+          "stage": "Warm-up",
+          "annotation": {
+            "verdict": "Strength",
+            "tag": "Evidence for score",
+            "desc": "Accurately framed core definition in Data Structures with appropriate technical vocabulary.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "72 / 100"
+          }
+        },
+        {
+          "speaker": "student",
+          "text": "Metrop",
+          "timestamp": "01:21",
+          "stage": "Fundamentals",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Conceptual check",
+            "desc": "Identified the main concept, but can be improved by adding memory layout trade-offs and complexity.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "72 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "It seems there was a transcription issue the answer you gave near is my previous explanation rather than stating the complexity the correct answer is oh I or o n in the worst case because you must Traverse from the head moving on can you explain the difference between a stack and a queue in terms of their access policies",
+          "timestamp": "01:22",
+          "stage": "Fundamentals"
+        },
+        {
+          "speaker": "mira",
+          "text": "I didn't quite catch that—\"Metrop\" doesn't address the question about stack and queue access policies. To continue: what is the key difference between a stack's LIFO policy and a queue's FIFO policy, and can you name one real-world scenario where each is used?",
+          "timestamp": "01:27",
+          "stage": "Depth"
+        },
+        {
+          "speaker": "student",
+          "text": "There was a transcription issue the answer you gave near is my previous explanation rather than I didn't quite catch that metric doesn't address the question about stack and Q access policies to continue what is the key difference between a Stack's lifo policy and accused fifo policy and can you name one real world scenario where each is used",
+          "timestamp": "01:46",
+          "stage": "Fundamentals",
+          "annotation": {
+            "verdict": "Strength",
+            "tag": "Evidence for score",
+            "desc": "Accurately framed core definition in Data Structures with appropriate technical vocabulary.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "72 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "I see the answer got mixed up; let's focus on implementation details. Can you describe how a stack is typically implemented using an array versus a linked list, and discuss the trade‑offs in terms of memory and performance?",
+          "timestamp": "01:50",
+          "stage": "Depth"
+        },
+        {
+          "speaker": "student",
+          "text": "I see the answer got mixed up let's focus on implementation details can you describe how a stack is typically implemented using an array versus a linked list and discuss the trade-offs in terms of memory and performance",
+          "timestamp": "02:07",
+          "stage": "Fundamentals",
+          "annotation": {
+            "verdict": "Strength",
+            "tag": "Evidence for score",
+            "desc": "Accurately framed core definition in Data Structures with appropriate technical vocabulary.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "72 / 100"
+          }
+        }
+      ]
+    },
+    "feedback": {},
+    "createdAt": "2026-10-19T17:14:35.312Z"
+  },
+  {
+    "id": "AV-9189",
+    "sessionNumber": "AV-9189",
+    "studentName": "pravin",
+    "studentEmail": "ghodakepravin154@gmail.com",
+    "candidateName": "pravin",
+    "candidateEmail": "ghodakepravin154@gmail.com",
+    "topic": "Data Structures",
+    "score": 22,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 19",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/AV-9189-cam.webm",
+    "screenRecordingUrl": "/recordings/AV-9189-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "interviewId": "AV-9189",
+        "speaker": "mira",
+        "text": "Great! Can you define a data structure and give examples of linear and non‑linear data structures?",
+        "timestamp": "00:03",
+        "stage": "Warm-up"
+      },
+      {
+        "interviewId": "AV-9189",
+        "speaker": "student",
+        "text": "Can you tell me about yourself",
+        "timestamp": "00:15",
+        "stage": "Warm-up",
+        "questionRef": "Great! Can you define a data structure and give examples of linear and non‑linear data structures?"
+      },
+      {
+        "interviewId": "AV-9189",
+        "speaker": "mira",
+        "text": "Thank you for introducing yourself, but we need to continue with the exam today. Moving forward with the Fundamentals section, could you explain the key differences between a stack and a queue regarding their insertion and deletion operations?",
+        "timestamp": "00:28",
+        "stage": "Fundamentals"
+      },
+      {
+        "interviewId": "AV-9189",
+        "speaker": "student",
+        "text": "Thank you for introducing yourself but we need to continue with the exam today moving forward with the fundamentals section could you explain the key differences between a stack and a queue regarding their insertion and deletion operations",
+        "timestamp": "00:44",
+        "stage": "Warm-up",
+        "questionRef": "Thank you for introducing yourself, but we need to continue with the exam today. Moving forward with the Fundamentals section, could you explain the key differences between a stack and a queue regarding their insertion and deletion operations?"
+      },
+      {
+        "interviewId": "AV-9189",
+        "speaker": "mira",
+        "text": "I see you repeated the question about stack and queue differences. Now, could you state the time complexity of the push and pop operations in a stack?",
+        "timestamp": "00:50",
+        "stage": "Fundamentals"
+      },
+      {
+        "interviewId": "AV-9189",
+        "speaker": "student",
+        "text": "I see you repeated the question about stack a few differences now could you State the time complexity of the push and pop operations in a stack",
+        "timestamp": "01:02",
+        "stage": "Fundamentals",
+        "questionRef": "I see you repeated the question about stack and queue differences. Now, could you state the time complexity of the push and pop operations in a stack?"
+      },
+      {
+        "interviewId": "AV-9189",
+        "speaker": "mira",
+        "text": "You’ve repeated the question instead of providing the time complexities for push and pop. Let’s proceed: what is the worst‑case time complexity for searching an element in an unsorted singly linked list?",
+        "timestamp": "01:08",
+        "stage": "Depth"
+      }
+    ],
+    "scorecard": {
+      "score": 22,
+      "readinessTier": "Needs Review",
+      "summary": "The candidate repeatedly echoed the examiner's questions instead of providing answers. They failed to define a data structure, explain stack versus queue differences, or state the time complexities of push/pop operations, demonstrating a lack of conceptual understanding and depth.",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 1,
+          "percent": 20,
+          "weight": 30,
+          "calculatedMarks": 6,
+          "reason": "No definition of data structures or examples of linear/non‑linear types were given; the candidate did not show any grasp of fundamental concepts.",
+          "evidence": ""
+        },
+        "depth": {
+          "score": 1,
+          "percent": 20,
+          "weight": 25,
+          "calculatedMarks": 5,
+          "reason": "The candidate did not explain trade‑offs, insertion/deletion mechanics of stacks vs queues, nor provide any algorithmic complexity analysis.",
+          "evidence": ""
+        },
+        "problemSolving": {
+          "score": 1,
+          "percent": 20,
+          "weight": 20,
+          "calculatedMarks": 4,
+          "reason": "No viable solution or approach was proposed for any of the technical questions; the candidate merely repeated the prompts.",
+          "evidence": ""
+        },
+        "practical": {
+          "score": 1,
+          "percent": 20,
+          "weight": 15,
+          "calculatedMarks": 3,
+          "reason": "There was no connection of data‑structure concepts to real‑world applications or projects.",
+          "evidence": ""
+        },
+        "communication": {
+          "score": 1.5,
+          "percent": 30,
+          "weight": 10,
+          "calculatedMarks": 3,
+          "reason": "While the candidate spoke, their responses were evasive and consisted of repeating the examiner's questions, indicating poor clarity and focus.",
+          "evidence": ""
+        }
+      },
+      "strengths": [
+        {
+          "title": "Acknowledged examiner prompts",
+          "desc": "The candidate responded to each examiner turn, showing they were listening and attempting to engage, even though the responses were repetitions."
+        },
+        {
+          "title": "Basic verbal fluency",
+          "desc": "The candidate spoke in complete sentences without long pauses, indicating some level of language proficiency."
+        }
+      ],
+      "improvements": [
+        {
+          "title": "Conceptual knowledge of data structures",
+          "desc": "Unable to define a data structure or give examples of linear and non‑linear types; needs to study core definitions and classifications."
+        },
+        {
+          "title": "Understanding of stack vs queue operations",
+          "desc": "Could not explain the differing insertion (push/enqueue) and deletion (pop/dequeue) principles; requires review of LIFO vs FIFO behavior."
+        },
+        {
+          "title": "Knowledge of algorithmic complexities",
+          "desc": "Failed to state O(1) time for stack push/pop and O(n) worst‑case search in an unsorted singly linked list; should practice complexity analysis."
+        }
+      ],
+      "suggestions": [
+        "Review textbook definitions of data structures and memorize key examples (arrays, linked lists, trees, graphs).",
+        "Practice explaining stack and queue operations aloud, focusing on insertion/deletion points and use‑case scenarios.",
+        "Work through complexity exercises: derive push/pop O(1), search O(n) for unsorted linked list, and compare with sorted variants.",
+        "Engage in mock viva sessions where you answer questions directly without repeating the prompt, recording responses to improve clarity and conciseness."
+      ],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "Great! Can you define a data structure and give examples of linear and non‑linear data structures?",
+          "timestamp": "00:03",
+          "stage": "Warm-up"
+        },
+        {
+          "speaker": "student",
+          "text": "Can you tell me about yourself",
+          "timestamp": "00:15",
+          "stage": "Warm-up",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Conceptual check",
+            "desc": "Identified the main concept, but can be improved by adding memory layout trade-offs and complexity.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "20 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "Thank you for introducing yourself, but we need to continue with the exam today. Moving forward with the Fundamentals section, could you explain the key differences between a stack and a queue regarding their insertion and deletion operations?",
+          "timestamp": "00:28",
+          "stage": "Fundamentals"
+        },
+        {
+          "speaker": "student",
+          "text": "Thank you for introducing yourself but we need to continue with the exam today moving forward with the fundamentals section could you explain the key differences between a stack and a queue regarding their insertion and deletion operations",
+          "timestamp": "00:44",
+          "stage": "Warm-up",
+          "annotation": {
+            "verdict": "Strength",
+            "tag": "Evidence for score",
+            "desc": "Accurately framed core definition in Data Structures with appropriate technical vocabulary.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "20 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "I see you repeated the question about stack and queue differences. Now, could you state the time complexity of the push and pop operations in a stack?",
+          "timestamp": "00:50",
+          "stage": "Fundamentals"
+        },
+        {
+          "speaker": "student",
+          "text": "I see you repeated the question about stack a few differences now could you State the time complexity of the push and pop operations in a stack",
+          "timestamp": "01:02",
+          "stage": "Fundamentals",
+          "annotation": {
+            "verdict": "Strength",
+            "tag": "Evidence for score",
+            "desc": "Accurately framed core definition in Data Structures with appropriate technical vocabulary.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "20 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "You’ve repeated the question instead of providing the time complexities for push and pop. Let’s proceed: what is the worst‑case time complexity for searching an element in an unsorted singly linked list?",
+          "timestamp": "01:08",
+          "stage": "Depth"
+        }
+      ]
+    },
+    "feedback": {},
+    "createdAt": "2026-10-19T17:14:35.309Z"
+  },
+  {
+    "id": "AV-4484",
+    "sessionNumber": "AV-4484",
+    "studentName": "pravin",
+    "studentEmail": "ghodakepravin154@gmail.com",
+    "candidateName": "pravin",
+    "candidateEmail": "ghodakepravin154@gmail.com",
+    "topic": "Data Structures",
+    "score": 80,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 19",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/AV-4484-cam.webm",
+    "screenRecordingUrl": "/recordings/AV-4484-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "interviewId": "AV-4484",
+        "speaker": "student",
+        "text": "I feel",
+        "timestamp": "00:05",
+        "stage": "Warm-up",
+        "questionRef": ""
+      },
+      {
+        "interviewId": "AV-4484",
+        "speaker": "mira",
+        "text": "I understand—you may feel a little unsure at first, but that’s perfectly fine. What is the main difference between an array and a linked list?",
+        "timestamp": "00:07",
+        "stage": "Fundamentals"
+      },
+      {
+        "interviewId": "AV-4484",
+        "speaker": "mira",
+        "text": "That's",
+        "timestamp": "00:19",
+        "stage": "Warm-up"
+      },
+      {
+        "interviewId": "AV-4484",
+        "speaker": "student",
+        "text": "Uh can you tell me who are you",
+        "timestamp": "00:21",
+        "stage": "Warm-up",
+        "questionRef": "That's"
+      },
+      {
+        "interviewId": "AV-4484",
+        "speaker": "mira",
+        "text": "Uh can you tell me who are you",
+        "timestamp": "00:34",
+        "stage": "Fundamentals"
+      },
+      {
+        "interviewId": "AV-4484",
+        "speaker": "student",
+        "text": "I'm Praveen and what about you",
+        "timestamp": "00:43",
+        "stage": "Warm-up",
+        "questionRef": "Uh can you tell me who are you"
+      },
+      {
+        "interviewId": "AV-4484",
+        "speaker": "mira",
+        "text": "Thanks, Praveen—I'm Professor Mira, your examiner for today's viva. Can you explain what a stack is and describe how its last‑in‑first‑out (LIFO) principle works with a simple example?",
+        "timestamp": "00:46",
+        "stage": "Fundamentals"
+      },
+      {
+        "interviewId": "AV-4484",
+        "speaker": "student",
+        "text": "Which is 2 plus blue is equal to",
+        "timestamp": "01:11",
+        "stage": "Fundamentals",
+        "questionRef": "Thanks, Praveen—I'm Professor Mira, your examiner for today's viva. Can you explain what a stack is and describe how its last‑in‑first‑out (LIFO) principle works with a simple example?"
+      },
+      {
+        "interviewId": "AV-4484",
+        "speaker": "mira",
+        "text": "I can’t determine “2 plus blue” because blue is not a numerical value. Moving on, explain the difference between a stack and a queue, including their insertion and deletion operations and a real-world example of each.",
+        "timestamp": "01:13",
+        "stage": "Depth"
+      },
+      {
+        "interviewId": "AV-4484",
+        "speaker": "student",
+        "text": "Can you tell me the answer of this question",
+        "timestamp": "01:33",
+        "stage": "Fundamentals",
+        "questionRef": "I can’t determine “2 plus blue” because blue is not a numerical value. Moving on, explain the difference between a stack and a queue, including their insertion and deletion operations and a real-world example of each."
+      },
+      {
+        "interviewId": "AV-4484",
+        "speaker": "mira",
+        "text": "I understand you're looking for the answer, but in a viva I need to hear your reasoning. Now, can you explain how a hash table handles collisions and describe two common collision‑resolution strategies?",
+        "timestamp": "01:49",
+        "stage": "Depth"
+      },
+      {
+        "interviewId": "AV-4484",
+        "speaker": "student",
+        "text": "Explain me how hash table handles the Collision and describe two common Collision resolution strategies",
+        "timestamp": "02:11",
+        "stage": "Fundamentals",
+        "questionRef": "I understand you're looking for the answer, but in a viva I need to hear your reasoning. Now, can you explain how a hash table handles collisions and describe two common collision‑resolution strategies?"
+      },
+      {
+        "interviewId": "AV-4484",
+        "speaker": "mira",
+        "text": "Perhaps: \"I see you've raised the topic of hash table collisions, Praveen",
+        "timestamp": "02:20",
+        "stage": "Depth"
+      },
+      {
+        "interviewId": "AV-4484",
+        "speaker": "student",
+        "text": "And answer for this question",
+        "timestamp": "02:32",
+        "stage": "Fundamentals",
+        "questionRef": "Perhaps: \"I see you've raised the topic of hash table collisions, Praveen"
+      },
+      {
+        "interviewId": "AV-4484",
+        "speaker": "mira",
+        "text": "I understand you're asking for the answer to the previous question. Can you explain how a",
+        "timestamp": "02:41",
+        "stage": "Depth"
+      }
+    ],
+    "scorecard": {
+      "score": 80,
+      "readinessTier": "Placement Ready",
+      "summary": "Candidate demonstrated solid foundational grasp in Data Structures with clear articulation during the 15-minute viva session.",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 4,
+          "max": 5,
+          "weight": 30,
+          "calculatedMarks": 24,
+          "reason": "Demonstrated clear definitions of core structures and principles.",
+          "evidence": "\"I feel...\""
+        },
+        "depth": {
+          "score": 4,
+          "max": 5,
+          "weight": 25,
+          "calculatedMarks": 20,
+          "reason": "Handled follow-up questions on collision trade-offs and complexity.",
+          "evidence": "\"Uh can you tell me who are you...\""
+        },
+        "problemSolving": {
+          "score": 4,
+          "max": 5,
+          "weight": 20,
+          "calculatedMarks": 16,
+          "reason": "Selected appropriate architecture for practical problem scenario.",
+          "evidence": "\"I'm Praveen and what about you...\""
+        },
+        "practical": {
+          "score": 4,
+          "max": 5,
+          "weight": 15,
+          "calculatedMarks": 12,
+          "reason": "Understands real-world use cases but can deepen systems-level profiling.",
+          "evidence": "Cited practical software examples during discussion."
+        },
+        "communication": {
+          "score": 4,
+          "max": 5,
+          "weight": 10,
+          "calculatedMarks": 8,
+          "reason": "Clear spoken diction, no significant hesitations or pauses.",
+          "evidence": "Consistent vocal delivery and professional composure."
+        }
+      },
+      "strengths": [
+        {
+          "title": "Good conceptual understanding",
+          "desc": "You clearly explained core concepts with relevant examples and showed a strong grasp of fundamentals."
+        },
+        {
+          "title": "Logical problem-solving approach",
+          "desc": "You followed a structured approach while answering questions and explained your thought process well."
+        },
+        {
+          "title": "Clear and confident communication",
+          "desc": "You expressed your ideas in a concise, composed manner throughout the examination."
+        }
+      ],
+      "improvements": [
+        {
+          "title": "Project implementation details",
+          "desc": "Some answers lacked implementation depth. Try to explain architecture, tools used, and challenges faced in more detail."
+        },
+        {
+          "title": "Explain time and space complexity",
+          "desc": "When discussing algorithms, always explicitly mention Big-O complexity and performance trade-offs."
+        },
+        {
+          "title": "Edge cases and system design",
+          "desc": "Your answers can be stronger by considering boundary conditions and discussing scalability for real-world scenarios."
+        }
+      ],
+      "suggestions": [
+        "Revise core concepts in Data Structures and practice explaining them aloud with whiteboard diagrams.",
+        "Work on project depth: be ready to explain system architecture, database choices, and trade-offs.",
+        "Practice medium and hard algorithmic problems, and always analyze time/space bounds.",
+        "Conduct mock viva sessions to maintain clarity, pace, and concise structure under pressure."
+      ],
+      "annotatedTranscript": [
+        {
+          "speaker": "student",
+          "text": "I feel",
+          "timestamp": "00:05",
+          "stage": "Warm-up",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Conceptual check",
+            "desc": "Identified the main concept, but can be improved by adding memory layout trade-offs and complexity.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "80 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "I understand—you may feel a little unsure at first, but that’s perfectly fine. What is the main difference between an array and a linked list?",
+          "timestamp": "00:07",
+          "stage": "Fundamentals"
+        },
+        {
+          "speaker": "mira",
+          "text": "That's",
+          "timestamp": "00:19",
+          "stage": "Warm-up"
+        },
+        {
+          "speaker": "student",
+          "text": "Uh can you tell me who are you",
+          "timestamp": "00:21",
+          "stage": "Warm-up",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Conceptual check",
+            "desc": "Identified the main concept, but can be improved by adding memory layout trade-offs and complexity.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "80 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "Uh can you tell me who are you",
+          "timestamp": "00:34",
+          "stage": "Fundamentals"
+        },
+        {
+          "speaker": "student",
+          "text": "I'm Praveen and what about you",
+          "timestamp": "00:43",
+          "stage": "Warm-up",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Conceptual check",
+            "desc": "Identified the main concept, but can be improved by adding memory layout trade-offs and complexity.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "80 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "Thanks, Praveen—I'm Professor Mira, your examiner for today's viva. Can you explain what a stack is and describe how its last‑in‑first‑out (LIFO) principle works with a simple example?",
+          "timestamp": "00:46",
+          "stage": "Fundamentals"
+        },
+        {
+          "speaker": "student",
+          "text": "Which is 2 plus blue is equal to",
+          "timestamp": "01:11",
+          "stage": "Fundamentals",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Conceptual check",
+            "desc": "Identified the main concept, but can be improved by adding memory layout trade-offs and complexity.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "80 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "I can’t determine “2 plus blue” because blue is not a numerical value. Moving on, explain the difference between a stack and a queue, including their insertion and deletion operations and a real-world example of each.",
+          "timestamp": "01:13",
+          "stage": "Depth"
+        },
+        {
+          "speaker": "student",
+          "text": "Can you tell me the answer of this question",
+          "timestamp": "01:33",
+          "stage": "Fundamentals",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Conceptual check",
+            "desc": "Identified the main concept, but can be improved by adding memory layout trade-offs and complexity.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "80 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "I understand you're looking for the answer, but in a viva I need to hear your reasoning. Now, can you explain how a hash table handles collisions and describe two common collision‑resolution strategies?",
+          "timestamp": "01:49",
+          "stage": "Depth"
+        },
+        {
+          "speaker": "student",
+          "text": "Explain me how hash table handles the Collision and describe two common Collision resolution strategies",
+          "timestamp": "02:11",
+          "stage": "Fundamentals",
+          "annotation": {
+            "verdict": "Strength",
+            "tag": "Evidence for score",
+            "desc": "Accurately framed core definition in Data Structures with appropriate technical vocabulary.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "80 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "Perhaps: \"I see you've raised the topic of hash table collisions, Praveen",
+          "timestamp": "02:20",
+          "stage": "Depth"
+        },
+        {
+          "speaker": "student",
+          "text": "And answer for this question",
+          "timestamp": "02:32",
+          "stage": "Fundamentals",
+          "annotation": {
+            "verdict": "Needs depth",
+            "tag": "Conceptual check",
+            "desc": "Identified the main concept, but can be improved by adding memory layout trade-offs and complexity.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "80 / 100"
+          }
+        },
+        {
+          "speaker": "mira",
+          "text": "I understand you're asking for the answer to the previous question. Can you explain how a",
+          "timestamp": "02:41",
+          "stage": "Depth"
+        }
+      ]
+    },
+    "feedback": {},
+    "createdAt": "2026-10-19T15:08:26.366Z"
+  },
+  {
+    "id": "AV-4310",
+    "sessionNumber": "AV-4310",
+    "studentName": "pravin",
+    "studentEmail": "ghodakepravin154@gmail.com",
+    "candidateName": "pravin",
+    "candidateEmail": "ghodakepravin154@gmail.com",
+    "topic": "Data Structures",
+    "score": 45,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 19",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/AV-4310-cam.webm",
+    "screenRecordingUrl": "/recordings/AV-4310-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "interviewId": "AV-4310",
+        "speaker": "mira",
+        "text": "Let's begin the warm‑up. Can you define what a data structure is and provide a simple example?",
+        "timestamp": "00:05",
+        "stage": "Warm-up"
+      },
+      {
+        "interviewId": "AV-4310",
+        "speaker": "student",
+        "text": "Let's begin the warm-up can you define what a data structure is and provide a simple example",
+        "timestamp": "00:14",
+        "stage": "Warm-up",
+        "questionRef": "Let's begin the warm‑up. Can you define what a data structure is and provide a simple example?"
+      },
+      {
+        "interviewId": "AV-4310",
+        "speaker": "mira",
+        "text": "That appears to be a repeat of my question rather than an answer. Let's try again: what is the difference between linear and non-linear data structures, and can you name one example of each?",
+        "timestamp": "00:18",
+        "stage": "Fundamentals"
+      },
+      {
+        "interviewId": "AV-4310",
+        "speaker": "student",
+        "text": "Can you hear me",
+        "timestamp": "00:34",
+        "stage": "Warm-up",
+        "questionRef": "That appears to be a repeat of my question rather than an answer. Let's try again: what is the difference between linear and non-linear data structures, and can you name one example of each?"
+      },
+      {
+        "interviewId": "AV-4310",
+        "speaker": "mira",
+        "text": "Yes, I can hear you clearly. Let's proceed: what is the difference between linear and non-linear data structures, and can you give one example of each?",
+        "timestamp": "00:38",
+        "stage": "Fundamentals"
+      },
+      {
+        "interviewId": "AV-4310",
+        "speaker": "student",
+        "text": "I don't know",
+        "timestamp": "00:52",
+        "stage": "Warm-up",
+        "questionRef": "Yes, I can hear you clearly. Let's proceed: what is the difference between linear and non-linear data structures, and can you give one example of each?"
+      },
+      {
+        "interviewId": "AV-4310",
+        "speaker": "mira",
+        "text": "I see you're unsure about that concept. Could you explain what distinguishes linear from non-linear data structures and give one example of each?",
+        "timestamp": "00:55",
+        "stage": "Fundamentals"
+      },
+      {
+        "interviewId": "AV-4310",
+        "speaker": "student",
+        "text": "Are you",
+        "timestamp": "01:09",
+        "stage": "Fundamentals",
+        "questionRef": "I see you're unsure about that concept. Could you explain what distinguishes linear from non-linear data structures and give one example of each?"
+      },
+      {
+        "interviewId": "AV-4310",
+        "speaker": "mira",
+        "text": "I see you're checking if I'm still there. Let's continue: can you compare the space and time complexities of an array versus a linked list for insertion, deletion, and random access?",
+        "timestamp": "01:13",
+        "stage": "Depth"
+      },
+      {
+        "interviewId": "AV-4310",
+        "speaker": "student",
+        "text": "I see you're checking if I'm still there let's continue can you compare the space and time complexities of an array versus a linked list for insertion deletion and Random access",
+        "timestamp": "01:27",
+        "stage": "Fundamentals",
+        "questionRef": "I see you're checking if I'm still there. Let's continue: can you compare the space and time complexities of an array versus a linked list for insertion, deletion, and random access?"
+      },
+      {
+        "interviewId": "AV-4310",
+        "speaker": "mira",
+        "text": "I see you repeated the question; let's move on. Can you explain how a hash table handles collisions and compare chaining versus open addressing in terms of time complexity?",
+        "timestamp": "01:30",
+        "stage": "Depth"
+      },
+      {
+        "interviewId": "AV-4310",
+        "speaker": "student",
+        "text": "Who are you",
+        "timestamp": "01:47",
+        "stage": "Fundamentals",
+        "questionRef": "I see you repeated the question; let's move on. Can you explain how a hash table handles collisions and compare chaining versus open addressing in terms of time complexity?"
+      },
+      {
+        "interviewId": "AV-4310",
+        "speaker": "mira",
+        "text": "I think the safest approach is to briefly acknowledge that I am LFM by Liquid AI (since they asked about my identity) and then immediately return to",
+        "timestamp": "01:50",
+        "stage": "Depth"
+      },
+      {
+        "interviewId": "AV-4310",
+        "speaker": "student",
+        "text": "Who are you",
+        "timestamp": "02:05",
+        "stage": "Fundamentals",
+        "questionRef": "I think the safest approach is to briefly acknowledge that I am LFM by Liquid AI (since they asked about my identity) and then immediately return to"
+      },
+      {
+        "interviewId": "AV-4310",
+        "speaker": "mira",
+        "text": "I am Mira, your examiner for this Data Structures viva. Let's get back on track: explain how a hash table resolves collisions and contrast the performance trade-offs between separate chaining and open addressing.",
+        "timestamp": "02:10",
+        "stage": "Depth"
+      }
+    ],
+    "scorecard": {
+      "score": 45,
+      "readinessTier": "Needs Review",
+      "summary": "The candidate demonstrates limited understanding of core data structures concepts despite attempting to engage with the material. Multiple instances show repetition of questions, inability to provide substantive answers, and occasional evasion (e.g., referencing their own identity when asked about data structures). While basic topic recognition exists, the lack of coherent explanations and fundamental knowledge gaps indicate significant room for improvement.",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 35,
+          "percent": 70,
+          "reason": "Candidate struggles to define key concepts accurately. Cannot distinguish linear vs non-linear data structures with proper examples, cannot compare space/time complexities of arrays vs linked lists, and fails to explain hash table collision resolution mechanisms."
+        },
+        "depth": {
+          "score": 25,
+          "percent": 50,
+          "reason": "Shallow conceptual understanding. Answers are superficial, lacking depth and analytical reasoning required for advanced data structures evaluation."
+        },
+        "problemSolving": {
+          "score": 20,
+          "percent": 40,
+          "reason": "Minimal problem-solving demonstration. No attempt to apply theoretical knowledge to concrete scenarios or explain underlying principles beyond surface-level definitions."
+        },
+        "practical": {
+          "score": 15,
+          "percent": 30,
+          "reason": "Basic familiarity with topics but poor practical articulation. Candidate resorts to repeating questions or deflecting when pressed, showing lack of confidence in applying knowledge."
+        },
+        "communication": {
+          "score": 25,
+          "percent": 50,
+          "reason": "Inconsistent communication style. Frequent repetition of questions, unclear responses, and at times inappropriate self-references disrupt the flow of the examination."
+        }
+      },
+      "strengths": [
+        {
+          "title": "Topic Recognition",
+          "desc": "The candidate correctly identifies that the discussion covers fundamental data structures including linear/non-linear distinctions, array vs linked list analysis, and hash table collision resolution."
+        },
+        {
+          "title": "Attempted Engagement",
+          "desc": "Despite difficulties, the candidate does engage with the examiner's questions and attempts to respond to substantive queries about data structure properties."
+        }
+      ],
+      "improvements": [
+        {
+          "title": "Foundational Knowledge Review",
+          "desc": "The candidate needs to thoroughly review core data structures concepts including the distinction between linear and non-linear structures, complexity analysis of various operations, and hash table implementation details."
+        },
+        {
+          "title": "Structured Answer Practice",
+          "desc": "Develop consistent patterns for answering technical questions with clear definitions, examples, and comparative analysis rather than repeating questions or providing vague responses."
+        },
+        {
+          "title": "Confidence Building",
+          "desc": "Work on maintaining composure under pressure and avoiding irrelevant self-disclosures that distract from the academic content."
+        }
+      ],
+      "suggestions": [
+        "Review linear vs non-linear data structures with concrete examples (arrays, stacks, queues, trees, graphs) and their structural differences.",
+        "Practice explaining hash table collision resolution strategies (separate chaining vs open addressing) with specific time complexity trade-offs.",
+        "Complete end-to-end problems involving array vs linked list operations to build intuition for space/time complexity comparisons.",
+        "Prepare concise, well-structured answers for common exam topics to improve communication clarity and reduce reliance on repetition."
+      ]
+    },
+    "feedback": {},
+    "createdAt": "2026-10-19T14:47:28.569Z"
+  },
+  {
+    "id": "AV-TEST-RAG1",
+    "sessionNumber": "AV-TEST-RAG1",
+    "studentName": "Pravin Ghodake",
+    "studentEmail": "ghodakepravin154@gmail.com",
+    "candidateName": "Pravin Ghodake",
+    "candidateEmail": "ghodakepravin154@gmail.com",
+    "topic": "Data Structures & Algorithms",
+    "score": 79,
+    "integrityScore": 100,
+    "duration": "15 min",
+    "date": "Oct 19",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/AV-TEST-RAG1-camera.webm",
+    "screenRecordingUrl": "/recordings/AV-TEST-RAG1-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "speaker": "mira",
+        "text": "Can you explain why self-balancing trees are needed?"
+      },
+      {
+        "speaker": "student",
+        "text": "An unbalanced BST degenerates into an O(N) linked list. AVL trees calculate height balance factors to guarantee O(log N)."
+      }
+    ],
+    "scorecard": {
+      "score": 79,
+      "readinessTier": "Placement Ready",
+      "summary": "Candidate demonstrated solid foundational grasp in Data Structures & Algorithms with clear articulation during the 15-minute viva session.",
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 3.9,
+          "max": 5,
+          "weight": 30,
+          "calculatedMarks": 24,
+          "reason": "Demonstrated clear definitions of core structures and principles."
+        },
+        "depth": {
+          "score": 4,
+          "max": 5,
+          "weight": 25,
+          "calculatedMarks": 20,
+          "reason": "Handled follow-up questions on collision trade-offs."
+        }
+      },
+      "strengths": [
+        {
+          "title": "Good conceptual understanding",
+          "desc": "Clearly explained AVL tree balancing."
+        }
+      ],
+      "improvements": [
+        {
+          "title": "Edge cases",
+          "desc": "Deepen worst case bounds."
+        }
+      ],
+      "suggestions": [
+        "Practice AVL tree rotations."
+      ],
+      "annotatedTranscript": [
+        {
+          "speaker": "mira",
+          "text": "Can you explain why self-balancing trees are needed?"
+        },
+        {
+          "speaker": "student",
+          "text": "An unbalanced BST degenerates into an O(N) linked list. AVL trees calculate height balance factors to guarantee O(log N).",
+          "annotation": {
+            "verdict": "Strength",
+            "tag": "Evidence for score",
+            "desc": "Accurately framed core definition.",
+            "dimension": "Conceptual Understanding",
+            "supportsScore": "79 / 100"
+          }
+        }
+      ]
+    },
+    "feedback": {},
+    "createdAt": "2026-10-19T08:25:44.783Z"
+  },
+  {
+    "id": "AV-2026-REAL1",
+    "sessionNumber": "AV-2026-REAL1",
+    "studentName": "Pravin Ghodake",
+    "studentEmail": "ghodakepravin154@gmail.com",
+    "candidateName": "Pravin Ghodake",
+    "candidateEmail": "ghodakepravin154@gmail.com",
+    "topic": "Binary Search Trees & Balancing",
+    "score": 88,
+    "integrityScore": 100,
+    "duration": "14:20",
+    "date": "Oct 19",
+    "status": "Completed",
+    "recordingUrl": null,
+    "cameraRecordingUrl": "/recordings/viva-cam.webm",
+    "screenRecordingUrl": "/recordings/viva-screen.webm",
+    "technology": "Python",
+    "difficulty": "Medium",
+    "audioPath": null,
+    "transcripts": [
+      {
+        "speaker": "mira",
+        "text": "Welcome to your viva. Can you explain why a Binary Search Tree can degrade to O(N) lookup time?",
+        "stage": "Fundamentals"
+      },
+      {
+        "speaker": "student",
+        "text": "When elements are inserted in already sorted order without self-balancing, the tree degrades into a linked list of height N.",
+        "stage": "Fundamentals"
+      },
+      {
+        "speaker": "mira",
+        "text": "Excellent explanation. How does an AVL tree prevent that degradation?",
+        "stage": "Depth"
+      },
+      {
+        "speaker": "student",
+        "text": "AVL trees track the balance factor of each node and perform single or double rotations whenever the height difference between left and right subtrees exceeds one.",
+        "stage": "Depth"
+      }
+    ],
+    "scorecard": {
+      "rubricBreakdown": {
+        "conceptual": {
+          "score": 4.5,
+          "max": 5,
+          "weight": 30,
+          "calculatedMarks": 27,
+          "reason": "Clearly articulated AVL tree rotation logic."
+        },
+        "depth": {
+          "score": 4.2,
+          "max": 5,
+          "weight": 25,
+          "calculatedMarks": 21,
+          "reason": "Handled balance factor depth questions accurately."
+        },
+        "problemSolving": {
+          "score": 4,
+          "max": 5,
+          "weight": 20,
+          "calculatedMarks": 16,
+          "reason": "Proposed clean in-order traversal solution."
+        },
+        "practical": {
+          "score": 4,
+          "max": 5,
+          "weight": 15,
+          "calculatedMarks": 12,
+          "reason": "Understands real-world DB indexing trade-offs."
+        },
+        "communication": {
+          "score": 4.8,
+          "max": 5,
+          "weight": 10,
+          "calculatedMarks": 9.6,
+          "reason": "Confident, structured technical delivery."
+        }
+      },
+      "strengths": [],
+      "improvements": [],
+      "suggestions": []
+    },
+    "feedback": {},
+    "createdAt": "2026-10-19T07:47:39.252Z"
+  }
+]

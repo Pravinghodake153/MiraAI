@@ -1,0 +1,1796 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>VivaAI • Interactive Voice Viva Architecture & Screen Flow Map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0b0f17;
+  --grid: #1e293b;
+  --card: #151d2a;
+  --card-hover: #1c2638;
+  --ink: #f1f5f9;
+  --mute: #94a3b8;
+  --line: #2d3b4e;
+  --wire: #6366f1;
+  --wire-student: #10b981;
+  --wire-admin: #ec4899;
+  --tag: #f59e0b;
+  --tagink: #0f172a;
+  --bar: #0f172a;
+  --student-badge: #059669;
+  --admin-badge: #db2777;
+  --ref-badge: #7c3aed;
+  box-sizing: border-box;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  font: 14px/1.4 "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* TOP TOOLBAR */
+#bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--bar);
+  border-bottom: 1px solid var(--line);
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.brand-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 12px;
+}
+.brand-wrap b {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 17px;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+.brand-pill {
+  background: rgba(99,102,241,0.2);
+  color: #a5b4fc;
+  border: 1px solid rgba(99,102,241,0.3);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 999px;
+  text-transform: uppercase;
+}
+
+#bar i.divider {
+  width: 1px;
+  height: 22px;
+  background: var(--line);
+  margin: 0 4px;
+}
+
+/* BUTTONS */
+button {
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--ink);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+}
+button svg {
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+button:hover {
+  background: var(--card-hover);
+  border-color: var(--wire);
+  color: #fff;
+}
+button.pri {
+  background: #4f46e5;
+  color: #fff;
+  border-color: #6366f1;
+}
+button.pri:hover {
+  background: #4338ca;
+}
+button.active-filter {
+  background: var(--wire);
+  color: #fff;
+  border-color: var(--wire);
+}
+button.success {
+  background: rgba(16,185,129,0.15);
+  border-color: #10b981;
+  color: #34d399;
+}
+button.success:hover {
+  background: #10b981;
+  color: #fff;
+}
+
+/* SEARCH INPUT */
+.search-box {
+  position: relative;
+  margin-left: auto;
+}
+.search-box input {
+  background: #111827;
+  border: 1px solid var(--line);
+  color: #fff;
+  padding: 6px 12px 6px 30px;
+  border-radius: 8px;
+  font-size: 12px;
+  width: 200px;
+  transition: width 0.2s;
+}
+.search-box input:focus {
+  width: 260px;
+  outline: none;
+  border-color: var(--wire);
+}
+.search-box span.icon {
+  position: absolute;
+  left: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  color: var(--mute);
+}
+.search-box span.icon svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+/* CANVAS */
+#canvas {
+  position: relative;
+  flex: 1;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(99,102,241,0.03) 0%, transparent 80%),
+    linear-gradient(to right, var(--grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+  background-size: 100% 100%, 32px 32px, 32px 32px;
+  overflow: hidden;
+  touch-action: none;
+  cursor: grab;
+}
+#canvas:active { cursor: grabbing; }
+
+#world {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  transform-origin: 0 0;
+}
+
+/* SVG WIRES */
+#wires {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+#wires path {
+  fill: none;
+  stroke: var(--wire);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+#wires path.wire-student {
+  stroke: var(--wire-student);
+}
+#wires path.wire-admin {
+  stroke: var(--wire-admin);
+  stroke-dasharray: 6 4;
+}
+#tmp {
+  stroke: #38bdf8 !important;
+  stroke-dasharray: 4 4;
+}
+
+/* CARD NODES */
+.node {
+  position: absolute;
+  width: 320px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0,0,0,0.5), 0 8px 10px -6px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  user-select: none;
+  transition: box-shadow 0.2s, border-color 0.2s, opacity 0.2s;
+  cursor: default;
+}
+.node:hover {
+  border-color: #475569;
+  box-shadow: 0 16px 32px -4px rgba(0,0,0,0.6);
+}
+.node.selected {
+  border-color: var(--wire);
+  box-shadow: 0 0 0 2px var(--wire), 0 16px 32px -4px rgba(99,102,241,0.3);
+}
+.node.dimmed {
+  opacity: 0.15;
+  pointer-events: none;
+}
+.node.highlighted {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 3px #38bdf8, 0 20px 35px rgba(56,189,248,0.4);
+}
+
+.node.role-student {
+  border-top: 3px solid var(--student-badge);
+}
+.node.role-admin {
+  border-top: 3px solid var(--admin-badge);
+}
+
+.node .hd {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: rgba(15,23,42,0.6);
+  border-bottom: 1px solid var(--line);
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  cursor: move;
+}
+
+.badge {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 6px;
+  color: #fff;
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+}
+.badge-student { background: var(--student-badge); }
+.badge-admin { background: var(--admin-badge); }
+
+.node input.ttl {
+  flex: 1;
+  font: inherit;
+  font-weight: 700;
+  font-size: 12.5px;
+  color: #fff;
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+.node input.ttl:hover { border-color: var(--line); background: rgba(0,0,0,0.2); }
+.node input.ttl:focus { border-color: var(--wire); background: #0f172a; outline: none; }
+
+.card-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.btn-icon {
+  background: transparent;
+  border: none;
+  color: var(--mute);
+  padding: 4px 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-icon svg {
+  width: 13px;
+  height: 13px;
+  fill: currentColor;
+}
+.btn-icon:hover {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+.btn-icon.x:hover {
+  background: rgba(239,68,68,0.2);
+  color: #f87171;
+}
+
+.node .img-wrap {
+  position: relative;
+  width: 100%;
+  background: #090d14;
+  overflow: hidden;
+  cursor: zoom-in;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--line);
+}
+.node .img-wrap img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 220px;
+  object-fit: cover;
+  object-position: top center;
+  pointer-events: none;
+}
+.node .img-wrap:hover .zoom-hint {
+  opacity: 1;
+}
+.zoom-hint {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(15,23,42,0.85);
+  backdrop-filter: blur(4px);
+  color: #cbd5e1;
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.1);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.zoom-hint svg {
+  width: 11px;
+  height: 11px;
+  fill: currentColor;
+}
+
+.node textarea.note {
+  font: inherit;
+  font-size: 11.5px;
+  line-height: 1.45;
+  color: var(--mute);
+  background: #0f172a;
+  border: none;
+  border-bottom-left-radius: 11px;
+  border-bottom-right-radius: 11px;
+  padding: 8px 10px;
+  resize: vertical;
+  min-height: 62px;
+}
+.node textarea.note:hover { color: #cbd5e1; }
+.node textarea.note:focus { outline: none; background: #0b1120; color: #fff; }
+
+/* PORTS */
+.port {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #38bdf8;
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 0 2px #0284c7;
+  cursor: crosshair;
+  z-index: 2;
+  transition: transform 0.15s ease;
+}
+.port:hover { transform: scale(1.3); }
+.port.in { left: -7px; top: 50%; transform: translateY(-50%); background: #10b981; box-shadow: 0 0 0 2px #059669; }
+.port.in:hover { transform: translateY(-50%) scale(1.3); }
+.port.out { right: -7px; top: 50%; transform: translateY(-50%); background: #f59e0b; box-shadow: 0 0 0 2px #d97706; }
+.port.out:hover { transform: translateY(-50%) scale(1.3); }
+
+/* WIRE LABELS */
+.elabel {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: #1e293b;
+  border: 1px solid var(--line);
+  color: #fff;
+  border-radius: 6px;
+  padding: 2px 6px;
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  white-space: nowrap;
+  z-index: 5;
+}
+.elabel input {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  width: 110px;
+  text-align: center;
+}
+.elabel input:focus { outline: none; border-bottom: 1px solid var(--wire); }
+.elabel button {
+  background: transparent;
+  border: none;
+  color: var(--mute);
+  padding: 0 2px;
+  font-size: 12px;
+  cursor: pointer;
+  line-height: 1;
+}
+.elabel button:hover { color: #f87171; }
+
+/* ZOOM TOOLBAR */
+#zoom {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  gap: 4px;
+  background: var(--bar);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 4px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  z-index: 10;
+}
+#zoom button {
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+/* TOAST */
+#toast {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: #1e293b;
+  border: 1px solid var(--wire);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s ease;
+  z-index: 100;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+#toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* EMPTY STATE */
+#empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+#empty > div {
+  background: rgba(15,23,42,0.85);
+  border: 1px dashed var(--line);
+  padding: 32px 40px;
+  border-radius: 16px;
+  text-align: center;
+  max-width: 440px;
+  color: var(--mute);
+  backdrop-filter: blur(8px);
+}
+#empty strong {
+  display: block;
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+/* LIGHTBOX MODAL */
+#lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: none;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+}
+#lightbox.open { display: flex; }
+.lb-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.lb-header h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.lb-body {
+  flex: 1;
+  display: flex;
+  gap: 20px;
+  overflow: hidden;
+}
+.lb-img-wrap {
+  flex: 3;
+  background: #090d14;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.lb-img-wrap img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+  border-radius: 6px;
+}
+.lb-meta {
+  flex: 1;
+  min-width: 280px;
+  max-width: 360px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+}
+.lb-meta h4 {
+  margin: 0 0 6px 0;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--mute);
+}
+.lb-meta p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: #cbd5e1;
+}
+.meta-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.meta-list li {
+  font-size: 12px;
+  padding: 6px 8px;
+  background: #0f172a;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.meta-list li span.badge-sm {
+  font-size: 10px;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--wire);
+  color: #fff;
+  font-weight: 700;
+}
+
+/* SCREENS GALLERY DRAWER */
+#drawer {
+  position: fixed;
+  top: 0;
+  right: -420px;
+  width: 420px;
+  height: 100%;
+  background: var(--bar);
+  border-left: 1px solid var(--line);
+  box-shadow: -10px 0 30px rgba(0,0,0,0.7);
+  z-index: 500;
+  transition: right 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+#drawer.open { right: 0; }
+.drawer-header {
+  padding: 16px;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.drawer-header h3 {
+  margin: 0;
+  font-size: 15px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.drawer-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.drawer-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.drawer-item:hover {
+  background: var(--card-hover);
+  border-color: var(--wire);
+  transform: translateX(-3px);
+}
+.drawer-thumb {
+  width: 60px;
+  height: 42px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  background: #000;
+}
+.drawer-info {
+  flex: 1;
+  min-width: 0;
+}
+.drawer-title {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.drawer-role {
+  font-size: 11px;
+  color: var(--mute);
+}
+
+/* LEGEND BAR */
+.legend-bar {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(15,23,42,0.92);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 12px;
+  color: var(--mute);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  z-index: 10;
+}
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+.dot-student { background: var(--wire-student); }
+.dot-admin { background: var(--wire-admin); }
+.dot-wire { background: var(--wire); }
+</style>
+</head>
+<body>
+
+<!-- TOP TOOLBAR -->
+<div id="bar">
+  <div class="brand-wrap">
+    <b>VivaAI</b>
+    <span class="brand-pill">Voice Viva Map</span>
+  </div>
+
+  <button class="active-filter" id="f-all">All (11)</button>
+  <button id="f-student">
+    <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zm0 8.7L4.73 9 12 5.05 19.27 9 12 11.7zM5 13.11v4L12 21l7-3.89v-4L12 17l-7-3.89z"/></svg>
+    Student Track (6)
+  </button>
+  <button id="f-admin">
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+    Faculty & Admin (5)
+  </button>
+
+  <i class="divider"></i>
+
+  <a href="http://localhost:3000" target="_blank" style="text-decoration:none;">
+    <button class="pri" style="background:#ff5722; border-color:#ff5722;" title="Launch interactive VivaAI application on localhost:3000">
+      <svg viewBox="0 0 24 24"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+      Launch Live App
+    </button>
+  </a>
+  <button class="success" id="btn-default-flow" title="Load complete pre-wired VivaAI screen flow">
+    <svg viewBox="0 0 24 24"><path d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+    Load VivaAI Flow
+  </button>
+  <button id="btn-gallery">
+    <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12zm-6-2l-2.5-3.01L8.5 15h11l-3.5-4.5z"/></svg>
+    Screens Gallery
+  </button>
+  <button class="pri" id="add">
+    <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+    Add Images
+  </button>
+
+  <i class="divider"></i>
+
+  <button id="copy" title="Copy flow summary for AI and system prompt">
+    <svg viewBox="0 0 24 24"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+    Copy AI Brief
+  </button>
+  <button id="spng" title="Export entire flow canvas as high-res PNG">
+    <svg viewBox="0 0 24 24"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+    Save Flow PNG
+  </button>
+  <button id="sjson">
+    <svg viewBox="0 0 24 24"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+    Save JSON
+  </button>
+  <button id="ojson">
+    <svg viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/></svg>
+    Open JSON
+  </button>
+  <button id="clear">Clear</button>
+
+  <div class="search-box">
+    <span class="icon">
+      <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+    </span>
+    <input type="text" id="quick-search" placeholder="Search screen (e.g. live, rubrics)...">
+  </div>
+
+  <input type="file" id="fi" accept="image/*" multiple hidden>
+  <input type="file" id="fj" accept=".json,application/json" hidden>
+</div>
+
+<!-- CANVAS WORKSPACE -->
+<div id="canvas">
+  <div id="world">
+    <svg id="wires" width="1" height="1">
+      <defs>
+        <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M0 0L10 5L0 10z" fill="currentColor" stroke="none"/>
+        </marker>
+      </defs>
+      <g id="g"></g>
+      <path id="tmp" d=""/>
+    </svg>
+  </div>
+
+  <div id="empty">
+    <div>
+      <strong>No Screens on Canvas</strong>
+      Click <b>"Load VivaAI Flow"</b> to instantly load all 11 VivaAI screens with pre-configured wiring, or click <b>"Add Images"</b> to drop your own screenshots.
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend-bar">
+    <span style="font-weight:700; color:#fff;">Legend:</span>
+    <div class="legend-item"><span class="legend-dot dot-student"></span> Student Experience</div>
+    <div class="legend-item"><span class="legend-dot dot-admin"></span> Faculty & Administration</div>
+    <div class="legend-item"><span class="legend-dot dot-wire"></span> User Flow Action</div>
+  </div>
+
+  <!-- Zoom Controls -->
+  <div id="zoom">
+    <button id="zo" aria-label="Zoom out">−</button>
+    <button id="zf">Fit All</button>
+    <button id="zi" aria-label="Zoom in">+</button>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" role="status"></div>
+</div>
+
+<!-- LIGHTBOX MODAL -->
+<div id="lightbox">
+  <div class="lb-header">
+    <h2 id="lb-title"><span class="badge" id="lb-badge">S1</span> <span id="lb-name">Screen Preview</span></h2>
+    <button class="btn-icon" id="lb-close" style="padding:6px 12px;" title="Close preview">
+      <svg viewBox="0 0 24 24" style="width:20px; height:20px;"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+    </button>
+  </div>
+  <div class="lb-body">
+    <div class="lb-img-wrap">
+      <img id="lb-img" src="" alt="Full Screen Preview">
+    </div>
+    <div class="lb-meta">
+      <h4>Page Description & Behavior</h4>
+      <p id="lb-note">Notes will appear here...</p>
+
+      <h4>Incoming Actions (From)</h4>
+      <ul class="meta-list" id="lb-incoming"></ul>
+
+      <h4>Outgoing Actions (To)</h4>
+      <ul class="meta-list" id="lb-outgoing"></ul>
+
+      <div style="margin-top:auto; display:flex; gap:8px;">
+        <button class="pri" style="width:100%; justify-content:center;" id="lb-jump">Focus on Canvas</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCREENS GALLERY DRAWER -->
+<div id="drawer">
+  <div class="drawer-header">
+    <h3>
+      <svg viewBox="0 0 24 24" style="width:18px; height:18px; fill:currentColor;"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12zm-6-2l-2.5-3.01L8.5 15h11l-3.5-4.5z"/></svg>
+      All VivaAI Screens (<span id="drawer-count">11</span>)
+    </h3>
+    <button class="btn-icon" id="drawer-close" title="Close drawer">
+      <svg viewBox="0 0 24 24" style="width:18px; height:18px;"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+    </button>
+  </div>
+  <div class="drawer-list" id="drawer-list"></div>
+</div>
+
+<script>
+(() => {
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+const canvas = $('#canvas');
+const world = $('#world');
+const g = $('#g');
+const tmp = $('#tmp');
+const empty = $('#empty');
+const toastEl = $('#toast');
+
+let activeFilter = 'all';
+
+// CONSTANTS
+const NW = 320; // Node card width in px
+const NS = 'http://www.w3.org/2000/svg';
+
+// State Object
+const S = {
+  nodes: [],
+  edges: [],
+  view: { x: 40, y: 30, k: 0.65 }
+};
+
+const els = { n: {}, e: {} };
+
+let _uid = Date.now();
+const nid = p => `${p}_${(++_uid).toString(36)}`;
+
+function toast(msg){
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  clearTimeout(toastEl._t);
+  toastEl._t = setTimeout(() => toastEl.classList.remove('show'), 2400);
+}
+
+// Coordinate conversions
+function toWorld(cx, cy){
+  const r = canvas.getBoundingClientRect();
+  return {
+    x: (cx - r.left - S.view.x) / S.view.k,
+    y: (cy - r.top  - S.view.y) / S.view.k
+  };
+}
+
+function applyView(){
+  world.style.transform = `translate(${S.view.x}px, ${S.view.y}px) scale(${S.view.k})`;
+}
+
+function N(id){ return S.nodes.find(n => n.id === id); }
+
+function anchor(n, which){
+  const el = els.n[n.id];
+  const h = el ? el.offsetHeight : 340;
+  return {
+    x: which === 'in' ? n.x : n.x + NW,
+    y: n.y + Math.min(180, h / 2)
+  };
+}
+
+function curve(ax, ay, bx, by){
+  const dx = Math.max(50, Math.abs(bx - ax) * 0.45);
+  return `M ${ax} ${ay} C ${ax + dx} ${ay}, ${bx - dx} ${by}, ${bx} ${by}`;
+}
+
+// Auto Fit View
+function fit(filterRole){
+  const pool = filterRole ? S.nodes.filter(n => n.role === filterRole) : S.nodes;
+  if (!pool.length) return;
+  let minX = 1e9, minY = 1e9, maxX = -1e9, maxY = -1e9;
+  pool.forEach(n => {
+    minX = Math.min(minX, n.x);
+    minY = Math.min(minY, n.y);
+    maxX = Math.max(maxX, n.x + NW);
+    maxY = Math.max(maxY, n.y + 420);
+  });
+  const r = canvas.getBoundingClientRect();
+  const pad = 60;
+  const w = maxX - minX + pad * 2, h = maxY - minY + pad * 2;
+  const k = Math.min(1.0, Math.max(0.35, Math.min(r.width / w, r.height / h)));
+  S.view.k = k;
+  S.view.x = (r.width - w * k) / 2 - (minX - pad) * k;
+  S.view.y = (r.height - h * k) / 2 - (minY - pad) * k;
+  applyView();
+}
+
+// Add Node Function
+function addNode(d){
+  const n = Object.assign({
+    id: nid('n'),
+    badge: 'S1',
+    role: 'student', // 'student' | 'admin'
+    title: '',
+    note: '',
+    x: 0,
+    y: 0,
+    file: 'screen.png',
+    src: '',
+    nw: 1,
+    nh: 1
+  }, d);
+
+  S.nodes.push(n);
+
+  const el = document.createElement('div');
+  el.className = `node role-${n.role}`;
+  el.dataset.id = n.id;
+  el.dataset.role = n.role;
+  el.style.left = n.x + 'px';
+  el.style.top = n.y + 'px';
+
+  const badgeClass = n.role === 'admin' ? 'badge-admin' : 'badge-student';
+
+  el.innerHTML = `
+    <div class="hd">
+      <span class="badge ${badgeClass}">${n.badge || 'S'}</span>
+      <input class="ttl" value="${n.title}" placeholder="Screen title" aria-label="Screen title">
+      <div class="card-actions">
+        <button class="btn-icon btn-inspect" title="Enlarge screenshot">
+          <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        </button>
+        <button class="btn-icon x" title="Remove screen">
+          <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="img-wrap" title="Click to open full view">
+      <img src="${n.src}" alt="${n.title}" draggable="false" loading="lazy">
+      <div class="zoom-hint">
+        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        Click to enlarge
+      </div>
+    </div>
+    <textarea class="note" placeholder="What the user sees or does here...">${n.note || ''}</textarea>
+    <div class="port in" title="Incoming connection target"></div>
+    <div class="port out" title="Drag to another screen to wire them"></div>
+  `;
+
+  const img = el.querySelector('img');
+  img.onload = () => { n.nw = img.naturalWidth || 1; n.nh = img.naturalHeight || 1; sync(); };
+  img.onerror = () => {
+    img.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200"><rect width="100%" height="100%" fill="%231e293b"/><text x="50%" y="50%" fill="%2394a3b8" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="13">Asset: ' + encodeURIComponent(n.file) + '</text></svg>';
+  };
+
+  const t = el.querySelector('.ttl');
+  t.oninput = () => { n.title = t.value; persist(); };
+
+  const no = el.querySelector('.note');
+  no.oninput = () => { n.note = no.value; persist(); };
+
+  el.querySelector('.img-wrap').onclick = () => openLightbox(n);
+  el.querySelector('.btn-inspect').onclick = () => openLightbox(n);
+
+  el.querySelector('.x').onclick = () => {
+    S.edges.filter(e => e.from === n.id || e.to === n.id).forEach(rmEdge);
+    el.remove();
+    delete els.n[n.id];
+    S.nodes = S.nodes.filter(q => q !== n);
+    sync();
+    persist();
+  };
+
+  world.appendChild(el);
+  els.n[n.id] = el;
+  return n;
+}
+
+// Edge functions
+function rmEdge(e){
+  const el = els.e[e.id];
+  if(el){ el._p.remove(); el.remove(); delete els.e[e.id]; }
+  S.edges = S.edges.filter(q => q !== e);
+  sync();
+  persist();
+}
+function addEdge(d){
+  const e = Object.assign({ id: nid('e'), from: '', to: '', label: '', role: 'wire' }, d);
+  S.edges.push(e);
+
+  const el = document.createElement('div');
+  el.className = 'elabel';
+  el.innerHTML = `
+    <input placeholder="Action (e.g. tap Start)" value="${e.label || ''}">
+    <button title="Remove connection">✕</button>
+  `;
+  const i = el.querySelector('input');
+  i.oninput = () => { e.label = i.value; persist(); };
+  el.querySelector('button').onclick = () => rmEdge(e);
+
+  el._p = document.createElementNS(NS, 'path');
+  el._p.setAttribute('marker-end', 'url(#ah)');
+  if(e.role === 'student') el._p.classList.add('wire-student');
+  if(e.role === 'admin') el._p.classList.add('wire-admin');
+
+  g.appendChild(el._p);
+  world.appendChild(el);
+  els.e[e.id] = el;
+  sync();
+  return e;
+}
+
+// Sync positions & wires
+function sync(){
+  S.nodes.forEach(n => {
+    const el = els.n[n.id];
+    if(el) {
+      el.style.left = n.x + 'px';
+      el.style.top = n.y + 'px';
+    }
+  });
+
+  S.edges.forEach(e => {
+    const a = N(e.from), b = N(e.to);
+    if (!a || !b) return;
+    const A = anchor(a, 'out'), B = anchor(b, 'in'), el = els.e[e.id];
+    if(el && el._p) {
+      el._p.setAttribute('d', curve(A.x, A.y, B.x, B.y));
+      el.style.left = ((A.x + B.x) / 2) + 'px';
+      el.style.top = ((A.y + B.y) / 2) + 'px';
+    }
+  });
+
+  empty.hidden = S.nodes.length > 0;
+  $('#drawer-count').textContent = S.nodes.length;
+}
+
+// Canvas pointer tracking
+function track(e, move, up){
+  e.preventDefault();
+  const u = ev => {
+    removeEventListener('pointermove', move);
+    removeEventListener('pointerup', u);
+    removeEventListener('pointercancel', u);
+    up && up(ev);
+  };
+  addEventListener('pointermove', move);
+  addEventListener('pointerup', u);
+  addEventListener('pointercancel', u);
+}
+
+canvas.addEventListener('pointerdown', e => {
+  if (e.target.closest('.node, .elabel, #zoom, .legend-bar')) return;
+  const sx = e.clientX, sy = e.clientY, vx = S.view.x, vy = S.view.y;
+  track(e, ev => {
+    S.view.x = vx + (ev.clientX - sx);
+    S.view.y = vy + (ev.clientY - sy);
+    applyView();
+  });
+});
+
+// Canvas Zoom with Wheel
+canvas.addEventListener('wheel', e => {
+  e.preventDefault();
+  const r = canvas.getBoundingClientRect();
+  const mx = e.clientX - r.left, my = e.clientY - r.top;
+  const factor = e.deltaY < 0 ? 1.12 : 0.89;
+  const newK = Math.min(2.5, Math.max(0.25, S.view.k * factor));
+  S.view.x = mx - (mx - S.view.x) * (newK / S.view.k);
+  S.view.y = my - (my - S.view.y) * (newK / S.view.k);
+  S.view.k = newK;
+  applyView();
+}, { passive: false });
+
+$('#zi').onclick = () => { S.view.k = Math.min(2.5, S.view.k * 1.2); applyView(); };
+$('#zo').onclick = () => { S.view.k = Math.max(0.25, S.view.k / 1.2); applyView(); };
+$('#zf').onclick = () => fit();
+
+// Node Dragging
+world.addEventListener('pointerdown', e => {
+  const hd = e.target.closest('.hd');
+  if (!hd || e.target.closest('button, input')) return;
+  const nodeEl = hd.closest('.node');
+  const n = N(nodeEl.dataset.id);
+  if (!n) return;
+
+  const startP = toWorld(e.clientX, e.clientY);
+  const ox = n.x, oy = n.y;
+
+  track(e, ev => {
+    const curP = toWorld(ev.clientX, ev.clientY);
+    n.x = Math.round(ox + (curP.x - startP.x));
+    n.y = Math.round(oy + (curP.y - startP.y));
+    sync();
+  }, () => persist());
+});
+
+// Port Dragging (Create wire connection)
+world.addEventListener('pointerdown', e => {
+  const port = e.target.closest('.port.out');
+  if (!port) return;
+  const nodeEl = port.closest('.node');
+  const n = N(nodeEl.dataset.id);
+  if (!n) return;
+
+  const A = anchor(n, 'out');
+  let targetNode = null;
+
+  track(e, ev => {
+    const w = toWorld(ev.clientX, ev.clientY);
+    tmp.setAttribute('d', curve(A.x, A.y, w.x, w.y));
+
+    const under = document.elementFromPoint(ev.clientX, ev.clientY);
+    const targetEl = under?.closest('.node');
+    if (targetEl && targetEl !== nodeEl) {
+      targetEl.classList.add('selected');
+      targetNode = N(targetEl.dataset.id);
+    } else {
+      $$('.node.selected').forEach(el => el.classList.remove('selected'));
+      targetNode = null;
+    }
+  }, () => {
+    tmp.setAttribute('d', '');
+    $$('.node.selected').forEach(el => el.classList.remove('selected'));
+    if (targetNode && targetNode.id !== n.id) {
+      const exists = S.edges.some(q => q.from === n.id && q.to === targetNode.id);
+      if (!exists) {
+        addEdge({
+          from: n.id,
+          to: targetNode.id,
+          label: 'Navigate to screen',
+          role: n.role === 'admin' ? 'admin' : 'student'
+        });
+        persist();
+      }
+    }
+  });
+});
+
+function persist(){
+  try {
+    localStorage.setItem('vivaai_flowwire_data', JSON.stringify({
+      nodes: S.nodes,
+      edges: S.edges,
+      view: S.view
+    }));
+  } catch(e){}
+}
+
+function reset(){
+  S.nodes.forEach(n => els.n[n.id]?.remove());
+  S.edges.forEach(e => { els.e[e.id]?._p.remove(); els.e[e.id]?.remove(); });
+  S.nodes = [];
+  S.edges = [];
+  Object.keys(els.n).forEach(k => delete els.n[k]);
+  Object.keys(els.e).forEach(k => delete els.e[k]);
+  sync();
+}
+
+// LIGHTBOX
+function openLightbox(node){
+  $('#lb-title').innerHTML = `<span class="badge ${node.role === 'admin' ? 'badge-admin' : 'badge-student'}">${node.badge}</span> ${node.title}`;
+  $('#lb-img').src = node.src;
+  $('#lb-note').textContent = node.note || 'No notes entered for this screen.';
+
+  const inEdges = S.edges.filter(e => e.to === node.id);
+  const outEdges = S.edges.filter(e => e.from === node.id);
+
+  const inList = $('#lb-incoming');
+  inList.innerHTML = inEdges.length ? '' : '<li style="color:var(--mute)">No incoming actions (Start screen)</li>';
+  inEdges.forEach(e => {
+    const fromN = N(e.from);
+    if(fromN) inList.innerHTML += `<li><span class="badge-sm">${fromN.badge}</span> <b>${fromN.title}</b> — <i style="color:#a5b4fc">"${e.label || 'Action'}"</i></li>`;
+  });
+
+  const outList = $('#lb-outgoing');
+  outList.innerHTML = outEdges.length ? '' : '<li style="color:var(--mute)">No outgoing actions (Terminal screen)</li>';
+  outEdges.forEach(e => {
+    const toN = N(e.to);
+    if(toN) outList.innerHTML += `<li><i style="color:#a5b4fc">"${e.label || 'Action'}"</i> → <span class="badge-sm">${toN.badge}</span> <b>${toN.title}</b></li>`;
+  });
+
+  $('#lb-jump').onclick = () => {
+    closeLightbox();
+    focusNode(node.id);
+  };
+
+  $('#lightbox').classList.add('open');
+}
+function closeLightbox(){
+  $('#lightbox').classList.remove('open');
+}
+$('#lb-close').onclick = closeLightbox;
+$('#lightbox').onclick = e => { if (e.target === $('#lightbox')) closeLightbox(); };
+addEventListener('keydown', e => { if (e.key === 'Escape') { closeLightbox(); closeDrawer(); } });
+
+// Focus on a specific node
+function focusNode(id){
+  const n = N(id);
+  if (!n) return;
+  const r = canvas.getBoundingClientRect();
+  S.view.k = 0.85;
+  S.view.x = r.width / 2 - (n.x + NW / 2) * S.view.k;
+  S.view.y = r.height / 2 - (n.y + 150) * S.view.k;
+  applyView();
+
+  const el = els.n[id];
+  if(el){
+    el.classList.add('highlighted');
+    setTimeout(() => el.classList.remove('highlighted'), 2200);
+  }
+}
+
+// DRAWER (Screens Gallery)
+function renderDrawer(){
+  const list = $('#drawer-list');
+  list.innerHTML = '';
+  S.nodes.forEach(n => {
+    const item = document.createElement('div');
+    item.className = 'drawer-item';
+    item.innerHTML = `
+      <img class="drawer-thumb" src="${n.src}" alt="${n.title}">
+      <div class="drawer-info">
+        <div class="drawer-title">${n.badge}: ${n.title}</div>
+        <div class="drawer-role">${n.role === 'admin' ? 'Faculty / Admin Track' : 'Student Experience Track'}</div>
+      </div>
+    `;
+    item.onclick = () => {
+      closeDrawer();
+      focusNode(n.id);
+    };
+    list.appendChild(item);
+  });
+}
+function openDrawer(){
+  renderDrawer();
+  $('#drawer').classList.add('open');
+}
+function closeDrawer(){
+  $('#drawer').classList.remove('open');
+}
+$('#btn-gallery').onclick = openDrawer;
+$('#drawer-close').onclick = closeDrawer;
+
+// FILTERING
+function applyFilter(role){
+  activeFilter = role;
+  $$('#bar button').forEach(b => b.classList.remove('active-filter'));
+  if (role === 'all') $('#f-all').classList.add('active-filter');
+  if (role === 'student') $('#f-student').classList.add('active-filter');
+  if (role === 'admin') $('#f-admin').classList.add('active-filter');
+
+  S.nodes.forEach(n => {
+    const el = els.n[n.id];
+    if(!el) return;
+    if(role === 'all' || n.role === role){
+      el.classList.remove('dimmed');
+    } else {
+      el.classList.add('dimmed');
+    }
+  });
+  fit(role === 'all' ? null : role);
+}
+$('#f-all').onclick = () => applyFilter('all');
+$('#f-student').onclick = () => applyFilter('student');
+$('#f-admin').onclick = () => applyFilter('admin');
+
+// QUICK SEARCH
+$('#quick-search').oninput = e => {
+  const q = e.target.value.toLowerCase().trim();
+  if(!q){
+    S.nodes.forEach(n => els.n[n.id]?.classList.remove('dimmed', 'highlighted'));
+    return;
+  }
+  let matchFirst = null;
+  S.nodes.forEach(n => {
+    const match = n.title.toLowerCase().includes(q) || (n.note && n.note.toLowerCase().includes(q)) || n.badge.toLowerCase().includes(q);
+    const el = els.n[n.id];
+    if(match){
+      el?.classList.remove('dimmed');
+      el?.classList.add('highlighted');
+      if(!matchFirst) matchFirst = n;
+    } else {
+      el?.classList.add('dimmed');
+      el?.classList.remove('highlighted');
+    }
+  });
+  if(matchFirst && q.length >= 3){
+    focusNode(matchFirst.id);
+  }
+};
+
+// ============================================================================
+// COMPLETE VIVAAI SCREENS & FLOW DEFINITION
+// ============================================================================
+const VIVAAI_PRESET = {
+  nodes: [
+    // --- STUDENT TRACK (S1 to S6) ---
+    {
+      id: "n_s1",
+      badge: "S1",
+      role: "student",
+      title: "VivaAI Portal Landing",
+      file: "landing.png",
+      src: "images/landing.png",
+      x: 80,
+      y: 80,
+      note: "Public portal welcome screen for MSOT students. Details the 15-minute voice viva rules, evaluation rubrics, mic/camera checklist, and initiates the viva journey via 'Start Technical Viva' button."
+    },
+    {
+      id: "n_s2",
+      badge: "S2",
+      role: "student",
+      title: "Student Login & Consent Modal",
+      file: "AI Viva Signup Modal.png",
+      src: "images/AI Viva Signup Modal.png",
+      x: 480,
+      y: 80,
+      note: "Student joins with their Student ID / Roll number. Runs device connectivity check (mic, audio output, webcam) and requires explicit student consent for voice recording, transcription, and academic integrity monitoring."
+    },
+    {
+      id: "n_s3",
+      badge: "S3",
+      role: "student",
+      title: "Interview Flow & Stage Briefing",
+      file: "Interview Flow Dashboard.png",
+      src: "images/Interview Flow Dashboard.png",
+      x: 880,
+      y: 80,
+      note: "Pre-interview flow briefing breaking down the standard 15-minute viva structure: 0-1m Warm-up, 1-5m Fundamentals (2-3 concept Qs), 5-10m Depth & Trade-offs, 10-13m Applied Debugging, and 13-15m Wrap-up & Scoring."
+    },
+    {
+      id: "n_s4",
+      badge: "S4",
+      role: "student",
+      title: "Live Voice Interview Arena",
+      file: "AI Viva Live Interview Dashboard.png",
+      src: "images/AI Viva Live Interview Dashboard.png",
+      x: 1280,
+      y: 80,
+      note: "Real-time conversational voice chamber. Features active 15:00 countdown timer, real-time STT / TTS audio waveform visualizer, webcam stream with proctoring monitor, and AI adaptive follow-up questions in under ~2 seconds."
+    },
+    {
+      id: "n_s5",
+      badge: "S5",
+      role: "student",
+      title: "Evaluation & Rubric Breakdown",
+      file: "AI Viva Evaluation Screen.png",
+      src: "images/AI Viva Evaluation Screen.png",
+      x: 1680,
+      y: 80,
+      note: "Final marks computed after session ends: Overall score out of 100, 5-dimension rubric breakdown (Conceptual 30%, Depth 25%, Problem Solving 20%, Practical 15%, Communication 10%), plus itemized strengths and key areas for growth."
+    },
+    {
+      id: "n_s6",
+      badge: "S6",
+      role: "student",
+      title: "Annotated Transcript & Citations",
+      file: "AI Viva Annotated Interview Transcript.png",
+      src: "images/AI Viva Annotated Interview Transcript.png",
+      x: 2080,
+      y: 80,
+      note: "Full timestamped interview transcript synchronized with audio waveform playback. AI feedback citations link directly to student quotes for full transparency and defensible evaluation."
+    },
+
+    // --- FACULTY & ADMIN TRACK (A1 to A5) ---
+    {
+      id: "n_a1",
+      badge: "A1",
+      role: "admin",
+      title: "Faculty Overview & Cohort Metrics",
+      file: "Admin Dashboard.png",
+      src: "images/Admin Dashboard.png",
+      x: 80,
+      y: 620,
+      note: "Central faculty command center displaying cohort progress across 350 MSOT students, live concurrent sessions (100-150 target), average cohort grade, distribution curve, and quick navigation to all admin modules."
+    },
+    {
+      id: "n_a2",
+      badge: "A2",
+      role: "admin",
+      title: "Subject Setup & Question Bank",
+      file: "Topics Dashboard.png",
+      src: "images/Topics Dashboard.png",
+      x: 480,
+      y: 620,
+      note: "Faculty viva configuration console: Define subject, syllabus topics, difficulty levels, upload question banks via CSV/JSON, or trigger AI question generation from uploaded course syllabus for faculty review."
+    },
+    {
+      id: "n_a3",
+      badge: "A3",
+      role: "admin",
+      title: "Student Cohort Roster & Status",
+      file: "Users Dashboard.png",
+      src: "images/Users Dashboard.png",
+      x: 880,
+      y: 620,
+      note: "Comprehensive student roster management: View all 350 students with roll numbers, viva completion status, final marks, low-confidence warning flags, and quick links to review individual transcripts and recordings."
+    },
+    {
+      id: "n_a4",
+      badge: "A4",
+      role: "admin",
+      title: "Integrity & Cheating Review",
+      file: "Cheating Review Dashboard.png",
+      src: "images/Cheating Review Dashboard.png",
+      x: 1280,
+      y: 620,
+      note: "Anti-cheat audit dashboard tracking real-time integrity signals: tab-switch frequency, long unnatural pauses, multiple detected voices, background chatter, and answers read from screen."
+    },
+    {
+      id: "n_a5",
+      badge: "A5",
+      role: "admin",
+      title: "Faculty Evaluation Audit & Override",
+      file: "Feedback Dashboard.png",
+      src: "images/Feedback Dashboard.png",
+      x: 1680,
+      y: 620,
+      note: "Faculty auditing interface: Replay full student audio, inspect transcript citations, examine AI scoring rationale, and override the mark with mandatory reviewer name and justification note."
+    }
+  ],
+
+  edges: [
+    // Student Actions
+    { id: "e1", from: "n_s1", to: "n_s2", label: "Click 'Start Viva'", role: "student" },
+    { id: "e2", from: "n_s2", to: "n_s3", label: "Consent & Mic Verified", role: "student" },
+    { id: "e3", from: "n_s3", to: "n_s4", label: "Begin Voice Interview", role: "student" },
+    { id: "e4", from: "n_s4", to: "n_s5", label: "15-Min Timer Finished", role: "student" },
+    { id: "e5", from: "n_s5", to: "n_s6", label: "View Transcript & Audio", role: "student" },
+
+    // Faculty & Admin Actions
+    { id: "ea1", from: "n_a1", to: "n_a2", label: "Configure Questions & Topics", role: "admin" },
+    { id: "ea2", from: "n_a1", to: "n_a3", label: "Inspect Student Roster", role: "admin" },
+    { id: "ea3", from: "n_a1", to: "n_a4", label: "Review Flagged Anti-Cheat Alerts", role: "admin" },
+    { id: "ea4", from: "n_a1", to: "n_a5", label: "Audit Scores & Override", role: "admin" },
+    { id: "ea5", from: "n_a4", to: "n_a5", label: "Faculty Re-evaluation & Justification", role: "admin" },
+
+    // Cross-system Sync Wires (Live Proctoring & Gradebook Submission)
+    { id: "ex1", from: "n_s4", to: "n_a4", label: "Live Telemetry & Proctor Stream", role: "admin" },
+    { id: "ex2", from: "n_s5", to: "n_a5", label: "Synchronize Marks to Faculty", role: "student" }
+  ]
+};
+
+function loadPreset(preset){
+  reset();
+  preset.nodes.forEach(n => addNode(n));
+  preset.edges.forEach(e => addEdge(e));
+  sync();
+  setTimeout(() => { sync(); fit(); }, 200);
+  persist();
+  toast('VivaAI 11-screen architecture loaded successfully!');
+}
+
+$('#btn-default-flow').onclick = () => loadPreset(VIVAAI_PRESET);
+
+// File Adding & Dropping
+const readURL = f => new Promise(r => { const fr = new FileReader(); fr.onload = () => r(fr.result); fr.readAsDataURL(f); });
+async function addFiles(files, at){
+  const list = [...files].filter(f => f.type.startsWith('image/'));
+  if (!list.length) { toast('Only image files can be added.'); return; }
+  let last = S.nodes[S.nodes.length - 1], x, y;
+  if (at) { x = at.x - NW / 2; y = at.y - 20; }
+  else if (last) { x = last.x + NW + 80; y = last.y; }
+  else { const p = toWorld(canvas.getBoundingClientRect().left + 60, canvas.getBoundingClientRect().top + 60); x = p.x; y = p.y; }
+
+  for (const f of list) {
+    const src = await readURL(f), im = new Image();
+    im.src = src;
+    await im.decode().catch(() => {});
+    addNode({
+      src,
+      file: f.name || 'custom.png',
+      badge: 'C' + (S.nodes.length + 1),
+      role: 'student',
+      title: (f.name || 'Custom Screen').replace(/\.[^.]+$/, ''),
+      x, y,
+      nw: im.naturalWidth || 1, nh: im.naturalHeight || 1
+    });
+    x += NW + 80;
+  }
+  sync();
+  requestAnimationFrame(() => { sync(); fit(); });
+  persist();
+}
+
+$('#add').onclick = () => $('#fi').click();
+$('#fi').onchange = e => { addFiles(e.target.files); e.target.value = ''; };
+canvas.addEventListener('dragover', e => e.preventDefault());
+canvas.addEventListener('drop', e => { e.preventDefault(); addFiles(e.dataTransfer.files, toWorld(e.clientX, e.clientY)); });
+addEventListener('paste', e => {
+  const fs = [...(e.clipboardData?.files || [])];
+  if (fs.length && !e.target.closest?.('input,textarea')) {
+    e.preventDefault();
+    addFiles(fs);
+  }
+});
+
+// AI Brief Generation
+function brief(){
+  const T = S.nodes, id = n => n.badge + ' (' + n.title.trim() + ')', lab = e => e.label.trim() || '(next)';
+  let o = `# VivaAI Platform Wireframe & User Flow Architecture\n\n`;
+  o += `Total Screens: ${T.length} | Connections: ${S.edges.length}\n\n`;
+
+  o += `## Student Experience Flow\n`;
+  T.filter(n => n.role === 'student').forEach(n => {
+    const out = S.edges.filter(e => e.from === n.id);
+    o += `\n### [${n.badge}] ${n.title}\n`;
+    o += `- Image Asset: \`${n.file}\`\n`;
+    if (n.note) o += `- Specs & Features: ${n.note.trim()}\n`;
+    out.forEach(e => {
+      const t = N(e.to);
+      if(t) o += `- User Action: **${lab(e)}** -> [${t.badge}] ${t.title}\n`;
+    });
+  });
+
+  o += `\n## Faculty & Authority Experience Flow\n`;
+  T.filter(n => n.role === 'admin').forEach(n => {
+    const out = S.edges.filter(e => e.from === n.id);
+    o += `\n### [${n.badge}] ${n.title}\n`;
+    o += `- Image Asset: \`${n.file}\`\n`;
+    if (n.note) o += `- Specs & Features: ${n.note.trim()}\n`;
+    out.forEach(e => {
+      const t = N(e.to);
+      if(t) o += `- User Action: **${lab(e)}** -> [${t.badge}] ${t.title}\n`;
+    });
+  });
+
+  o += `\n## Full Connections Graph\n\`\`\`\n`;
+  S.edges.forEach(e => {
+    const a = N(e.from), b = N(e.to);
+    if(a && b) o += `${a.badge} [${a.title}] --(${e.label || 'Action'})--> ${b.badge} [${b.title}]\n`;
+  });
+  o += `\`\`\`\n`;
+  return o;
+}
+
+$('#copy').onclick = async () => {
+  if (!S.nodes.length) return toast('Add or load screens first.');
+  try {
+    await navigator.clipboard.writeText(brief());
+    toast('Architecture brief copied to clipboard!');
+  } catch(_) {
+    toast('Clipboard unavailable.');
+  }
+};
+
+// Save Project JSON
+$('#sjson').onclick = () => {
+  if (!S.nodes.length) return toast('Nothing to save.');
+  const blob = new Blob([JSON.stringify({ v: 2, nodes: S.nodes, edges: S.edges, view: S.view }, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'vivaai-flowwire-project.json';
+  a.click();
+  toast('Project downloaded as JSON.');
+};
+
+// Open Project JSON
+$('#ojson').onclick = () => $('#fj').click();
+$('#fj').onchange = async e => {
+  const f = e.target.files[0]; e.target.value = '';
+  if (!f) return;
+  try {
+    const d = JSON.parse(await f.text());
+    if (!Array.isArray(d.nodes)) throw 0;
+    reset();
+    d.nodes.forEach(n => addNode(n));
+    (d.edges || []).forEach(ed => addEdge(ed));
+    sync();
+    setTimeout(() => { sync(); fit(); }, 200);
+    persist();
+    toast('Project loaded successfully.');
+  } catch(_) {
+    toast('Invalid Flowwire JSON file.');
+  }
+};
+
+// Clear Button
+$('#clear').onclick = function(){
+  if (!S.nodes.length) return;
+  if (this.dataset.arm) {
+    reset();
+    this.textContent = 'Clear';
+    delete this.dataset.arm;
+    localStorage.removeItem('vivaai_flowwire_data');
+    toast('Canvas cleared.');
+    return;
+  }
+  this.dataset.arm = '1';
+  this.textContent = 'Click again to confirm';
+  setTimeout(() => { this.textContent = 'Clear'; delete this.dataset.arm; }, 3000);
+};
+
+// Save Flow PNG
+$('#spng').onclick = async () => {
+  if (!S.nodes.length) return toast('No screens on canvas.');
+  toast('Generating high-res PNG flow diagram...');
+
+  const W = NW, pad = 100;
+  await Promise.all(S.nodes.map(n => new Promise(r => {
+    const i = new Image();
+    i.onload = () => { n._i = i; r(); };
+    i.onerror = () => { r(); };
+    i.src = n.src;
+  })));
+
+  S.nodes.forEach(n => {
+    const h = (W - 20) * ((n.nh || 1) / (n.nw || 1));
+    n._h = Math.min(500, Math.max(300, 100 + h));
+  });
+
+  let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+  S.nodes.forEach(n => {
+    x0 = Math.min(x0, n.x); y0 = Math.min(y0, n.y);
+    x1 = Math.max(x1, n.x + W); y1 = Math.max(y1, n.y + n._h);
+  });
+
+  const w = x1 - x0 + pad * 2, h = y1 - y0 + pad * 2;
+  const sc = Math.min(1.5, 7000 / Math.max(w, h));
+  const c = document.createElement('canvas');
+  c.width = Math.round(w * sc);
+  c.height = Math.round(h * sc);
+  const x = c.getContext('2d');
+  x.scale(sc, sc);
+
+  // Background
+  x.fillStyle = '#0b0f17';
+  x.fillRect(0, 0, w, h);
+  x.translate(pad - x0, pad - y0);
+
+  // Draw Wires
+  S.edges.forEach(e => {
+    const a = N(e.from), b = N(e.to);
+    if (!a || !b) return;
+    const A = { x: a.x + W, y: a.y + a._h / 2 };
+    const B = { x: b.x, y: b.y + b._h / 2 };
+    const dx = Math.max(60, Math.abs(B.x - A.x) / 2);
+
+    x.strokeStyle = e.role === 'admin' ? '#ec4899' : (e.role === 'student' ? '#10b981' : '#6366f1');
+    x.lineWidth = 3;
+    x.beginPath();
+    x.moveTo(A.x, A.y);
+    x.bezierCurveTo(A.x + dx, A.y, B.x - dx, B.y, B.x - 8, B.y);
+    x.stroke();
+
+    // Arrowhead
+    x.fillStyle = x.strokeStyle;
+    x.beginPath();
+    x.moveTo(B.x, B.y);
+    x.lineTo(B.x - 12, B.y - 7);
+    x.lineTo(B.x - 12, B.y + 7);
+    x.fill();
+  });
+
+  // Draw Cards
+  S.nodes.forEach(n => {
+    x.fillStyle = '#151d2a';
+    x.strokeStyle = '#2d3b4e';
+    x.lineWidth = 1.5;
+    x.beginPath();
+    x.roundRect(n.x, n.y, W, n._h, 12);
+    x.fill();
+    x.stroke();
+
+    // Header badge
+    x.fillStyle = n.role === 'admin' ? '#ec4899' : '#10b981';
+    x.beginPath();
+    x.roundRect(n.x + 10, n.y + 10, 34, 22, 6);
+    x.fill();
+    x.fillStyle = '#ffffff';
+    x.font = 'bold 12px sans-serif';
+    x.textAlign = 'center';
+    x.fillText(n.badge, n.x + 27, n.y + 25);
+
+    // Title
+    x.textAlign = 'left';
+    x.fillStyle = '#ffffff';
+    x.font = 'bold 13px sans-serif';
+    x.fillText(n.title.slice(0, 24), n.x + 52, n.y + 26);
+
+    // Image
+    if (n._i) {
+      const imgH = Math.min(220, n._h - 110);
+      x.drawImage(n._i, n.x + 10, n.y + 42, W - 20, imgH);
+    }
+  });
+
+  c.toBlob(b => {
+    if(!b) return toast('Failed to create image.');
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(b);
+    a.download = 'vivaai-visual-architecture-flow.png';
+    a.click();
+    toast('Flow diagram PNG downloaded!');
+  }, 'image/png');
+};
+
+// INITIALIZATION
+function init(){
+  const saved = localStorage.getItem('vivaai_flowwire_data');
+  if (saved) {
+    try {
+      const d = JSON.parse(saved);
+      if (Array.isArray(d.nodes) && d.nodes.length) {
+        d.nodes.forEach(n => addNode(n));
+        (d.edges || []).forEach(e => addEdge(e));
+        if (d.view) S.view = d.view;
+        sync();
+        applyView();
+        return;
+      }
+    } catch(e){}
+  }
+  // Default to VIVAAI_PRESET if no saved data
+  loadPreset(VIVAAI_PRESET);
+}
+
+addEventListener('resize', sync);
+init();
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "vivaai-root",
+  "version": "1.0.0",
+  "description": "VivaAI Root Runner",
+  "scripts": {
+    "start": "npm start --prefix VivaAi_app",
+    "dev": "npm start --prefix VivaAi_app"
+  }
+}
