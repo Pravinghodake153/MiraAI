@@ -3308,6 +3308,7 @@ const App = {
               class="coding-code-textarea"
               id="candidate-code-editor"
               spellcheck="false"
+              onscroll="App.syncCodeEditorScroll(this)"
               oninput="App.updateCodingLineNumbers(this)"
               onkeydown="App.handleCodeEditorKeyDown(event, this)"
             >${currentCode}</textarea>
@@ -3326,9 +3327,9 @@ const App = {
 
             <div class="coding-test-body" id="console-body-cases" style="display:${(!this.activeConsoleTab || this.activeConsoleTab === 'cases') ? 'flex' : 'none'};">
               <div class="test-cases-sidebar">
-                <button class="test-case-btn ${(!this.activeTestCaseIdx || this.activeTestCaseIdx === 0) ? 'active' : ''}" onclick="App.selectCodingTestCase(0)" id="tc-btn-0">Test Case 1</button>
-                <button class="test-case-btn ${this.activeTestCaseIdx === 1 ? 'active' : ''}" onclick="App.selectCodingTestCase(1)" id="tc-btn-1">Test Case 2</button>
-                <button class="test-case-btn ${this.activeTestCaseIdx === 2 ? 'active' : ''}" onclick="App.selectCodingTestCase(2)" id="tc-btn-2">Test Case 3</button>
+                ${(prob.examples || prob.testCases || [{ id: 1 }, { id: 2 }, { id: 3 }]).map((tc, idx) => `
+                  <button class="test-case-btn ${(this.activeTestCaseIdx === idx || (!this.activeTestCaseIdx && idx === 0)) ? 'active' : ''}" onclick="App.selectCodingTestCase(${idx})" id="tc-btn-${idx}">Case ${idx + 1}</button>
+                `).join('')}
               </div>
 
               <div class="test-case-detail" id="test-case-detail-content">
@@ -3452,25 +3453,22 @@ const App = {
 
   selectCodingTestCase(idx) {
     this.activeTestCaseIdx = idx;
-    const stages = this.getCurrentFlowStages();
-    const activeStageIdx = this.getCurrentFlowStageIndexByTime();
+    const stages = this.getCurrentFlowStages ? this.getCurrentFlowStages() : [];
+    const activeStageIdx = this.getCurrentFlowStageIndexByTime ? this.getCurrentFlowStageIndexByTime() : 0;
     const currentStage = stages[activeStageIdx] || {};
-    const prob = currentStage.codingProblem;
+    const prob = currentStage.codingProblem || {};
 
-    [0, 1, 2].forEach(i => {
-      const btn = document.getElementById(`tc-btn-${i}`);
-      if (btn) {
-        if (i === idx) btn.classList.add('active');
-        else btn.classList.remove('active');
-      }
+    document.querySelectorAll('.test-cases-sidebar .test-case-btn').forEach((btn, i) => {
+      btn.classList.toggle('active', i === idx);
     });
 
     const inPre = document.getElementById('test-case-input-preview');
     const outPre = document.getElementById('test-case-output-preview');
-    const eg = prob?.examples?.[idx] || {};
+    const cases = prob.examples || prob.testCases || [];
+    const eg = cases[idx] || cases[0] || {};
 
     if (inPre) inPre.textContent = eg.input || '(None)';
-    if (outPre) outPre.textContent = eg.output || '(None)';
+    if (outPre) outPre.textContent = eg.output || eg.expectedOutput || '(None)';
   },
 
   switchCodingConsoleTab(tabKey) {
@@ -3493,6 +3491,141 @@ const App = {
     }
   },
 
+  syncCodeEditorScroll(textarea) {
+    if (!textarea) return;
+    const linesEl = document.getElementById('coding-line-numbers');
+    if (linesEl) {
+      linesEl.scrollTop = textarea.scrollTop;
+    }
+  },
+
+  switchResultCase(idx) {
+    this.activeResultCaseIdx = idx;
+    const outputBox = document.getElementById('compiler-run-output-box');
+    if (outputBox && this.latestExecutionResultObj) {
+      outputBox.innerHTML = this.renderLeetCodeTestResultHtml(this.latestExecutionResultObj, this.latestExecutionIsSubmit, this.latestExecutionVersion);
+    }
+  },
+
+  renderLeetCodeTestResultHtml(res, isSubmit = false, versionNum = 1) {
+    if (!res) return '<span style="color:#64748B;">No execution result available.</span>';
+
+    const status = res.status || (res.success ? 'Execution Successful' : 'Execution Failed');
+    const isAccepted = res.isAccepted || status === 'Accepted';
+    const isWrong = status === 'Wrong Answer';
+    const isError = status.includes('Error') || (!res.success);
+    const testResults = res.testResults || [];
+    const passedCount = res.passedTests !== undefined ? res.passedTests : (testResults.filter(t => t.passed).length);
+    const totalCount = res.totalTests !== undefined ? res.totalTests : testResults.length;
+
+    // Header Badge
+    let headerStatusHtml = '';
+    if (isAccepted) {
+      headerStatusHtml = `
+        <div class="lc-status-accepted">
+          ${ICONS.check}
+          <span>Accepted</span>
+        </div>
+      `;
+    } else if (isWrong) {
+      headerStatusHtml = `
+        <div class="lc-status-wrong">
+          ${ICONS.clock}
+          <span>Wrong Answer</span>
+        </div>
+      `;
+    } else {
+      headerStatusHtml = `
+        <div class="lc-status-error">
+          ${ICONS.clock}
+          <span>${status}</span>
+        </div>
+      `;
+    }
+
+    const statsHtml = `
+      <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+        ${res.runtimeMs ? `<span class="lc-meta-pill">Runtime: ${res.runtimeMs} ms</span>` : ''}
+        ${res.memoryMB ? `<span class="lc-meta-pill">Memory: ${res.memoryMB} MB</span>` : ''}
+        <span class="lc-meta-pill" style="font-weight:700; color:${isAccepted ? '#15803D' : (isWrong ? '#B91C1C' : '#64748B')}">${passedCount} / ${totalCount} test cases passed</span>
+      </div>
+    `;
+
+    // If compile error or runtime error without structured test results
+    if (isError && testResults.length === 0) {
+      const errOut = res.output?.stderr || res.error || 'Syntax or compiler error occurred.';
+      return `
+        <div class="lc-result-header">
+          ${headerStatusHtml}
+          ${isSubmit ? `<span class="badge" style="background:#FEE2E2; color:#B91C1C; font-weight:700;">Version ${versionNum || 1}</span>` : ''}
+        </div>
+        <div style="margin-top:6px;">
+          <div style="font-size:11px; font-weight:700; color:#B91C1C; text-transform:uppercase; margin-bottom:4px;">Compiler / Diagnostics Error</div>
+          <pre style="background:#FFF1F2; border:1px solid #FECDD3; border-radius:8px; padding:10px 12px; color:#9F1239; font-size:12px; font-family:'JetBrains Mono', monospace; line-height:1.5; white-space:pre-wrap; max-height:140px; overflow-y:auto;">${errOut}</pre>
+        </div>
+      `;
+    }
+
+    // Interactive Test Case Nav Pills
+    this.latestExecutionTestResults = testResults;
+    if (this.activeResultCaseIdx === undefined || this.activeResultCaseIdx >= testResults.length) {
+      const firstFailIdx = testResults.findIndex(t => !t.passed);
+      this.activeResultCaseIdx = firstFailIdx !== -1 ? firstFailIdx : 0;
+    }
+
+    const caseNavHtml = `
+      <div class="lc-case-nav">
+        ${testResults.map((tc, idx) => `
+          <button
+            class="lc-case-pill ${idx === this.activeResultCaseIdx ? 'active' : ''}"
+            onclick="App.switchResultCase(${idx})"
+            type="button"
+          >
+            <span class="lc-indicator-dot ${tc.passed ? 'lc-indicator-pass' : 'lc-indicator-fail'}"></span>
+            <span>Case ${idx + 1}</span>
+          </button>
+        `).join('')}
+      </div>
+    `;
+
+    const activeCase = testResults[this.activeResultCaseIdx] || testResults[0] || {};
+    const caseDetailHtml = activeCase ? `
+      <div id="lc-active-case-detail" style="display:flex; flex-direction:column; gap:6px;">
+        <div class="lc-box-card">
+          <div class="lc-box-label">Input</div>
+          <pre class="lc-box-content">${activeCase.input || ''}</pre>
+        </div>
+        <div class="lc-box-card ${activeCase.passed ? 'lc-box-pass' : 'lc-box-fail'}">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:3px;">
+            <div class="lc-box-label" style="color:${activeCase.passed ? '#15803D' : '#B91C1C'}; margin-bottom:0;">Output</div>
+            <span class="badge" style="font-size:10px; background:${activeCase.passed ? '#DCFCE7' : '#FEE2E2'}; color:${activeCase.passed ? '#15803D' : '#B91C1C'}; font-weight:700;">
+              ${activeCase.passed ? 'Matches Expected' : 'Wrong Answer'}
+            </span>
+          </div>
+          <pre class="lc-box-content" style="color:${activeCase.passed ? '#15803D' : '#B91C1C'}; font-weight:700;">${activeCase.actual || ''}</pre>
+        </div>
+        <div class="lc-box-card">
+          <div class="lc-box-label">Expected Output</div>
+          <pre class="lc-box-content">${activeCase.expected || ''}</pre>
+        </div>
+      </div>
+    ` : '';
+
+    return `
+      <div class="lc-result-header">
+        ${headerStatusHtml}
+        ${statsHtml}
+      </div>
+      ${isSubmit ? `
+        <div style="margin-bottom:8px; font-size:12px; color:#475569;">
+          <strong>Version ${versionNum} Recorded.</strong> ${isAccepted ? 'All test cases verified! Discuss your algorithmic runtime with Mira.' : 'Review the mismatched test cases below and refine your logic.'}
+        </div>
+      ` : ''}
+      ${caseNavHtml}
+      ${caseDetailHtml}
+    `;
+  },
+
   async runCandidateCode() {
     const editor = document.getElementById('candidate-code-editor');
     const btn = document.getElementById('btn-run-code');
@@ -3502,10 +3635,15 @@ const App = {
     const code = editor.value;
     const lang = this.currentCodingLang || 'cpp';
 
+    const stages = this.getCurrentFlowStages ? this.getCurrentFlowStages() : [];
+    const activeStageIdx = this.getCurrentFlowStageIndexByTime ? this.getCurrentFlowStageIndexByTime() : (this.currentStageIndex || 0);
+    const currentStage = stages[activeStageIdx] || {};
+    const prob = currentStage.codingProblem || null;
+
     this.switchCodingConsoleTab('result');
     const outputBox = document.getElementById('compiler-run-output-box');
     if (outputBox) {
-      outputBox.innerHTML = `<span style="color:#D97706; font-weight:700;">Compiling and running code on online compiler...</span>`;
+      outputBox.innerHTML = `<span style="color:#D97706; font-weight:700;">Compiling and running against test cases on online compiler...</span>`;
     }
 
     if (btn) btn.disabled = true;
@@ -3515,29 +3653,27 @@ const App = {
       const res = await window.API.executeCode({
         language: lang,
         code: code,
-        stdin: ''
+        stdin: '',
+        problem: prob,
+        isSubmit: false
       });
 
-      if (res && res.success) {
-        const out = res.output || {};
-        const stdout = out.stdout || '';
-        const stderr = out.stderr || '';
-        const isError = Boolean(stderr) || (out.code && out.code !== 0);
+      this.latestExecutionResultObj = res;
+      this.latestExecutionIsSubmit = false;
+      this.latestExecutionVersion = 1;
 
-        const html = `
-          <div style="margin-bottom:8px;">
-            <span class="badge" style="background:${isError ? '#FEE2E2' : '#DCFCE7'}; color:${isError ? '#B91C1C' : '#15803D'}; font-weight:700;">
-              ${isError ? 'Execution Finished (with Stderr/Error)' : 'Execution Successful'}
-            </span>
-            <span style="font-size:11px; color:#64748B; margin-left:8px;">Language: ${res.language} ${res.version || ''}</span>
-          </div>
-          ${stdout ? `<div style="margin-top:6px;"><strong style="color:#0F172A;">Stdout:</strong><pre style="background:#F8FAFC; border:1px solid #E2E8F0; padding:8px 10px; border-radius:6px; color:#0F172A; margin-top:4px; font-size:12px;">${stdout}</pre></div>` : ''}
-          ${stderr ? `<div style="margin-top:6px;"><strong style="color:#B91C1C;">Stderr / Diagnostics:</strong><pre style="background:#FFF1F2; border:1px solid #FECDD3; padding:8px 10px; border-radius:6px; color:#9F1239; margin-top:4px; font-size:12px;">${stderr}</pre></div>` : ''}
-          ${(!stdout && !stderr) ? '<div style="color:#64748B;">Program finished with code 0 (no stdout output).</div>' : ''}
-        `;
+      if (res && res.success) {
+        const html = this.renderLeetCodeTestResultHtml(res, false, 1);
         this.latestExecutionResultHtml = html;
         if (outputBox) outputBox.innerHTML = html;
-        this.showToast('Code execution completed!', 'success');
+
+        if (res.isAccepted) {
+          this.showToast('Accepted! All test cases passed.', 'success');
+        } else if (res.status === 'Wrong Answer') {
+          this.showToast(`Wrong Answer (${res.passedTests}/${res.totalTests} passed)`, 'warning');
+        } else {
+          this.showToast(`Execution finished: ${res.status}`, 'warning');
+        }
       } else {
         const errorHtml = `<div style="color:#DC2626;"><strong>Execution Failed:</strong> ${res?.error || 'Compiler error'}</div>`;
         this.latestExecutionResultHtml = errorHtml;
@@ -3564,6 +3700,11 @@ const App = {
     const code = editor.value;
     const lang = this.currentCodingLang || 'cpp';
 
+    const stages = this.getCurrentFlowStages ? this.getCurrentFlowStages() : [];
+    const activeStageIdx = this.getCurrentFlowStageIndexByTime ? this.getCurrentFlowStageIndexByTime() : (this.currentStageIndex || 0);
+    const currentStage = stages[activeStageIdx] || {};
+    const prob = currentStage.codingProblem || null;
+
     // Track submission version history
     if (!this.candidateCodeSubmissions) {
       this.candidateCodeSubmissions = [];
@@ -3584,7 +3725,7 @@ const App = {
     this.switchCodingConsoleTab('result');
     const outputBox = document.getElementById('compiler-run-output-box');
     if (outputBox) {
-      outputBox.innerHTML = `<span style="color:#D97706; font-weight:700;">${isAutoSubmit ? 'Auto-submitting code before time window closes...' : `Submitting solution (Version ${versionNum}) & running compiler...`}</span>`;
+      outputBox.innerHTML = `<span style="color:#D97706; font-weight:700;">${isAutoSubmit ? 'Auto-submitting code before time window closes...' : `Submitting Version ${versionNum} & running test case verification...`}</span>`;
     }
 
     if (btn) btn.disabled = true;
@@ -3594,38 +3735,35 @@ const App = {
       const res = await window.API.executeCode({
         language: lang,
         code: code,
-        stdin: ''
+        stdin: '',
+        problem: prob,
+        isSubmit: true
       });
 
+      this.latestExecutionResultObj = res;
+      this.latestExecutionIsSubmit = true;
+      this.latestExecutionVersion = versionNum;
+
       if (res && res.success) {
-        const out = res.output || {};
-        const stdout = out.stdout || '';
-        const stderr = out.stderr || '';
-        const isError = Boolean(stderr) || (out.code && out.code !== 0);
+        submissionRecord.compilerOutput = res.output?.stdout || '';
+        submissionRecord.compilerError = res.output?.stderr || '';
+        submissionRecord.isPassed = Boolean(res.isAccepted);
+        submissionRecord.status = res.status;
+        submissionRecord.passedTests = res.passedTests;
+        submissionRecord.totalTests = res.totalTests;
 
-        submissionRecord.compilerOutput = stdout;
-        submissionRecord.compilerError = stderr;
-        submissionRecord.isPassed = !isError;
-
-        const html = `
-          <div style="margin-bottom:8px;">
-            <span class="badge" style="background:${isError ? '#FEF3C7' : '#DCFCE7'}; color:${isError ? '#B45309' : '#15803D'}; font-weight:800; font-size:13px; padding:4px 12px;">
-              ${isError ? `Version ${versionNum} Submitted — Review Errors with Mira` : `Version ${versionNum} Accepted — Verified via Compiler`}
-            </span>
-            ${isAutoSubmit ? '<span class="badge" style="background:#EEF2FF; color:#4338CA; margin-left:8px; font-weight:700;">Auto-Submitted at Time Limit</span>' : ''}
-          </div>
-          <p style="font-size:12px; color:#475569; margin-bottom:8px;">
-            Professor Mira has received Version ${versionNum}. Please explain your algorithmic intuition, time complexity, and edge cases to Mira now.
-          </p>
-          ${stdout ? `<div><strong style="color:#0F172A;">Compiler Output:</strong><pre style="background:#F8FAFC; border:1px solid #E2E8F0; padding:8px 10px; border-radius:6px; color:#0F172A; margin-top:4px; font-size:12px;">${stdout}</pre></div>` : ''}
-          ${stderr ? `<div style="margin-top:6px;"><strong style="color:#B91C1C;">Runtime Feedback:</strong><pre style="background:#FFF1F2; border:1px solid #FECDD3; padding:8px 10px; border-radius:6px; color:#9F1239; margin-top:4px; font-size:12px;">${stderr}</pre></div>` : ''}
-        `;
+        const html = this.renderLeetCodeTestResultHtml(res, true, versionNum);
         this.latestExecutionResultHtml = html;
         if (outputBox) outputBox.innerHTML = html;
-        this.showToast(isAutoSubmit ? 'Coding stage ended: Code auto-submitted!' : `Code Version ${versionNum} submitted!`, 'success');
+
+        if (res.isAccepted) {
+          this.showToast(`Accepted! Version ${versionNum} passed all test cases.`, 'success');
+        } else {
+          this.showToast(`Version ${versionNum} submitted (${res.passedTests || 0}/${res.totalTests || 0} passed).`, 'warning');
+        }
 
         // Immediately trigger Mira follow-up prompt acknowledging code submission!
-        this.triggerMiraCodingFollowUp(code);
+        this.triggerMiraCodingFollowUp(code, res.status, res.passedTests, res.totalTests);
       } else {
         const errorHtml = `<div style="color:#DC2626;"><strong>Submission Error:</strong> ${res?.error || 'Compiler error'}</div>`;
         this.latestExecutionResultHtml = errorHtml;
