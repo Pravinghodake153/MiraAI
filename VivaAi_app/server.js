@@ -1100,7 +1100,7 @@ function buildRagQAPairs(safeTranscript, topic) {
   return qaPairs;
 }
 
-async function evaluateInterview({ studentName, topic, transcript, durationSeconds }) {
+async function evaluateInterview({ studentName, topic, transcript, durationSeconds, submittedCode, codingProblem }) {
   const safeTranscript = Array.isArray(transcript) ? transcript : [];
   const candidate = studentName || 'Candidate';
   const vivaTopic = topic || 'Data Structures & Algorithms';
@@ -1115,6 +1115,25 @@ EXCHANGE ${p.turnIndex} [Stage: ${p.stage}]
 - CANDIDATE ACTUAL SPOKEN ANSWER: "${p.studentAnswer}"
 - PRE-EVALUATED ANSWERING PATTERN: ${p.answeringPattern}
 `).join('\n');
+
+  let codingAuditContext = '';
+  if (submittedCode && submittedCode.trim()) {
+    codingAuditContext = `
+================================================================================
+CANDIDATE CODING PROBLEM SUBMISSION AUDIT:
+================================================================================
+Problem Title: "${codingProblem?.title || 'Applied Problem Coding Round'}"
+Difficulty: ${codingProblem?.difficulty || 'Medium'}
+Candidate Submitted Code:
+\`\`\`
+${submittedCode.trim()}
+\`\`\`
+CRITICAL CODING PROBLEM SCORING DIRECTIVES FOR "Problem Solving":
+- Evaluate the candidate's actual written implementation against optimal algorithms (syntax, logic, algorithmic correctness, edge cases, time complexity O(N), space complexity).
+- If the candidate solved the problem cleanly with correct data structures (e.g. dummy head node, pointer manipulation, carry handling), award high marks (80-98%) on Problem Solving.
+- If the candidate left syntax errors, missed loop conditions, or did not complete the function logic, deduct marks accordingly.
+`;
+  }
 
   // Attempt real AI evaluation via OpenRouter with strict, personalized evaluation instructions
   if (process.env.OPENROUTER_API_KEY && process.env.OPENROUTER_API_KEY.trim().length > 10) {
@@ -1147,9 +1166,11 @@ YOU MUST ENFORCE THE FOLLOWING STRICT SCORING POLICY:
 
 HERE IS THE STRUCTURED RAG QUESTION-BY-QUESTION AUDIT:
 ${ragFormattedExchanges}
+${codingAuditContext}
 
 CRITICAL RULES:
 - Compare each candidate answer directly against the RAG Ground Truth Expected Solution.
+- If coding submission was provided above, evaluate "Problem Solving" strictly based on their submitted code solution, algorithmic elegance, edge cases, and runtime complexity.
 - If the candidate failed to provide the expected solution (e.g., said "structure of food" or asked "Can you hear me now"), penalize heavily and detail this failure in turnAnnotations and rubricBreakdown.
 - In "turnAnnotations", evaluate each student turn individually by index.
 - DO NOT use generic placeholder text. Every strength, improvement, and suggestion must directly cite what was discussed in the transcript!
@@ -1564,7 +1585,9 @@ const server = http.createServer(async (req, res) => {
       studentName: body.studentName,
       topic: body.topic,
       transcript: body.transcript,
-      durationSeconds: body.durationSeconds || 900
+      durationSeconds: body.durationSeconds || 900,
+      submittedCode: body.submittedCode || '',
+      codingProblem: body.codingProblem || null
     });
     return sendJson(res, 200, evaluation);
   }

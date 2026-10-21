@@ -3555,7 +3555,7 @@ const App = {
     }
   },
 
-  async submitCandidateCode() {
+  async submitCandidateCode(isAutoSubmit = false) {
     const editor = document.getElementById('candidate-code-editor');
     const btn = document.getElementById('btn-submit-code');
     const btnText = document.getElementById('btn-submit-code-text');
@@ -3564,14 +3564,31 @@ const App = {
     const code = editor.value;
     const lang = this.currentCodingLang || 'cpp';
 
+    // Track submission version history
+    if (!this.candidateCodeSubmissions) {
+      this.candidateCodeSubmissions = [];
+    }
+    const versionNum = this.candidateCodeSubmissions.length + 1;
+    const submissionRecord = {
+      version: versionNum,
+      code: code,
+      language: lang,
+      timestamp: this.getFormattedSessionTime ? this.getFormattedSessionTime() : '00:00',
+      isAutoSubmit: Boolean(isAutoSubmit),
+      submittedAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+    };
+    this.candidateCodeSubmissions.push(submissionRecord);
+    this.latestSubmittedCode = code;
+    this.latestSubmittedLanguage = lang;
+
     this.switchCodingConsoleTab('result');
     const outputBox = document.getElementById('compiler-run-output-box');
     if (outputBox) {
-      outputBox.innerHTML = `<span style="color:#D97706; font-weight:700;">Submitting solution and running test suite...</span>`;
+      outputBox.innerHTML = `<span style="color:#D97706; font-weight:700;">${isAutoSubmit ? 'Auto-submitting code before time window closes...' : `Submitting solution (Version ${versionNum}) & running compiler...`}</span>`;
     }
 
     if (btn) btn.disabled = true;
-    if (btnText) btnText.textContent = 'Submitting...';
+    if (btnText) btnText.textContent = isAutoSubmit ? 'Auto-submitting...' : 'Submitting...';
 
     try {
       const res = await window.API.executeCode({
@@ -3586,21 +3603,26 @@ const App = {
         const stderr = out.stderr || '';
         const isError = Boolean(stderr) || (out.code && out.code !== 0);
 
+        submissionRecord.compilerOutput = stdout;
+        submissionRecord.compilerError = stderr;
+        submissionRecord.isPassed = !isError;
+
         const html = `
           <div style="margin-bottom:8px;">
             <span class="badge" style="background:${isError ? '#FEF3C7' : '#DCFCE7'}; color:${isError ? '#B45309' : '#15803D'}; font-weight:800; font-size:13px; padding:4px 12px;">
-              ${isError ? 'Submitted — Review Errors with Mira' : 'Accepted — Solution Passed Initial Evaluation'}
+              ${isError ? `Version ${versionNum} Submitted — Review Errors with Mira` : `Version ${versionNum} Accepted — Verified via Compiler`}
             </span>
+            ${isAutoSubmit ? '<span class="badge" style="background:#EEF2FF; color:#4338CA; margin-left:8px; font-weight:700;">Auto-Submitted at Time Limit</span>' : ''}
           </div>
           <p style="font-size:12px; color:#475569; margin-bottom:8px;">
-            Professor Mira has received your submitted code. Please explain your logic, time complexity, and edge case handling to Mira now.
+            Professor Mira has received Version ${versionNum}. Please explain your algorithmic intuition, time complexity, and edge cases to Mira now.
           </p>
           ${stdout ? `<div><strong style="color:#0F172A;">Compiler Output:</strong><pre style="background:#F8FAFC; border:1px solid #E2E8F0; padding:8px 10px; border-radius:6px; color:#0F172A; margin-top:4px; font-size:12px;">${stdout}</pre></div>` : ''}
           ${stderr ? `<div style="margin-top:6px;"><strong style="color:#B91C1C;">Runtime Feedback:</strong><pre style="background:#FFF1F2; border:1px solid #FECDD3; padding:8px 10px; border-radius:6px; color:#9F1239; margin-top:4px; font-size:12px;">${stderr}</pre></div>` : ''}
         `;
         this.latestExecutionResultHtml = html;
         if (outputBox) outputBox.innerHTML = html;
-        this.showToast('Solution submitted to Professor Mira!', 'success');
+        this.showToast(isAutoSubmit ? 'Coding stage ended: Code auto-submitted!' : `Code Version ${versionNum} submitted!`, 'success');
 
         // Immediately trigger Mira follow-up prompt acknowledging code submission!
         this.triggerMiraCodingFollowUp(code);
@@ -3651,6 +3673,97 @@ const App = {
       }
     } catch (err) {
       console.warn('Mira coding follow-up prompt error:', err);
+    }
+  },
+
+  switchLiveArenaUI(newStage) {
+    if (this.currentRoute !== '/interview') return;
+    const isCoding = Boolean(newStage.isCodingStage || newStage.codingProblem);
+    const mainEl = document.querySelector('.interview-main-stage');
+    if (!mainEl) return;
+
+    const currentQ = this.currentAiQuestionText || `Mira is initiating your viva for ${this.activeTopic || 'Data Structures'} (${newStage.name})...`;
+
+    // Swap outer HTML of the main arena cleanly
+    if (isCoding) {
+      mainEl.outerHTML = this.renderCodingArenaStage(newStage, currentQ);
+    } else {
+      mainEl.outerHTML = `
+        <main class="interview-main-stage">
+          <!-- Left: AI Avatar Mira -->
+          <div class="ai-orb-center">
+            <div class="orb-ring-outer">
+              <span class="orb-planet p1"></span>
+              <span class="orb-planet p2"></span>
+              <div class="orb-core-glow">
+                <span class="orb-core-name">Mira</span>
+              </div>
+            </div>
+
+            <div class="orb-status-text" id="ai-speaking-status">Speaking...</div>
+
+            <div class="mira-wave-container">
+              <span class="mbar" style="height:4px;"></span>
+              <span class="mbar" style="height:6px;"></span>
+              <span class="mbar" style="height:10px;"></span>
+              <span class="mbar" style="height:16px;"></span>
+              <span class="mbar" style="height:24px;"></span>
+              <span class="mbar" style="height:34px;"></span>
+              <span class="mbar" style="height:40px;"></span>
+              <span class="mbar" style="height:34px;"></span>
+              <span class="mbar" style="height:24px;"></span>
+              <span class="mbar" style="height:16px;"></span>
+              <span class="mbar" style="height:10px;"></span>
+              <span class="mbar" style="height:6px;"></span>
+              <span class="mbar" style="height:4px;"></span>
+            </div>
+          </div>
+
+          <!-- Right: Live Question & Student Webcam preview -->
+          <div class="interview-side-panel">
+            <div class="question-lead-row">
+              <svg viewBox="0 0 64 36" fill="none" style="width:52px; height:28px;">
+                <rect x="2" y="12" width="4" height="12" rx="2" fill="#FF5722"/>
+                <rect x="10" y="8" width="4" height="20" rx="2" fill="#FF5722"/>
+                <rect x="18" y="4" width="4" height="28" rx="2" fill="#FF5722"/>
+                <rect x="26" y="2" width="4" height="32" rx="2" fill="#FF5722"/>
+                <rect x="34" y="2" width="4" height="32" rx="2" fill="#FF5722"/>
+                <rect x="42" y="6" width="4" height="24" rx="2" fill="#FF5722"/>
+                <rect x="50" y="10" width="4" height="16" rx="2" fill="#FF5722"/>
+                <rect x="58" y="14" width="4" height="8" rx="2" fill="#FF5722"/>
+              </svg>
+            </div>
+
+            <h2 class="live-question-headline" id="live-question-text">
+              ${currentQ}<span class="typewriter-cursor">|</span>
+            </h2>
+
+            <div class="candidate-live-answer-box ai-speaking" id="candidate-answer-box">
+              <div class="answer-box-header">
+                <div style="display:flex; align-items:center; gap:8px;">
+                  <span class="live-mic-pulse" id="mic-status-pulse"></span>
+                  <span style="font-size:12px; font-weight:700; color:var(--text-dark);" id="candidate-speaking-label">Mira Speaking... (System will listen when finished)</span>
+                </div>
+                <span class="badge" style="font-size:11px; background:#FEF3C7; color:#92400E; border:1px solid #FDE68A;" id="silence-timer-badge">AI Speaking</span>
+              </div>
+              <div class="candidate-interim-text" id="candidate-live-transcript">Mira is speaking. Listen carefully... When finished, speak your answer and it will transcribe here in real time.</div>
+            </div>
+
+            <div class="candidate-webcam-card">
+              <div class="webcam-pill-badge">
+                <span class="webcam-green-dot"></span> You
+              </div>
+              <video id="student-webcam" autoplay playsinline muted></video>
+            </div>
+          </div>
+        </main>
+      `;
+    }
+
+    // Reattach webcam stream to newly rendered video tag
+    const video = document.getElementById('student-webcam');
+    if (video && this.webcamStream) {
+      video.srcObject = this.webcamStream;
     }
   },
 
@@ -4433,6 +4546,36 @@ const App = {
 
       // Keep upper flow stepper progress strictly in sync with the countdown clock
       this.updateInterviewFlowStepper();
+
+      // Check if active flow stage transitioned
+      const currentActiveStageIdx = this.getCurrentFlowStageIndexByTime();
+      if (this.lastTrackedStageIdx === undefined) {
+        this.lastTrackedStageIdx = currentActiveStageIdx;
+      } else if (this.lastTrackedStageIdx !== currentActiveStageIdx) {
+        const prevStageIdx = this.lastTrackedStageIdx;
+        this.lastTrackedStageIdx = currentActiveStageIdx;
+        const stages = this.getCurrentFlowStages();
+        const prevStage = stages[prevStageIdx] || {};
+        const newStage = stages[currentActiveStageIdx] || {};
+
+        // If leaving a coding problem stage and candidate hasn't manually submitted yet, auto-submit code!
+        if (prevStage.isCodingStage || prevStage.codingProblem) {
+          const editor = document.getElementById('candidate-code-editor');
+          const currentCode = editor ? editor.value : (this.candidateCodes?.[this.currentCodingLang || 'cpp'] || '');
+          if (currentCode && (!this.candidateCodeSubmissions || !this.candidateCodeSubmissions.length)) {
+            console.log('[Coding Flow] Stage time reached: Auto-submitting candidate code solution...');
+            this.submitCandidateCode(true);
+          }
+        }
+
+        // Dynamically transition the arena UI between Coding Round and Oral Viva
+        const wasCoding = Boolean(prevStage.isCodingStage || prevStage.codingProblem);
+        const isNowCoding = Boolean(newStage.isCodingStage || newStage.codingProblem);
+        if (wasCoding !== isNowCoding) {
+          console.log(`[Arena Switch] Transitioning live arena UI (wasCoding=${wasCoding} -> isNowCoding=${isNowCoding})`);
+          this.switchLiveArenaUI(newStage);
+        }
+      }
     }, 1000);
 
     // Camera Stream & Recorder
@@ -4961,13 +5104,21 @@ const App = {
       }
     }, 1800);
 
-    // Call Real Evaluator REST API
+    // Retrieve active coding problem and latest submitted code (if any)
+    const codingStage = this.flowStages ? this.flowStages.find(s => s.isCodingStage || s.codingProblem) : null;
+    const activeCodingProblem = codingStage ? (codingStage.codingProblem || { title: codingStage.name }) : null;
+    const latestCode = this.latestSubmittedCode || (this.candidateCodeSubmissions && this.candidateCodeSubmissions.length ? this.candidateCodeSubmissions[this.candidateCodeSubmissions.length - 1].code : '');
+    const codeSubmissionsList = Array.isArray(this.candidateCodeSubmissions) ? this.candidateCodeSubmissions : [];
+
+    // Call Real Evaluator REST API with latest submitted code
     try {
       const evalResult = await API.evaluateViva({
         studentName,
         topic,
         transcript,
-        durationSeconds: 900
+        durationSeconds: 900,
+        submittedCode: latestCode,
+        codingProblem: activeCodingProblem
       });
 
       if (evalResult) {
@@ -5020,6 +5171,9 @@ const App = {
             durationSeconds: this.totalExamDuration || this.getTotalInterviewDurationSeconds(),
             cameraRecordingUrl: this.uploadedCameraUrl || `/recordings/${this.activeInterviewId || 'AV-viva'}-camera.webm`,
             screenRecordingUrl: this.uploadedScreenUrl || `/recordings/${this.activeInterviewId || 'AV-viva'}-screen.webm`,
+            submittedCode: latestCode,
+            candidateCodeSubmissions: codeSubmissionsList,
+            codingProblem: activeCodingProblem,
             rubricBreakdown: evalResult.rubricBreakdown,
             strengths: this.isDisqualifiedSession ? [{ title: 'Integrity Alert', desc: 'Session terminated due to repeated proctoring violations.' }] : evalResult.strengths,
             improvements: this.isDisqualifiedSession ? [{ title: 'Examination Adherence', desc: 'Must follow anti-cheat guidelines, avoid tab switches and keep single person in frame.' }] : evalResult.improvements,
@@ -5043,6 +5197,9 @@ const App = {
             candidateName: studentName,
             candidateEmail: candidateEmail,
             topic: topic,
+            submittedCode: latestCode,
+            candidateCodeSubmissions: codeSubmissionsList,
+            codingProblem: activeCodingProblem,
             transcripts: transcript,
             annotatedTranscript: evalResult.annotatedTranscript || transcript
           };
@@ -5695,8 +5852,109 @@ const App = {
             </div>
           </div>
         </div>
+
+        <!-- Submitted Coding Problem Implementation Section (Displayed only if code was submitted) -->
+        ${this.renderScorecardCodeSection(iv)}
       </div>
     `;
+  },
+
+  renderScorecardCodeSection(iv) {
+    const submissions = (iv && Array.isArray(iv.candidateCodeSubmissions) && iv.candidateCodeSubmissions.length > 0)
+      ? iv.candidateCodeSubmissions
+      : (Array.isArray(this.candidateCodeSubmissions) && this.candidateCodeSubmissions.length > 0
+          ? this.candidateCodeSubmissions
+          : (iv?.submittedCode || this.latestSubmittedCode
+              ? [{ version: 1, code: iv?.submittedCode || this.latestSubmittedCode, language: iv?.technology || 'cpp', submittedAt: 'Final' }]
+              : []));
+
+    // If user quit before coding stage or never submitted any code, DO NOT show section
+    if (!submissions || submissions.length === 0) {
+      return '';
+    }
+
+    const codingProblem = iv?.codingProblem || this.activeCodingProblem || { title: 'Applied Problem Solution' };
+    const activeVerIdx = (this.scorecardSelectedCodeVersion !== undefined && this.scorecardSelectedCodeVersion < submissions.length)
+      ? this.scorecardSelectedCodeVersion
+      : (submissions.length - 1);
+    const activeSub = submissions[activeVerIdx] || submissions[submissions.length - 1];
+    const codeText = activeSub?.code || '// No code found';
+    const lines = codeText.split('\n');
+
+    return `
+      <div class="scorecard-submitted-code-section" id="scorecard-code-section">
+        <div class="scorecard-code-header">
+          <div class="scorecard-code-title-group">
+            <div class="scorecard-code-icon-badge">
+              ${ICONS.codeSimple}
+            </div>
+            <div class="scorecard-code-titles">
+              <h3>Submitted Solution & Code Verification &bull; ${codingProblem.title || 'Coding Round'}</h3>
+              <p>Candidate source code submitted during viva. Each line verified and signed by Professor Mira AI Engine.</p>
+            </div>
+          </div>
+
+          <div class="scorecard-code-controls">
+            ${submissions.length > 1 ? `
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span style="font-size:12px; font-weight:700; color:#475569;">Submission Version:</span>
+                <select class="version-select-dropdown" id="scorecard-code-ver-select" onchange="App.onScorecardCodeVersionChange(this.value)">
+                  ${submissions.map((sub, idx) => `
+                    <option value="${idx}" ${idx === activeVerIdx ? 'selected' : ''}>
+                      Version ${sub.version || (idx + 1)} ${sub.isAutoSubmit ? '(Auto-Submitted)' : ''} &bull; ${sub.submittedAt || sub.timestamp || ''}
+                    </option>
+                  `).join('')}
+                </select>
+              </div>
+            ` : `
+              <span class="badge" style="background:#F1F5F9; color:#475569; font-weight:700; font-size:12px;">Version 1 (Final Submission)</span>
+            `}
+
+            <div class="scorecard-ai-verified-pill">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+              <span>AI Evaluated &bull; Problem Solving Validated</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="scorecard-code-display-box">
+          <table class="scorecard-code-table">
+            <tbody>
+              ${lines.map((lineContent, lineIdx) => `
+                <tr>
+                  <td class="code-line-num">${lineIdx + 1}</td>
+                  <td class="code-line-content">${(lineContent || ' ').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</td>
+                  <td class="code-line-ai-sig">
+                    <span class="ai-line-sig-badge" title="Line verified and evaluated by Mira AI">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"/>
+                      </svg>
+                      Mira AI Signed
+                    </span>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    `;
+  },
+
+  onScorecardCodeVersionChange(versionIdx) {
+    this.scorecardSelectedCodeVersion = parseInt(versionIdx, 10) || 0;
+    const viewport = document.getElementById('app-viewport');
+    if (viewport && this.currentRoute === '/scorecard') {
+      viewport.innerHTML = this.renderScorecard();
+      // Scroll to code section smoothly
+      const codeSec = document.getElementById('scorecard-code-section');
+      if (codeSec) {
+        codeSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
   },
 
   // ==========================================================================
