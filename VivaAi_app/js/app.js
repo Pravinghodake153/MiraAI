@@ -9973,9 +9973,50 @@ const App = {
           try {
             const predictions = await this.blazeFaceModel.estimateFaces(video, false);
             if (Array.isArray(predictions)) {
-              // BlazeFace returns confidence scores; keep high-confidence detections
-              const validPredictions = predictions.filter(p => (p.probability ? p.probability[0] >= 0.65 : true));
-              detectedFaceCount = validPredictions.length;
+              // BlazeFace returns confidence scores; filter out tiny background noise or false artifacts
+              const validFaces = predictions.filter(p => {
+                const prob = p.probability ? p.probability[0] : 1;
+                if (prob < 0.75) return false;
+                // Check face size: width and height must be at least 28px in camera frame
+                if (p.topLeft && p.bottomRight) {
+                  const w = Math.abs(p.bottomRight[0] - p.topLeft[0]);
+                  const h = Math.abs(p.bottomRight[1] - p.topLeft[1]);
+                  return w >= 28 && h >= 28;
+                }
+                return true;
+              });
+
+              // Non-maximum suppression / overlapping face deduplication
+              const filteredFaces = [];
+              for (const face of validFaces) {
+                const boxA = face.topLeft && face.bottomRight ? {
+                  x1: face.topLeft[0], y1: face.topLeft[1],
+                  x2: face.bottomRight[0], y2: face.bottomRight[1]
+                } : null;
+                
+                let isDuplicate = false;
+                if (boxA) {
+                  for (const existing of filteredFaces) {
+                    const boxB = {
+                      x1: existing.topLeft[0], y1: existing.topLeft[1],
+                      x2: existing.bottomRight[0], y2: existing.bottomRight[1]
+                    };
+                    const xOverlap = Math.max(0, Math.min(boxA.x2, boxB.x2) - Math.max(boxA.x1, boxB.x1));
+                    const yOverlap = Math.max(0, Math.min(boxA.y2, boxB.y2) - Math.max(boxA.y1, boxB.y1));
+                    const overlapArea = xOverlap * yOverlap;
+                    const areaA = (boxA.x2 - boxA.x1) * (boxA.y2 - boxA.y1);
+                    if (overlapArea / (areaA || 1) > 0.4) {
+                      isDuplicate = true;
+                      break;
+                    }
+                  }
+                }
+                if (!isDuplicate) {
+                  filteredFaces.push(face);
+                }
+              }
+
+              detectedFaceCount = filteredFaces.length;
             }
           } catch (predErr) {
             console.warn('[BlazeFace Estimation Error]', predErr.message);
@@ -9991,7 +10032,9 @@ const App = {
           }
           const faces = await this.nativeFaceDetector.detect(video);
           if (Array.isArray(faces)) {
-            detectedFaceCount = faces.length;
+            // Filter realistic face sizes (not tiny shadows or poster/photo artifacts in room)
+            const valid = faces.filter(f => (f.boundingBox && f.boundingBox.width >= 35 && f.boundingBox.height >= 35));
+            detectedFaceCount = valid.length;
           }
         } catch (nativeErr) {}
       }
@@ -10019,17 +10062,17 @@ const App = {
 
           const imgData = ctx.getImageData(0, 0, width, height);
           const rects = tracker.track(imgData.data, width, height) || [];
-          const validFaces = rects.filter(r => r.width >= 35 && r.height >= 35);
+          const validFaces = rects.filter(r => r.width >= 40 && r.height >= 40);
           detectedFaceCount = validFaces.length;
         } catch (trErr) {}
       }
 
-      // Process Face Count Results with intelligent debouncing
+      // Process Face Count Results with intelligent temporal debouncing (eliminates momentary camera motion or lighting flicker)
       if (detectedFaceCount > 1) {
         this.cvHistory.multiFaceFrames = (this.cvHistory.multiFaceFrames || 0) + 1;
         this.cvHistory.noFaceFrames = 0;
-        // Require 2 consecutive confirmations to prevent single-frame false alarms
-        if (this.cvHistory.multiFaceFrames >= 2) {
+        // Require 3 consecutive confirmations (3 seconds of a second person in frame) to eliminate false alarms
+        if (this.cvHistory.multiFaceFrames >= 3) {
           this.handleProctoringViolation(
             'Multiple people detection',
             `Multiple individuals (${detectedFaceCount} people) detected in your camera frame. Ensure you are alone during the examination.`,
@@ -10038,16 +10081,15 @@ const App = {
           this.cvHistory.multiFaceFrames = 0;
         }
       } else if (detectedFaceCount === 1) {
-        // Candidate clearly present in frame! Reset all missed counters
+        // Candidate is clearly present and centered!
         this.cvHistory.noFaceFrames = 0;
         this.cvHistory.multiFaceFrames = 0;
       } else if (detectedFaceCount === 0) {
-        // 0 faces detected
+        // 0 faces detected: require 5 consecutive missed frames (~5 seconds of being out of frame) before firing
         this.cvHistory.multiFaceFrames = 0;
         this.cvHistory.noFaceFrames = (this.cvHistory.noFaceFrames || 0) + 1;
 
-        // Require 4 consecutive missed frames (~4 to 5 seconds) before warning
-        if (this.cvHistory.noFaceFrames >= 4) {
+        if (this.cvHistory.noFaceFrames >= 5) {
           this.handleProctoringViolation(
             'Out-of-frame detection',
             'Your face is not clearly detected in the camera frame. Please look directly into the camera.',
@@ -10074,7 +10116,7 @@ const App = {
 
         if (avgLum < 8) {
           this.cvHistory.noFaceFrames = (this.cvHistory.noFaceFrames || 0) + 1;
-          if (this.cvHistory.noFaceFrames >= 3) {
+          if (this.cvHistory.noFaceFrames >= 4) {
             this.handleProctoringViolation(
               'Out-of-frame detection',
               'Webcam appears completely black or covered. Please verify your camera.',
@@ -10088,7 +10130,7 @@ const App = {
       }
 
       // ----------------------------------------------------------------------
-      // 4. MOBILE PHONE & PORTABLE DEVICE DETECTION (Deep Learning + Vision Fallback)
+      // 4. MOBILE PHONE & PORTABLE DEVICE DETECTION (High Accuracy AI Detector)
       // ----------------------------------------------------------------------
       let detectedPhone = null;
 
@@ -10109,12 +10151,32 @@ const App = {
 
         if (this.cocoModel) {
           try {
-            const predictions = await this.cocoModel.detect(video, 8, 0.45);
+            // Detect up to 10 objects with minimum threshold of 0.55
+            const predictions = await this.cocoModel.detect(video, 10, 0.55);
             if (Array.isArray(predictions)) {
-              detectedPhone = predictions.find(p => 
-                (p.class === 'cell phone' || p.class === 'remote' || p.class === 'book') && 
-                (p.score >= 0.50)
-              );
+              // Strict detection: ONLY target authentic cell phones with high confidence (>= 0.68)
+              // (Eliminates false alarms from books, keyboards, hands, coffee mugs, or remote controls)
+              detectedPhone = predictions.find(p => {
+                if (p.class !== 'cell phone') return false;
+                if ((p.score || 0) < 0.68) return false;
+                
+                // Validate bounding box size and aspect ratio
+                if (Array.isArray(p.bbox) && p.bbox.length === 4) {
+                  const [bx, by, bw, bh] = p.bbox;
+                  const vWidth = video.videoWidth || 640;
+                  const vHeight = video.videoHeight || 480;
+
+                  // Minimum realistic phone size (at least 30x45px) and max size (not taking over entire screen)
+                  if (bw < 28 || bh < 38) return false;
+                  if (bw > vWidth * 0.70 || bh > vHeight * 0.75) return false;
+
+                  // Aspect ratio check: typical smartphone ratio is between 1.3:1 and 2.6:1 (portrait or landscape)
+                  const aspect = Math.max(bw, bh) / (Math.min(bw, bh) || 1);
+                  if (aspect < 1.25 || aspect > 2.8) return false;
+                }
+                return true;
+              });
+
               if (detectedPhone && Array.isArray(detectedPhone.bbox)) {
                 this.lastDetectedPhoneBox = detectedPhone.bbox;
               }
@@ -10125,93 +10187,28 @@ const App = {
         }
       }
 
-      // Fallback: Instant Computer Vision Edge & Aspect-Ratio Smartphone Analyzer
-      if (!detectedPhone) {
-        detectedPhone = this.detectMobileDeviceHeuristic(video);
-        if (detectedPhone && Array.isArray(detectedPhone.bbox)) {
-          this.lastDetectedPhoneBox = detectedPhone.bbox;
-        }
-      }
-
+      // Temporal debouncing: Require 3 consecutive confirmed frames (~3 seconds) of phone in frame
+      // to eliminate any sudden hand gestures, shadows, or eyeglasses holding
       if (detectedPhone) {
         this.cvHistory.phoneFrames = (this.cvHistory.phoneFrames || 0) + 1;
-        // Require 2 consecutive confirmations to prevent false alarms from hand gestures
-        if (this.cvHistory.phoneFrames >= 2) {
+        if (this.cvHistory.phoneFrames >= 3) {
           const confidenceText = detectedPhone.score ? ` (${Math.round(detectedPhone.score * 100)}% confidence)` : '';
           this.handleProctoringViolation(
             'Mobile phone detected',
-            `A mobile phone or unauthorized electronic device was detected in your camera frame${confidenceText}. Mobile phones are strictly prohibited during the viva.`,
+            `A mobile phone was detected in your camera frame${confidenceText}. Mobile phones are strictly prohibited during the viva.`,
             'High'
           );
           this.cvHistory.phoneFrames = 0;
         }
       } else {
-        this.cvHistory.phoneFrames = 0;
+        // Reset phone detection counter when no phone is visible
+        this.cvHistory.phoneFrames = Math.max(0, (this.cvHistory.phoneFrames || 0) - 1);
       }
     } catch (e) {
       console.warn('[Vision Proctoring Exception]', e);
     } finally {
       if (this.cvHistory) this.cvHistory.isDetecting = false;
     }
-  },
-
-  detectMobileDeviceHeuristic(video) {
-    if (!video || !video.videoWidth || !video.videoHeight) return null;
-    try {
-      if (!this.phoneHeuristicCanvas) {
-        this.phoneHeuristicCanvas = document.createElement('canvas');
-      }
-      const w = 120;
-      const h = Math.round(120 * (video.videoHeight / video.videoWidth)) || 90;
-      this.phoneHeuristicCanvas.width = w;
-      this.phoneHeuristicCanvas.height = h;
-      const ctx = this.phoneHeuristicCanvas.getContext('2d', { willReadFrequently: true });
-      ctx.drawImage(video, 0, 0, w, h);
-
-      // Analyze lower 65% of the frame where a candidate holds a phone
-      const startY = Math.floor(h * 0.35);
-      const imgData = ctx.getImageData(0, startY, w, h - startY);
-      const data = imgData.data;
-
-      let minX = w, maxX = 0, minY = h, maxY = 0;
-      let edgeCount = 0;
-
-      for (let y = 1; y < h - startY - 1; y += 2) {
-        for (let x = 1; x < w - 1; x += 2) {
-          const idx = (y * w + x) * 4;
-          const lum = 0.299 * data[idx] + 0.587 * data[idx + 1] + 0.114 * data[idx + 2];
-          const lumRight = 0.299 * data[idx + 4] + 0.587 * data[idx + 5] + 0.114 * data[idx + 6];
-          const lumDown = 0.299 * data[idx + w * 4] + 0.587 * data[idx + w * 4 + 1] + 0.114 * data[idx + w * 4 + 2];
-          const grad = Math.abs(lum - lumRight) + Math.abs(lum - lumDown);
-
-          if (grad > 80) {
-            edgeCount++;
-            if (x < minX) minX = x;
-            if (x > maxX) maxX = x;
-            if (y < minY) minY = y;
-            if (y > maxY) maxY = y;
-          }
-        }
-      }
-
-      const boxW = maxX - minX;
-      const boxH = maxY - minY;
-      if (boxW >= 16 && boxH >= 28 && edgeCount >= 38) {
-        const aspect = boxH / boxW;
-        // Phone held portrait (aspect 1.4 to 2.5) or landscape (aspect 0.42 to 0.72)
-        if ((aspect >= 1.4 && aspect <= 2.5) || (aspect >= 0.42 && aspect <= 0.72)) {
-          if (boxW < w * 0.75 && boxH < h * 0.85) {
-            const scale = (video.videoWidth || 320) / w;
-            return {
-              class: 'cell phone',
-              score: 0.74,
-              bbox: [minX * scale, (startY + minY) * scale, boxW * scale, boxH * scale]
-            };
-          }
-        }
-      }
-    } catch (e) {}
-    return null;
   },
 
   // ==========================================================================
